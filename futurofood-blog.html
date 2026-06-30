@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stories — FuturoFood</title>
+<meta name="description" content="FuturoFood stories on insect protein, lab-grown meat, regenerative farming, and food innovation across Latin America."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+
+:root{
+  --ink:    #0A0F0A;
+  --leaf:   #E8F5E0;
+  --panel:  #111A11;
+  --panel2: #162016;
+  --green:  #4ADE80;
+  --fire:   #FF6B35;
+  --gold:   #F5C842;
+  --mist:   rgba(232,245,224,0.65);
+  --mist2:  rgba(232,245,224,0.35);
+  --border: rgba(232,245,224,0.10);
+  --border2:rgba(232,245,224,0.06);
+  --serif:  'Playfair Display',Georgia,serif;
+  --sans:   'DM Sans',system-ui,sans-serif;
+  --mono:   'JetBrains Mono',monospace;
+}
+
+body{
+  background:var(--ink);
+  color:var(--leaf);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* ── MASTHEAD ── */
+.masthead{
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,15,10,0.93);
+  backdrop-filter:blur(16px);
+}
+.masthead-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  min-height:64px;
+  gap:1rem;
+}
+.mast-nav{display:flex;gap:1.75rem;align-items:center}
+.mast-nav a{
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);transition:color .2s;
+}
+.mast-nav a:hover,.mast-nav a.active{color:var(--green)}
+.mast-logo{
+  text-align:center;font-family:var(--serif);
+  font-size:1.6rem;font-weight:900;letter-spacing:-.02em;line-height:1;
+  display:block;cursor:pointer;
+}
+.mast-logo em{color:var(--green);font-style:normal}
+.mast-logo small{
+  display:block;font-family:var(--mono);font-size:.55rem;
+  font-weight:400;letter-spacing:.22em;color:var(--mist);margin-top:3px;
+}
+.mast-right{display:flex;justify-content:flex-end;align-items:center}
+.btn-subscribe{
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:var(--green);color:var(--ink);
+  padding:.5rem 1.25rem;border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+  text-decoration:none;display:inline-block;
+}
+.btn-subscribe:hover{background:#6ee89a;transform:translateY(-1px)}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  max-width:1280px;margin:0 auto;
+  padding:3rem 2rem 0;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+}
+.page-header-inner{
+  border-bottom:3px solid var(--leaf);
+  padding-bottom:1.25rem;
+  margin-bottom:2.5rem;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:1rem;
+}
+.page-title{
+  font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:900;letter-spacing:-.03em;line-height:1;
+}
+.page-title em{color:var(--green);font-style:normal}
+.page-meta{
+  font-family:var(--mono);font-size:.62rem;
+  color:var(--mist);letter-spacing:.08em;
+  text-align:right;line-height:1.6;
+}
+
+/* ── STATUS BANNER ── */
+/* 
+  ╔══════════════════════════════════════════════════════╗
+  ║  GHOST CMS INTEGRATION POINT                         ║
+  ║  When Ghost is live, hide .static-banner             ║
+  ║  and show .ghost-connected-banner instead            ║
+  ╚══════════════════════════════════════════════════════╝
+*/
+.static-banner{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+}
+.static-banner-inner{
+  margin:0 2rem;
+  background:var(--panel2);
+  border:1px solid rgba(245,200,66,.2);
+  border-left:3px solid var(--gold);
+  padding:.75rem 1.25rem;
+  display:flex;align-items:center;gap:.75rem;
+  font-family:var(--mono);font-size:.65rem;
+  color:var(--gold);letter-spacing:.06em;
+  margin-bottom:2rem;
+}
+.banner-dot{
+  width:6px;height:6px;background:var(--gold);
+  border-radius:50%;flex-shrink:0;
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-btn{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);background:transparent;border:none;
+  padding:1rem 1.25rem;cursor:pointer;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;transition:color .2s,border-color .2s;
+}
+.filter-btn:hover{color:var(--leaf)}
+.filter-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.filter-count{
+  display:inline-block;
+  background:var(--panel2);
+  color:var(--mist2);
+  font-size:.5rem;
+  padding:.1rem .35rem;
+  margin-left:.3rem;
+  vertical-align:middle;
+}
+
+/* ── FEATURED STORY (large card) ── */
+.featured-wrap{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  padding:2rem;
+  border-bottom:1px solid var(--border);
+}
+.featured-card{
+  display:grid;
+  grid-template-columns:3fr 2fr;
+  gap:0;
+  border:1px solid var(--border);
+  background:var(--panel);
+  transition:background .2s;
+  cursor:pointer;
+}
+.featured-card:hover{background:var(--panel2)}
+.featured-body{padding:2.5rem 2rem;}
+.featured-top{
+  display:flex;align-items:center;gap:.75rem;
+  margin-bottom:1.25rem;
+}
+.featured-label{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:var(--green);color:var(--ink);
+  padding:.25rem .65rem;
+}
+.featured-readtime{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.06em;
+}
+.featured-title{
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,2.5vw,2.2rem);
+  font-weight:900;letter-spacing:-.02em;line-height:1.1;
+  margin-bottom:1rem;
+}
+.featured-deck{
+  font-family:var(--serif);font-size:1rem;
+  font-style:italic;color:var(--mist);
+  line-height:1.6;margin-bottom:1.5rem;
+  padding-left:.875rem;
+  border-left:3px solid var(--green);
+}
+.featured-meta{
+  display:flex;align-items:center;gap:1rem;
+  flex-wrap:wrap;
+}
+.tag{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .6rem;
+}
+.tag-insects{background:rgba(74,222,128,.12);color:var(--green)}
+.tag-lab    {background:rgba(245,200,66,.12);color:var(--gold)}
+.tag-regen  {background:rgba(255,107,53,.12);color:var(--fire)}
+.tag-tech   {background:rgba(232,245,224,.08);color:var(--mist)}
+.tag-ancestral{background:rgba(245,200,66,.08);color:var(--gold)}
+.tag-water  {background:rgba(74,222,128,.06);color:rgba(74,222,128,.7)}
+.byline-sm{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.byline-sm span{color:var(--mist)}
+.featured-img{
+  background:var(--panel2);
+  border-left:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+  color:rgba(232,245,224,.06);
+  position:relative;
+  min-height:280px;
+}
+.featured-img-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:.6rem .875rem;
+  background:rgba(10,15,10,.8);
+  font-family:var(--mono);font-size:.55rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.read-cta{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--green);margin-top:1.25rem;
+  border-bottom:1px solid rgba(74,222,128,.3);
+  padding-bottom:2px;
+  transition:border-color .2s;
+}
+.read-cta:hover{border-color:var(--green)}
+
+/* ── MAIN GRID ── */
+.blog-layout{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:0;
+  border-bottom:1px solid var(--border);
+}
+
+/* Articles list */
+.articles-list{border-right:1px solid var(--border)}
+
+/*
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  GHOST CMS INTEGRATION — ARTICLE CARDS                          ║
+  ║                                                                  ║
+  ║  Step 1: Get your Ghost API key:                                 ║
+  ║    Ghost Admin → Settings → Integrations → Add custom           ║
+  ║    Copy the "Content API Key"                                    ║
+  ║                                                                  ║
+  ║  Step 2: Replace GHOST_URL and GHOST_KEY below in the JS        ║
+  ║    const GHOST_URL = 'https://your-ghost-site.com'              ║
+  ║    const GHOST_KEY = 'your-content-api-key'                     ║
+  ║                                                                  ║
+  ║  Step 3: The fetchGhostPosts() function will replace             ║
+  ║    the static cards with live Ghost content automatically        ║
+  ║                                                                  ║
+  ║  Ghost Content API endpoint used:                                ║
+  ║    GET /ghost/api/content/posts/                                 ║
+  ║    ?key={key}&include=tags,authors&limit=12&page={n}            ║
+  ╚══════════════════════════════════════════════════════════════════╝
+*/
+
+.article-card{
+  padding:2rem;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr 100px;
+  gap:1.5rem;
+  align-items:start;
+  cursor:pointer;
+  transition:background .2s;
+  color:inherit;
+  text-decoration:none;
+}
+.article-card:hover{background:var(--panel2)}
+.article-card:last-child{border-bottom:none}
+.card-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-title{
+  font-family:var(--serif);font-size:1.15rem;
+  font-weight:700;line-height:1.25;letter-spacing:-.01em;
+  margin-bottom:.6rem;
+}
+.card-excerpt{
+  font-size:.85rem;color:var(--mist);
+  line-height:1.6;margin-bottom:.875rem;
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;
+}
+.card-bottom{
+  display:flex;align-items:center;gap:.875rem;
+  flex-wrap:wrap;
+}
+.card-date{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.card-readtime{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.card-img{
+  width:100px;height:70px;
+  background:var(--panel2);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.75rem;
+  color:rgba(232,245,224,.15);
+  flex-shrink:0;
+}
+
+/* Pagination */
+.pagination{
+  padding:2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);
+}
+.page-info{
+  font-family:var(--mono);font-size:.62rem;
+  color:var(--mist2);letter-spacing:.06em;
+}
+.page-btns{display:flex;gap:.5rem}
+.page-btn{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--mist);
+  border:1px solid var(--border);
+  padding:.5rem 1rem;cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.page-btn:hover{border-color:var(--green);color:var(--green)}
+.page-btn:disabled{opacity:.3;cursor:not-allowed}
+.page-btn.active{background:var(--green);color:var(--ink);border-color:var(--green)}
+
+/* ── SIDEBAR ── */
+.sidebar{padding:2rem 1.5rem}
+
+.sidebar-block{margin-bottom:2.5rem}
+.sidebar-title{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mist2);
+  padding-bottom:.75rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:1.25rem;
+}
+
+/* Newsletter mini */
+.nl-mini{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-top:2px solid var(--green);
+  padding:1.25rem;
+}
+.nl-mini-title{
+  font-family:var(--serif);font-size:1.1rem;
+  font-weight:700;line-height:1.2;
+  margin-bottom:.5rem;
+}
+.nl-mini-title em{color:var(--green);font-style:normal}
+.nl-mini-desc{
+  font-size:.78rem;color:var(--mist);
+  line-height:1.55;margin-bottom:1rem;
+}
+.nl-mini-input{
+  width:100%;background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--leaf);font-family:var(--sans);
+  font-size:.82rem;padding:.7rem .875rem;
+  outline:none;transition:border-color .2s;
+  margin-bottom:.5rem;
+}
+.nl-mini-input::placeholder{color:var(--mist2)}
+.nl-mini-input:focus{border-color:var(--green)}
+.nl-mini-btn{
+  width:100%;background:var(--green);color:var(--ink);
+  font-family:var(--mono);font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.75rem;border:none;cursor:pointer;
+  transition:background .2s;
+}
+.nl-mini-btn:hover{background:#6ee89a}
+.nl-mini-note{
+  font-family:var(--mono);font-size:.52rem;
+  color:var(--mist2);letter-spacing:.05em;
+  margin-top:.5rem;
+}
+
+/* Topic list */
+.topic-list{display:flex;flex-direction:column;gap:0}
+.topic-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.6rem 0;
+  border-bottom:1px solid var(--border2);
+  cursor:pointer;
+  transition:color .2s;
+}
+.topic-item:last-child{border-bottom:none}
+.topic-item:hover .topic-name{color:var(--green)}
+.topic-name{
+  font-size:.88rem;font-weight:500;
+  display:flex;align-items:center;gap:.6rem;
+  transition:color .2s;
+}
+.topic-icon{font-size:.875rem}
+.topic-count{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+
+/* Most read */
+.most-read-list{display:flex;flex-direction:column;gap:1rem}
+.mr-item{
+  display:grid;grid-template-columns:28px 1fr;
+  gap:.75rem;align-items:start;
+  cursor:pointer;
+}
+.mr-num{
+  font-family:var(--serif);font-size:1.4rem;
+  font-weight:900;color:var(--border);
+  line-height:1;
+}
+.mr-title{
+  font-family:var(--serif);font-size:.88rem;
+  font-weight:700;line-height:1.25;
+  transition:color .2s;
+}
+.mr-item:hover .mr-title{color:var(--green)}
+.mr-tag{
+  font-family:var(--mono);font-size:.52rem;
+  color:var(--mist2);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:.25rem;display:block;
+}
+
+/* Sponsor mini */
+.sponsor-mini{
+  border:1px solid var(--border);padding:1.25rem;
+  text-align:center;background:var(--panel2);
+}
+.sponsor-mini-label{
+  font-family:var(--mono);font-size:.55rem;
+  color:var(--mist2);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:.875rem;display:block;
+}
+.sponsor-logo-box{
+  width:100%;height:50px;
+  border:1px dashed rgba(74,222,128,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.875rem;
+}
+.sponsor-logo-box span{
+  font-family:var(--mono);font-size:.55rem;
+  color:rgba(232,245,224,.2);letter-spacing:.06em;
+}
+.sponsor-mini-cta{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);border:1px solid rgba(74,222,128,.3);
+  display:block;padding:.5rem;
+  transition:background .2s,color .2s;
+}
+.sponsor-mini-cta:hover{background:var(--green);color:var(--ink)}
+
+/* ── GHOST LOADING STATE ── */
+/*
+  ╔═══════════════════════════════════════════════╗
+  ║  When Ghost loads, show .ghost-loading        ║
+  ║  and hide it when posts render                ║
+  ╚═══════════════════════════════════════════════╝
+*/
+.ghost-loading{
+  padding:3rem 2rem;
+  text-align:center;
+  display:none; /* shown by JS when fetching */
+}
+.ghost-loading-text{
+  font-family:var(--mono);font-size:.68rem;
+  color:var(--mist2);letter-spacing:.1em;text-transform:uppercase;
+}
+.skeleton{
+  background:var(--panel2);
+  animation:shimmer 1.5s infinite;
+}
+@keyframes shimmer{
+  0%,100%{opacity:.5}
+  50%{opacity:.8}
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:3px solid var(--leaf);
+  background:var(--panel);
+}
+.footer-bottom{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 2rem;flex-wrap:wrap;gap:.75rem;
+}
+.footer-brand{font-family:var(--serif);font-weight:900;font-size:1.1rem}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--mist2);letter-spacing:.06em;text-transform:uppercase;
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{
+  font-family:var(--mono);font-size:.58rem;
+  color:rgba(232,245,224,.25);letter-spacing:.05em;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .blog-layout{grid-template-columns:1fr}
+  .sidebar{border-top:1px solid var(--border)}
+  .featured-card{grid-template-columns:1fr}
+  .featured-img{min-height:180px;border-left:none;border-top:1px solid var(--border)}
+  .masthead-inner{grid-template-columns:auto 1fr}
+  .mast-nav{display:none}
+  .mast-logo{text-align:left}
+}
+@media(max-width:640px){
+  .article-card{grid-template-columns:1fr}
+  .card-img{display:none}
+  .page-header-inner{flex-direction:column;align-items:flex-start}
+  .page-meta{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+  .banner-dot,.ghost-loading{animation:none}
+  *{transition-duration:0ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <nav class="mast-nav">
+      <a href="index.html">Home</a>
+      <a href="futurofood-blog.html" class="active">Stories</a>
+      <a href="#topics">Topics</a>
+      <a href="index.html#newsletter">Newsletter</a>
+      <a href="index.html#sponsors">Advertise</a>
+    </nav>
+    <a href="index.html" class="mast-logo">
+      <span>Futuro<em>Food</em></span>
+      <small>El futuro de la alimentación · LATAM</small>
+    </a>
+    <div class="mast-right">
+      <a href="#newsletter" class="btn-subscribe">Subscribe Free</a>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1 class="page-title">All <em>Stories</em></h1>
+    <div class="page-meta">
+      <div id="post-count">Loading stories...</div>
+      <div>Updated weekly · EN / ES</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS BANNER — hide when Ghost is live -->
+<div class="static-banner">
+  <div class="static-banner-inner">
+    <span class="banner-dot"></span>
+    <span>
+      <strong>Demo mode</strong> — Showing sample stories. 
+      <!-- 
+        GHOST INTEGRATION: Once Ghost CMS is connected,
+        replace this entire .static-banner div with:
+        <div class="ghost-connected-banner" style="display:none"></div>
+        and the JS will populate live posts automatically.
+      -->
+      Connect Ghost CMS to load live AI-generated stories automatically.
+    </span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="topics" role="navigation" aria-label="Filter by topic">
+  <button class="filter-btn active" data-tag="all" onclick="filterCards(this,'all')">
+    All <span class="filter-count">28</span>
+  </button>
+  <button class="filter-btn" data-tag="insects" onclick="filterCards(this,'insects')">
+    🦗 Insect Protein <span class="filter-count">7</span>
+  </button>
+  <button class="filter-btn" data-tag="lab" onclick="filterCards(this,'lab')">
+    🧬 Lab-Grown <span class="filter-count">5</span>
+  </button>
+  <button class="filter-btn" data-tag="regen" onclick="filterCards(this,'regen')">
+    🌱 Regenerative <span class="filter-count">8</span>
+  </button>
+  <button class="filter-btn" data-tag="ancestral" onclick="filterCards(this,'ancestral')">
+    🌽 Ancestral <span class="filter-count">4</span>
+  </button>
+  <button class="filter-btn" data-tag="tech" onclick="filterCards(this,'tech')">
+    🤖 Food Tech <span class="filter-count">9</span>
+  </button>
+  <button class="filter-btn" data-tag="water" onclick="filterCards(this,'water')">
+    💧 Water <span class="filter-count">3</span>
+  </button>
+</div>
+
+<!-- FEATURED STORY -->
+<div class="featured-wrap">
+  <div class="featured-card" data-tag="insects">
+    <div class="featured-body">
+      <div class="featured-top">
+        <span class="featured-label">↗ Cover Story</span>
+        <span class="featured-readtime">6 min read</span>
+      </div>
+      <h2 class="featured-title">
+        Colombia is building one of Latin America's largest insect-protein plants — funded by international venture capital
+      </h2>
+      <p class="featured-deck">
+        S2G Investments and Ocean 14 Capital backed Enthos, a company converting organic waste into food-grade protein and oil using Black Soldier Fly larvae. The facility will process 200 tons of waste per day, aimed at replacing fishmeal in aquaculture feed.
+      </p>
+      <div class="featured-meta">
+        <span class="tag tag-insects">Insect Protein</span>
+        <span class="byline-sm">By <span>FuturoFood Editorial</span></span>
+        <span class="byline-sm">Source: Aquafeed.com, Undercurrent News</span>
+      </div>
+      <a href="#newsletter" class="read-cta">Read full story →</a>
+    </div>
+    <div class="featured-img">
+      🦗
+      <div class="featured-img-overlay">Black Soldier Fly protein facility · Colombia</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="blog-layout">
+
+  <!-- ARTICLES LIST -->
+  <div class="articles-list" id="articles-container">
+
+    <!--
+    ╔══════════════════════════════════════════════════════════════════════════╗
+    ║  GHOST CMS — DYNAMIC CONTENT INTEGRATION                                 ║
+    ║                                                                          ║
+    ║  When Ghost is connected, the JavaScript below replaces these            ║
+    ║  static cards with posts from the Ghost Content API.                     ║
+    ║                                                                          ║
+    ║  Each Ghost post maps to .article-card like this:                        ║
+    ║    post.title      → .card-title                                         ║
+    ║    post.excerpt    → .card-excerpt                                       ║
+    ║    post.tags[0]    → .tag (mapped to tag-insects, tag-lab, etc.)         ║
+    ║    post.published_at → .card-date (formatted)                            ║
+    ║    post.reading_time → .card-readtime                                    ║
+    ║    post.feature_image → .card-img (or emoji fallback)                    ║
+    ║    post.url        → href of entire card / read-cta                      ║
+    ║                                                                          ║
+    ║  See fetchGhostPosts() function at bottom of this file                   ║
+    ╚══════════════════════════════════════════════════════════════════════════╝
+    -->
+
+    <a class="article-card" data-tag="lab" href="futurofood-article.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-lab">Lab-Grown</span>
+          <span class="card-readtime">5 min</span>
+        </div>
+        <h3 class="card-title">Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered</h3>
+        <p class="card-excerpt">State research agency Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027, building on regulatory rules Brazil set in 2023.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: Embrapa / Rio Times</span>
+          <span class="tag tag-lab">Lab-Grown</span>
+        </div>
+      </div>
+      <div class="card-img">🧬</div>
+    </a>
+
+    <article class="article-card" data-tag="regen">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-regen">Regenerative</span>
+          <span class="card-readtime">5 min</span>
+        </div>
+        <h3 class="card-title">350 Costa Rican farmers are getting paid to restore soil through the AmistOsa network</h3>
+        <p class="card-excerpt">Osa Conservation is partnering with farmers in southern Costa Rica's AmistOsa ecological corridor on regenerative practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: Osa Conservation</span>
+          <span class="tag tag-regen">Regenerative</span>
+        </div>
+      </div>
+      <div class="card-img">🌱</div>
+    </article>
+
+    <article class="article-card" data-tag="regen">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-regen">Regenerative</span>
+          <span class="card-readtime">4 min</span>
+        </div>
+        <h3 class="card-title">World Bank commits $120M loan to sustainable agriculture in Costa Rica</h3>
+        <p class="card-excerpt">The financing supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane production chains.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: World Bank</span>
+          <span class="tag tag-regen">Regenerative</span>
+        </div>
+      </div>
+      <div class="card-img">🏦</div>
+    </article>
+
+    <article class="article-card" data-tag="insects">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-insects">Insect Protein</span>
+          <span class="card-readtime">6 min</span>
+        </div>
+        <h3 class="card-title">Enthos secures VC backing to scale Colombia's largest insect-protein facility</h3>
+        <p class="card-excerpt">S2G Investments and Ocean 14 Capital invested in Enthos, which processes 200 tons of organic waste per day into Black Soldier Fly protein and oil for the aquaculture and livestock feed markets.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: Aquafeed.com</span>
+          <span class="tag tag-insects">Insect Protein</span>
+        </div>
+      </div>
+      <div class="card-img">🪲</div>
+    </article>
+
+    <article class="article-card" data-tag="insects">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-insects">Insect Protein</span>
+          <span class="card-readtime">4 min</span>
+        </div>
+        <h3 class="card-title">IFC invests $2M in ProNuvo, a Costa Rican insect-feed producer in Guápiles</h3>
+        <p class="card-excerpt">The financing helps ProNuvo complete a 4,000 MT/year industrial insect-feed plant. The company harvests Black Soldier Fly larvae native to Costa Rica, using a fraction of the land, time, and water of conventional protein sources.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: IFC / World Bank Group</span>
+          <span class="tag tag-insects">Insect Protein</span>
+        </div>
+      </div>
+      <div class="card-img">♻️</div>
+    </article>
+
+    <article class="article-card" data-tag="regen">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-regen">Regenerative</span>
+          <span class="card-readtime">5 min</span>
+        </div>
+        <h3 class="card-title">Aquiares Estate: how a 600-hectare Costa Rican coffee farm became carbon neutral</h3>
+        <p class="card-excerpt">The Rainforest Alliance Certified farm on the slopes of Turrialba Volcano achieved carbon neutrality in 2016 and now sequesters more carbon than it emits — a regenerative coffee model spanning three generations of workers.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: Rainforest Alliance</span>
+          <span class="tag tag-regen">Regenerative</span>
+        </div>
+      </div>
+      <div class="card-img">☕</div>
+    </article>
+
+    <!-- PENDING: editorial placeholders below — replace with verified reporting before publishing -->
+    <article class="article-card" data-tag="tech">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-tech">Food Tech</span>
+          <span class="card-readtime">5 min</span>
+        </div>
+        <h3 class="card-title">Argentina's Kilimo has saved 72 billion liters of water with AI-powered irrigation — now in 7 countries</h3>
+        <p class="card-excerpt">Kilimo's platform analyzes satellite data, weather forecasts, and soil sensors to tell farmers exactly when and how much to irrigate. Farmers using it have cut water consumption by up to 20% while maintaining yields, reaching over 2,000 farmers across Argentina, Mexico, Chile, and four other countries.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: Borgen Project</span>
+          <span class="tag tag-tech">Food Tech</span>
+        </div>
+      </div>
+      <div class="card-img">💧</div>
+    </article>
+
+    <article class="article-card" data-tag="water">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-water">Water</span>
+          <span class="card-readtime">6 min</span>
+        </div>
+        <h3 class="card-title">Andean glaciers are thinning 35% faster than the global average — and 90 million people depend on them</h3>
+        <p class="card-excerpt">A policy brief from the Universities of Sheffield and Newcastle warns that Andean glaciers, thinning by 0.7 meters a year, threaten the water and food security of cities from La Paz to Santiago. In Peru's central range, some glaciers could disappear entirely by the 2050s.</p>
+        <div class="card-bottom">
+          <span class="card-date">Source: University of Sheffield</span>
+          <span class="tag tag-water">Water</span>
+        </div>
+      </div>
+      <div class="card-img">🏔️</div>
+    </article>
+
+    <!-- GHOST LOADING STATE (hidden by default, shown by JS when fetching) -->
+    <div class="ghost-loading" id="ghost-loading">
+      <p class="ghost-loading-text">Loading stories from Ghost CMS...</p>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <span class="page-info" id="page-info">Showing 1–8 of 28 stories</span>
+      <div class="page-btns">
+        <button class="page-btn" id="prev-btn" disabled onclick="changePage(-1)">← Previous</button>
+        <button class="page-btn active" id="page-1" onclick="goToPage(1)">1</button>
+        <button class="page-btn" id="page-2" onclick="goToPage(2)">2</button>
+        <button class="page-btn" id="page-3" onclick="goToPage(3)">3</button>
+        <button class="page-btn" id="next-btn" onclick="changePage(1)">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Newsletter -->
+    <div class="sidebar-block" id="newsletter">
+      <div class="nl-mini">
+        <h3 class="nl-mini-title">Stay ahead of <em>food's future</em></h3>
+        <p class="nl-mini-desc">Weekly brief on food innovation across LATAM. Free, always. Bilingüe.</p>
+        <input class="nl-mini-input" type="email" placeholder="your@email.com" aria-label="Email"/>
+        <button class="nl-mini-btn" type="button">Subscribe Free →</button>
+        <p class="nl-mini-note">Be an early subscriber · No spam · Unsubscribe anytime</p>
+      </div>
+    </div>
+
+    <!-- Topics -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">Browse by Topic</div>
+      <div class="topic-list">
+        <div class="topic-item" onclick="filterCards(null,'insects')">
+          <span class="topic-name"><span class="topic-icon">🦗</span> Insect Protein</span>
+          <span class="topic-count">7</span>
+        </div>
+        <div class="topic-item" onclick="filterCards(null,'lab')">
+          <span class="topic-name"><span class="topic-icon">🧬</span> Lab-Grown</span>
+          <span class="topic-count">5</span>
+        </div>
+        <div class="topic-item" onclick="filterCards(null,'regen')">
+          <span class="topic-name"><span class="topic-icon">🌱</span> Regenerative</span>
+          <span class="topic-count">8</span>
+        </div>
+        <div class="topic-item" onclick="filterCards(null,'ancestral')">
+          <span class="topic-name"><span class="topic-icon">🌽</span> Ancestral</span>
+          <span class="topic-count">4</span>
+        </div>
+        <div class="topic-item" onclick="filterCards(null,'tech')">
+          <span class="topic-name"><span class="topic-icon">🤖</span> Food Tech</span>
+          <span class="topic-count">9</span>
+        </div>
+        <div class="topic-item" onclick="filterCards(null,'water')">
+          <span class="topic-name"><span class="topic-icon">💧</span> Water</span>
+          <span class="topic-count">3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Most Read -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">Most Read This Week</div>
+      <div class="most-read-list">
+        <div class="mr-item">
+          <span class="mr-num">1</span>
+          <div>
+            <div class="mr-title">Enthos raises VC funding for Colombia insect-protein plant</div>
+            <span class="mr-tag">🦗 Insect Protein</span>
+          </div>
+        </div>
+        <div class="mr-item">
+          <span class="mr-num">2</span>
+          <div>
+            <div class="mr-title">Embrapa grows cultivated chicken from cells in Brazil</div>
+            <span class="mr-tag">🧬 Lab-Grown</span>
+          </div>
+        </div>
+        <div class="mr-item">
+          <span class="mr-num">3</span>
+          <div>
+            <div class="mr-title">World Bank commits $120M to Costa Rica agriculture</div>
+            <span class="mr-tag">🌱 Regenerative</span>
+          </div>
+        </div>
+        <div class="mr-item">
+          <span class="mr-num">4</span>
+          <div>
+            <div class="mr-title">ProNuvo's IFC-backed insect-feed plant in Guápiles</div>
+            <span class="mr-tag">♻️ Insect Protein</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sponsor slot -->
+    <div class="sidebar-block" id="advertise">
+      <div class="sidebar-title">Partner</div>
+      <div class="sponsor-mini">
+        <span class="sponsor-mini-label">Sponsored by</span>
+        <div class="sponsor-logo-box"><span>YOUR LOGO HERE</span></div>
+        <a href="futurofood.html#sponsors" class="sponsor-mini-cta">Advertise with FuturoFood →</a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-brand">Futuro<em>Food</em></div>
+    <div class="footer-links">
+      <a href="futurofood.html">Home</a>
+      <a href="#">About</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="index.html#sponsors">Advertise</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy</a>
+    </div>
+    <span class="footer-copy">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+  </div>
+</footer>
+
+<script>
+/*
+ ╔══════════════════════════════════════════════════════════════════════╗
+ ║  FUTUROFOOD — GHOST CMS INTEGRATION                                  ║
+ ║  ─────────────────────────────────────────────────────────────────   ║
+ ║  STEP 1: Set your Ghost credentials below                            ║
+ ║  STEP 2: Call initGhost() — it auto-replaces static cards           ║
+ ║  STEP 3: Remove the .static-banner div from the HTML above          ║
+ ╚══════════════════════════════════════════════════════════════════════╝
+*/
+
+// ── GHOST CONFIG ──────────────────────────────────────────────────────
+// Replace these with your real values when Ghost is live
+const GHOST_URL = 'https://YOUR-GHOST-SITE.ghost.io';   // ← your Ghost URL
+const GHOST_KEY = 'YOUR_CONTENT_API_KEY';                // ← from Ghost Admin
+const GHOST_VERSION = 'v5.0';
+const POSTS_PER_PAGE = 8;
+
+// ── TAG → CSS CLASS MAPPING ───────────────────────────────────────────
+// Map Ghost tag slugs to card tag classes
+const TAG_MAP = {
+  'insect-protein': { cls: 'tag-insects', label: '🦗 Insect Protein', filter: 'insects' },
+  'lab-grown':      { cls: 'tag-lab',     label: '🧬 Lab-Grown',      filter: 'lab'     },
+  'regenerative':   { cls: 'tag-regen',   label: '🌱 Regenerative',   filter: 'regen'   },
+  'ancestral':      { cls: 'tag-ancestral',label:'🌽 Ancestral',      filter: 'ancestral'},
+  'food-tech':      { cls: 'tag-tech',    label: '🤖 Food Tech',      filter: 'tech'    },
+  'water':          { cls: 'tag-water',   label: '💧 Water',          filter: 'water'   },
+};
+
+// ── EMOJI FALLBACKS per tag ───────────────────────────────────────────
+const TAG_EMOJI = {
+  'insects':'🦗','lab':'🧬','regen':'🌱',
+  'ancestral':'🌽','tech':'🤖','water':'💧'
+};
+
+// ── GHOST FETCH ───────────────────────────────────────────────────────
+/*
+  fetchGhostPosts(page, tag)
+  ─────────────────────────
+  Fetches posts from Ghost Content API.
+  Call this once Ghost is configured above.
+
+  API endpoint:
+  GET {GHOST_URL}/ghost/api/content/posts/
+      ?key={GHOST_KEY}
+      &include=tags,authors
+      &limit={POSTS_PER_PAGE}
+      &page={page}
+      &filter=tag:{tag}  (optional)
+
+  Returns: { posts: [...], meta: { pagination: { total, pages } } }
+*/
+async function fetchGhostPosts(page = 1, tag = null) {
+  if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
+    console.info('[FuturoFood] Ghost not configured yet — showing static content.');
+    return null;
+  }
+
+  const tagFilter = tag && tag !== 'all' ? `&filter=tag:${tag}` : '';
+  const url = `${GHOST_URL}/ghost/api/${GHOST_VERSION}/content/posts/`
+    + `?key=${GHOST_KEY}`
+    + `&include=tags,authors`
+    + `&limit=${POSTS_PER_PAGE}`
+    + `&page=${page}`
+    + tagFilter;
+
+  try {
+    document.getElementById('ghost-loading').style.display = 'block';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Ghost API error: ${res.status}`);
+    const data = await res.json();
+    document.getElementById('ghost-loading').style.display = 'none';
+    return data;
+  } catch (err) {
+    console.error('[FuturoFood] Ghost fetch failed:', err);
+    document.getElementById('ghost-loading').style.display = 'none';
+    return null;
+  }
+}
+
+// ── RENDER GHOST POSTS ────────────────────────────────────────────────
+function renderGhostPosts(posts, pagination) {
+  const container = document.getElementById('articles-container');
+  const loading = document.getElementById('ghost-loading');
+  const paginationDiv = container.querySelector('.pagination');
+
+  // Remove static cards (keep loading + pagination)
+  const staticCards = container.querySelectorAll('.article-card');
+  staticCards.forEach(c => c.remove());
+
+  posts.forEach(post => {
+    // Map Ghost tag to our system
+    const ghostTag = post.tags?.[0]?.slug || 'food-tech';
+    const tagInfo = TAG_MAP[ghostTag] || TAG_MAP['food-tech'];
+    const emoji = TAG_EMOJI[tagInfo.filter] || '🍽️';
+
+    // Format date
+    const date = new Date(post.published_at).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    const card = document.createElement('article');
+    card.className = 'article-card';
+    card.dataset.tag = tagInfo.filter;
+    card.onclick = () => window.location.href = post.url;
+    card.innerHTML = `
+      <div>
+        <div class="card-top">
+          <span class="tag ${tagInfo.cls}">${tagInfo.label}</span>
+          <span class="card-readtime">${post.reading_time} min</span>
+        </div>
+        <h3 class="card-title">${post.title}</h3>
+        <p class="card-excerpt">${post.excerpt || post.custom_excerpt || ''}</p>
+        <div class="card-bottom">
+          <span class="card-date">${date}</span>
+        </div>
+      </div>
+      <div class="card-img">${
+        post.feature_image
+          ? `<img src="${post.feature_image}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;"/>`
+          : emoji
+      }</div>
+    `;
+    container.insertBefore(card, loading);
+  });
+
+  // Update pagination
+  updatePagination(pagination);
+  document.getElementById('post-count').textContent =
+    `${pagination.total} stories · Page ${pagination.page} of ${pagination.pages}`;
+}
+
+// ── FILTER (static mode) ──────────────────────────────────────────────
+function filterCards(btn, tag) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    // called from sidebar topic list
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      if (b.dataset.tag === tag) b.classList.add('active');
+    });
+  }
+
+  // If Ghost is configured, fetch from API
+  if (!GHOST_URL.includes('YOUR-GHOST-SITE')) {
+    fetchGhostPosts(1, tag).then(data => {
+      if (data) renderGhostPosts(data.posts, data.meta.pagination);
+    });
+    return;
+  }
+
+  // Static fallback: show/hide cards by data-tag
+  const cards = document.querySelectorAll('.article-card');
+  cards.forEach(card => {
+    if (tag === 'all' || card.dataset.tag === tag) {
+      card.style.display = 'grid';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Update count
+  const visible = tag === 'all'
+    ? cards.length
+    : [...cards].filter(c => c.dataset.tag === tag).length;
+  document.getElementById('post-count').textContent =
+    `${visible} stories · Demo mode`;
+}
+
+// ── PAGINATION ────────────────────────────────────────────────────────
+let currentPage = 1;
+let currentTag = 'all';
+
+function updatePagination(p) {
+  document.getElementById('prev-btn').disabled = p.page <= 1;
+  document.getElementById('next-btn').disabled = p.page >= p.pages;
+  document.getElementById('page-info').textContent =
+    `Showing ${(p.page-1)*POSTS_PER_PAGE+1}–${Math.min(p.page*POSTS_PER_PAGE,p.total)} of ${p.total} stories`;
+}
+
+function changePage(dir) {
+  currentPage += dir;
+  fetchGhostPosts(currentPage, currentTag).then(data => {
+    if (data) renderGhostPosts(data.posts, data.meta.pagination);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToPage(n) {
+  currentPage = n;
+  fetchGhostPosts(n, currentTag).then(data => {
+    if (data) renderGhostPosts(data.posts, data.meta.pagination);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+/*
+  initGhost() — call this to activate Ghost integration
+  ──────────────────────────────────────────────────────
+  Once GHOST_URL and GHOST_KEY are set above,
+  uncomment the initGhost() call at the bottom.
+  It will auto-fetch and replace static cards on page load.
+*/
+async function initGhost() {
+  const data = await fetchGhostPosts(1, 'all');
+  if (data && data.posts?.length) {
+    renderGhostPosts(data.posts, data.meta.pagination);
+    // Hide static banner once Ghost is live
+    const banner = document.querySelector('.static-banner');
+    if (banner) banner.style.display = 'none';
+  }
+}
+
+// ── ACTIVATE GHOST (uncomment when ready) ─────────────────────────────
+// initGhost();
+//
+// For now, update static post count
+document.getElementById('post-count').textContent = '28 stories · Demo mode';
+</script>
+</body>
+</html>

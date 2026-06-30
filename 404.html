@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>404 — Story Not Found · FuturoFood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0A0F0A;--leaf:#E8F5E0;--panel:#111A11;--panel2:#162016;--green:#4ADE80;--fire:#FF6B35;--mist:rgba(232,245,224,0.65);--mist2:rgba(232,245,224,0.30);--border:rgba(232,245,224,0.10);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%}
+body{background:var(--ink);color:var(--leaf);font-family:var(--sans);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.masthead{border-bottom:1px solid var(--border);padding:0 2rem;background:rgba(10,15,10,0.93)}
+.masthead-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;min-height:64px}
+.mast-logo{font-family:var(--serif);font-size:1.4rem;font-weight:900}
+.mast-logo em{color:var(--green);font-style:normal}
+.btn-sub{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.45rem 1.1rem;transition:background .2s}
+.btn-sub:hover{background:#6ee89a}
+
+.error-page{flex:1;display:flex;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center}
+.error-inner{max-width:600px}
+.error-num{font-family:var(--serif);font-size:clamp(8rem,20vw,14rem);font-weight:900;line-height:.85;letter-spacing:-.05em;color:var(--panel2);position:relative;margin-bottom:1rem;-webkit-text-stroke:1px var(--border)}
+.error-icon{font-size:3rem;display:block;margin-bottom:1.5rem;animation:wobble 3s ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.error-eyebrow{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fire);margin-bottom:1rem;display:block}
+.error-title{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:.875rem}
+.error-title em{color:var(--green);font-style:normal}
+.error-desc{font-size:.95rem;color:var(--mist);line-height:1.7;margin-bottom:2.5rem;max-width:460px;margin-left:auto;margin-right:auto}
+.error-actions{display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.btn-primary{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.8rem 1.75rem;border:none;cursor:pointer;transition:background .2s;display:inline-block}
+.btn-primary:hover{background:#6ee89a}
+.btn-secondary{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--mist);padding:.8rem 1.75rem;border:1px solid var(--border);cursor:pointer;transition:border-color .2s,color .2s;display:inline-block}
+.btn-secondary:hover{border-color:var(--green);color:var(--green)}
+.quick-links-title{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist2);margin-bottom:1rem}
+.quick-links{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.quick-link{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--mist);border:1px solid var(--border2);padding:.35rem .875rem;transition:color .2s,border-color .2s}
+.quick-link:hover{color:var(--green);border-color:rgba(74,222,128,.3)}
+footer{border-top:1px solid var(--border);background:var(--panel);padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.footer-brand{font-family:var(--serif);font-weight:900;font-size:1rem}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-copy{font-family:var(--mono);font-size:.58rem;color:rgba(232,245,224,.25)}
+@media(prefers-reduced-motion:reduce){.error-icon{animation:none}}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="futurofood.html" class="mast-logo">Futuro<em>Food</em></a>
+    <a href="futurofood.html#newsletter" class="btn-sub">Subscribe Free</a>
+  </div>
+</header>
+
+<div class="error-page">
+  <div class="error-inner">
+    <span class="error-icon">🦗</span>
+    <span class="error-eyebrow">404 · Page Not Found</span>
+    <h1 class="error-title">This story<br>got <em>eaten.</em></h1>
+    <p class="error-desc">The page you're looking for has moved, been updated, or simply doesn't exist. Don't worry — there are thousands of food innovation stories waiting for you.</p>
+    <div class="error-actions">
+      <a href="futurofood.html" class="btn-primary">← Back to Home</a>
+      <a href="futurofood-blog.html" class="btn-secondary">Browse All Stories</a>
+    </div>
+    <div class="quick-links-title">Or jump to a topic</div>
+    <div class="quick-links">
+      <a href="futurofood-blog.html" class="quick-link">🦗 Insect Protein</a>
+      <a href="futurofood-blog.html" class="quick-link">🧬 Lab-Grown</a>
+      <a href="futurofood-blog.html" class="quick-link">🌱 Regenerative</a>
+      <a href="futurofood-blog.html" class="quick-link">🌽 Ancestral</a>
+      <a href="futurofood-blog.html" class="quick-link">🤖 Food Tech</a>
+      <a href="futurofood-blog.html" class="quick-link">💧 Water</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Futuro<em>Food</em></div>
+  <span class="footer-copy">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+</footer>
+</body>
+</html>

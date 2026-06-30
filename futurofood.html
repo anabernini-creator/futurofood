@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FuturoFood — The Future of Food in Latin America</title>
+<meta name="description" content="FuturoFood tracks the science, startups, and indigenous wisdom reshaping how 650 million Latin Americans eat. Weekly newsletter, free."/>
+<meta property="og:title" content="FuturoFood — The Future of Food in Latin America"/>
+<meta property="og:description" content="Lab-grown meat, insect protein, regenerative farming. The bilingual media platform for food innovation in LATAM."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+
+/* ─── TOKENS ─── */
+:root{
+  --ink:       #0A0F0A;
+  --leaf:      #E8F5E0;
+  --panel:     #111A11;
+  --panel2:    #162016;
+  --green:     #4ADE80;
+  --green-dim: #2D8B50;
+  --fire:      #FF6B35;
+  --gold:      #F5C842;
+  --mist:      rgba(232,245,224,0.55);
+  --border:    rgba(232,245,224,0.10);
+  --border2:   rgba(232,245,224,0.06);
+
+  --serif:  'Playfair Display', Georgia, serif;
+  --sans:   'DM Sans', system-ui, sans-serif;
+  --mono:   'JetBrains Mono', monospace;
+
+  --r: 0px; /* zero radius — editorial aesthetic */
+}
+
+body{
+  background:var(--ink);
+  color:var(--leaf);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ─── UTILITY ─── */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--green);
+}
+.section-rule{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:0;
+}
+a{color:inherit;text-decoration:none}
+
+/* ─── MASTHEAD ─── */
+.masthead{
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,15,10,0.92);
+  backdrop-filter:blur(16px);
+}
+.masthead-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  min-height:64px;
+  gap:1rem;
+}
+.mast-nav{display:flex;gap:1.75rem;align-items:center}
+.mast-nav a{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--mist);
+  transition:color .2s;
+}
+.mast-nav a:hover{color:var(--green)}
+.mast-logo{
+  text-align:center;
+  font-family:var(--serif);
+  font-size:1.6rem;
+  font-weight:900;
+  letter-spacing:-0.02em;
+  line-height:1;
+  display:block;
+  cursor:pointer;
+}
+.mast-logo em{color:var(--green);font-style:normal}
+.mast-logo small{
+  display:block;
+  font-family:var(--mono);
+  font-size:0.55rem;
+  font-weight:400;
+  letter-spacing:0.22em;
+  color:var(--mist);
+  margin-top:3px;
+}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:1rem}
+.btn-subscribe{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  background:var(--green);
+  color:var(--ink);
+  padding:.5rem 1.25rem;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.btn-subscribe:hover{background:#6ee89a;transform:translateY(-1px)}
+.issue-tag{
+  font-family:var(--mono);
+  font-size:0.6rem;
+  color:var(--mist);
+  letter-spacing:0.08em;
+}
+
+/* ─── TICKER ─── */
+.ticker{
+  background:var(--green);
+  overflow:hidden;
+  height:34px;
+  display:flex;align-items:center;
+  border-bottom:1px solid var(--border);
+}
+.ticker-label{
+  font-family:var(--mono);
+  font-size:0.6rem;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink);
+  background:var(--ink);
+  color:var(--green);
+  padding:0 1rem;
+  height:100%;
+  display:flex;align-items:center;
+  white-space:nowrap;
+  flex-shrink:0;
+  border-right:1px solid rgba(10,15,10,0.3);
+}
+.ticker-track{
+  display:flex;gap:0;
+  width:max-content;
+  animation:scroll 35s linear infinite;
+}
+.ticker-item{
+  font-family:var(--mono);
+  font-size:0.62rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink);
+  white-space:nowrap;
+  padding:0 2rem;
+  border-right:1px solid rgba(10,15,10,0.2);
+  display:flex;align-items:center;gap:.5rem;
+  height:34px;
+}
+.ticker-dot{width:4px;height:4px;background:var(--ink);border-radius:50%;opacity:.5}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── HERO (BROADSHEET LAYOUT) ─── */
+.hero{
+  max-width:1280px;margin:0 auto;
+  padding:3rem 2rem 0;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+}
+.hero-date-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-bottom:1rem;
+  border-bottom:3px solid var(--leaf);
+  margin-bottom:2rem;
+}
+.hero-date{
+  font-family:var(--mono);
+  font-size:0.65rem;
+  color:var(--mist);
+  letter-spacing:0.1em;
+}
+.hero-edition{
+  font-family:var(--mono);
+  font-size:0.65rem;
+  color:var(--mist);
+  letter-spacing:0.1em;
+}
+
+/* Main broadsheet grid */
+.broadsheet{
+  display:grid;
+  grid-template-columns:1fr 2px 2fr 2px 1fr;
+  gap:0;
+  min-height:520px;
+}
+.bs-col{padding:0 1.5rem}
+.bs-col:first-child{padding-left:0}
+.bs-col:last-child{padding-right:0}
+.bs-divider{background:var(--border);flex-shrink:0}
+
+/* Left column */
+.bs-left{}
+.kicker{
+  font-family:var(--mono);
+  font-size:0.62rem;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--fire);
+  margin-bottom:.6rem;
+  display:block;
+}
+.mini-story{
+  padding-bottom:1.25rem;
+  margin-bottom:1.25rem;
+  border-bottom:1px solid var(--border);
+}
+.mini-story:last-child{border-bottom:none}
+.mini-title{
+  font-family:var(--serif);
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:.4rem;
+}
+.mini-body{
+  font-size:.8rem;
+  color:var(--mist);
+  line-height:1.5;
+}
+.read-more{
+  font-family:var(--mono);
+  font-size:.6rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--green);
+  display:inline-block;
+  margin-top:.4rem;
+}
+
+/* Center column — flagship story */
+.bs-center{}
+.flagship-label{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--green);
+  border:1px solid var(--green);
+  display:inline-block;
+  padding:.25rem .6rem;
+  margin-bottom:1.2rem;
+}
+.flagship-title{
+  font-family:var(--serif);
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:1rem;
+}
+.flagship-title em{color:var(--green);font-style:normal}
+.flagship-deck{
+  font-family:var(--serif);
+  font-size:1.05rem;
+  font-weight:400;
+  font-style:italic;
+  color:var(--mist);
+  line-height:1.55;
+  margin-bottom:1.5rem;
+  padding-left:1rem;
+  border-left:3px solid var(--green);
+}
+.flagship-body{
+  font-size:.9rem;
+  color:rgba(232,245,224,.85);
+  line-height:1.75;
+  margin-bottom:1.5rem;
+}
+.flagship-img{
+  width:100%;
+  aspect-ratio:16/7;
+  background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.flagship-img-inner{
+  font-family:var(--serif);
+  font-size:4rem;
+  opacity:.15;
+  user-select:none;
+}
+.flagship-img-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:.5rem .75rem;
+  background:rgba(10,15,10,.7);
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:var(--mist);
+  letter-spacing:.06em;
+}
+.byline{
+  font-family:var(--mono);
+  font-size:.6rem;
+  color:var(--mist);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.byline span{color:var(--green)}
+
+/* Right column */
+.bs-right{}
+.stat-block{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  padding:1.25rem;
+  margin-bottom:1.25rem;
+}
+.stat-num{
+  font-family:var(--serif);
+  font-size:2.6rem;
+  font-weight:900;
+  line-height:1;
+  margin-bottom:.25rem;
+}
+.stat-num.green{color:var(--green)}
+.stat-num.fire{color:var(--fire)}
+.stat-num.gold{color:var(--gold)}
+.stat-label{
+  font-family:var(--mono);
+  font-size:.62rem;
+  color:var(--mist);
+  letter-spacing:.06em;
+  line-height:1.4;
+}
+.pull-quote{
+  border-top:3px solid var(--fire);
+  padding:1rem 0;
+  margin-bottom:1.25rem;
+}
+.pull-quote p{
+  font-family:var(--serif);
+  font-size:1.1rem;
+  font-style:italic;
+  line-height:1.4;
+  margin-bottom:.5rem;
+}
+.pull-quote cite{
+  font-family:var(--mono);
+  font-size:.6rem;
+  color:var(--mist);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-style:normal;
+}
+
+/* ─── TOPIC BAND ─── */
+.topic-band{
+  border-top:3px solid var(--leaf);
+  border-bottom:1px solid var(--border);
+  max-width:1280px;margin:2rem auto 0;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+}
+.topic{
+  padding:1.25rem 1rem;
+  border-right:1px solid var(--border);
+  cursor:default;
+  transition:background .2s;
+}
+.topic:last-child{border-right:none}
+.topic:hover{background:var(--panel2)}
+.topic-icon{font-size:1.4rem;display:block;margin-bottom:.5rem}
+.topic-name{
+  font-family:var(--serif);
+  font-size:.9rem;
+  font-weight:700;
+  display:block;
+  margin-bottom:.2rem;
+}
+.topic-count{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:var(--mist);
+  letter-spacing:.06em;
+}
+
+/* ─── SECOND ROW — articles grid ─── */
+.articles-section{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+}
+.articles-header{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:2rem 2rem 1.25rem;
+  border-bottom:1px solid var(--border);
+}
+.articles-title{
+  font-family:var(--serif);
+  font-size:1.5rem;
+  font-weight:900;
+  letter-spacing:-.02em;
+}
+.see-all{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--green);
+  border-bottom:1px solid var(--green);
+  padding-bottom:1px;
+}
+.articles-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.article-card{
+  padding:1.5rem;
+  border-right:1px solid var(--border);
+  border-top:1px solid var(--border);
+  display:flex;flex-direction:column;
+  gap:.75rem;
+  transition:background .2s;
+  color:inherit;
+  text-decoration:none;
+  cursor:pointer;
+}
+.article-card:last-child{border-right:none}
+.article-card:hover{background:var(--panel2)}
+.article-tag{
+  font-family:var(--mono);
+  font-size:.58rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  display:inline-block;
+  padding:.2rem .6rem;
+}
+.tag-insects{background:rgba(74,222,128,.12);color:var(--green)}
+.tag-lab    {background:rgba(245,200,66,.12);color:var(--gold)}
+.tag-regen  {background:rgba(255,107,53,.12);color:var(--fire)}
+.tag-tech   {background:rgba(232,245,224,.08);color:var(--mist)}
+.article-title{
+  font-family:var(--serif);
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.25;
+  flex:1;
+}
+.article-excerpt{
+  font-size:.82rem;
+  color:var(--mist);
+  line-height:1.55;
+}
+.article-meta{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:rgba(232,245,224,.4);
+  letter-spacing:.05em;
+  border-top:1px solid var(--border2);
+  padding-top:.75rem;
+}
+
+/* ─── NEWSLETTER CTA ─── */
+.newsletter-section{
+  max-width:1280px;margin:0 auto;
+  border:1px solid var(--border);
+  border-top:3px solid var(--green);
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.nl-left{
+  padding:3rem 2.5rem;
+  border-right:1px solid var(--border);
+}
+.nl-eyebrow{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--green);
+  display:flex;align-items:center;gap:.5rem;
+  margin-bottom:1.25rem;
+}
+.nl-live-dot{
+  width:7px;height:7px;
+  background:var(--green);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.nl-title{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1.05;
+  margin-bottom:1rem;
+}
+.nl-title em{color:var(--green);font-style:normal}
+.nl-desc{
+  font-size:.92rem;
+  color:var(--mist);
+  line-height:1.7;
+  max-width:400px;
+}
+.nl-right{
+  padding:3rem 2.5rem;
+  display:flex;flex-direction:column;justify-content:center;gap:1.5rem;
+}
+.nl-form{display:flex;flex-direction:column;gap:.75rem}
+.nl-input{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  color:var(--leaf);
+  font-family:var(--sans);
+  font-size:.9rem;
+  padding:.9rem 1.25rem;
+  outline:none;
+  transition:border-color .2s;
+  width:100%;
+}
+.nl-input::placeholder{color:rgba(232,245,224,.3)}
+.nl-input:focus{border-color:var(--green)}
+.btn-nl{
+  background:var(--green);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:1rem 1.5rem;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.btn-nl:hover{background:#6ee89a;transform:translateY(-1px)}
+.nl-note{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:rgba(232,245,224,.35);
+  letter-spacing:.06em;
+}
+.nl-proof{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+}
+.nl-stat{
+  background:var(--panel);
+  border:1px solid var(--border2);
+  padding:1rem;
+}
+.nl-stat-n{
+  font-family:var(--serif);
+  font-size:1.4rem;
+  font-weight:900;
+  color:var(--green);
+  line-height:1;
+  margin-bottom:.2rem;
+}
+.nl-stat-l{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:var(--mist);
+  letter-spacing:.06em;
+}
+
+/* ─── SPONSORS ─── */
+.sponsors-section{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+}
+.sponsors-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 2rem;
+  border-bottom:1px solid var(--border);
+}
+.sponsors-label{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--mist);
+}
+.sponsor-cta{
+  font-family:var(--mono);
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--green);
+  border:1px solid var(--green);
+  padding:.35rem .9rem;
+  transition:background .2s,color .2s;
+}
+.sponsor-cta:hover{background:var(--green);color:var(--ink)}
+.sponsors-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+.sponsor-slot{
+  padding:2rem 1.5rem;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;
+  text-align:center;
+  transition:background .2s;
+}
+.sponsor-slot:last-child{border-right:none}
+.sponsor-slot:hover{background:var(--panel2)}
+.sponsor-logo-area{
+  width:80px;height:40px;
+  border:1px dashed var(--border);
+  display:flex;align-items:center;justify-content:center;
+}
+.sponsor-logo-placeholder{
+  font-family:var(--mono);
+  font-size:.55rem;
+  color:rgba(232,245,224,.2);
+  letter-spacing:.06em;
+}
+.sponsor-name{
+  font-family:var(--mono);
+  font-size:.58rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--mist);
+}
+.sponsor-category{
+  font-family:var(--mono);
+  font-size:.52rem;
+  color:rgba(232,245,224,.3);
+  letter-spacing:.06em;
+}
+.sponsor-slot.available{
+  cursor:pointer;
+}
+.sponsor-slot.available .sponsor-logo-area{
+  border-color:rgba(74,222,128,.2);
+}
+.sponsor-slot.available:hover .sponsor-logo-placeholder{
+  color:var(--green);
+}
+
+/* ─── MANIFESTO ─── */
+.manifesto-section{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  background:var(--panel);
+  display:grid;
+  grid-template-columns:3fr 2fr;
+  border-bottom:1px solid var(--border);
+}
+.manifesto-left{
+  padding:4rem 3rem 4rem 2rem;
+  border-right:1px solid var(--border);
+}
+.manifesto-eyebrow{margin-bottom:1.5rem}
+.manifesto-quote{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1.1;
+  margin-bottom:1.5rem;
+}
+.manifesto-quote em{color:var(--green);font-style:normal}
+.manifesto-body{
+  font-size:.92rem;
+  color:var(--mist);
+  line-height:1.8;
+  margin-bottom:1.5rem;
+  max-width:520px;
+}
+.btn-outline{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  border:1px solid var(--leaf);
+  color:var(--leaf);
+  padding:.75rem 1.75rem;
+  transition:background .2s,color .2s;
+}
+.btn-outline:hover{background:var(--leaf);color:var(--ink)}
+.manifesto-right{
+  padding:4rem 2rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  align-content:start;
+}
+.mf-cell{
+  background:var(--panel);
+  padding:1.5rem;
+  display:flex;flex-direction:column;gap:.5rem;
+}
+.mf-icon{font-size:1.75rem}
+.mf-label{
+  font-family:var(--serif);
+  font-size:.95rem;
+  font-weight:700;
+}
+.mf-sub{
+  font-family:var(--mono);
+  font-size:.6rem;
+  color:var(--mist);
+  letter-spacing:.06em;
+  line-height:1.4;
+}
+
+/* ─── FOOTER ─── */
+footer{
+  border-top:3px solid var(--leaf);
+  background:var(--panel);
+}
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:0;
+  border-bottom:1px solid var(--border);
+}
+.footer-col{
+  padding:2.5rem 2rem;
+  border-right:1px solid var(--border);
+}
+.footer-col:last-child{border-right:none}
+.footer-brand{
+  font-family:var(--serif);
+  font-size:1.5rem;
+  font-weight:900;
+  letter-spacing:-.02em;
+  margin-bottom:.4rem;
+}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-tagline{
+  font-family:var(--mono);
+  font-size:.6rem;
+  color:var(--mist);
+  letter-spacing:.08em;
+  line-height:1.5;
+  margin-bottom:1.25rem;
+}
+.footer-social{display:flex;gap:.75rem}
+.social-link{
+  font-family:var(--mono);
+  font-size:.58rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--mist);
+  border:1px solid var(--border);
+  padding:.3rem .65rem;
+  transition:border-color .2s,color .2s;
+}
+.social-link:hover{border-color:var(--green);color:var(--green)}
+.footer-col-title{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--mist);
+  margin-bottom:1rem;
+  padding-bottom:.5rem;
+  border-bottom:1px solid var(--border);
+}
+.footer-links{display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{
+  font-size:.82rem;
+  color:rgba(232,245,224,.7);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--green)}
+.footer-bottom{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2rem;
+  flex-wrap:wrap;gap:.5rem;
+}
+.footer-copy{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:rgba(232,245,224,.3);
+  letter-spacing:.06em;
+}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{
+  font-family:var(--mono);
+  font-size:.58rem;
+  color:rgba(232,245,224,.3);
+  letter-spacing:.06em;
+  transition:color .2s;
+}
+.footer-legal a:hover{color:var(--green)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .broadsheet{grid-template-columns:1fr 2px 2fr;grid-template-rows:auto auto}
+  .bs-right-col-wrapper{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1.5rem 0 0}
+  .articles-grid{grid-template-columns:1fr 1fr}
+  .sponsors-grid{grid-template-columns:repeat(3,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .manifesto-section{grid-template-columns:1fr}
+  .newsletter-section{grid-template-columns:1fr}
+  .nl-left{border-right:none;border-bottom:1px solid var(--border)}
+}
+@media(max-width:768px){
+  .masthead-inner{grid-template-columns:auto 1fr}
+  .mast-nav{display:none}
+  .mast-logo{text-align:left}
+  .broadsheet{grid-template-columns:1fr}
+  .bs-divider{display:none}
+  .topic-band{grid-template-columns:repeat(3,1fr)}
+  .articles-grid{grid-template-columns:1fr}
+  .sponsors-grid{grid-template-columns:1fr 1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-col{border-right:none;border-bottom:1px solid var(--border)}
+  .nl-proof{grid-template-columns:1fr 1fr}
+  .hero{padding:1.5rem 1rem 0}
+  .bs-col{padding:0 .75rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .ticker-track,.nl-live-dot{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <nav class="mast-nav">
+      <a href="futurofood-blog.html">Stories</a>
+      <a href="#topics">Topics</a>
+      <a href="futurofood-about.html">About</a>
+      <a href="#sponsors">Advertise</a>
+    </nav>
+    <a href="index.html" class="mast-logo">
+      <span>Futuro<em>Food</em></span>
+      <small>El futuro de la alimentación · LATAM</small>
+    </a>
+    <div class="mast-right">
+      <span class="issue-tag">Vol. 1 · Issue 1 · 2026</span>
+      <a href="#newsletter" class="btn-subscribe">Subscribe Free</a>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <span class="ticker-label">↗ Now</span>
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Enthos raises VC funding for Colombia insect-protein plant</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> World Bank commits $120M to Costa Rica sustainable agriculture</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016</span>
+    <!-- duplicate -->
+    <span class="ticker-item"><span class="ticker-dot"></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Enthos raises VC funding for Colombia insect-protein plant</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> World Bank commits $120M to Costa Rica sustainable agriculture</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016</span>
+  </div>
+</div>
+
+<!-- HERO — BROADSHEET -->
+<main>
+<section class="hero">
+  <div class="hero-date-bar">
+    <span class="hero-date">Friday, June 27, 2026</span>
+    <span class="hero-edition">FuturoFood Weekly · Free Edition</span>
+  </div>
+
+  <div class="broadsheet">
+    <!-- LEFT COL -->
+    <div class="bs-col bs-left">
+      <div class="mini-story">
+        <span class="kicker">🌱 Regenerative</span>
+        <h3 class="mini-title">350 Costa Rican farmers join regenerative agriculture network</h3>
+        <p class="mini-body">Osa Conservation's AmistOsa network partners with farmers in southern Costa Rica on practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding.</p>
+        <a href="futurofood-blog.html" class="read-more">Read story →</a>
+      </div>
+      <div class="mini-story">
+        <span class="kicker">🏦 Finance</span>
+        <h3 class="mini-title">World Bank commits $120M to sustainable agriculture in Costa Rica</h3>
+        <p class="mini-body">The loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane chains.</p>
+        <a href="futurofood-blog.html" class="read-more">Read story →</a>
+      </div>
+      <div class="mini-story">
+        <span class="kicker">☕ Regenerative</span>
+        <h3 class="mini-title">Aquiares Estate: a carbon-neutral coffee farm in Turrialba</h3>
+        <p class="mini-body">The 600-hectare Rainforest Alliance Certified farm has sequestered more carbon than it emits since 2016 — a regenerative model spanning three generations of workers.</p>
+        <a href="futurofood-blog.html" class="read-more">Read story →</a>
+      </div>
+    </div>
+
+    <div class="bs-divider"></div>
+
+    <!-- CENTER COL — FLAGSHIP -->
+    <div class="bs-col bs-center">
+      <span class="flagship-label">↗ Cover Story</span>
+      <div class="flagship-img">
+        <span class="flagship-img-inner">🧬</span>
+        <span class="flagship-img-caption">Embrapa Nanobiotechnology Laboratory (Cenargen) · Brasília · cultivated meat research</span>
+      </div>
+      <h1 class="flagship-title">
+        Brazil's state research agency is growing chicken meat from<em> cells</em> — and the world's top beef exporter says it's just the beginning
+      </h1>
+      <p class="byline">By <span>FuturoFood Editorial</span> · Sources: Agência Brasil, Rio Times, Embrapa · 6 min read · EN/ES</p>
+      <p class="flagship-deck">
+        Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027 — built entirely in-house, in a country that already set regulatory rules for cultivated meat back in 2023.
+      </p>
+      <p class="flagship-body">
+        Brazil is the world's largest beef exporter — a country built, in large part, on cattle. So when its own federal research agency starts growing meat in a dish, without a single animal slaughtered, it's a signal that the idea has moved well past the experimental fringe.
+      </p>
+      <p class="flagship-body">
+        Researcher Luciano Paulino da Silva, who coordinates the experiments at Embrapa's Nanobiotechnology Laboratory, expects the work to be ready as a licensable technology package by mid-2027 — building on a regulatory framework Brazil's ANVISA published back in 2023.
+      </p>
+      <a href="futurofood-article.html" class="read-more">Continue reading →</a>
+    </div>
+
+    <div class="bs-divider"></div>
+
+    <!-- RIGHT COL -->
+    <div class="bs-col bs-right">
+      <div class="stat-block">
+        <div class="stat-num green">2027</div>
+        <div class="stat-label">Target year for Embrapa's finished cultivated-meat technology package, ready to license to private companies</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num fire">4</div>
+        <div class="stat-label">Countries with regulatory or commercial approval for cultivated meat: Singapore, US, Israel, Australia/New Zealand</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num gold">2023</div>
+        <div class="stat-label">Year Brazil's ANVISA published its cultivated-meat regulatory framework (RDC 839)</div>
+      </div>
+      <div class="pull-quote">
+        <p>"Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa." — By around the middle of next year, it will be on display as an Embrapa technological asset.</p>
+        <cite>— Luciano Paulino da Silva, researcher, Embrapa LNANO</cite>
+      </div>
+      <div class="mini-story">
+        <span class="kicker">🪲 Insect Protein</span>
+        <h3 class="mini-title">Also this week: Enthos scales Colombia's insect-protein plant</h3>
+        <p class="mini-body">S2G Investments and Ocean 14 Capital backed a 200-ton-per-day Black Soldier Fly facility aimed at replacing fishmeal in aquaculture feed.</p>
+        <a href="futurofood-blog.html" class="read-more">Read →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPIC BAND -->
+<nav class="topic-band" id="topics" aria-label="Topics">
+  <div class="topic">
+    <span class="topic-icon">🦗</span>
+    <span class="topic-name">Insect Protein</span>
+    <span class="topic-count eyebrow">12 stories</span>
+  </div>
+  <div class="topic">
+    <span class="topic-icon">🧬</span>
+    <span class="topic-name">Lab-Grown</span>
+    <span class="topic-count eyebrow">9 stories</span>
+  </div>
+  <div class="topic">
+    <span class="topic-icon">🌱</span>
+    <span class="topic-name">Regenerative</span>
+    <span class="topic-count eyebrow">18 stories</span>
+  </div>
+  <div class="topic">
+    <span class="topic-icon">🌽</span>
+    <span class="topic-name">Ancestral</span>
+    <span class="topic-count eyebrow">14 stories</span>
+  </div>
+  <div class="topic">
+    <span class="topic-icon">🤖</span>
+    <span class="topic-name">Food Tech</span>
+    <span class="topic-count eyebrow">21 stories</span>
+  </div>
+  <div class="topic">
+    <span class="topic-icon">💧</span>
+    <span class="topic-name">Water</span>
+    <span class="topic-count eyebrow">7 stories</span>
+  </div>
+</nav>
+
+<!-- ARTICLES GRID -->
+<section class="articles-section" id="stories">
+  <div class="articles-header">
+    <h2 class="articles-title">Latest Stories</h2>
+    <a href="futurofood-blog.html" class="see-all">View all stories →</a>
+  </div>
+  <div class="articles-grid">
+    <a class="article-card" href="futurofood-article.html">
+      <span class="article-tag tag-lab">Lab-Grown</span>
+      <h3 class="article-title">Brazil's state research agency Embrapa is growing real chicken meat from cells — without a single animal slaughtered</h3>
+      <p class="article-excerpt">Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília, with a finished technology package targeted for mid-2027. Brazil already set regulatory rules for cultivated meat back in 2023.</p>
+      <div class="article-meta">5 min · Source: Embrapa / Rio Times</div>
+    </a>
+    <a class="article-card" href="futurofood-blog.html">
+      <span class="article-tag tag-insects">Insect Protein</span>
+      <h3 class="article-title">Enthos raises VC funding to build one of Latin America's largest insect-protein plants in Colombia</h3>
+      <p class="article-excerpt">S2G Investments and Ocean 14 Capital backed Enthos, which converts organic waste into food-grade protein and oil using Black Soldier Fly larvae — a 200-ton-per-day facility aimed at the aquaculture and livestock feed market.</p>
+      <div class="article-meta">6 min · Source: Aquafeed.com / Undercurrent News</div>
+    </a>
+    <a class="article-card" href="futurofood-blog.html">
+      <span class="article-tag tag-regen">Regenerative</span>
+      <h3 class="article-title">Costa Rica's farmers are getting paid to restore soil — and the model is scaling across the region</h3>
+      <p class="article-excerpt">Osa Conservation's AmistOsa network is partnering with 350 farmers on regenerative practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding and two decades of conservation work in southern Costa Rica.</p>
+      <div class="article-meta">5 min · Source: Osa Conservation</div>
+    </a>
+    <a class="article-card" href="futurofood-blog.html">
+      <span class="article-tag tag-regen">Regenerative</span>
+      <h3 class="article-title">Costa Rica and the World Bank commit $120M to sustainable agriculture financing</h3>
+      <p class="article-excerpt">The new loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including a track that pays farmers for carbon capture in coffee, livestock, and sugarcane production chains.</p>
+      <div class="article-meta">4 min · Source: World Bank</div>
+    </a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section" id="newsletter">
+  <div class="nl-left">
+    <div class="nl-eyebrow">
+      <span class="nl-live-dot"></span>
+      Free · Weekly · Bilingual
+    </div>
+    <h2 class="nl-title">
+      The future of food<br>lands in your inbox.<br>
+      <em>Every Tuesday.</em>
+    </h2>
+    <p class="nl-desc">
+      Be one of the first food innovators, investors, farmers, and scientists across Latin America to get the weekly brief on what's changing how 650 million people eat. Free, always.
+    </p>
+  </div>
+  <div class="nl-right">
+    <div class="nl-proof">
+      <div class="nl-stat">
+        <div class="nl-stat-n">2026</div>
+        <div class="nl-stat-l">Founded in Costa Rica</div>
+      </div>
+      <div class="nl-stat">
+        <div class="nl-stat-n">2</div>
+        <div class="nl-stat-l">Languages · EN/ES every story</div>
+      </div>
+      <div class="nl-stat">
+        <div class="nl-stat-n">100%</div>
+        <div class="nl-stat-l">Free forever · No paywall on news</div>
+      </div>
+      <div class="nl-stat">
+        <div class="nl-stat-n">6</div>
+        <div class="nl-stat-l">Verticals covered every week</div>
+      </div>
+    </div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com" aria-label="Email address"/>
+      <button class="btn-nl" type="button">Subscribe — It's Free →</button>
+    </div>
+    <p class="nl-note">No spam. Unsubscribe anytime. Tu privacidad es sagrada.</p>
+  </div>
+</section>
+
+<!-- SPONSORS -->
+<section class="sponsors-section" id="sponsors">
+  <div class="sponsors-header">
+    <span class="sponsors-label">Sponsor FuturoFood · Patrocina FuturoFood</span>
+    <a href="#newsletter" class="sponsor-cta">Become a Founding Sponsor →</a>
+  </div>
+  <div class="sponsors-grid">
+    <div class="sponsor-slot available">
+      <div class="sponsor-logo-area">
+        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+      </div>
+      <div class="sponsor-name" style="color:var(--green)">Available</div>
+      <div class="sponsor-category eyebrow">AgriTech · Mexico</div>
+    </div>
+    <div class="sponsor-slot available">
+      <div class="sponsor-logo-area">
+        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+      </div>
+      <div class="sponsor-name" style="color:var(--green)">Available</div>
+      <div class="sponsor-category eyebrow">Biotech · Brazil</div>
+    </div>
+    <div class="sponsor-slot available">
+      <div class="sponsor-logo-area">
+        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+      </div>
+      <div class="sponsor-name" style="color:var(--green)">Available</div>
+      <div class="sponsor-category eyebrow">Regen Ag · Costa Rica</div>
+    </div>
+    <div class="sponsor-slot available">
+      <div class="sponsor-logo-area">
+        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+      </div>
+      <div class="sponsor-name" style="color:var(--green)">Available</div>
+      <div class="sponsor-category eyebrow">Founding sponsor slot</div>
+    </div>
+    <div class="sponsor-slot available">
+      <div class="sponsor-logo-area">
+        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+      </div>
+      <div class="sponsor-name" style="color:var(--green)">Available</div>
+      <div class="sponsor-category eyebrow">Founding sponsor slot</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto-section" id="manifesto">
+  <div class="manifesto-left">
+    <p class="eyebrow manifesto-eyebrow">Our Manifesto · Nuestra Visión</p>
+    <h2 class="manifesto-quote">
+      Latin America didn't just grow food.<br>
+      It <em>invented</em> civilization's pantry.
+    </h2>
+    <p class="manifesto-body">
+      Corn, cacao, tomato, potato, avocado, quinoa, vanilla, chili — the ingredients that feed the modern world were first cultivated here, by peoples who spent millennia in dialogue with the land.
+    </p>
+    <p class="manifesto-body">
+      And yet Latin America remains largely absent from the global conversation about the future of food. The investment flows north. The headlines run in English. The IP goes elsewhere.
+    </p>
+    <p class="manifesto-body">
+      FuturoFood exists to change that. We believe the solutions to the world's food crisis are already present in Latin American soil, in indigenous knowledge systems, and in a new generation of scientists, farmers, and entrepreneurs who refuse to wait for permission.
+    </p>
+    <a href="#newsletter" class="btn-outline">Join the Movement →</a>
+  </div>
+  <div class="manifesto-right">
+    <div class="mf-cell">
+      <span class="mf-icon">🌎</span>
+      <span class="mf-label">Origin</span>
+      <span class="mf-sub">40% of Earth's biodiversity · The world's original food lab</span>
+    </div>
+    <div class="mf-cell">
+      <span class="mf-icon">🔬</span>
+      <span class="mf-label">Science</span>
+      <span class="mf-sub">Cutting-edge research across 6 food innovation verticals</span>
+    </div>
+    <div class="mf-cell">
+      <span class="mf-icon">🌾</span>
+      <span class="mf-label">Tradition</span>
+      <span class="mf-sub">3,000+ years of agricultural wisdom — documented and defended</span>
+    </div>
+    <div class="mf-cell">
+      <span class="mf-icon">🚀</span>
+      <span class="mf-label">Futuro</span>
+      <span class="mf-sub">Building the media platform the region's food revolution deserves</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-brand">Futuro<em>Food</em></div>
+      <p class="footer-tagline">El futuro de la alimentación<br>en América Latina · Since 2026</p>
+      <div class="footer-social">
+        <a href="#" class="social-link">X/Twitter</a>
+        <a href="#" class="social-link">LinkedIn</a>
+        <a href="#" class="social-link">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Topics</div>
+      <div class="footer-links">
+        <a href="#topics">Insect Protein</a>
+        <a href="#topics">Lab-Grown</a>
+        <a href="#topics">Regenerative</a>
+        <a href="#topics">Ancestral Wisdom</a>
+        <a href="#topics">Food Tech & AI</a>
+        <a href="#topics">Water & Climate</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <div class="footer-links">
+        <a href="futurofood-about.html">About Us</a>
+        <a href="#newsletter">Newsletter</a>
+        <a href="#sponsors">Advertise</a>
+        <a href="#">Contact</a>
+        <a href="#">Write for Us</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Subscribe</div>
+      <p style="font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:1rem">
+        Free weekly newsletter covering food innovation across Latin America. Be one of the first to subscribe.
+      </p>
+      <a href="#newsletter" class="btn-subscribe">Subscribe Free →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 FuturoFood.com · All rights reserved · Alajuela, Costa Rica</span>
+    <div class="footer-legal">
+      <a href="futurofood-privacy.html">Privacy Policy</a>
+      <a href="futurofood-privacy.html">Terms</a>
+      <a href="futurofood-privacy.html">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

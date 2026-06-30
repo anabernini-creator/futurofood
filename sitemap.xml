@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+  <!-- HOME -->
+  <url>
+    <loc>https://futurofood.com/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- BLOG -->
+  <url>
+    <loc>https://futurofood.com/blog/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ABOUT -->
+  <url>
+    <loc>https://futurofood.com/about/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- PRIVACY -->
+  <url>
+    <loc>https://futurofood.com/privacy/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!--
+    NOTE: When Ghost CMS is connected, Ghost generates
+    its own dynamic sitemap at /sitemap.xml automatically.
+    Replace this static file with Ghost's dynamic sitemap,
+    or configure Cloudflare to proxy /sitemap.xml to Ghost.
+
+    Ghost sitemap URL pattern:
+    https://your-ghost-site.ghost.io/sitemap.xml
+  -->
+
+</urlset>
