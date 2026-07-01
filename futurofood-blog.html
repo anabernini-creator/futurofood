@@ -560,9 +560,14 @@ footer{
   .sidebar{border-top:1px solid var(--border)}
   .featured-card{grid-template-columns:1fr}
   .featured-img{min-height:180px;border-left:none;border-top:1px solid var(--border)}
-  .masthead-inner{grid-template-columns:auto 1fr}
+  .masthead-inner{display:flex;flex-wrap:wrap;align-items:center;row-gap:.5rem}
   .mast-nav{display:none}
-  .mast-logo{text-align:left}
+  .masthead{padding:0 1rem}
+  .mast-logo{text-align:left;font-size:1.15rem;width:100%}
+  .mast-logo small{display:none}
+  .mast-right{gap:.35rem;width:100%;justify-content:flex-end;flex-wrap:wrap}
+  .lang-btn{padding:.3rem .5rem;font-size:.6rem}
+  .btn-subscribe{padding:.35rem .7rem;font-size:.6rem}
 }
 @media(max-width:640px){
   .article-card{grid-template-columns:1fr}
