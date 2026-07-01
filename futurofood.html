@@ -129,6 +129,20 @@ a{color:inherit;text-decoration:none}
   color:var(--mist);
   letter-spacing:0.08em;
 }
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{
+  background:transparent;border:none;cursor:pointer;
+  color:var(--mist);
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  padding:.4rem .65rem;
+  transition:background .2s,color .2s;
+}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
 
 /* ─── TICKER ─── */
 .ticker{
@@ -868,39 +882,43 @@ footer{
 <header class="masthead">
   <div class="masthead-inner">
     <nav class="mast-nav">
-      <a href="futurofood-blog.html">Stories</a>
-      <a href="#topics">Topics</a>
-      <a href="futurofood-about.html">About</a>
-      <a href="#sponsors">Advertise</a>
+      <a href="futurofood-blog.html" data-es="Historias">Stories</a>
+      <a href="#topics" data-es="Temas">Topics</a>
+      <a href="futurofood-about.html" data-es="Nosotros">About</a>
+      <a href="#sponsors" data-es="Anunciarse">Advertise</a>
     </nav>
     <a href="index.html" class="mast-logo">
       <span>Futuro<em>Food</em></span>
-      <small>El futuro de la alimentación · LATAM</small>
+      <small data-es="El futuro de la alimentación · LATAM">The Future of Food · LATAM</small>
     </a>
     <div class="mast-right">
-      <span class="issue-tag">Vol. 1 · Issue 1 · 2026</span>
-      <a href="#newsletter" class="btn-subscribe">Subscribe Free</a>
+      <span class="issue-tag" data-es="Vol. 1 · Edición 1 · 2026">Vol. 1 · Issue 1 · 2026</span>
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
+      <a href="#newsletter" class="btn-subscribe" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
   </div>
 </header>
 
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
-  <span class="ticker-label">↗ Now</span>
+  <span class="ticker-label" data-es="↗ Ahora">↗ Now</span>
   <div class="ticker-track">
-    <span class="ticker-item"><span class="ticker-dot"></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Enthos raises VC funding for Colombia insect-protein plant</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> World Bank commits $120M to Costa Rica sustainable agriculture</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Embrapa de Brasil cultiva pollo a partir de células · Cultivado en Lab'><span class="ticker-dot"></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia'><span class="ticker-dot"></span> Enthos raises VC funding for Colombia insect-protein plant</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> El Banco Mundial destina $120M a la agricultura sostenible de Costa Rica'><span class="ticker-dot"></span> World Bank commits $120M to Costa Rica sustainable agriculture</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Osa Conservation se asocia con 350 agricultores en agricultura regenerativa · Costa Rica'><span class="ticker-dot"></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> ProNuvo (Costa Rica) construye planta de alimento para insectos de 4,000 TM/año con respaldo de la IFC'><span class="ticker-dot"></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Finca Aquiares, Turrialba: café regenerativo carbono neutral desde 2016'><span class="ticker-dot"></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016</span>
     <!-- duplicate -->
-    <span class="ticker-item"><span class="ticker-dot"></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Enthos raises VC funding for Colombia insect-protein plant</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> World Bank commits $120M to Costa Rica sustainable agriculture</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Embrapa de Brasil cultiva pollo a partir de células · Cultivado en Lab'><span class="ticker-dot"></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia'><span class="ticker-dot"></span> Enthos raises VC funding for Colombia insect-protein plant</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> El Banco Mundial destina $120M a la agricultura sostenible de Costa Rica'><span class="ticker-dot"></span> World Bank commits $120M to Costa Rica sustainable agriculture</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Osa Conservation se asocia con 350 agricultores en agricultura regenerativa · Costa Rica'><span class="ticker-dot"></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> ProNuvo (Costa Rica) construye planta de alimento para insectos de 4,000 TM/año con respaldo de la IFC'><span class="ticker-dot"></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing</span>
+    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Finca Aquiares, Turrialba: café regenerativo carbono neutral desde 2016'><span class="ticker-dot"></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016</span>
   </div>
 </div>
 
@@ -908,30 +926,30 @@ footer{
 <main>
 <section class="hero">
   <div class="hero-date-bar">
-    <span class="hero-date">Friday, June 27, 2026</span>
-    <span class="hero-edition">FuturoFood Weekly · Free Edition</span>
+    <span class="hero-date" data-es="viernes, 27 de junio de 2026">Friday, June 27, 2026</span>
+    <span class="hero-edition" data-es="FuturoFood Semanal · Edición Gratuita">FuturoFood Weekly · Free Edition</span>
   </div>
 
   <div class="broadsheet">
     <!-- LEFT COL -->
     <div class="bs-col bs-left">
       <div class="mini-story">
-        <span class="kicker">🌱 Regenerative</span>
-        <h3 class="mini-title">350 Costa Rican farmers join regenerative agriculture network</h3>
-        <p class="mini-body">Osa Conservation's AmistOsa network partners with farmers in southern Costa Rica on practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding.</p>
-        <a href="futurofood-blog.html" class="read-more">Read story →</a>
+        <span class="kicker" data-es="🌱 Regenerativo">🌱 Regenerative</span>
+        <h3 class="mini-title" data-es="350 agricultores costarricenses se unen a una red de agricultura regenerativa">350 Costa Rican farmers join regenerative agriculture network</h3>
+        <p class="mini-body" data-es="La red AmistOsa de Osa Conservation se asocia con agricultores del sur de Costa Rica en prácticas que aumentan la productividad mientras capturan carbono, con el respaldo de la Fundación Walmart.">Osa Conservation's AmistOsa network partners with farmers in southern Costa Rica on practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding.</p>
+        <a href="futurofood-blog.html" class="read-more" data-es="Leer historia →">Read story →</a>
       </div>
       <div class="mini-story">
-        <span class="kicker">🏦 Finance</span>
-        <h3 class="mini-title">World Bank commits $120M to sustainable agriculture in Costa Rica</h3>
-        <p class="mini-body">The loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane chains.</p>
-        <a href="futurofood-blog.html" class="read-more">Read story →</a>
+        <span class="kicker" data-es="🏦 Finanzas">🏦 Finance</span>
+        <h3 class="mini-title" data-es="El Banco Mundial destina $120M a la agricultura sostenible en Costa Rica">World Bank commits $120M to sustainable agriculture in Costa Rica</h3>
+        <p class="mini-body" data-es="El préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar.">The loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane chains.</p>
+        <a href="futurofood-blog.html" class="read-more" data-es="Leer historia →">Read story →</a>
       </div>
       <div class="mini-story">
-        <span class="kicker">☕ Regenerative</span>
-        <h3 class="mini-title">Aquiares Estate: a carbon-neutral coffee farm in Turrialba</h3>
-        <p class="mini-body">The 600-hectare Rainforest Alliance Certified farm has sequestered more carbon than it emits since 2016 — a regenerative model spanning three generations of workers.</p>
-        <a href="futurofood-blog.html" class="read-more">Read story →</a>
+        <span class="kicker" data-es="☕ Regenerativo">☕ Regenerative</span>
+        <h3 class="mini-title" data-es="Finca Aquiares: una finca cafetalera carbono neutral en Turrialba">Aquiares Estate: a carbon-neutral coffee farm in Turrialba</h3>
+        <p class="mini-body" data-es="La finca de 600 hectáreas, certificada por Rainforest Alliance, captura más carbono del que emite desde 2016 — un modelo regenerativo que abarca tres generaciones de trabajadores.">The 600-hectare Rainforest Alliance Certified farm has sequestered more carbon than it emits since 2016 — a regenerative model spanning three generations of workers.</p>
+        <a href="futurofood-blog.html" class="read-more" data-es="Leer historia →">Read story →</a>
       </div>
     </div>
 
@@ -939,25 +957,25 @@ footer{
 
     <!-- CENTER COL — FLAGSHIP -->
     <div class="bs-col bs-center">
-      <span class="flagship-label">↗ Cover Story</span>
+      <span class="flagship-label" data-es="↗ Historia Principal">↗ Cover Story</span>
       <div class="flagship-img">
         <span class="flagship-img-inner">🧬</span>
-        <span class="flagship-img-caption">Embrapa Nanobiotechnology Laboratory (Cenargen) · Brasília · cultivated meat research</span>
+        <span class="flagship-img-caption" data-es="Laboratorio de Nanobiotecnología de Embrapa (Cenargen) · Brasília · investigación de carne cultivada">Embrapa Nanobiotechnology Laboratory (Cenargen) · Brasília · cultivated meat research</span>
       </div>
-      <h1 class="flagship-title">
+      <h1 class="flagship-title" data-es="La agencia estatal de investigación de Brasil cultiva carne de pollo a partir de<em> células</em> — y el mayor exportador de carne vacuna del mundo dice que esto es solo el comienzo">
         Brazil's state research agency is growing chicken meat from<em> cells</em> — and the world's top beef exporter says it's just the beginning
       </h1>
-      <p class="byline">By <span>FuturoFood Editorial</span> · Sources: Agência Brasil, Rio Times, Embrapa · 6 min read · EN/ES</p>
-      <p class="flagship-deck">
+      <p class="byline" data-es='Por <span>Equipo Editorial FuturoFood</span> · Fuentes: Agência Brasil, Rio Times, Embrapa · 6 min de lectura · EN/ES'>By <span>FuturoFood Editorial</span> · Sources: Agência Brasil, Rio Times, Embrapa · 6 min read · EN/ES</p>
+      <p class="flagship-deck" data-es="Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027 — desarrollado íntegramente de forma interna, en un país que ya estableció normas regulatorias para la carne cultivada desde 2023.">
         Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027 — built entirely in-house, in a country that already set regulatory rules for cultivated meat back in 2023.
       </p>
-      <p class="flagship-body">
+      <p class="flagship-body" data-es="Brasil es el mayor exportador de carne vacuna del mundo — un país construido, en gran parte, sobre la ganadería. Por eso, cuando su propia agencia federal de investigación comienza a cultivar carne en un plato, sin sacrificar un solo animal, es una señal de que la idea ha superado ampliamente el terreno experimental.">
         Brazil is the world's largest beef exporter — a country built, in large part, on cattle. So when its own federal research agency starts growing meat in a dish, without a single animal slaughtered, it's a signal that the idea has moved well past the experimental fringe.
       </p>
-      <p class="flagship-body">
+      <p class="flagship-body" data-es="El investigador Luciano Paulino da Silva, quien coordina los experimentos en el Laboratorio de Nanobiotecnología de Embrapa, espera que el trabajo esté listo como paquete tecnológico licenciable para mediados de 2027 — apoyándose en el marco regulatorio que la ANVISA de Brasil publicó en 2023.">
         Researcher Luciano Paulino da Silva, who coordinates the experiments at Embrapa's Nanobiotechnology Laboratory, expects the work to be ready as a licensable technology package by mid-2027 — building on a regulatory framework Brazil's ANVISA published back in 2023.
       </p>
-      <a href="futurofood-article.html" class="read-more">Continue reading →</a>
+      <a href="futurofood-article.html" class="read-more" data-es="Seguir leyendo →">Continue reading →</a>
     </div>
 
     <div class="bs-divider"></div>
@@ -966,25 +984,25 @@ footer{
     <div class="bs-col bs-right">
       <div class="stat-block">
         <div class="stat-num green">2027</div>
-        <div class="stat-label">Target year for Embrapa's finished cultivated-meat technology package, ready to license to private companies</div>
+        <div class="stat-label" data-es="Año meta para el paquete tecnológico terminado de carne cultivada de Embrapa, listo para licenciar a empresas privadas">Target year for Embrapa's finished cultivated-meat technology package, ready to license to private companies</div>
       </div>
       <div class="stat-block">
         <div class="stat-num fire">4</div>
-        <div class="stat-label">Countries with regulatory or commercial approval for cultivated meat: Singapore, US, Israel, Australia/New Zealand</div>
+        <div class="stat-label" data-es="Países con aprobación regulatoria o comercial para carne cultivada: Singapur, EE. UU., Israel, Australia/Nueva Zelanda">Countries with regulatory or commercial approval for cultivated meat: Singapore, US, Israel, Australia/New Zealand</div>
       </div>
       <div class="stat-block">
         <div class="stat-num gold">2023</div>
-        <div class="stat-label">Year Brazil's ANVISA published its cultivated-meat regulatory framework (RDC 839)</div>
+        <div class="stat-label" data-es="Año en que la ANVISA de Brasil publicó su marco regulatorio para carne cultivada (RDC 839)">Year Brazil's ANVISA published its cultivated-meat regulatory framework (RDC 839)</div>
       </div>
       <div class="pull-quote">
         <p>"Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa." — By around the middle of next year, it will be on display as an Embrapa technological asset.</p>
         <cite>— Luciano Paulino da Silva, researcher, Embrapa LNANO</cite>
       </div>
       <div class="mini-story">
-        <span class="kicker">🪲 Insect Protein</span>
-        <h3 class="mini-title">Also this week: Enthos scales Colombia's insect-protein plant</h3>
-        <p class="mini-body">S2G Investments and Ocean 14 Capital backed a 200-ton-per-day Black Soldier Fly facility aimed at replacing fishmeal in aquaculture feed.</p>
-        <a href="futurofood-blog.html" class="read-more">Read →</a>
+        <span class="kicker" data-es="🪲 Proteína de Insectos">🪲 Insect Protein</span>
+        <h3 class="mini-title" data-es="También esta semana: Enthos amplía su planta de proteína de insectos en Colombia">Also this week: Enthos scales Colombia's insect-protein plant</h3>
+        <p class="mini-body" data-es="S2G Investments y Ocean 14 Capital respaldaron una instalación de 200 toneladas diarias de mosca soldado negra orientada a reemplazar la harina de pescado en alimento para acuicultura.">S2G Investments and Ocean 14 Capital backed a 200-ton-per-day Black Soldier Fly facility aimed at replacing fishmeal in aquaculture feed.</p>
+        <a href="futurofood-blog.html" class="read-more" data-es="Leer →">Read →</a>
       </div>
     </div>
   </div>
@@ -994,66 +1012,66 @@ footer{
 <nav class="topic-band" id="topics" aria-label="Topics">
   <div class="topic">
     <span class="topic-icon">🦗</span>
-    <span class="topic-name">Insect Protein</span>
-    <span class="topic-count eyebrow">12 stories</span>
+    <span class="topic-name" data-es="Proteína de Insectos">Insect Protein</span>
+    <span class="topic-count eyebrow" data-es="12 historias">12 stories</span>
   </div>
   <div class="topic">
     <span class="topic-icon">🧬</span>
-    <span class="topic-name">Lab-Grown</span>
-    <span class="topic-count eyebrow">9 stories</span>
+    <span class="topic-name" data-es="Cultivado en Lab">Lab-Grown</span>
+    <span class="topic-count eyebrow" data-es="9 historias">9 stories</span>
   </div>
   <div class="topic">
     <span class="topic-icon">🌱</span>
-    <span class="topic-name">Regenerative</span>
-    <span class="topic-count eyebrow">18 stories</span>
+    <span class="topic-name" data-es="Regenerativo">Regenerative</span>
+    <span class="topic-count eyebrow" data-es="18 historias">18 stories</span>
   </div>
   <div class="topic">
     <span class="topic-icon">🌽</span>
-    <span class="topic-name">Ancestral</span>
-    <span class="topic-count eyebrow">14 stories</span>
+    <span class="topic-name" data-es="Ancestral">Ancestral</span>
+    <span class="topic-count eyebrow" data-es="14 historias">14 stories</span>
   </div>
   <div class="topic">
     <span class="topic-icon">🤖</span>
-    <span class="topic-name">Food Tech</span>
-    <span class="topic-count eyebrow">21 stories</span>
+    <span class="topic-name" data-es="Tecnología Alimentaria">Food Tech</span>
+    <span class="topic-count eyebrow" data-es="21 historias">21 stories</span>
   </div>
   <div class="topic">
     <span class="topic-icon">💧</span>
-    <span class="topic-name">Water</span>
-    <span class="topic-count eyebrow">7 stories</span>
+    <span class="topic-name" data-es="Agua">Water</span>
+    <span class="topic-count eyebrow" data-es="7 historias">7 stories</span>
   </div>
 </nav>
 
 <!-- ARTICLES GRID -->
 <section class="articles-section" id="stories">
   <div class="articles-header">
-    <h2 class="articles-title">Latest Stories</h2>
-    <a href="futurofood-blog.html" class="see-all">View all stories →</a>
+    <h2 class="articles-title" data-es="Últimas Historias">Latest Stories</h2>
+    <a href="futurofood-blog.html" class="see-all" data-es="Ver todas las historias →">View all stories →</a>
   </div>
   <div class="articles-grid">
     <a class="article-card" href="futurofood-article.html">
-      <span class="article-tag tag-lab">Lab-Grown</span>
-      <h3 class="article-title">Brazil's state research agency Embrapa is growing real chicken meat from cells — without a single animal slaughtered</h3>
-      <p class="article-excerpt">Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília, with a finished technology package targeted for mid-2027. Brazil already set regulatory rules for cultivated meat back in 2023.</p>
-      <div class="article-meta">5 min · Source: Embrapa / Rio Times</div>
+      <span class="article-tag tag-lab" data-es="Cultivado en Lab">Lab-Grown</span>
+      <h3 class="article-title" data-es="La agencia estatal de investigación Embrapa de Brasil cultiva carne de pollo real a partir de células — sin sacrificar un solo animal">Brazil's state research agency Embrapa is growing real chicken meat from cells — without a single animal slaughtered</h3>
+      <p class="article-excerpt" data-es="Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília, con un paquete tecnológico terminado previsto para mediados de 2027. Brasil ya estableció normas regulatorias para la carne cultivada desde 2023.">Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília, with a finished technology package targeted for mid-2027. Brazil already set regulatory rules for cultivated meat back in 2023.</p>
+      <div class="article-meta" data-es="5 min · Fuente: Embrapa / Rio Times">5 min · Source: Embrapa / Rio Times</div>
     </a>
     <a class="article-card" href="futurofood-blog.html">
-      <span class="article-tag tag-insects">Insect Protein</span>
-      <h3 class="article-title">Enthos raises VC funding to build one of Latin America's largest insect-protein plants in Colombia</h3>
-      <p class="article-excerpt">S2G Investments and Ocean 14 Capital backed Enthos, which converts organic waste into food-grade protein and oil using Black Soldier Fly larvae — a 200-ton-per-day facility aimed at the aquaculture and livestock feed market.</p>
-      <div class="article-meta">6 min · Source: Aquafeed.com / Undercurrent News</div>
+      <span class="article-tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
+      <h3 class="article-title" data-es="Enthos recauda capital de riesgo para construir una de las plantas de proteína de insectos más grandes de América Latina en Colombia">Enthos raises VC funding to build one of Latin America's largest insect-protein plants in Colombia</h3>
+      <p class="article-excerpt" data-es="S2G Investments y Ocean 14 Capital respaldaron a Enthos, que convierte residuos orgánicos en proteína y aceite de calidad alimentaria usando larvas de mosca soldado negra — una instalación de 200 toneladas diarias orientada a la acuicultura y el alimento para ganado.">S2G Investments and Ocean 14 Capital backed Enthos, which converts organic waste into food-grade protein and oil using Black Soldier Fly larvae — a 200-ton-per-day facility aimed at the aquaculture and livestock feed market.</p>
+      <div class="article-meta" data-es="6 min · Fuente: Aquafeed.com / Undercurrent News">6 min · Source: Aquafeed.com / Undercurrent News</div>
     </a>
     <a class="article-card" href="futurofood-blog.html">
-      <span class="article-tag tag-regen">Regenerative</span>
-      <h3 class="article-title">Costa Rica's farmers are getting paid to restore soil — and the model is scaling across the region</h3>
-      <p class="article-excerpt">Osa Conservation's AmistOsa network is partnering with 350 farmers on regenerative practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding and two decades of conservation work in southern Costa Rica.</p>
-      <div class="article-meta">5 min · Source: Osa Conservation</div>
+      <span class="article-tag tag-regen" data-es="Regenerativo">Regenerative</span>
+      <h3 class="article-title" data-es="A los agricultores de Costa Rica se les paga por restaurar el suelo — y el modelo se expande por toda la región">Costa Rica's farmers are getting paid to restore soil — and the model is scaling across the region</h3>
+      <p class="article-excerpt" data-es="La red AmistOsa de Osa Conservation se asocia con 350 agricultores en prácticas regenerativas que aumentan la productividad mientras capturan carbono, con el respaldo de la Fundación Walmart y dos décadas de trabajo de conservación en el sur de Costa Rica.">Osa Conservation's AmistOsa network is partnering with 350 farmers on regenerative practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding and two decades of conservation work in southern Costa Rica.</p>
+      <div class="article-meta" data-es="5 min · Fuente: Osa Conservation">5 min · Source: Osa Conservation</div>
     </a>
     <a class="article-card" href="futurofood-blog.html">
-      <span class="article-tag tag-regen">Regenerative</span>
-      <h3 class="article-title">Costa Rica and the World Bank commit $120M to sustainable agriculture financing</h3>
-      <p class="article-excerpt">The new loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including a track that pays farmers for carbon capture in coffee, livestock, and sugarcane production chains.</p>
-      <div class="article-meta">4 min · Source: World Bank</div>
+      <span class="article-tag tag-regen" data-es="Regenerativo">Regenerative</span>
+      <h3 class="article-title" data-es="Costa Rica y el Banco Mundial destinan $120M al financiamiento de la agricultura sostenible">Costa Rica and the World Bank commit $120M to sustainable agriculture financing</h3>
+      <p class="article-excerpt" data-es="El nuevo préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo una línea que paga a los agricultores por la captura de carbono en las cadenas de café, ganadería y caña de azúcar.">The new loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including a track that pays farmers for carbon capture in coffee, livestock, and sugarcane production chains.</p>
+      <div class="article-meta" data-es="4 min · Fuente: Banco Mundial">4 min · Source: World Bank</div>
     </a>
   </div>
 </section>
@@ -1063,13 +1081,13 @@ footer{
   <div class="nl-left">
     <div class="nl-eyebrow">
       <span class="nl-live-dot"></span>
-      Free · Weekly · Bilingual
+      <span data-es="Gratis · Semanal · Bilingüe">Free · Weekly · Bilingual</span>
     </div>
-    <h2 class="nl-title">
+    <h2 class="nl-title" data-es="El futuro de la alimentación<br>llega a tu bandeja de entrada.<br><em>Todos los martes.</em>">
       The future of food<br>lands in your inbox.<br>
       <em>Every Tuesday.</em>
     </h2>
-    <p class="nl-desc">
+    <p class="nl-desc" data-es="Sé de los primeros innovadores alimentarios, inversionistas, agricultores y científicos de América Latina en recibir el resumen semanal sobre lo que está cambiando la forma en que comen 650 millones de personas. Gratis, siempre.">
       Be one of the first food innovators, investors, farmers, and scientists across Latin America to get the weekly brief on what's changing how 650 million people eat. Free, always.
     </p>
   </div>
@@ -1077,70 +1095,70 @@ footer{
     <div class="nl-proof">
       <div class="nl-stat">
         <div class="nl-stat-n">2026</div>
-        <div class="nl-stat-l">Founded in Costa Rica</div>
+        <div class="nl-stat-l" data-es="Fundado en Costa Rica">Founded in Costa Rica</div>
       </div>
       <div class="nl-stat">
         <div class="nl-stat-n">2</div>
-        <div class="nl-stat-l">Languages · EN/ES every story</div>
+        <div class="nl-stat-l" data-es="Idiomas · EN/ES en cada historia">Languages · EN/ES every story</div>
       </div>
       <div class="nl-stat">
         <div class="nl-stat-n">100%</div>
-        <div class="nl-stat-l">Free forever · No paywall on news</div>
+        <div class="nl-stat-l" data-es="Gratis para siempre · Sin muro de pago en noticias">Free forever · No paywall on news</div>
       </div>
       <div class="nl-stat">
         <div class="nl-stat-n">6</div>
-        <div class="nl-stat-l">Verticals covered every week</div>
+        <div class="nl-stat-l" data-es="Verticales cubiertas cada semana">Verticals covered every week</div>
       </div>
     </div>
     <div class="nl-form">
-      <input class="nl-input" type="email" placeholder="your@email.com" aria-label="Email address"/>
-      <button class="btn-nl" type="button">Subscribe — It's Free →</button>
+      <input class="nl-input" type="email" placeholder="your@email.com" aria-label="Email address" data-es-aria-label="Correo electrónico"/>
+      <button class="btn-nl" type="button" data-es="Suscríbete — Es Gratis →">Subscribe — It's Free →</button>
     </div>
-    <p class="nl-note">No spam. Unsubscribe anytime. Tu privacidad es sagrada.</p>
+    <p class="nl-note" data-es="Sin spam. Cancela cuando quieras. Tu privacidad es sagrada.">No spam. Unsubscribe anytime. Your privacy is sacred.</p>
   </div>
 </section>
 
 <!-- SPONSORS -->
 <section class="sponsors-section" id="sponsors">
   <div class="sponsors-header">
-    <span class="sponsors-label">Sponsor FuturoFood · Patrocina FuturoFood</span>
-    <a href="#newsletter" class="sponsor-cta">Become a Founding Sponsor →</a>
+    <span class="sponsors-label" data-es="Patrocina FuturoFood">Sponsor FuturoFood</span>
+    <a href="#newsletter" class="sponsor-cta" data-es="Conviértete en Patrocinador Fundador →">Become a Founding Sponsor →</a>
   </div>
   <div class="sponsors-grid">
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
         <span class="sponsor-logo-placeholder">YOUR BRAND</span>
       </div>
-      <div class="sponsor-name" style="color:var(--green)">Available</div>
-      <div class="sponsor-category eyebrow">AgriTech · Mexico</div>
+      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
+      <div class="sponsor-category eyebrow" data-es="AgriTech · México">AgriTech · Mexico</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
         <span class="sponsor-logo-placeholder">YOUR BRAND</span>
       </div>
-      <div class="sponsor-name" style="color:var(--green)">Available</div>
-      <div class="sponsor-category eyebrow">Biotech · Brazil</div>
+      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
+      <div class="sponsor-category eyebrow" data-es="Biotecnología · Brasil">Biotech · Brazil</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
         <span class="sponsor-logo-placeholder">YOUR BRAND</span>
       </div>
-      <div class="sponsor-name" style="color:var(--green)">Available</div>
-      <div class="sponsor-category eyebrow">Regen Ag · Costa Rica</div>
+      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
+      <div class="sponsor-category eyebrow" data-es="Agricultura Regenerativa · Costa Rica">Regen Ag · Costa Rica</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
         <span class="sponsor-logo-placeholder">YOUR BRAND</span>
       </div>
-      <div class="sponsor-name" style="color:var(--green)">Available</div>
-      <div class="sponsor-category eyebrow">Founding sponsor slot</div>
+      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
+      <div class="sponsor-category eyebrow" data-es="Espacio de patrocinador fundador">Founding sponsor slot</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
         <span class="sponsor-logo-placeholder">YOUR BRAND</span>
       </div>
-      <div class="sponsor-name" style="color:var(--green)">Available</div>
-      <div class="sponsor-category eyebrow">Founding sponsor slot</div>
+      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
+      <div class="sponsor-category eyebrow" data-es="Espacio de patrocinador fundador">Founding sponsor slot</div>
     </div>
   </div>
 </section>
@@ -1148,42 +1166,42 @@ footer{
 <!-- MANIFESTO -->
 <section class="manifesto-section" id="manifesto">
   <div class="manifesto-left">
-    <p class="eyebrow manifesto-eyebrow">Our Manifesto · Nuestra Visión</p>
-    <h2 class="manifesto-quote">
+    <p class="eyebrow manifesto-eyebrow" data-es="Nuestra Visión">Our Manifesto</p>
+    <h2 class="manifesto-quote" data-es="América Latina no solo cultivó alimentos.<br>Ella <em>inventó</em> la despensa de la civilización.">
       Latin America didn't just grow food.<br>
       It <em>invented</em> civilization's pantry.
     </h2>
-    <p class="manifesto-body">
+    <p class="manifesto-body" data-es="Maíz, cacao, tomate, papa, aguacate, quinoa, vainilla, chile — los ingredientes que alimentan al mundo moderno se cultivaron aquí por primera vez, por pueblos que pasaron milenios en diálogo con la tierra.">
       Corn, cacao, tomato, potato, avocado, quinoa, vanilla, chili — the ingredients that feed the modern world were first cultivated here, by peoples who spent millennia in dialogue with the land.
     </p>
-    <p class="manifesto-body">
+    <p class="manifesto-body" data-es="Y sin embargo, América Latina sigue mayormente ausente de la conversación global sobre el futuro de la alimentación. La inversión fluye hacia el norte. Los titulares se publican en inglés. La propiedad intelectual termina en otro lugar.">
       And yet Latin America remains largely absent from the global conversation about the future of food. The investment flows north. The headlines run in English. The IP goes elsewhere.
     </p>
-    <p class="manifesto-body">
+    <p class="manifesto-body" data-es="FuturoFood existe para cambiar eso. Creemos que las soluciones a la crisis alimentaria mundial ya están presentes en el suelo latinoamericano, en los sistemas de conocimiento indígena, y en una nueva generación de científicos, agricultores y emprendedores que se niegan a esperar permiso.">
       FuturoFood exists to change that. We believe the solutions to the world's food crisis are already present in Latin American soil, in indigenous knowledge systems, and in a new generation of scientists, farmers, and entrepreneurs who refuse to wait for permission.
     </p>
-    <a href="#newsletter" class="btn-outline">Join the Movement →</a>
+    <a href="#newsletter" class="btn-outline" data-es="Únete al Movimiento →">Join the Movement →</a>
   </div>
   <div class="manifesto-right">
     <div class="mf-cell">
       <span class="mf-icon">🌎</span>
-      <span class="mf-label">Origin</span>
-      <span class="mf-sub">40% of Earth's biodiversity · The world's original food lab</span>
+      <span class="mf-label" data-es="Origen">Origin</span>
+      <span class="mf-sub" data-es="40% de la biodiversidad del planeta · El laboratorio alimentario original del mundo">40% of Earth's biodiversity · The world's original food lab</span>
     </div>
     <div class="mf-cell">
       <span class="mf-icon">🔬</span>
-      <span class="mf-label">Science</span>
-      <span class="mf-sub">Cutting-edge research across 6 food innovation verticals</span>
+      <span class="mf-label" data-es="Ciencia">Science</span>
+      <span class="mf-sub" data-es="Investigación de vanguardia en 6 verticales de innovación alimentaria">Cutting-edge research across 6 food innovation verticals</span>
     </div>
     <div class="mf-cell">
       <span class="mf-icon">🌾</span>
-      <span class="mf-label">Tradition</span>
-      <span class="mf-sub">3,000+ years of agricultural wisdom — documented and defended</span>
+      <span class="mf-label" data-es="Tradición">Tradition</span>
+      <span class="mf-sub" data-es="Más de 3,000 años de sabiduría agrícola — documentada y defendida">3,000+ years of agricultural wisdom — documented and defended</span>
     </div>
     <div class="mf-cell">
       <span class="mf-icon">🚀</span>
       <span class="mf-label">Futuro</span>
-      <span class="mf-sub">Building the media platform the region's food revolution deserves</span>
+      <span class="mf-sub" data-es="Construyendo la plataforma mediática que merece la revolución alimentaria de la región">Building the media platform the region's food revolution deserves</span>
     </div>
   </div>
 </section>
@@ -1194,7 +1212,7 @@ footer{
   <div class="footer-inner">
     <div class="footer-col">
       <div class="footer-brand">Futuro<em>Food</em></div>
-      <p class="footer-tagline">El futuro de la alimentación<br>en América Latina · Since 2026</p>
+      <p class="footer-tagline" data-es="El futuro de la alimentación<br>en América Latina · Desde 2026">The future of food<br>in Latin America · Since 2026</p>
       <div class="footer-social">
         <a href="#" class="social-link">X/Twitter</a>
         <a href="#" class="social-link">LinkedIn</a>
@@ -1202,43 +1220,44 @@ footer{
       </div>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Topics</div>
+      <div class="footer-col-title" data-es="Temas">Topics</div>
       <div class="footer-links">
-        <a href="#topics">Insect Protein</a>
-        <a href="#topics">Lab-Grown</a>
-        <a href="#topics">Regenerative</a>
-        <a href="#topics">Ancestral Wisdom</a>
-        <a href="#topics">Food Tech & AI</a>
-        <a href="#topics">Water & Climate</a>
+        <a href="#topics" data-es="Proteína de Insectos">Insect Protein</a>
+        <a href="#topics" data-es="Cultivado en Lab">Lab-Grown</a>
+        <a href="#topics" data-es="Regenerativo">Regenerative</a>
+        <a href="#topics" data-es="Sabiduría Ancestral">Ancestral Wisdom</a>
+        <a href="#topics" data-es="Tecnología Alimentaria & IA">Food Tech & AI</a>
+        <a href="#topics" data-es="Agua & Clima">Water & Climate</a>
       </div>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Company</div>
+      <div class="footer-col-title" data-es="Compañía">Company</div>
       <div class="footer-links">
-        <a href="futurofood-about.html">About Us</a>
-        <a href="#newsletter">Newsletter</a>
-        <a href="#sponsors">Advertise</a>
-        <a href="#">Contact</a>
-        <a href="#">Write for Us</a>
+        <a href="futurofood-about.html" data-es="Sobre Nosotros">About Us</a>
+        <a href="#newsletter" data-es="Boletín">Newsletter</a>
+        <a href="#sponsors" data-es="Anunciarse">Advertise</a>
+        <a href="#" data-es="Contacto">Contact</a>
+        <a href="#" data-es="Escribe para Nosotros">Write for Us</a>
       </div>
     </div>
     <div class="footer-col">
-      <div class="footer-col-title">Subscribe</div>
-      <p style="font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:1rem">
+      <div class="footer-col-title" data-es="Suscríbete">Subscribe</div>
+      <p style="font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:1rem" data-es="Boletín semanal gratuito sobre innovación alimentaria en toda América Latina. Sé de los primeros en suscribirte.">
         Free weekly newsletter covering food innovation across Latin America. Be one of the first to subscribe.
       </p>
-      <a href="#newsletter" class="btn-subscribe">Subscribe Free →</a>
+      <a href="#newsletter" class="btn-subscribe" data-es="Suscríbete Gratis →">Subscribe Free →</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 FuturoFood.com · All rights reserved · Alajuela, Costa Rica</span>
+    <span class="footer-copy" data-es="© 2026 FuturoFood.com · Todos los derechos reservados · Alajuela, Costa Rica">© 2026 FuturoFood.com · All rights reserved · Alajuela, Costa Rica</span>
     <div class="footer-legal">
-      <a href="futurofood-privacy.html">Privacy Policy</a>
-      <a href="futurofood-privacy.html">Terms</a>
-      <a href="futurofood-privacy.html">Cookie Policy</a>
+      <a href="futurofood-privacy.html" data-es="Política de Privacidad">Privacy Policy</a>
+      <a href="futurofood-privacy.html" data-es="Términos">Terms</a>
+      <a href="futurofood-privacy.html" data-es="Política de Cookies">Cookie Policy</a>
     </div>
   </div>
 </footer>
 
+<script src="i18n.js" defer></script>
 </body>
 </html>

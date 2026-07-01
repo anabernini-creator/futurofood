@@ -32,9 +32,14 @@ a{color:inherit;text-decoration:none}
 .mast-logo{text-align:center;font-family:var(--serif);font-size:1.6rem;font-weight:900;letter-spacing:-.02em;display:block;cursor:pointer}
 .mast-logo em{color:var(--green);font-style:normal}
 .mast-logo small{display:block;font-family:var(--mono);font-size:.55rem;letter-spacing:.22em;color:var(--mist);margin-top:3px}
-.mast-right{display:flex;justify-content:flex-end}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:1rem}
 .btn-sub{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.5rem 1.25rem;transition:background .2s;display:inline-block}
 .btn-sub:hover{background:#6ee89a}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
 
 /* HERO */
 .about-hero{max-width:1280px;margin:0 auto;padding:5rem 2rem 4rem;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:3px solid var(--leaf)}
@@ -141,63 +146,67 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 <header class="masthead">
   <div class="masthead-inner">
     <nav class="mast-nav">
-      <a href="futurofood.html">Home</a>
-      <a href="futurofood-blog.html">Stories</a>
-      <a href="futurofood-about.html" class="active">About</a>
+      <a href="futurofood.html" data-es="Inicio">Home</a>
+      <a href="futurofood-blog.html" data-es="Historias">Stories</a>
+      <a href="futurofood-about.html" class="active" data-es="Nosotros">About</a>
     </nav>
     <a href="futurofood.html" class="mast-logo">
       <span>Futuro<em>Food</em></span>
-      <small>El futuro de la alimentación · LATAM</small>
+      <small data-es="El futuro de la alimentación · LATAM">The Future of Food · LATAM</small>
     </a>
     <div class="mast-right">
-      <a href="futurofood.html#newsletter" class="btn-sub">Subscribe Free</a>
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
+      <a href="futurofood.html#newsletter" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
   </div>
 </header>
 
 <div class="about-hero">
-  <span class="hero-eyebrow">About FuturoFood · Sobre Nosotros</span>
-  <h1 class="hero-title">The media platform<br>Latin America's food<br><em>revolution deserves.</em></h1>
-  <p class="hero-deck">We cover the science, the startups, and the indigenous wisdom reshaping how 650 million people eat — in English and Spanish, every week, free.</p>
+  <span class="hero-eyebrow" data-es="Sobre Nosotros">About FuturoFood</span>
+  <h1 class="hero-title" data-es="La plataforma mediática que merece<br>la revolución alimentaria<br><em>de América Latina.</em>">The media platform<br>Latin America's food<br><em>revolution deserves.</em></h1>
+  <p class="hero-deck" data-es="Cubrimos la ciencia, las startups y la sabiduría indígena que están transformando la forma en que comen 650 millones de personas — en inglés y español, cada semana, gratis.">We cover the science, the startups, and the indigenous wisdom reshaping how 650 million people eat — in English and Spanish, every week, free.</p>
 </div>
 
 <div class="mission">
   <div class="mission-left">
-    <span class="section-label">Our Mission</span>
-    <h2 class="mission-title">Put Latin America<br>at the <em>center</em> of the<br>global food conversation.</h2>
-    <p class="mission-body">The solutions to the world's food crisis are already present in Latin American soil, in indigenous knowledge systems, and in a new generation of scientists, farmers, and entrepreneurs. They just need a platform.</p>
-    <p class="mission-body">FuturoFood is that platform. We're bilingual, independent, and powered by a combination of expert editorial judgment and artificial intelligence — so the stories never stop coming.</p>
-    <p class="mission-body">We publish weekly. We never paywall the news. And we believe that a well-informed food community is a more innovative one.</p>
+    <span class="section-label" data-es="Nuestra Misión">Our Mission</span>
+    <h2 class="mission-title" data-es="Poner a América Latina<br>en el <em>centro</em> de la<br>conversación global sobre alimentación.">Put Latin America<br>at the <em>center</em> of the<br>global food conversation.</h2>
+    <p class="mission-body" data-es="Las soluciones a la crisis alimentaria mundial ya están presentes en el suelo latinoamericano, en los sistemas de conocimiento indígena, y en una nueva generación de científicos, agricultores y emprendedores. Solo necesitan una plataforma.">The solutions to the world's food crisis are already present in Latin American soil, in indigenous knowledge systems, and in a new generation of scientists, farmers, and entrepreneurs. They just need a platform.</p>
+    <p class="mission-body" data-es="FuturoFood es esa plataforma. Somos bilingües, independientes, y funcionamos con una combinación de criterio editorial experto e inteligencia artificial — para que las historias nunca dejen de llegar.">FuturoFood is that platform. We're bilingual, independent, and powered by a combination of expert editorial judgment and artificial intelligence — so the stories never stop coming.</p>
+    <p class="mission-body" data-es="Publicamos cada semana. Nunca ponemos un muro de pago en las noticias. Y creemos que una comunidad alimentaria bien informada es una comunidad más innovadora.">We publish weekly. We never paywall the news. And we believe that a well-informed food community is a more innovative one.</p>
   </div>
   <div class="mission-right">
-    <span class="section-label">Our Values</span>
+    <span class="section-label" data-es="Nuestros Valores">Our Values</span>
     <div class="value-list">
       <div class="value-item">
         <span class="value-icon">🌎</span>
         <div>
-          <div class="value-title">LATAM First</div>
-          <div class="value-desc">We center Latin American voices, researchers, and entrepreneurs — not commentary from the outside looking in.</div>
+          <div class="value-title" data-es="LATAM Primero">LATAM First</div>
+          <div class="value-desc" data-es="Centramos las voces, investigadores y emprendedores latinoamericanos — no comentarios desde afuera mirando hacia adentro.">We center Latin American voices, researchers, and entrepreneurs — not commentary from the outside looking in.</div>
         </div>
       </div>
       <div class="value-item">
         <span class="value-icon">🔬</span>
         <div>
-          <div class="value-title">Science-Grounded</div>
-          <div class="value-desc">Every story is fact-checked against primary sources. We cite research. We correct errors. We distinguish opinion from fact.</div>
+          <div class="value-title" data-es="Basados en Ciencia">Science-Grounded</div>
+          <div class="value-desc" data-es="Cada historia se verifica contra fuentes primarias. Citamos investigaciones. Corregimos errores. Distinguimos la opinión del hecho.">Every story is fact-checked against primary sources. We cite research. We correct errors. We distinguish opinion from fact.</div>
         </div>
       </div>
       <div class="value-item">
         <span class="value-icon">🌾</span>
         <div>
-          <div class="value-title">Tradition-Respecting</div>
-          <div class="value-desc">Indigenous knowledge systems are not background color. They are innovation. We treat them with the rigor they deserve.</div>
+          <div class="value-title" data-es="Respetuosos de la Tradición">Tradition-Respecting</div>
+          <div class="value-desc" data-es="Los sistemas de conocimiento indígena no son color de fondo. Son innovación. Los tratamos con el rigor que merecen.">Indigenous knowledge systems are not background color. They are innovation. We treat them with the rigor they deserve.</div>
         </div>
       </div>
       <div class="value-item">
         <span class="value-icon">🚀</span>
         <div>
-          <div class="value-title">Future-Building</div>
-          <div class="value-desc">We don't just report. We believe media can accelerate the transition to better food systems by connecting the people building them.</div>
+          <div class="value-title" data-es="Constructores del Futuro">Future-Building</div>
+          <div class="value-desc" data-es="No solo informamos. Creemos que los medios pueden acelerar la transición hacia mejores sistemas alimentarios conectando a las personas que los están construyendo.">We don't just report. We believe media can accelerate the transition to better food systems by connecting the people building them.</div>
         </div>
       </div>
     </div>
@@ -205,105 +214,105 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 </div>
 
 <div class="stats-band">
-  <div class="stat-cell"><div class="stat-n g">2026</div><div class="stat-l">Founded in Alajuela, Costa Rica</div></div>
-  <div class="stat-cell"><div class="stat-n f">6</div><div class="stat-l">Food innovation verticals covered every week</div></div>
-  <div class="stat-cell"><div class="stat-n gold">2</div><div class="stat-l">Languages — English and Spanish, every story</div></div>
-  <div class="stat-cell"><div class="stat-n g">100%</div><div class="stat-l">Sourced and verified — no AI-fabricated stories, ever</div></div>
+  <div class="stat-cell"><div class="stat-n g">2026</div><div class="stat-l" data-es="Fundado en Alajuela, Costa Rica">Founded in Alajuela, Costa Rica</div></div>
+  <div class="stat-cell"><div class="stat-n f">6</div><div class="stat-l" data-es="Verticales de innovación alimentaria cubiertas cada semana">Food innovation verticals covered every week</div></div>
+  <div class="stat-cell"><div class="stat-n gold">2</div><div class="stat-l" data-es="Idiomas — inglés y español, en cada historia">Languages — English and Spanish, every story</div></div>
+  <div class="stat-cell"><div class="stat-n g">100%</div><div class="stat-l" data-es="Verificado y con fuentes — nunca historias fabricadas por IA">Sourced and verified — no AI-fabricated stories, ever</div></div>
 </div>
 
 <div class="topics-section">
   <div class="topics-header">
-    <h2 class="topics-title">What we cover</h2>
+    <h2 class="topics-title" data-es="Lo que cubrimos">What we cover</h2>
   </div>
   <div class="topics-grid">
     <div class="topic-cell">
       <span class="topic-icon">🦗</span>
-      <div class="topic-name">Insect Protein</div>
-      <div class="topic-desc">A 3,000-year-old food tradition meeting a $9.6B global market. We cover the science, the startups, and the communities at the center.</div>
+      <div class="topic-name" data-es="Proteína de Insectos">Insect Protein</div>
+      <div class="topic-desc" data-es="Una tradición alimentaria de 3,000 años que se encuentra con un mercado global de $9.6B. Cubrimos la ciencia, las startups y las comunidades en el centro de todo esto.">A 3,000-year-old food tradition meeting a $9.6B global market. We cover the science, the startups, and the communities at the center.</div>
     </div>
     <div class="topic-cell">
       <span class="topic-icon">🧬</span>
-      <div class="topic-name">Lab-Grown & Biotech</div>
-      <div class="topic-desc">Cultivated meat, precision fermentation, synthetic biology. The labs across LATAM changing what protein means.</div>
+      <div class="topic-name" data-es="Cultivado en Lab y Biotecnología">Lab-Grown & Biotech</div>
+      <div class="topic-desc" data-es="Carne cultivada, fermentación de precisión, biología sintética. Los laboratorios de toda América Latina que están cambiando el significado de la proteína.">Cultivated meat, precision fermentation, synthetic biology. The labs across LATAM changing what protein means.</div>
     </div>
     <div class="topic-cell">
       <span class="topic-icon">🌱</span>
-      <div class="topic-name">Regenerative Agriculture</div>
-      <div class="topic-desc">Soil carbon, water cycles, biodiversity credits. The farms proving that healing land feeds people better — and pays more.</div>
+      <div class="topic-name" data-es="Agricultura Regenerativa">Regenerative Agriculture</div>
+      <div class="topic-desc" data-es="Carbono en el suelo, ciclos del agua, créditos de biodiversidad. Las fincas que demuestran que sanar la tierra alimenta mejor a las personas — y paga más.">Soil carbon, water cycles, biodiversity credits. The farms proving that healing land feeds people better — and pays more.</div>
     </div>
     <div class="topic-cell">
       <span class="topic-icon">🌽</span>
-      <div class="topic-name">Ancestral Wisdom</div>
-      <div class="topic-desc">Quinoa, amaranth, cacao, teosinte. Indigenous food systems that feed the planet — and the legal fights to protect them.</div>
+      <div class="topic-name" data-es="Sabiduría Ancestral">Ancestral Wisdom</div>
+      <div class="topic-desc" data-es="Quinoa, amaranto, cacao, teosinte. Sistemas alimentarios indígenas que alimentan al planeta — y las luchas legales para protegerlos.">Quinoa, amaranth, cacao, teosinte. Indigenous food systems that feed the planet — and the legal fights to protect them.</div>
     </div>
     <div class="topic-cell">
       <span class="topic-icon">🤖</span>
-      <div class="topic-name">Food Tech & AI</div>
-      <div class="topic-desc">Precision agriculture, AI supply chains, smart packaging. Technology reducing the 30% of food lost between farm and fork in LATAM.</div>
+      <div class="topic-name" data-es="Tecnología Alimentaria & IA">Food Tech & AI</div>
+      <div class="topic-desc" data-es="Agricultura de precisión, cadenas de suministro con IA, empaques inteligentes. Tecnología que reduce el 30% de los alimentos que se pierden entre la finca y la mesa en LATAM.">Precision agriculture, AI supply chains, smart packaging. Technology reducing the 30% of food lost between farm and fork in LATAM.</div>
     </div>
     <div class="topic-cell">
       <span class="topic-icon">💧</span>
-      <div class="topic-name">Water & Climate</div>
-      <div class="topic-desc">The Amazon, the Andes glaciers, the Pacific fisheries. Food security in Latin America is water security — and the clock is ticking.</div>
+      <div class="topic-name" data-es="Agua & Clima">Water & Climate</div>
+      <div class="topic-desc" data-es="El Amazonas, los glaciares de los Andes, las pesquerías del Pacífico. La seguridad alimentaria en América Latina es seguridad hídrica — y el reloj avanza.">The Amazon, the Andes glaciers, the Pacific fisheries. Food security in Latin America is water security — and the clock is ticking.</div>
     </div>
   </div>
 </div>
 
 <div class="manifesto-full">
   <div class="manifesto-inner">
-    <span class="section-label" style="text-align:center;display:block;margin-bottom:1.5rem">Our Manifesto</span>
-    <h2 class="manifesto-quote">Latin America didn't just grow food.<br>It <em>invented civilization's pantry.</em></h2>
+    <span class="section-label" style="text-align:center;display:block;margin-bottom:1.5rem" data-es="Nuestro Manifiesto">Our Manifesto</span>
+    <h2 class="manifesto-quote" data-es="América Latina no solo cultivó alimentos.<br>Ella <em>inventó la despensa de la civilización.</em>">Latin America didn't just grow food.<br>It <em>invented civilization's pantry.</em></h2>
     <div class="origin-list">
-      <span class="origin-tag">🌽 Corn</span>
-      <span class="origin-tag">🍫 Cacao</span>
-      <span class="origin-tag">🍅 Tomato</span>
-      <span class="origin-tag">🥔 Potato</span>
-      <span class="origin-tag">🥑 Avocado</span>
-      <span class="origin-tag">🌿 Quinoa</span>
-      <span class="origin-tag">🌶️ Chili</span>
-      <span class="origin-tag">🍦 Vanilla</span>
-      <span class="origin-tag">🫘 Cacao</span>
-      <span class="origin-tag">🍍 Pineapple</span>
+      <span class="origin-tag" data-es="🌽 Maíz">🌽 Corn</span>
+      <span class="origin-tag" data-es="🍫 Cacao">🍫 Cacao</span>
+      <span class="origin-tag" data-es="🍅 Tomate">🍅 Tomato</span>
+      <span class="origin-tag" data-es="🥔 Papa">🥔 Potato</span>
+      <span class="origin-tag" data-es="🥑 Aguacate">🥑 Avocado</span>
+      <span class="origin-tag" data-es="🌿 Quinoa">🌿 Quinoa</span>
+      <span class="origin-tag" data-es="🌶️ Chile">🌶️ Chili</span>
+      <span class="origin-tag" data-es="🍦 Vainilla">🍦 Vanilla</span>
+      <span class="origin-tag" data-es="🫘 Cacao">🫘 Cacao</span>
+      <span class="origin-tag" data-es="🍍 Piña">🍍 Pineapple</span>
     </div>
-    <p class="manifesto-body">The ingredients that feed the modern world were first cultivated here, by peoples who spent millennia in dialogue with the land. And yet Latin America remains largely absent from the global conversation about the future of food. The investment flows north. The headlines run in English. The IP goes elsewhere.</p>
-    <p class="manifesto-body">FuturoFood exists to change that. We believe the solutions to the world's food crisis are already present in Latin American soil, in indigenous knowledge systems, and in a new generation of scientists, farmers, and entrepreneurs who refuse to wait for permission.</p>
-    <p class="manifesto-body"><strong style="color:var(--leaf)">We are not observers. We are participants.</strong></p>
+    <p class="manifesto-body" data-es="Los ingredientes que alimentan al mundo moderno se cultivaron aquí por primera vez, por pueblos que pasaron milenios en diálogo con la tierra. Y sin embargo, América Latina sigue mayormente ausente de la conversación global sobre el futuro de la alimentación. La inversión fluye hacia el norte. Los titulares se publican en inglés. La propiedad intelectual termina en otro lugar.">The ingredients that feed the modern world were first cultivated here, by peoples who spent millennia in dialogue with the land. And yet Latin America remains largely absent from the global conversation about the future of food. The investment flows north. The headlines run in English. The IP goes elsewhere.</p>
+    <p class="manifesto-body" data-es="FuturoFood existe para cambiar eso. Creemos que las soluciones a la crisis alimentaria mundial ya están presentes en el suelo latinoamericano, en los sistemas de conocimiento indígena, y en una nueva generación de científicos, agricultores y emprendedores que se niegan a esperar permiso.">FuturoFood exists to change that. We believe the solutions to the world's food crisis are already present in Latin American soil, in indigenous knowledge systems, and in a new generation of scientists, farmers, and entrepreneurs who refuse to wait for permission.</p>
+    <p class="manifesto-body"><strong style="color:var(--leaf)" data-es="No somos observadores. Somos participantes.">We are not observers. We are participants.</strong></p>
   </div>
 </div>
 
 <div class="ai-section">
   <div class="ai-left">
-    <span class="section-label">How We Work</span>
-    <h2 class="ai-title">Powered by AI.<br>Guided by humans.</h2>
-    <p class="ai-body">FuturoFood uses a combination of artificial intelligence and human editorial judgment to ensure we never miss a story — while never publishing one that isn't ready.</p>
-    <p class="ai-body">Our AI agents monitor hundreds of sources across LATAM 24 hours a day. They draft. They research. They surface what matters. Our editors then review, enrich, and approve every story before it reaches you.</p>
-    <p class="ai-body">The result is a publication with the speed of automation and the quality of expertise. No AI hallucinations in your inbox. No filler. Just signal.</p>
+    <span class="section-label" data-es="Cómo Trabajamos">How We Work</span>
+    <h2 class="ai-title" data-es="Impulsado por IA.<br>Guiado por humanos.">Powered by AI.<br>Guided by humans.</h2>
+    <p class="ai-body" data-es="FuturoFood usa una combinación de inteligencia artificial y criterio editorial humano para asegurarnos de nunca perder una historia — sin publicar nunca una que no esté lista.">FuturoFood uses a combination of artificial intelligence and human editorial judgment to ensure we never miss a story — while never publishing one that isn't ready.</p>
+    <p class="ai-body" data-es="Nuestros agentes de IA monitorean cientos de fuentes en toda América Latina las 24 horas del día. Redactan. Investigan. Detectan lo que importa. Luego, nuestros editores revisan, enriquecen y aprueban cada historia antes de que llegue a ti.">Our AI agents monitor hundreds of sources across LATAM 24 hours a day. They draft. They research. They surface what matters. Our editors then review, enrich, and approve every story before it reaches you.</p>
+    <p class="ai-body" data-es="El resultado es una publicación con la velocidad de la automatización y la calidad de la experiencia. Sin alucinaciones de IA en tu bandeja de entrada. Sin relleno. Solo lo esencial.">The result is a publication with the speed of automation and the quality of expertise. No AI hallucinations in your inbox. No filler. Just signal.</p>
   </div>
   <div class="ai-right">
-    <span class="section-label">Our Tech Stack</span>
+    <span class="section-label" data-es="Nuestra Pila Tecnológica">Our Tech Stack</span>
     <div class="tech-stack">
-      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Ghost CMS</span><span class="tech-role">Publishing platform</span></div>
-      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">n8n</span><span class="tech-role">AI workflow automation</span></div>
-      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Claude (Anthropic)</span><span class="tech-role">Article drafting</span></div>
-      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Perplexity Sonar</span><span class="tech-role">Real-time research</span></div>
-      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Supabase</span><span class="tech-role">Database & deduplication</span></div>
-      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Cloudflare</span><span class="tech-role">CDN, DNS & hosting</span></div>
+      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Ghost CMS</span><span class="tech-role" data-es="Plataforma de publicación">Publishing platform</span></div>
+      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">n8n</span><span class="tech-role" data-es="Automatización de flujos con IA">AI workflow automation</span></div>
+      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Claude (Anthropic)</span><span class="tech-role" data-es="Redacción de artículos">Article drafting</span></div>
+      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Perplexity Sonar</span><span class="tech-role" data-es="Investigación en tiempo real">Real-time research</span></div>
+      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Supabase</span><span class="tech-role" data-es="Base de datos y deduplicación">Database & deduplication</span></div>
+      <div class="tech-item"><span class="tech-dot"></span><span class="tech-name">Cloudflare</span><span class="tech-role" data-es="CDN, DNS y hosting">CDN, DNS & hosting</span></div>
     </div>
   </div>
 </div>
 
 <div class="contact-cta">
   <div class="contact-item">
-    <span class="contact-label">For Readers</span>
-    <div class="contact-title">Subscribe to the newsletter</div>
-    <p class="contact-desc">Be one of the first to get the weekly brief on LATAM food innovation. We're just getting started — free forever, no spam.</p>
-    <a href="futurofood.html#newsletter" class="btn-contact btn-green">Subscribe Free →</a>
+    <span class="contact-label" data-es="Para Lectores">For Readers</span>
+    <div class="contact-title" data-es="Suscríbete al boletín">Subscribe to the newsletter</div>
+    <p class="contact-desc" data-es="Sé de los primeros en recibir el resumen semanal sobre innovación alimentaria en LATAM. Estamos recién comenzando — gratis para siempre, sin spam.">Be one of the first to get the weekly brief on LATAM food innovation. We're just getting started — free forever, no spam.</p>
+    <a href="futurofood.html#newsletter" class="btn-contact btn-green" data-es="Suscríbete Gratis →">Subscribe Free →</a>
   </div>
   <div class="contact-item">
-    <span class="contact-label">For Partners</span>
-    <div class="contact-title">Advertise with FuturoFood</div>
-    <p class="contact-desc">Reach an engaged, growing audience of food innovators, investors, and farmers across Latin America from day one. View our media kit or get in touch directly.</p>
-    <a href="mailto:hello@futurofood.com" class="btn-contact">View Media Kit →</a>
+    <span class="contact-label" data-es="Para Socios">For Partners</span>
+    <div class="contact-title" data-es="Anúnciate con FuturoFood">Advertise with FuturoFood</div>
+    <p class="contact-desc" data-es="Llega a una audiencia comprometida y en crecimiento de innovadores alimentarios, inversionistas y agricultores en toda América Latina desde el primer día. Consulta nuestro media kit o contáctanos directamente.">Reach an engaged, growing audience of food innovators, investors, and farmers across Latin America from day one. View our media kit or get in touch directly.</p>
+    <a href="mailto:hello@futurofood.com" class="btn-contact" data-es="Ver Media Kit →">View Media Kit →</a>
   </div>
 </div>
 
@@ -311,13 +320,14 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   <div class="footer-bottom">
     <div class="footer-brand">Futuro<em>Food</em></div>
     <div class="footer-links">
-      <a href="futurofood.html">Home</a>
-      <a href="futurofood-blog.html">Stories</a>
-      <a href="futurofood-about.html">About</a>
-      <a href="futurofood-privacy.html">Privacy</a>
+      <a href="futurofood.html" data-es="Inicio">Home</a>
+      <a href="futurofood-blog.html" data-es="Historias">Stories</a>
+      <a href="futurofood-about.html" data-es="Nosotros">About</a>
+      <a href="futurofood-privacy.html" data-es="Privacidad">Privacy</a>
     </div>
-    <span class="footer-copy">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+    <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
   </div>
 </footer>
+<script src="i18n.js" defer></script>
 </body>
 </html>

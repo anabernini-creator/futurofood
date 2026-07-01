@@ -20,6 +20,12 @@ a{color:var(--green)}
 .mast-logo em{color:var(--green);font-style:normal}
 .btn-sub{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.45rem 1.1rem;text-decoration:none;transition:background .2s}
 .btn-sub:hover{background:#6ee89a}
+.mast-right{display:flex;align-items:center;gap:1rem}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist2);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
 .page-wrap{max-width:760px;margin:0 auto;padding:4rem 2rem 6rem}
 .page-eyebrow{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem;display:block}
 .page-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:1rem}
@@ -44,102 +50,110 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem
 <header class="masthead">
   <div class="masthead-inner">
     <a href="futurofood.html" class="mast-logo">Futuro<em>Food</em></a>
-    <a href="futurofood.html#newsletter" class="btn-sub">Subscribe Free</a>
+    <div class="mast-right">
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
+      <a href="futurofood.html#newsletter" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
+    </div>
   </div>
 </header>
 
 <div class="page-wrap">
-  <span class="page-eyebrow">Legal</span>
-  <h1 class="page-title">Privacy Policy</h1>
-  <p class="page-meta">Last updated: June 27, 2026 · Effective: June 27, 2026</p>
+  <span class="page-eyebrow" data-es="Legal">Legal</span>
+  <h1 class="page-title" data-es="Política de Privacidad">Privacy Policy</h1>
+  <p class="page-meta" data-es="Última actualización: 27 de junio de 2026 · Vigente desde: 27 de junio de 2026">Last updated: June 27, 2026 · Effective: June 27, 2026</p>
 
   <div class="doc">
 
     <div class="highlight-box">
-      <p><strong>Short version:</strong> We collect your email to send you our newsletter. We don't sell your data. We don't track you across the web. You can unsubscribe anytime with one click. That's it.</p>
+      <p data-es='<strong>Versión corta:</strong> Recopilamos tu correo electrónico para enviarte nuestro boletín. No vendemos tus datos. No te rastreamos por la web. Puedes darte de baja en cualquier momento con un clic. Eso es todo.'><strong>Short version:</strong> We collect your email to send you our newsletter. We don't sell your data. We don't track you across the web. You can unsubscribe anytime with one click. That's it.</p>
     </div>
 
-    <h2>1. Who We Are</h2>
-    <p>FuturoFood ("we", "us", "our") is a digital media publication covering food innovation in Latin America, operated from Alajuela, Costa Rica. Our website is <a href="https://futurofood.com">futurofood.com</a>. You can contact us at <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>.</p>
+    <h2 data-es="1. Quiénes Somos">1. Who We Are</h2>
+    <p data-es='FuturoFood ("nosotros", "nos", "nuestro") es una publicación de medios digitales que cubre la innovación alimentaria en América Latina, operada desde Alajuela, Costa Rica. Nuestro sitio web es <a href="https://futurofood.com">futurofood.com</a>. Puedes contactarnos en <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>.'>FuturoFood ("we", "us", "our") is a digital media publication covering food innovation in Latin America, operated from Alajuela, Costa Rica. Our website is <a href="https://futurofood.com">futurofood.com</a>. You can contact us at <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>.</p>
 
-    <h2>2. What Data We Collect</h2>
-    <h3>Information you provide to us</h3>
+    <h2 data-es="2. Qué Datos Recopilamos">2. What Data We Collect</h2>
+    <h3 data-es="Información que nos proporcionas">Information you provide to us</h3>
     <ul>
-      <li><strong>Email address</strong> — when you subscribe to our newsletter</li>
-      <li><strong>Name</strong> — optional, if you provide it when subscribing</li>
-      <li><strong>Messages</strong> — if you contact us by email</li>
+      <li data-es="<strong>Dirección de correo electrónico</strong> — cuando te suscribes a nuestro boletín"><strong>Email address</strong> — when you subscribe to our newsletter</li>
+      <li data-es="<strong>Nombre</strong> — opcional, si lo proporcionas al suscribirte"><strong>Name</strong> — optional, if you provide it when subscribing</li>
+      <li data-es="<strong>Mensajes</strong> — si nos contactas por correo electrónico"><strong>Messages</strong> — if you contact us by email</li>
     </ul>
-    <h3>Information collected automatically</h3>
+    <h3 data-es="Información recopilada automáticamente">Information collected automatically</h3>
     <ul>
-      <li><strong>Usage data</strong> — pages visited, time spent, referring URL (via Cloudflare analytics, privacy-friendly, no cookies)</li>
-      <li><strong>Email engagement</strong> — opens and clicks on newsletters (via Ghost CMS)</li>
-      <li><strong>IP address</strong> — collected by our hosting infrastructure for security purposes, not used for profiling</li>
-    </ul>
-
-    <h2>3. How We Use Your Data</h2>
-    <ul>
-      <li>Send you the FuturoFood weekly newsletter (the only reason we ask for your email)</li>
-      <li>Send occasional announcements about FuturoFood (new features, special editions)</li>
-      <li>Improve our content based on aggregate, anonymized engagement data</li>
-      <li>Respond to your inquiries if you contact us</li>
-      <li>Comply with legal obligations</li>
-    </ul>
-    <p>We do <strong>not</strong> use your data for advertising targeting, profiling, or selling to third parties.</p>
-
-    <h2>4. Legal Basis for Processing (GDPR)</h2>
-    <p>If you are located in the European Economic Area (EEA), we process your personal data under the following legal bases:</p>
-    <ul>
-      <li><strong>Consent</strong> — when you subscribe to our newsletter, you consent to receiving it. You can withdraw this consent at any time by unsubscribing.</li>
-      <li><strong>Legitimate interests</strong> — for analytics and security purposes, where these don't override your rights.</li>
+      <li data-es="<strong>Datos de uso</strong> — páginas visitadas, tiempo de permanencia, URL de referencia (mediante analítica de Cloudflare, respetuosa de la privacidad, sin cookies)"><strong>Usage data</strong> — pages visited, time spent, referring URL (via Cloudflare analytics, privacy-friendly, no cookies)</li>
+      <li data-es="<strong>Interacción con el correo</strong> — aperturas y clics en los boletines (mediante Ghost CMS)"><strong>Email engagement</strong> — opens and clicks on newsletters (via Ghost CMS)</li>
+      <li data-es="<strong>Dirección IP</strong> — recopilada por nuestra infraestructura de hosting con fines de seguridad, no se usa para perfilamiento"><strong>IP address</strong> — collected by our hosting infrastructure for security purposes, not used for profiling</li>
     </ul>
 
-    <h2>5. Data Sharing</h2>
-    <p>We share your data only with the following service providers, who are contractually bound to protect it:</p>
+    <h2 data-es="3. Cómo Usamos Tus Datos">3. How We Use Your Data</h2>
     <ul>
-      <li><strong>Ghost (Ghost Foundation)</strong> — our newsletter and CMS platform. <a href="https://ghost.org/privacy/" target="_blank" rel="noopener">Ghost Privacy Policy</a></li>
-      <li><strong>Cloudflare, Inc.</strong> — CDN, DNS, and analytics. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a></li>
-      <li><strong>Amazon SES / Mailgun</strong> — email delivery infrastructure</li>
+      <li data-es="Enviarte el boletín semanal de FuturoFood (la única razón por la que pedimos tu correo electrónico)">Send you the FuturoFood weekly newsletter (the only reason we ask for your email)</li>
+      <li data-es="Enviar anuncios ocasionales sobre FuturoFood (nuevas funciones, ediciones especiales)">Send occasional announcements about FuturoFood (new features, special editions)</li>
+      <li data-es="Mejorar nuestro contenido con base en datos de interacción agregados y anonimizados">Improve our content based on aggregate, anonymized engagement data</li>
+      <li data-es="Responder a tus consultas si nos contactas">Respond to your inquiries if you contact us</li>
+      <li data-es="Cumplir con obligaciones legales">Comply with legal obligations</li>
     </ul>
-    <p>We do <strong>not</strong> sell, rent, or trade your personal information to any third party.</p>
+    <p data-es="<strong>No</strong> usamos tus datos para segmentación publicitaria, perfilamiento, ni los vendemos a terceros.">We do <strong>not</strong> use your data for advertising targeting, profiling, or selling to third parties.</p>
 
-    <h2>6. Data Retention</h2>
-    <p>We retain your email address for as long as you are subscribed to our newsletter. If you unsubscribe, your data is deleted from our active lists within 30 days. Backups may retain data for up to 90 days after deletion.</p>
-
-    <h2>7. Your Rights</h2>
-    <p>Depending on your location, you may have the following rights:</p>
+    <h2 data-es="4. Base Legal para el Tratamiento (RGPD)">4. Legal Basis for Processing (GDPR)</h2>
+    <p data-es="Si te encuentras en el Espacio Económico Europeo (EEE), procesamos tus datos personales bajo las siguientes bases legales:">If you are located in the European Economic Area (EEA), we process your personal data under the following legal bases:</p>
     <ul>
-      <li><strong>Access</strong> — request a copy of the personal data we hold about you</li>
-      <li><strong>Correction</strong> — ask us to correct inaccurate data</li>
-      <li><strong>Deletion</strong> — request that we delete your personal data</li>
-      <li><strong>Portability</strong> — receive your data in a machine-readable format</li>
-      <li><strong>Objection</strong> — object to certain types of processing</li>
-      <li><strong>Withdraw consent</strong> — unsubscribe at any time using the link in any email</li>
-    </ul>
-    <p>To exercise any of these rights, email us at <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>. We will respond within 30 days.</p>
-
-    <h2>8. Cookies</h2>
-    <p>Our website uses minimal cookies. We do not use advertising cookies or third-party tracking cookies. We use:</p>
-    <ul>
-      <li><strong>Essential cookies</strong> — for basic site functionality (session management)</li>
-      <li><strong>Analytics</strong> — via Cloudflare Web Analytics, which is privacy-respecting and does not use cookies or fingerprinting</li>
+      <li data-es="<strong>Consentimiento</strong> — al suscribirte a nuestro boletín, consientes recibirlo. Puedes retirar este consentimiento en cualquier momento dándote de baja."><strong>Consent</strong> — when you subscribe to our newsletter, you consent to receiving it. You can withdraw this consent at any time by unsubscribing.</li>
+      <li data-es="<strong>Intereses legítimos</strong> — para fines de analítica y seguridad, cuando estos no prevalezcan sobre tus derechos."><strong>Legitimate interests</strong> — for analytics and security purposes, where these don't override your rights.</li>
     </ul>
 
-    <h2>9. Children's Privacy</h2>
-    <p>FuturoFood is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us.</p>
+    <h2 data-es="5. Compartir Datos">5. Data Sharing</h2>
+    <p data-es="Compartimos tus datos únicamente con los siguientes proveedores de servicios, quienes están obligados contractualmente a protegerlos:">We share your data only with the following service providers, who are contractually bound to protect it:</p>
+    <ul>
+      <li data-es='<strong>Ghost (Ghost Foundation)</strong> — nuestra plataforma de boletín y CMS. <a href="https://ghost.org/privacy/" target="_blank" rel="noopener">Política de Privacidad de Ghost</a>'><strong>Ghost (Ghost Foundation)</strong> — our newsletter and CMS platform. <a href="https://ghost.org/privacy/" target="_blank" rel="noopener">Ghost Privacy Policy</a></li>
+      <li data-es='<strong>Cloudflare, Inc.</strong> — CDN, DNS y analítica. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Política de Privacidad de Cloudflare</a>'><strong>Cloudflare, Inc.</strong> — CDN, DNS, and analytics. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a></li>
+      <li data-es="<strong>Amazon SES / Mailgun</strong> — infraestructura de entrega de correo electrónico"><strong>Amazon SES / Mailgun</strong> — email delivery infrastructure</li>
+    </ul>
+    <p data-es="<strong>No</strong> vendemos, alquilamos ni intercambiamos tu información personal con terceros.">We do <strong>not</strong> sell, rent, or trade your personal information to any third party.</p>
 
-    <h2>10. International Transfers</h2>
-    <p>FuturoFood is operated from Costa Rica. Our service providers (Cloudflare, Ghost) may process data in the United States and other countries. Where data is transferred from the EEA, we ensure appropriate safeguards are in place (Standard Contractual Clauses or equivalent).</p>
+    <h2 data-es="6. Retención de Datos">6. Data Retention</h2>
+    <p data-es="Conservamos tu dirección de correo electrónico mientras estés suscrito a nuestro boletín. Si te das de baja, tus datos se eliminan de nuestras listas activas en un plazo de 30 días. Las copias de seguridad pueden conservar datos hasta 90 días después de la eliminación.">We retain your email address for as long as you are subscribed to our newsletter. If you unsubscribe, your data is deleted from our active lists within 30 days. Backups may retain data for up to 90 days after deletion.</p>
 
-    <h2>11. Security</h2>
-    <p>We implement reasonable technical and organizational measures to protect your personal data, including HTTPS encryption, access controls, and regular security reviews. No method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+    <h2 data-es="7. Tus Derechos">7. Your Rights</h2>
+    <p data-es="Dependiendo de tu ubicación, puedes tener los siguientes derechos:">Depending on your location, you may have the following rights:</p>
+    <ul>
+      <li data-es="<strong>Acceso</strong> — solicitar una copia de los datos personales que tenemos sobre ti"><strong>Access</strong> — request a copy of the personal data we hold about you</li>
+      <li data-es="<strong>Corrección</strong> — pedirnos que corrijamos datos inexactos"><strong>Correction</strong> — ask us to correct inaccurate data</li>
+      <li data-es="<strong>Eliminación</strong> — solicitar que eliminemos tus datos personales"><strong>Deletion</strong> — request that we delete your personal data</li>
+      <li data-es="<strong>Portabilidad</strong> — recibir tus datos en un formato legible por máquina"><strong>Portability</strong> — receive your data in a machine-readable format</li>
+      <li data-es="<strong>Oposición</strong> — oponerte a ciertos tipos de tratamiento"><strong>Objection</strong> — object to certain types of processing</li>
+      <li data-es="<strong>Retirar el consentimiento</strong> — darte de baja en cualquier momento usando el enlace en cualquier correo"><strong>Withdraw consent</strong> — unsubscribe at any time using the link in any email</li>
+    </ul>
+    <p data-es='Para ejercer cualquiera de estos derechos, escríbenos a <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>. Responderemos dentro de 30 días.'>To exercise any of these rights, email us at <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>. We will respond within 30 days.</p>
 
-    <h2>12. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page and notify newsletter subscribers of material changes.</p>
+    <h2 data-es="8. Cookies">8. Cookies</h2>
+    <p data-es="Nuestro sitio web usa cookies mínimas. No usamos cookies publicitarias ni cookies de rastreo de terceros. Usamos:">Our website uses minimal cookies. We do not use advertising cookies or third-party tracking cookies. We use:</p>
+    <ul>
+      <li data-es="<strong>Cookies esenciales</strong> — para la funcionalidad básica del sitio (gestión de sesión)"><strong>Essential cookies</strong> — for basic site functionality (session management)</li>
+      <li data-es="<strong>Analítica</strong> — mediante Cloudflare Web Analytics, que respeta la privacidad y no usa cookies ni huellas digitales"><strong>Analytics</strong> — via Cloudflare Web Analytics, which is privacy-respecting and does not use cookies or fingerprinting</li>
+    </ul>
 
-    <h2>13. Contact Us</h2>
-    <p>For any questions about this Privacy Policy or your personal data, please contact us:</p>
+    <h2 data-es="9. Privacidad de Menores">9. Children's Privacy</h2>
+    <p data-es="FuturoFood no está dirigido a menores de 13 años. No recopilamos a sabiendas información personal de menores de 13 años. Si crees que un menor nos ha proporcionado información personal, contáctanos.">FuturoFood is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us.</p>
+
+    <h2 data-es="10. Transferencias Internacionales">10. International Transfers</h2>
+    <p data-es="FuturoFood opera desde Costa Rica. Nuestros proveedores de servicios (Cloudflare, Ghost) pueden procesar datos en Estados Unidos y otros países. Cuando los datos se transfieren desde el EEE, garantizamos que existan las salvaguardas adecuadas (Cláusulas Contractuales Tipo o equivalentes).">FuturoFood is operated from Costa Rica. Our service providers (Cloudflare, Ghost) may process data in the United States and other countries. Where data is transferred from the EEA, we ensure appropriate safeguards are in place (Standard Contractual Clauses or equivalent).</p>
+
+    <h2 data-es="11. Seguridad">11. Security</h2>
+    <p data-es="Implementamos medidas técnicas y organizativas razonables para proteger tus datos personales, incluyendo cifrado HTTPS, controles de acceso y revisiones de seguridad periódicas. Ningún método de transmisión por internet es 100% seguro, y no podemos garantizar una seguridad absoluta.">We implement reasonable technical and organizational measures to protect your personal data, including HTTPS encryption, access controls, and regular security reviews. No method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+    <h2 data-es="12. Cambios a Esta Política">12. Changes to This Policy</h2>
+    <p data-es='Podemos actualizar esta Política de Privacidad de vez en cuando. Cuando lo hagamos, actualizaremos la fecha de "Última actualización" en la parte superior de esta página y notificaremos a los suscriptores del boletín sobre cambios importantes.'>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page and notify newsletter subscribers of material changes.</p>
+
+    <h2 data-es="13. Contáctanos">13. Contact Us</h2>
+    <p data-es="Para cualquier pregunta sobre esta Política de Privacidad o tus datos personales, contáctanos:">For any questions about this Privacy Policy or your personal data, please contact us:</p>
     <div class="highlight-box">
-      <p><strong>FuturoFood</strong><br/>
+      <p data-es='<strong>FuturoFood</strong><br/>
+      Correo: <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a><br/>
+      Ubicación: Alajuela, Costa Rica'><strong>FuturoFood</strong><br/>
       Email: <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a><br/>
       Location: Alajuela, Costa Rica</p>
     </div>
@@ -149,7 +163,8 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem
 
 <footer>
   <div class="footer-brand">Futuro<em>Food</em></div>
-  <span class="footer-copy">© 2026 FuturoFood.com · All rights reserved</span>
+  <span class="footer-copy" data-es="© 2026 FuturoFood.com · Todos los derechos reservados">© 2026 FuturoFood.com · All rights reserved</span>
 </footer>
+<script src="i18n.js" defer></script>
 </body>
 </html>

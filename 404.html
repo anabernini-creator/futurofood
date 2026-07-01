@@ -19,6 +19,12 @@ a{color:inherit;text-decoration:none}
 .mast-logo em{color:var(--green);font-style:normal}
 .btn-sub{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.45rem 1.1rem;transition:background .2s}
 .btn-sub:hover{background:#6ee89a}
+.mast-right{display:flex;align-items:center;gap:1rem}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
 
 .error-page{flex:1;display:flex;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center}
 .error-inner{max-width:600px}
@@ -49,35 +55,42 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.25re
 <header class="masthead">
   <div class="masthead-inner">
     <a href="futurofood.html" class="mast-logo">Futuro<em>Food</em></a>
-    <a href="futurofood.html#newsletter" class="btn-sub">Subscribe Free</a>
+    <div class="mast-right">
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
+      <a href="futurofood.html#newsletter" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
+    </div>
   </div>
 </header>
 
 <div class="error-page">
   <div class="error-inner">
     <span class="error-icon">🦗</span>
-    <span class="error-eyebrow">404 · Page Not Found</span>
-    <h1 class="error-title">This story<br>got <em>eaten.</em></h1>
-    <p class="error-desc">The page you're looking for has moved, been updated, or simply doesn't exist. Don't worry — there are thousands of food innovation stories waiting for you.</p>
+    <span class="error-eyebrow" data-es="404 · Página No Encontrada">404 · Page Not Found</span>
+    <h1 class="error-title" data-es="Esta historia<br>fue <em>devorada.</em>">This story<br>got <em>eaten.</em></h1>
+    <p class="error-desc" data-es="La página que buscas se ha movido, ha sido actualizada, o simplemente no existe. No te preocupes — hay miles de historias de innovación alimentaria esperándote.">The page you're looking for has moved, been updated, or simply doesn't exist. Don't worry — there are thousands of food innovation stories waiting for you.</p>
     <div class="error-actions">
-      <a href="futurofood.html" class="btn-primary">← Back to Home</a>
-      <a href="futurofood-blog.html" class="btn-secondary">Browse All Stories</a>
+      <a href="futurofood.html" class="btn-primary" data-es="← Volver al Inicio">← Back to Home</a>
+      <a href="futurofood-blog.html" class="btn-secondary" data-es="Ver Todas las Historias">Browse All Stories</a>
     </div>
-    <div class="quick-links-title">Or jump to a topic</div>
+    <div class="quick-links-title" data-es="O salta a un tema">Or jump to a topic</div>
     <div class="quick-links">
-      <a href="futurofood-blog.html" class="quick-link">🦗 Insect Protein</a>
-      <a href="futurofood-blog.html" class="quick-link">🧬 Lab-Grown</a>
-      <a href="futurofood-blog.html" class="quick-link">🌱 Regenerative</a>
-      <a href="futurofood-blog.html" class="quick-link">🌽 Ancestral</a>
-      <a href="futurofood-blog.html" class="quick-link">🤖 Food Tech</a>
-      <a href="futurofood-blog.html" class="quick-link">💧 Water</a>
+      <a href="futurofood-blog.html" class="quick-link" data-es="🦗 Proteína de Insectos">🦗 Insect Protein</a>
+      <a href="futurofood-blog.html" class="quick-link" data-es="🧬 Cultivado en Lab">🧬 Lab-Grown</a>
+      <a href="futurofood-blog.html" class="quick-link" data-es="🌱 Regenerativo">🌱 Regenerative</a>
+      <a href="futurofood-blog.html" class="quick-link" data-es="🌽 Ancestral">🌽 Ancestral</a>
+      <a href="futurofood-blog.html" class="quick-link" data-es="🤖 Tecnología Alimentaria">🤖 Food Tech</a>
+      <a href="futurofood-blog.html" class="quick-link" data-es="💧 Agua">💧 Water</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">Futuro<em>Food</em></div>
-  <span class="footer-copy">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+  <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
 </footer>
+<script src="i18n.js" defer></script>
 </body>
 </html>

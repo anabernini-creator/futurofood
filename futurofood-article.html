@@ -57,9 +57,14 @@ a{color:inherit;text-decoration:none}
 .mast-logo{text-align:center;font-family:var(--serif);font-size:1.6rem;font-weight:900;letter-spacing:-.02em;line-height:1;display:block;cursor:pointer}
 .mast-logo em{color:var(--green);font-style:normal}
 .mast-logo small{display:block;font-family:var(--mono);font-size:.55rem;letter-spacing:.22em;color:var(--mist);margin-top:3px}
-.mast-right{display:flex;justify-content:flex-end}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:1rem}
 .btn-sub{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.5rem 1.25rem;transition:background .2s}
 .btn-sub:hover{background:#6ee89a}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
 
 /* ARTICLE HERO */
 .article-hero{border-bottom:1px solid var(--border);padding:3rem 2rem 0;max-width:1280px;margin:0 auto}
@@ -221,16 +226,20 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 <header class="masthead">
   <div class="masthead-inner">
     <nav class="mast-nav">
-      <a href="futurofood.html">Home</a>
-      <a href="futurofood-blog.html">Stories</a>
-      <a href="futurofood-about.html">About</a>
+      <a href="futurofood.html" data-es="Inicio">Home</a>
+      <a href="futurofood-blog.html" data-es="Historias">Stories</a>
+      <a href="futurofood-about.html" data-es="Nosotros">About</a>
     </nav>
     <a href="futurofood.html" class="mast-logo">
       <span>Futuro<em>Food</em></span>
-      <small>El futuro de la alimentación · LATAM</small>
+      <small data-es="El futuro de la alimentación · LATAM">The Future of Food · LATAM</small>
     </a>
     <div class="mast-right">
-      <a href="#newsletter-cta" class="btn-sub">Subscribe Free</a>
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
+      <a href="#newsletter-cta" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
   </div>
 </header>
@@ -238,20 +247,20 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 <!-- ARTICLE HERO -->
 <div class="article-hero">
   <nav class="article-breadcrumb" aria-label="Breadcrumb">
-    <a href="futurofood.html" class="breadcrumb-item">Home</a>
+    <a href="futurofood.html" class="breadcrumb-item" data-es="Inicio">Home</a>
     <span class="breadcrumb-sep">›</span>
-    <a href="futurofood-blog.html" class="breadcrumb-item">Stories</a>
+    <a href="futurofood-blog.html" class="breadcrumb-item" data-es="Historias">Stories</a>
     <span class="breadcrumb-sep">›</span>
-    <span class="breadcrumb-item breadcrumb-current">Lab-Grown</span>
+    <span class="breadcrumb-item breadcrumb-current" data-es="Cultivado en Lab">Lab-Grown</span>
   </nav>
 
-  <span class="article-tag">🧬 Lab-Grown</span>
+  <span class="article-tag" data-es="🧬 Cultivado en Lab">🧬 Lab-Grown</span>
 
-  <h1 class="article-title">
+  <h1 class="article-title" data-es="La agencia estatal de investigación de Brasil cultiva carne de pollo a partir de células — y el mayor exportador de carne vacuna del mundo dice que esto es solo el comienzo">
     Brazil's state research agency is growing chicken meat from cells — and the world's top beef exporter says it's just the beginning
   </h1>
 
-  <p class="article-deck">
+  <p class="article-deck" data-es="Embrapa, la corporación federal brasileña de investigación agropecuaria, ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027 — desarrollado íntegramente de forma interna, en un país que ya estableció normas regulatorias para la carne cultivada desde 2023.">
     Embrapa, Brazil's federal agricultural research corporation, has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027 — built entirely in-house, in a country that already set regulatory rules for cultivated meat back in 2023.
   </p>
 
@@ -259,18 +268,18 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
     <div class="meta-author">
       <div class="author-avatar">✍️</div>
       <div>
-        <div class="author-name">FuturoFood Editorial</div>
-        <div class="author-role">FuturoFood · LATAM Food Desk</div>
+        <div class="author-name" data-es="Equipo Editorial FuturoFood">FuturoFood Editorial</div>
+        <div class="author-role" data-es="FuturoFood · Redacción de Alimentación LATAM">FuturoFood · LATAM Food Desk</div>
       </div>
     </div>
     <div class="meta-divider"></div>
-    <div class="meta-item">Sources: <strong>Agência Brasil, Rio Times, Embrapa</strong></div>
-    <div class="meta-item"><strong>6 min</strong> read</div>
+    <div class="meta-item" data-es='Fuentes: <strong>Agência Brasil, Rio Times, Embrapa</strong>'>Sources: <strong>Agência Brasil, Rio Times, Embrapa</strong></div>
+    <div class="meta-item" data-es='<strong>6 min</strong> de lectura'><strong>6 min</strong> read</div>
     <div class="meta-item">EN / <strong>ES</strong></div>
     <div class="share-btns">
       <button class="share-btn" onclick="shareArticle('twitter')">↗ X/Twitter</button>
       <button class="share-btn" onclick="shareArticle('linkedin')">↗ LinkedIn</button>
-      <button class="share-btn" onclick="copyLink()">⎘ Copy Link</button>
+      <button class="share-btn" onclick="copyLink()" data-es="⎘ Copiar Enlace">⎘ Copy Link</button>
     </div>
   </div>
 </div>
@@ -279,7 +288,7 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 <div class="feature-image-wrap">
   <div class="feature-image">
     🧬
-    <div class="feature-caption">Embrapa's Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research site</div>
+    <div class="feature-caption" data-es="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — sitio de investigación de carne cultivada">Embrapa's Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research site</div>
   </div>
 </div>
 
@@ -290,98 +299,98 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   <article class="article-content" id="article-body">
 
     <div class="takeaways">
-      <div class="takeaways-title">Key Takeaways</div>
+      <div class="takeaways-title" data-es="Puntos Clave">Key Takeaways</div>
       <ul>
-        <li><span class="takeaway-arrow">→</span> Embrapa has produced prototype cultivated chicken fillets using cells from its own genetic stock — no animal slaughtered</li>
-        <li><span class="takeaway-arrow">→</span> Research is split across two labs: Embrapa Swine and Poultry in Concórdia, Santa Catarina, and Cenargen's Nanobiotechnology Lab in Brasília</li>
-        <li><span class="takeaway-arrow">→</span> Lead researcher Luciano Paulino da Silva expects a finished Embrapa technology package by mid-2027, ready to license to private companies</li>
-        <li><span class="takeaway-arrow">→</span> Brazil's health regulator ANVISA published its regulatory framework for cultivated meat (RDC 839) back in 2023</li>
+        <li><span class="takeaway-arrow">→</span> <span data-es="Embrapa ha producido filetes de pollo cultivado prototipo usando células de su propio banco genético — sin sacrificar ningún animal">Embrapa has produced prototype cultivated chicken fillets using cells from its own genetic stock — no animal slaughtered</span></li>
+        <li><span class="takeaway-arrow">→</span> <span data-es="La investigación se divide entre dos laboratorios: Embrapa Suínos e Aves en Concórdia, Santa Catarina, y el Laboratorio de Nanobiotecnología de Cenargen en Brasília">Research is split across two labs: Embrapa Swine and Poultry in Concórdia, Santa Catarina, and Cenargen's Nanobiotechnology Lab in Brasília</span></li>
+        <li><span class="takeaway-arrow">→</span> <span data-es="El investigador principal Luciano Paulino da Silva espera un paquete tecnológico terminado de Embrapa para mediados de 2027, listo para licenciar a empresas privadas">Lead researcher Luciano Paulino da Silva expects a finished Embrapa technology package by mid-2027, ready to license to private companies</span></li>
+        <li><span class="takeaway-arrow">→</span> <span data-es="El regulador sanitario de Brasil, ANVISA, publicó su marco regulatorio para carne cultivada (RDC 839) en 2023">Brazil's health regulator ANVISA published its regulatory framework for cultivated meat (RDC 839) back in 2023</span></li>
       </ul>
     </div>
 
-    <p>Brazil is the world's largest beef exporter — a country built, in large part, on cattle. So when its own federal research agency starts growing meat in a dish, without a single animal slaughtered, it's a signal that the idea has moved well past the experimental fringe.</p>
+    <p data-es="Brasil es el mayor exportador de carne vacuna del mundo — un país construido, en gran parte, sobre la ganadería. Por eso, cuando su propia agencia federal de investigación comienza a cultivar carne en un plato, sin sacrificar un solo animal, es una señal de que la idea ha superado ampliamente el terreno experimental.">Brazil is the world's largest beef exporter — a country built, in large part, on cattle. So when its own federal research agency starts growing meat in a dish, without a single animal slaughtered, it's a signal that the idea has moved well past the experimental fringe.</p>
 
-    <p>That's exactly what's happening at Embrapa, Brazil's state agricultural research corporation. Researchers there have produced prototype chicken-breast fillets grown from cultured cells — a small biopsy taken from a living animal, multiplied in a nutrient-rich liquid, then shaped on tiny scaffolds into three-dimensional muscle tissue.</p>
+    <p data-es="Eso es exactamente lo que está sucediendo en Embrapa, la corporación estatal brasileña de investigación agropecuaria. Allí, los investigadores han producido filetes prototipo de pechuga de pollo cultivados a partir de células — una pequeña biopsia tomada de un animal vivo, multiplicada en un líquido rico en nutrientes, y luego moldeada sobre pequeños andamios en tejido muscular tridimensional.">That's exactly what's happening at Embrapa, Brazil's state agricultural research corporation. Researchers there have produced prototype chicken-breast fillets grown from cultured cells — a small biopsy taken from a living animal, multiplied in a nutrient-rich liquid, then shaped on tiny scaffolds into three-dimensional muscle tissue.</p>
 
-    <h2 id="market-size">Two labs, one technology package</h2>
+    <h2 id="market-size" data-es="Dos laboratorios, un paquete tecnológico">Two labs, one technology package</h2>
 
-    <p>The work is split between two sites: Embrapa Swine and Poultry, based in Concórdia, Santa Catarina, and the Nanobiotechnology Laboratory (LNANO) at Embrapa Genetic Resources and Biotechnology — known as Cenargen — in Brasília. According to a report by Agência Brasil published June 14, 2026, the experiments use cells multiplied in a controlled environment with nutrients, oxygen, glucose, amino acids, and mineral salts.</p>
+    <p data-es="El trabajo se divide entre dos sedes: Embrapa Suínos e Aves, con base en Concórdia, Santa Catarina, y el Laboratorio de Nanobiotecnología (LNANO) de Embrapa Recursos Genéticos y Biotecnología — conocido como Cenargen — en Brasília. Según un reportaje de Agência Brasil publicado el 14 de junio de 2026, los experimentos usan células multiplicadas en un entorno controlado con nutrientes, oxígeno, glucosa, aminoácidos y sales minerales.">The work is split between two sites: Embrapa Swine and Poultry, based in Concórdia, Santa Catarina, and the Nanobiotechnology Laboratory (LNANO) at Embrapa Genetic Resources and Biotechnology — known as Cenargen — in Brasília. According to a report by Agência Brasil published June 14, 2026, the experiments use cells multiplied in a controlled environment with nutrients, oxygen, glucose, amino acids, and mineral salts.</p>
 
     <div class="pull-stat">
       <div class="pull-stat-num">2027</div>
-      <div class="pull-stat-label">The year Embrapa expects to finish its cultivated meat technology package — ready for private companies to license for commercial products</div>
+      <div class="pull-stat-label" data-es="El año en que Embrapa espera terminar su paquete tecnológico de carne cultivada — listo para que empresas privadas lo licencien para productos comerciales">The year Embrapa expects to finish its cultivated meat technology package — ready for private companies to license for commercial products</div>
     </div>
 
-    <p>Biologist Luciano Paulino da Silva, the researcher coordinating the cultivated meat experiments at LNANO, told Agência Brasil that the prototype should be finalized in 2027. He frames the project in plain commercial terms: once the technology package is ready, private companies will be able to license the methods to make and sell specific products.</p>
+    <p data-es="El biólogo Luciano Paulino da Silva, investigador que coordina los experimentos de carne cultivada en LNANO, dijo a Agência Brasil que el prototipo debería estar finalizado en 2027. Plantea el proyecto en términos comerciales claros: una vez que el paquete tecnológico esté listo, las empresas privadas podrán licenciar los métodos para fabricar y vender productos específicos.">Biologist Luciano Paulino da Silva, the researcher coordinating the cultivated meat experiments at LNANO, told Agência Brasil that the prototype should be finalized in 2027. He frames the project in plain commercial terms: once the technology package is ready, private companies will be able to license the methods to make and sell specific products.</p>
 
     <blockquote>
       <p>"Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa." ("By around the middle of next year, it will be on display as an Embrapa technological asset.")</p>
       <cite>— Luciano Paulino da Silva, researcher, Embrapa LNANO</cite>
     </blockquote>
 
-    <h2 id="ip-shift">Why a state lab, and why now</h2>
+    <h2 id="ip-shift" data-es="Por qué un laboratorio estatal, y por qué ahora">Why a state lab, and why now</h2>
 
-    <p>The appeal is partly environmental. Traditional cattle farming drives deforestation and releases large amounts of methane, so meat grown in a lab promises a far lighter footprint. But there's also a strategic logic: by developing the know-how in-house, Brazil positions itself to help shape an industry that Singapore, the United States, Israel, and Australia are already racing to lead — several of which have already granted regulatory or commercial approval.</p>
+    <p data-es="El atractivo es en parte ambiental. La ganadería tradicional impulsa la deforestación y libera grandes cantidades de metano, por lo que la carne cultivada en laboratorio promete una huella mucho más liviana. Pero también hay una lógica estratégica: al desarrollar el know-how internamente, Brasil se posiciona para ayudar a moldear una industria que Singapur, Estados Unidos, Israel y Australia ya están compitiendo por liderar — varios de los cuales ya otorgaron aprobación regulatoria o comercial.">The appeal is partly environmental. Traditional cattle farming drives deforestation and releases large amounts of methane, so meat grown in a lab promises a far lighter footprint. But there's also a strategic logic: by developing the know-how in-house, Brazil positions itself to help shape an industry that Singapore, the United States, Israel, and Australia are already racing to lead — several of which have already granted regulatory or commercial approval.</p>
 
-    <p>Brazil set its own regulatory groundwork early. ANVISA, the national health surveillance agency, published RDC No. 839 in 2023, establishing a framework for cultivated meat years before the first commercial product is expected to reach a Brazilian shelf.</p>
+    <p data-es="Brasil sentó sus propias bases regulatorias de forma temprana. ANVISA, la agencia nacional de vigilancia sanitaria, publicó la RDC N.° 839 en 2023, estableciendo un marco para la carne cultivada años antes de que se espere que el primer producto comercial llegue a un estante brasileño.">Brazil set its own regulatory groundwork early. ANVISA, the national health surveillance agency, published RDC No. 839 in 2023, establishing a framework for cultivated meat years before the first commercial product is expected to reach a Brazilian shelf.</p>
 
-    <h2 id="tech-meets-tradition">Beyond chicken fillets</h2>
+    <h2 id="tech-meets-tradition" data-es="Más allá de los filetes de pollo">Beyond chicken fillets</h2>
 
-    <p>Embrapa's cultivated meat work isn't limited to poultry. Reporting from Agência Brasil indicates the lab has also tested prototypes including salmon, caviar, and squid rings, alongside research into an edible film that could function as casing for sausage products made with cultivated meat technique — a potential replacement for traditional animal-derived casings.</p>
+    <p data-es="El trabajo de carne cultivada de Embrapa no se limita a las aves. Reportajes de Agência Brasil indican que el laboratorio también ha probado prototipos que incluyen salmón, caviar y aros de calamar, junto con investigación sobre una película comestible que podría funcionar como envoltura para productos de embutido elaborados con la técnica de carne cultivada — un posible reemplazo para las envolturas tradicionales de origen animal.">Embrapa's cultivated meat work isn't limited to poultry. Reporting from Agência Brasil indicates the lab has also tested prototypes including salmon, caviar, and squid rings, alongside research into an edible film that could function as casing for sausage products made with cultivated meat technique — a potential replacement for traditional animal-derived casings.</p>
 
-    <p>The lab's work has already been published in a peer-reviewed scientific journal, and several large Brazilian food groups and startups now run their own cultivated-meat research units, signaling that Embrapa's public investment is feeding a wider domestic ecosystem rather than competing alone.</p>
+    <p data-es="El trabajo del laboratorio ya se ha publicado en una revista científica revisada por pares, y varios grandes grupos alimentarios y startups brasileñas ahora tienen sus propias unidades de investigación en carne cultivada, lo que indica que la inversión pública de Embrapa está alimentando un ecosistema doméstico más amplio en lugar de competir en solitario.">The lab's work has already been published in a peer-reviewed scientific journal, and several large Brazilian food groups and startups now run their own cultivated-meat research units, signaling that Embrapa's public investment is feeding a wider domestic ecosystem rather than competing alone.</p>
 
     <div class="pull-stat">
       <div class="pull-stat-num">2023</div>
-      <div class="pull-stat-label">The year ANVISA published Brazil's first regulatory framework for cultivated meat (RDC 839) — three years before any product is expected to reach commercial shelves</div>
+      <div class="pull-stat-label" data-es="El año en que ANVISA publicó el primer marco regulatorio de Brasil para carne cultivada (RDC 839) — tres años antes de que se espere que algún producto llegue a estantes comerciales">The year ANVISA published Brazil's first regulatory framework for cultivated meat (RDC 839) — three years before any product is expected to reach commercial shelves</div>
     </div>
 
-    <h2 id="scaling-challenge">What's still ahead</h2>
+    <h2 id="scaling-challenge" data-es="Lo que aún falta">What's still ahead</h2>
 
-    <p>Despite the scientific progress, Embrapa is careful to frame this as still experimental. The research should not be confused with a ready product on supermarket shelves. The real challenge now is transforming lab prototypes into industrial processes that meet cost, safety, scale, and consumer-acceptance requirements simultaneously — the same bottleneck that has slowed cultivated meat companies worldwide, even in markets with full regulatory approval like Singapore and the United States.</p>
+    <p data-es="A pesar del progreso científico, Embrapa tiene cuidado de enmarcar esto como todavía experimental. La investigación no debe confundirse con un producto listo para los estantes del supermercado. El verdadero desafío ahora es transformar los prototipos de laboratorio en procesos industriales que cumplan simultáneamente con requisitos de costo, seguridad, escala y aceptación del consumidor — el mismo cuello de botella que ha frenado a las empresas de carne cultivada en todo el mundo, incluso en mercados con aprobación regulatoria total como Singapur y Estados Unidos.">Despite the scientific progress, Embrapa is careful to frame this as still experimental. The research should not be confused with a ready product on supermarket shelves. The real challenge now is transforming lab prototypes into industrial processes that meet cost, safety, scale, and consumer-acceptance requirements simultaneously — the same bottleneck that has slowed cultivated meat companies worldwide, even in markets with full regulatory approval like Singapore and the United States.</p>
 
     <div class="pull-stat">
       <div class="pull-stat-num">4</div>
-      <div class="pull-stat-label">Countries that have already granted regulatory or commercial approval for cultivated meat: Singapore, the United States, Israel, and Australia/New Zealand</div>
+      <div class="pull-stat-label" data-es="Países que ya han otorgado aprobación regulatoria o comercial para la carne cultivada: Singapur, Estados Unidos, Israel y Australia/Nueva Zelanda">Countries that have already granted regulatory or commercial approval for cultivated meat: Singapore, the United States, Israel, and Australia/New Zealand</div>
     </div>
 
-    <p>For FuturoFood's readers across the region, the story matters less for what's on the menu today and more for what it signals: Latin America's largest agricultural economy is choosing to build cultivated-protein capability domestically, in a public lab, rather than simply importing the technology once it matures elsewhere.</p>
+    <p data-es="Para los lectores de FuturoFood en toda la región, la historia importa menos por lo que hay hoy en el menú y más por lo que señala: la economía agrícola más grande de América Latina está eligiendo construir capacidad de proteína cultivada de forma doméstica, en un laboratorio público, en lugar de simplemente importar la tecnología una vez que madure en otro lugar.">For FuturoFood's readers across the region, the story matters less for what's on the menu today and more for what it signals: Latin America's largest agricultural economy is choosing to build cultivated-protein capability domestically, in a public lab, rather than simply importing the technology once it matures elsewhere.</p>
 
     <div class="article-tags">
-      <span class="article-tag-item">Lab-Grown</span>
+      <span class="article-tag-item" data-es="Cultivado en Lab">Lab-Grown</span>
       <span class="article-tag-item">Brazil</span>
       <span class="article-tag-item">Embrapa</span>
-      <span class="article-tag-item">Cultivated Meat</span>
-      <span class="article-tag-item">Food Tech</span>
+      <span class="article-tag-item" data-es="Carne Cultivada">Cultivated Meat</span>
+      <span class="article-tag-item" data-es="Tecnología Alimentaria">Food Tech</span>
       <span class="article-tag-item">LATAM</span>
-      <span class="article-tag-item">Regulation</span>
+      <span class="article-tag-item" data-es="Regulación">Regulation</span>
     </div>
 
     <!-- RELATED ARTICLES -->
     <div class="related-section">
-      <div class="related-title">Related Stories</div>
+      <div class="related-title" data-es="Historias Relacionadas">Related Stories</div>
       <div class="related-card">
         <div class="related-img">🪲</div>
         <div>
-          <span class="related-tag">🦗 Insect Protein</span>
-          <div class="related-title-text">Enthos raises VC funding for Colombia insect-protein plant</div>
-          <span class="related-date">Source: Aquafeed.com · 6 min</span>
+          <span class="related-tag" data-es="🦗 Proteína de Insectos">🦗 Insect Protein</span>
+          <div class="related-title-text" data-es="Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia">Enthos raises VC funding for Colombia insect-protein plant</div>
+          <span class="related-date" data-es="Fuente: Aquafeed.com · 6 min">Source: Aquafeed.com · 6 min</span>
         </div>
       </div>
       <div class="related-card">
         <div class="related-img">🌱</div>
         <div>
-          <span class="related-tag">🌱 Regenerative</span>
-          <div class="related-title-text">350 Costa Rican farmers join the AmistOsa regenerative network</div>
-          <span class="related-date">Source: Osa Conservation · 5 min</span>
+          <span class="related-tag" data-es="🌱 Regenerativo">🌱 Regenerative</span>
+          <div class="related-title-text" data-es="350 agricultores costarricenses se unen a la red regenerativa AmistOsa">350 Costa Rican farmers join the AmistOsa regenerative network</div>
+          <span class="related-date" data-es="Fuente: Osa Conservation · 5 min">Source: Osa Conservation · 5 min</span>
         </div>
       </div>
       <div class="related-card">
         <div class="related-img">🏦</div>
         <div>
-          <span class="related-tag">🌱 Regenerative</span>
-          <div class="related-title-text">World Bank commits $120M to Costa Rica agriculture</div>
-          <span class="related-date">Source: World Bank · 4 min</span>
+          <span class="related-tag" data-es="🌱 Regenerativo">🌱 Regenerative</span>
+          <div class="related-title-text" data-es="El Banco Mundial destina $120M a la agricultura de Costa Rica">World Bank commits $120M to Costa Rica agriculture</div>
+          <span class="related-date" data-es="Fuente: Banco Mundial · 4 min">Source: World Bank · 4 min</span>
         </div>
       </div>
     </div>
@@ -392,34 +401,34 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
     <!-- Table of Contents -->
     <div class="sidebar-block">
-      <div class="sidebar-block-title">In this story</div>
+      <div class="sidebar-block-title" data-es="En esta historia">In this story</div>
       <ul class="toc-list" id="toc">
-        <li class="toc-item"><a href="#market-size">Two labs, one technology package</a></li>
-        <li class="toc-item"><a href="#ip-shift">Why a state lab, and why now</a></li>
-        <li class="toc-item"><a href="#tech-meets-tradition">Beyond chicken fillets</a></li>
-        <li class="toc-item"><a href="#scaling-challenge">What's still ahead</a></li>
+        <li class="toc-item"><a href="#market-size" data-es="Dos laboratorios, un paquete tecnológico">Two labs, one technology package</a></li>
+        <li class="toc-item"><a href="#ip-shift" data-es="Por qué un laboratorio estatal, y por qué ahora">Why a state lab, and why now</a></li>
+        <li class="toc-item"><a href="#tech-meets-tradition" data-es="Más allá de los filetes de pollo">Beyond chicken fillets</a></li>
+        <li class="toc-item"><a href="#scaling-challenge" data-es="Lo que aún falta">What's still ahead</a></li>
       </ul>
     </div>
 
     <!-- Newsletter -->
     <div class="sidebar-block">
       <div class="nl-mini">
-        <h3>Stay ahead of <em>food's future</em></h3>
-        <p>Weekly brief on LATAM food innovation. Free, always. Bilingüe.</p>
+        <h3 data-es="Mantente al tanto del <em>futuro de la alimentación</em>">Stay ahead of <em>food's future</em></h3>
+        <p data-es="Resumen semanal sobre innovación alimentaria en LATAM. Gratis, siempre. Bilingüe.">Weekly brief on LATAM food innovation. Free, always. Bilingüe.</p>
         <input class="nl-input" type="email" placeholder="your@email.com"/>
-        <button class="nl-btn">Subscribe Free →</button>
-        <p class="nl-note">Be an early subscriber · No spam</p>
+        <button class="nl-btn" data-es="Suscríbete Gratis →">Subscribe Free →</button>
+        <p class="nl-note" data-es="Sé de los primeros suscriptores · Sin spam">Be an early subscriber · No spam</p>
       </div>
     </div>
 
     <!-- Share -->
     <div class="sidebar-block">
-      <div class="sidebar-block-title">Share this story</div>
+      <div class="sidebar-block-title" data-es="Comparte esta historia">Share this story</div>
       <div class="share-sidebar">
-        <button class="share-side-btn" onclick="shareArticle('twitter')">↗ Share on X/Twitter</button>
-        <button class="share-side-btn" onclick="shareArticle('linkedin')">↗ Share on LinkedIn</button>
-        <button class="share-side-btn" onclick="shareArticle('whatsapp')">↗ Share on WhatsApp</button>
-        <button class="share-side-btn" onclick="copyLink()">⎘ Copy article link</button>
+        <button class="share-side-btn" onclick="shareArticle('twitter')" data-es="↗ Compartir en X/Twitter">↗ Share on X/Twitter</button>
+        <button class="share-side-btn" onclick="shareArticle('linkedin')" data-es="↗ Compartir en LinkedIn">↗ Share on LinkedIn</button>
+        <button class="share-side-btn" onclick="shareArticle('whatsapp')" data-es="↗ Compartir en WhatsApp">↗ Share on WhatsApp</button>
+        <button class="share-side-btn" onclick="copyLink()" data-es="⎘ Copiar enlace del artículo">⎘ Copy article link</button>
       </div>
     </div>
 
@@ -428,14 +437,14 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
 <!-- NEWSLETTER CTA -->
 <div class="article-cta" id="newsletter-cta">
-  <div class="cta-eyebrow"><span class="cta-dot"></span> Free Weekly Newsletter</div>
-  <h2 class="cta-title">Enjoyed this story?<br><em>Get the next one free.</em></h2>
-  <p class="cta-desc">Every Tuesday — the most important food innovation story from Latin America, in your inbox. Bilingual. Free forever.</p>
+  <div class="cta-eyebrow"><span class="cta-dot"></span> <span data-es="Boletín Semanal Gratuito">Free Weekly Newsletter</span></div>
+  <h2 class="cta-title" data-es="¿Te gustó esta historia?<br><em>Recibe la próxima gratis.</em>">Enjoyed this story?<br><em>Get the next one free.</em></h2>
+  <p class="cta-desc" data-es="Cada martes — la historia de innovación alimentaria más importante de América Latina, en tu bandeja de entrada. Bilingüe. Gratis para siempre.">Every Tuesday — the most important food innovation story from Latin America, in your inbox. Bilingual. Free forever.</p>
   <div class="cta-form">
-    <input class="cta-input" type="email" placeholder="your@email.com" aria-label="Email address"/>
-    <button class="cta-btn">Subscribe →</button>
+    <input class="cta-input" type="email" placeholder="your@email.com" aria-label="Email address" data-es-aria-label="Correo electrónico"/>
+    <button class="cta-btn" data-es="Suscríbete →">Subscribe →</button>
   </div>
-  <p class="cta-note">Be one of the first to subscribe · No spam · Unsubscribe anytime</p>
+  <p class="cta-note" data-es="Sé de los primeros en suscribirte · Sin spam · Cancela cuando quieras">Be one of the first to subscribe · No spam · Unsubscribe anytime</p>
 </div>
 
 <!-- FOOTER -->
@@ -443,15 +452,16 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   <div class="footer-bottom">
     <div class="footer-brand">Futuro<em>Food</em></div>
     <div class="footer-links">
-      <a href="futurofood.html">Home</a>
-      <a href="futurofood-blog.html">Stories</a>
-      <a href="futurofood-about.html">About</a>
-      <a href="#">Advertise</a>
-      <a href="futurofood-privacy.html">Privacy</a>
+      <a href="futurofood.html" data-es="Inicio">Home</a>
+      <a href="futurofood-blog.html" data-es="Historias">Stories</a>
+      <a href="futurofood-about.html" data-es="Nosotros">About</a>
+      <a href="#" data-es="Anunciarse">Advertise</a>
+      <a href="futurofood-privacy.html" data-es="Privacidad">Privacy</a>
     </div>
-    <span class="footer-copy">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+    <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
   </div>
 </footer>
+<script src="i18n.js" defer></script>
 
 <script>
 // ── READ PROGRESS ──────────────────────────────────────────────────────
