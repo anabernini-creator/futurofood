@@ -34,6 +34,9 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated urls here — do not hand-edit between markers) -->
+  <!-- AGENT:ARTICLES:END -->
+
   <!--
     NOTE: When Ghost CMS is connected, Ghost generates
     its own dynamic sitemap at /sitemap.xml automatically.
