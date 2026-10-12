@@ -2,8 +2,8 @@ name: Weekly content agent
 
 on:
   schedule:
-    # 12:00 UTC every Monday = ~06:00 Costa Rica time (UTC-6, no DST)
-    - cron: "0 12 * * 1"
+    # 13:00 UTC every Monday = 07:00 Costa Rica time (UTC-6, no DST)
+    - cron: "0 13 * * 1"
   workflow_dispatch: {}
 
 permissions:

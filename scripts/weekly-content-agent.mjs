@@ -21,9 +21,25 @@ const TEMPLATE_PATH = join(__dirname, "article-template.html");
 const BLOG_PATH = join(ROOT, "futurofood-blog.html");
 const SITEMAP_PATH = join(ROOT, "sitemap.xml");
 
-const MIN_ARTICLES = 3;
-const MAX_ARTICLES = 5;
-const VALID_TAGS = ["lab", "regen", "tech", "insects", "ancestral", "water"];
+const TARGET_ARTICLES = 3;
+// Try a few extra candidates so a failed draft can be replaced by the next story.
+const MAX_ATTEMPTS = 8;
+// Only cover recent news — some feeds keep returning year-old items.
+const MAX_AGE_DAYS = 21;
+// Keep the weekly mix varied — at most this many stories per outlet per run.
+const MAX_PER_OUTLET = 2;
+// Category labels must match the filter buttons and existing cards in futurofood-blog.html.
+const CATEGORIES = {
+  lab: { en: "Lab-Grown", es: "Cultivado en Lab" },
+  regen: { en: "Regenerative", es: "Regenerativo" },
+  insects: { en: "Insect Protein", es: "Proteína de Insectos" },
+  tech: { en: "Food Tech", es: "Tecnología Alimentaria" },
+  water: { en: "Water", es: "Agua" },
+  ancestral: { en: "Ancestral", es: "Ancestral" },
+};
+const VALID_TAGS = Object.keys(CATEGORIES);
+// Weekly global funding roundups mention many non-LATAM companies — not one story.
+const ROUNDUP_RE = /^the week in agrifoodtech|roundup|newsletter|lo m[aá]s le[ií]do/i;
 
 // NOTE: We deliberately do NOT use Google News RSS. Its <link> is an
 // obfuscated redirect into a JS-rendered splash page (no plain HTTP redirect
@@ -31,18 +47,28 @@ const VALID_TAGS = ["lab", "regen", "tech", "insects", "ancestral", "water"];
 // it would "verify" a Google URL, not the actual outlet. These are real
 // outlet RSS feeds with direct, fetchable article links and full content.
 const FEEDS = [
-  // Already both LATAM- and food/agtech-scoped — no extra filtering needed.
-  { url: "https://agfundernews.com/tag/latin-america/feed", requireLatam: false, requireFoodtech: false },
+  // FoodNavigator-LATAM — its RSS also mixes in sister global titles, so filter to LATAM.
+  { url: "https://www.foodnavigator-latam.com/arc/outboundfeeds/rss/", requireLatam: true, requireFoodtech: false },
   // Global food/agtech outlet — filter down to LATAM-relevant stories.
   { url: "https://agfundernews.com/feed", requireLatam: true, requireFoodtech: false },
-  // LATAM startup/business outlet, broad — filter down to food/agtech stories.
+  // Global alternative-protein / future-food outlet — filter down to LATAM.
+  { url: "https://www.greenqueen.com.hk/feed/", requireLatam: true, requireFoodtech: false },
+  // Environment journalism in Spanish (also covers other regions) — filter to both.
+  { url: "https://es.mongabay.com/feed/", requireLatam: true, requireFoodtech: true },
+  // Brazilian agribusiness outlet (Portuguese) — filter to food/agtech stories.
+  { url: "https://www.agfeed.com.br/feed/", requireLatam: false, requireFoodtech: true },
+  // LATAM startup outlets, broad — filter down to food/agtech stories.
   { url: "https://www.contxto.com/en/feed/", requireLatam: false, requireFoodtech: true },
+  { url: "https://latamlist.com/feed/", requireLatam: false, requireFoodtech: true },
+  { url: "https://startupi.com.br/feed/", requireLatam: false, requireFoodtech: true },
+  // Climate/food journalism (Spanish edition, also covers China) — filter to both.
+  { url: "https://dialogue.earth/es/feed/", requireLatam: true, requireFoodtech: true },
   // Global tech journalism, broad — filter to stories that are both.
   { url: "https://restofworld.org/feed/", requireLatam: true, requireFoodtech: true },
 ];
 
-const LATAM_RE = /latin america|latam|brazil|brasil|mexico|méxico|colombia|argentina|chile|per[uú]|costa rica|ecuador|uruguay|paraguay|bolivia|venezuela|guatemala|honduras|panam[aá]|dominican|el salvador|nicaragua/i;
-const FOODTECH_RE = /\bfood\b|foodtech|food-tech|agri|agtech|ag-tech|agriculture|farm|crop|livestock|protein|meat|dairy|seafood|aquaculture|nutrition|beverage|coffee|caf[eé]|cacao|cocoa|regenerative|cultivated meat|alternative protein|vertical farm|fertilizer|fertilizante/i;
+const LATAM_RE = /latin america|latam|am[eé]rica latina|latinoam[eé]rica|amazon[iíi]a|amaz[oô]nia|brazil|brasil|mexico|méxico|colombia|argentina|chile|per[uú]|costa rica|ecuador|uruguay|paraguay|bolivia|venezuela|guatemala|honduras|panam[aá]|dominican|el salvador|nicaragua/i;
+const FOODTECH_RE = /\bfood\b|foodtech|food-tech|agri|agtech|ag-tech|agriculture|farm|crop|livestock|protein|meat|dairy|seafood|aquaculture|nutrition|beverage|coffee|caf[eé]|cacao|cocoa|regenerative|cultivated meat|alternative protein|vertical farm|fertilizer|fertilizante|aliment|agro|agr[ií]cola|cultivo|ganad|pecu[aá]ri|pesca|acuicultura|aquicultura|semilla|semente|prote[ií]na|carne|leche|leite|l[aá]cteo|insect|fermenta/i;
 
 function log(...args) {
   console.log("[content-agent]", ...args);
@@ -52,6 +78,13 @@ const KNOWN_OUTLETS = {
   "agfundernews.com": "AgFunderNews",
   "contxto.com": "Contxto",
   "restofworld.org": "Rest of World",
+  "foodnavigator-latam.com": "FoodNavigator-LATAM",
+  "greenqueen.com.hk": "Green Queen",
+  "es.mongabay.com": "Mongabay Latam",
+  "agfeed.com.br": "AgFeed",
+  "latamlist.com": "LatamList",
+  "startupi.com.br": "Startupi",
+  "dialogue.earth": "Dialogue Earth",
 };
 function outletName(hostname) {
   return KNOWN_OUTLETS[hostname] || hostname;
@@ -113,6 +146,19 @@ function extractTag(block, tag) {
   return m[1].replace(/^<!\[CDATA\[/, "").replace(/\]\]>$/, "").trim();
 }
 
+function cleanLink(raw) {
+  const link = raw.trim().replace(/&amp;/g, "&");
+  try {
+    const url = new URL(link);
+    for (const key of [...url.searchParams.keys()]) {
+      if (key.startsWith("utm_")) url.searchParams.delete(key);
+    }
+    return url.toString();
+  } catch {
+    return link;
+  }
+}
+
 function parseRssItems(xml) {
   const items = [];
   const itemRe = /<item>([\s\S]*?)<\/item>/g;
@@ -122,7 +168,7 @@ function parseRssItems(xml) {
     const contentMatch = block.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/);
     items.push({
       title: stripHtml(extractTag(block, "title") || ""),
-      link: (extractTag(block, "link") || "").trim(),
+      link: cleanLink(extractTag(block, "link") || ""),
       pubDate: extractTag(block, "pubDate") || "",
       description: stripHtml(extractTag(block, "description") || ""),
       contentEncoded: contentMatch ? stripHtml(contentMatch[1].replace(/^<!\[CDATA\[/, "").replace(/\]\]>$/, "")) : "",
@@ -131,7 +177,14 @@ function parseRssItems(xml) {
   return items;
 }
 
+function isRecent(item) {
+  const published = Date.parse(item.pubDate);
+  if (Number.isNaN(published)) return false;
+  return Date.now() - published <= MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+}
+
 function isRelevant(item, feedConfig) {
+  if (ROUNDUP_RE.test(item.title) || !isRecent(item)) return false;
   const haystack = `${item.title} ${item.description}`.toLowerCase();
   if (feedConfig.requireLatam && !LATAM_RE.test(haystack)) return false;
   if (feedConfig.requireFoodtech && !FOODTECH_RE.test(haystack)) return false;
@@ -153,12 +206,14 @@ async function fetchCandidates() {
     }
   }
   const seen = new Set();
-  return all.filter((item) => {
-    const key = item.title.toLowerCase();
-    if (!item.link || seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  return all
+    .filter((item) => {
+      const key = item.title.toLowerCase();
+      if (!item.link || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate));
 }
 
 // ---------- verification ----------
@@ -220,10 +275,11 @@ ARTICLE EXCERPT (auto-extracted, may include boilerplate — use your judgment):
 ${candidate.excerpt}
 """
 
-Respond with ONLY valid JSON, no markdown fences, no commentary, matching exactly this shape:
+If the story is NOT substantially about food, agriculture, or food technology in Latin America (for example it is about another region, or food is only mentioned in passing), respond with ONLY {"skip": true, "reason": "one short sentence"} and nothing else.
+
+Otherwise respond with ONLY valid JSON, no markdown fences, no commentary, matching exactly this shape:
 {
-  "tag_slug": "one of lab, regen, tech, insects, ancestral, water — pick the closest category",
-  "tag_en": "short category label in English", "tag_es": "short category label in Spanish",
+  "tag_slug": "one of lab (Lab-Grown), regen (Regenerative), insects (Insect Protein), tech (Food Tech), water (Water), ancestral (Ancestral) — pick the closest category",
   "emoji": "one relevant emoji",
   "title_en": "headline, punchy, ~12-16 words", "title_es": "natural Spanish translation, not literal",
   "deck_en": "one-sentence dek, ~25-35 words", "deck_es": "...",
@@ -243,17 +299,23 @@ All Spanish must read as natural Latin American Spanish, not a literal translati
       },
       body: JSON.stringify({
         model,
-        max_tokens: 3500,
+        // Thinking is on by default for this model and counts toward max_tokens.
+        max_tokens: 16000,
         messages: [{ role: "user", content: prompt }],
       }),
     },
-    30000
+    180000
   );
   if (!res.ok) throw new Error(`anthropic_error ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const data = await res.json();
-  const text = data.content?.[0]?.text || "";
+  if (data.stop_reason !== "end_turn") throw new Error(`stop_reason ${data.stop_reason}`);
+  // The first content block can be a thinking block — read the text block instead.
+  const text = data.content?.find((b) => b.type === "text")?.text || "";
   const parsed = JSON.parse(extractJsonBlock(text));
+  if (parsed.skip) throw new Error(`not_latam_foodtech: ${parsed.reason || ""}`);
   if (!VALID_TAGS.includes(parsed.tag_slug)) parsed.tag_slug = "tech";
+  parsed.tag_en = CATEGORIES[parsed.tag_slug].en;
+  parsed.tag_es = CATEGORIES[parsed.tag_slug].es;
   return parsed;
 }
 
@@ -412,17 +474,18 @@ async function main() {
 
   const verified = [];
   for (const c of candidates) {
-    if (verified.length >= MAX_ARTICLES) break;
+    if (verified.length >= MAX_ATTEMPTS) break;
     const v = await verifyAndFetchExcerpt(c);
     if (!v) continue;
     if (usedUrls.has(v.verifiedUrl)) continue;
+    if (verified.filter((x) => x.sourceName === v.sourceName).length >= MAX_PER_OUTLET) continue;
     verified.push(v);
     usedUrls.add(v.verifiedUrl);
   }
   log(`${verified.length} verified, unpublished sources`);
 
-  if (verified.length < MIN_ARTICLES) {
-    log(`Only ${verified.length} verified sources found (need ${MIN_ARTICLES}). Publishing what we have.`);
+  if (verified.length < TARGET_ARTICLES) {
+    log(`Only ${verified.length} verified sources found (need ${TARGET_ARTICLES}). Publishing what we have.`);
   }
   if (verified.length === 0) {
     log("No verifiable sources this run. Exiting without changes.");
@@ -446,6 +509,7 @@ async function main() {
   const todayIso = new Date().toISOString().slice(0, 10);
 
   for (const candidate of verified) {
+    if (newRegistryEntries.length >= TARGET_ARTICLES) break;
     let draft;
     try {
       draft = await draftArticle(candidate);
