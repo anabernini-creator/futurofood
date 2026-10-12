@@ -6,8 +6,11 @@ on:
     - cron: "0 13 * * 1"
   workflow_dispatch: {}
 
+# New articles go to a review pull request instead of straight to main.
+# Merging the PR is what publishes them (Cloudflare deploys main).
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: weekly-content-agent
@@ -16,21 +19,47 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Skip if last week's review is still open
+        id: pending
+        run: |
+          url=$(gh pr list --state open --json headRefName,url \
+            -q '[.[] | select(.headRefName | startswith("content/weekly-"))][0].url // ""')
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          if [ -n "$url" ]; then
+            echo "A weekly review PR is still open: $url — skipping this run."
+            gh pr comment "$url" --body "El agente no preparó artículos nuevos esta semana porque este PR sigue pendiente. Haz *Merge* o *Close* para que la próxima ejecución continúe."
+          fi
+
       - name: Set up Node
+        if: steps.pending.outputs.url == ''
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Run content agent
+        if: steps.pending.outputs.url == ''
+        id: agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/weekly-content-agent.mjs
+          REVIEW_SUMMARY_PATH: ${{ runner.temp }}/review-summary.md
+        run: |
+          branch="content/weekly-$(date -u +%F)"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          # Cloudflare Pages preview alias: branch name with "/" turned into "-".
+          export PREVIEW_BASE_URL="https://${branch//\//-}.futurofood.pages.dev"
+          node scripts/weekly-content-agent.mjs
 
-      - name: Commit and push if changed
+      - name: Open review pull request
+        if: steps.pending.outputs.url == ''
+        env:
+          BRANCH: ${{ steps.agent.outputs.branch }}
+          SUMMARY: ${{ runner.temp }}/review-summary.md
         run: |
           shopt -s nullglob
           git config user.name "FuturoFood Content Agent"
@@ -41,7 +70,11 @@ jobs:
           [ ${#article_files[@]} -gt 0 ] && git add "${article_files[@]}"
           if git diff --cached --quiet; then
             echo "No new articles this run."
-          else
-            git commit -m "content: weekly food-tech news roundup"
-            git push
+            exit 0
           fi
+          git switch -c "$BRANCH"
+          git commit -m "content: weekly food-tech news roundup"
+          git push --force -u origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "Artículos de la semana — $(date -u +%F)" \
+            --body-file "$SUMMARY"

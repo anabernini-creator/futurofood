@@ -8,6 +8,8 @@
 // No dependencies — relies on global fetch (Node 18+ / Bun).
 //
 // Requires env: ANTHROPIC_API_KEY (optional: ANTHROPIC_MODEL)
+// Optional env for the review PR: REVIEW_SUMMARY_PATH (writes a Markdown summary
+// of the new articles there) and PREVIEW_BASE_URL (Cloudflare branch preview).
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -574,6 +576,39 @@ async function main() {
 
   log(`Done. Published ${newRegistryEntries.length} article(s):`);
   for (const e of newRegistryEntries) log(` - ${e.filename} (${e.source_name})`);
+
+  if (process.env.REVIEW_SUMMARY_PATH) {
+    writeFileSync(process.env.REVIEW_SUMMARY_PATH, renderReviewSummary(newRegistryEntries, process.env.PREVIEW_BASE_URL));
+  }
+}
+
+export function renderReviewSummary(entries, previewBaseUrl) {
+  const articles = entries.map((e, i) => {
+    const preview = previewBaseUrl ? `${previewBaseUrl.replace(/\/$/, "")}/${e.filename.replace(/\.html$/, "")}` : null;
+    return [
+      `### ${i + 1}. ${e.title_es}`,
+      `*${e.title_en}*`,
+      "",
+      `- **Categoría:** ${e.tag_es}`,
+      `- **Fuente:** [${e.source_name}](${e.source_url})`,
+      preview ? `- **Vista previa:** ${preview}` : `- **Archivo:** \`${e.filename}\``,
+    ].join("\n");
+  });
+  return [
+    `El agente semanal preparó ${entries.length} artículo(s). **Nada se publica hasta que hagas Merge.**`,
+    "",
+    ...articles.flatMap((a) => [a, ""]),
+    "### Antes de aprobar",
+    "- [ ] Las cifras y nombres coinciden con la fuente",
+    "- [ ] La noticia es de verdad sobre Latinoamérica",
+    "- [ ] La categoría es la correcta",
+    "- [ ] El español suena natural (ojo con calcos del portugués o del inglés)",
+    "",
+    "**Para publicar:** botón *Merge pull request*. Cloudflare lo sube a futurofood.com en unos 2 minutos.",
+    "**Para descartar todo:** *Close pull request*.",
+    "**Para quitar un solo artículo o corregir texto:** pídeselo a Claude indicando el número de este PR.",
+    "",
+  ].join("\n");
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === __filename) {
