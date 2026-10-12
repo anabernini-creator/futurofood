@@ -347,10 +347,19 @@ export function readMarkerBlock(content, marker) {
 }
 export function replaceMarkerBlock(content, newInner) {
   const re = /(<!--\s*AGENT:ARTICLES:START[^>]*-->)([\s\S]*?)(<!--\s*AGENT:ARTICLES:END\s*-->)/;
-  return content.replace(re, `$1\n${newInner}\n    $3`);
+  // Use a replacer function: a string replacement would treat "$1" in a title
+  // like "raises $1.3M" as a backreference and inject the marker comment.
+  return content.replace(re, (_, start, _inner, end) => `${start}\n${newInner}\n    ${end}`);
+}
+
+export function formatCardDate(iso) {
+  const d = new Date(`${iso}T12:00:00Z`);
+  const opts = { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" };
+  return { en: d.toLocaleDateString("en-US", opts), es: d.toLocaleDateString("es", opts) };
 }
 
 export function renderCard(entry) {
+  const date = formatCardDate(entry.date_iso);
   return `    <a class="article-card" data-tag="${entry.tag_slug}" href="${entry.filename}">
       <div>
         <div class="card-top">
@@ -360,7 +369,7 @@ export function renderCard(entry) {
         <h3 class="card-title" data-es="${escapeAttr(entry.title_es)}">${escapeHtml(entry.title_en)}</h3>
         <p class="card-excerpt" data-es="${escapeAttr(entry.deck_es)}">${escapeHtml(entry.deck_en)}</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: ${escapeAttr(entry.source_name)}">Source: ${escapeHtml(entry.source_name)}</span>
+          <span class="card-date"><time datetime="${entry.date_iso}" data-es="${date.es}">${date.en}</time> · <span data-es="Fuente: ${escapeAttr(entry.source_name)}">Source: ${escapeHtml(entry.source_name)}</span></span>
           <span class="tag tag-${entry.tag_slug}" data-es="${escapeAttr(entry.tag_es)}">${escapeHtml(entry.tag_en)}</span>
         </div>
       </div>
@@ -468,7 +477,18 @@ export function renderArticlePage(draft, meta, related) {
 
 // ---------- main ----------
 
+// Re-renders the generated cards in futurofood-blog.html from the registry —
+// use after changing renderCard() so existing cards pick up the new markup.
+function rebuildCards() {
+  const registry = readRegistry();
+  const blogHtml = readFileSync(BLOG_PATH, "utf8");
+  readMarkerBlock(blogHtml, "futurofood-blog.html");
+  writeFileSync(BLOG_PATH, replaceMarkerBlock(blogHtml, registry.map(renderCard).join("\n\n")));
+  log(`Rebuilt ${registry.length} card(s) from the registry.`);
+}
+
 async function main() {
+  if (process.argv.includes("--rebuild-cards")) return rebuildCards();
   const dryRun = process.argv.includes("--dry-run");
   if (!dryRun && !process.env.ANTHROPIC_API_KEY) {
     console.error("Missing ANTHROPIC_API_KEY env var. Aborting. (use --dry-run to test the feed/verify pipeline without it)");
@@ -516,7 +536,6 @@ async function main() {
   readMarkerBlock(blogHtml, "futurofood-blog.html"); // throws if markers missing
   readMarkerBlock(sitemapHtml, "sitemap.xml");
 
-  const newCards = [];
   const newUrls = [];
   const newRegistryEntries = [];
   const todayIso = new Date().toISOString().slice(0, 10);
@@ -564,7 +583,6 @@ async function main() {
     };
     registry.unshift(entry);
     newRegistryEntries.push(entry);
-    newCards.push(renderCard(entry));
     newUrls.push(renderSitemapUrl(entry));
   }
 
@@ -573,9 +591,9 @@ async function main() {
     return;
   }
 
-  const existingCardsBlock = readMarkerBlock(blogHtml, "futurofood-blog.html").trim();
-  const mergedCards = [newCards.join("\n\n"), existingCardsBlock].filter(Boolean).join("\n\n");
-  blogHtml = replaceMarkerBlock(blogHtml, mergedCards);
+  // Cards are always rendered from the registry (newest first), the same way
+  // --rebuild-cards does, so the markup stays consistent across runs.
+  blogHtml = replaceMarkerBlock(blogHtml, registry.map(renderCard).join("\n\n"));
   writeFileSync(BLOG_PATH, blogHtml);
 
   const existingUrlsBlock = readMarkerBlock(sitemapHtml, "sitemap.xml").trim();
