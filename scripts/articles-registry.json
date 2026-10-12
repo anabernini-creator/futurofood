@@ -13,7 +13,10 @@
     "read_minutes": 3,
     "source_name": "AgFeed",
     "source_url": "https://agfeed.com.br/agtech/neurotico-ceo-da-solinftec-acelera-mudancas-para-nao-ser-atropelado-pelo-trem-da-ia/",
-    "date_iso": "2026-10-12"
+    "date_iso": "2026-10-12",
+    "video_url": null,
+    "video_title": null,
+    "video_channel": null
   },
   {
     "slug": "myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in",
