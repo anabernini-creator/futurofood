@@ -53,6 +53,18 @@ jobs:
             | sort -u > "$RUNNER_TEMP/skip-urls.txt"
           echo "$(wc -l < "$RUNNER_TEMP/skip-urls.txt") source(s) from earlier review PRs"
 
+      # Link-preview cards are rendered with the runner's Chrome; the emoji font
+      # draws the category emoji on the card.
+      # Optional: if this fails the agent still runs and uses og-default.jpg.
+      - name: Set up preview-card rendering
+        if: steps.pending.outputs.url == ''
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-color-emoji >/dev/null
+          npm install --no-save --no-package-lock puppeteer-core@23.11.1
+          echo "CHROME_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+
       - name: Run content agent
         if: steps.pending.outputs.url == ''
         id: agent
@@ -78,7 +90,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add futurofood-blog.html sitemap.xml
           [ -f scripts/articles-registry.json ] && git add scripts/articles-registry.json
-          article_files=(futurofood-article-*.html)
+          article_files=(futurofood-article-*.html og/*.jpg)
           [ ${#article_files[@]} -gt 0 ] && git add "${article_files[@]}"
           if git diff --cached --quiet; then
             echo "No new articles this run."
