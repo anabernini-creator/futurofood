@@ -286,7 +286,7 @@ Otherwise respond with ONLY valid JSON, no markdown fences, no commentary, match
   "takeaways": [{"en":"...","es":"..."}, {"en":"...","es":"..."}, {"en":"...","es":"..."}],
   "body": [{"type":"p","en":"...","es":"..."}, {"type":"h2","en":"...","es":"..."}, "5 to 8 items total, at least 2 of type h2, each p is 2-4 sentences"]
 }
-All Spanish must read as natural Latin American Spanish, not a literal translation.`;
+All Spanish must read as natural Latin American Spanish, not a literal translation. Sources may be in Portuguese — watch for Portuguese false friends (e.g. an event "trilha" is a "programa" or "eje temático" in Spanish, never "trilla").`;
 
   const res = await fetchWithTimeout(
     "https://api.anthropic.com/v1/messages",
