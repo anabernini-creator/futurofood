@@ -623,6 +623,7 @@ export function renderArticlePage(draft, meta, related) {
     "{{DATE_HUMAN}}": dateHuman,
     "{{DATE_HUMAN_ES}}": dateHumanEs,
     "{{VIDEO_URL_ATTR}}": escapeAttr(meta.video_url || ""),
+    "{{PAGE_PATH}}": meta.page_path,
     "{{TAKEAWAYS_HTML}}": takeawaysHtml,
     "{{BODY_HTML}}": bodyHtml,
     "{{TAGS_HTML}}": tagsHtml,
@@ -731,7 +732,7 @@ async function main() {
       log("video search failed — placeholder", e.message);
     }
 
-    const meta = { source_name: candidate.sourceName, source_url: candidate.verifiedUrl, date_iso: todayIso, video_url: video?.url };
+    const meta = { source_name: candidate.sourceName, source_url: candidate.verifiedUrl, date_iso: todayIso, video_url: video?.url, page_path: filename.replace(/\.html$/, "") };
     const related = registry.slice(0, 3);
     const { html, readMinutes } = renderArticlePage(draft, meta, related);
 

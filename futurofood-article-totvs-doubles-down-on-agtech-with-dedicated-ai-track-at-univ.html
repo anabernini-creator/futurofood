@@ -9,6 +9,12 @@
 <meta property="og:description" content="Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC."/>
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="FuturoFood"/>
+<meta property="og:url" content="https://futurofood.com/futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ"/>
+<meta property="og:image" content="https://futurofood.com/og-default.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema"/>
+<meta name="twitter:image" content="https://futurofood.com/og-default.jpg"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <script type="application/ld+json">
 {
@@ -28,6 +34,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="media.css?v=1"/>
+<link rel="stylesheet" href="share.css?v=1"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -174,7 +181,7 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   .cta-form{flex-direction:column}
 }
 @media(max-width:640px){
-  .share-btns{display:none}
+  .share-btns .share-btn:not(.share-wa){display:none}
   .article-title{font-size:1.6rem}
 }
 @media(prefers-reduced-motion:reduce){
@@ -235,9 +242,10 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
     <div class="meta-item" data-es='<strong>3 min</strong> de lectura'><strong>3 min</strong> read</div>
     <div class="meta-item">EN / <strong>ES</strong></div>
     <div class="share-btns">
-      <button class="share-btn" onclick="shareArticle('twitter')">↗ X/Twitter</button>
-      <button class="share-btn" onclick="shareArticle('linkedin')">↗ LinkedIn</button>
-      <button class="share-btn" onclick="copyLink()" data-es="⎘ Copiar Enlace">⎘ Copy Link</button>
+      <a class="share-btn share-wa" data-share="whatsapp" href="https://wa.me/">WhatsApp</a>
+      <a class="share-btn" data-share="x" href="https://twitter.com/intent/tweet">X</a>
+      <a class="share-btn" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/">LinkedIn</a>
+      <button type="button" class="share-btn" data-share="copy" data-es="⎘ Copiar enlace">⎘ Copy link</button>
     </div>
   </div>
 </div>
@@ -288,10 +296,10 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
     <div class="share-inline">
       <div class="share-inline-title" data-es="Comparte esta historia">Share this story</div>
-      <button class="share-inline-btn" onclick="shareArticle('twitter')" data-es="↗ X/Twitter">↗ X/Twitter</button>
-      <button class="share-inline-btn" onclick="shareArticle('linkedin')" data-es="↗ LinkedIn">↗ LinkedIn</button>
-      <button class="share-inline-btn" onclick="shareArticle('whatsapp')" data-es="↗ WhatsApp">↗ WhatsApp</button>
-      <button class="share-inline-btn" onclick="copyLink()" data-es="⎘ Copiar Enlace">⎘ Copy Link</button>
+      <a class="share-inline-btn share-wa" data-share="whatsapp" href="https://wa.me/" data-es="Compartir por WhatsApp">Share on WhatsApp</a>
+      <a class="share-inline-btn" data-share="x" href="https://twitter.com/intent/tweet">X</a>
+      <a class="share-inline-btn" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/">LinkedIn</a>
+      <button type="button" class="share-inline-btn" data-share="copy" data-es="⎘ Copiar enlace">⎘ Copy link</button>
     </div>
 
     <div class="related-section">
@@ -330,10 +338,10 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
     <div class="sidebar-block">
       <div class="sidebar-block-title" data-es="Comparte esta historia">Share this story</div>
       <div class="share-sidebar">
-        <button class="share-side-btn" onclick="shareArticle('twitter')" data-es="↗ Compartir en X/Twitter">↗ Share on X/Twitter</button>
-        <button class="share-side-btn" onclick="shareArticle('linkedin')" data-es="↗ Compartir en LinkedIn">↗ Share on LinkedIn</button>
-        <button class="share-side-btn" onclick="shareArticle('whatsapp')" data-es="↗ Compartir en WhatsApp">↗ Share on WhatsApp</button>
-        <button class="share-side-btn" onclick="copyLink()" data-es="⎘ Copiar enlace del artículo">⎘ Copy article link</button>
+        <a class="share-side-btn share-wa" data-share="whatsapp" href="https://wa.me/" data-es="Compartir por WhatsApp">Share on WhatsApp</a>
+        <a class="share-side-btn" data-share="x" href="https://twitter.com/intent/tweet" data-es="Compartir en X">Share on X</a>
+        <a class="share-side-btn" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/" data-es="Compartir en LinkedIn">Share on LinkedIn</a>
+        <button type="button" class="share-side-btn" data-share="copy" data-es="⎘ Copiar enlace del artículo">⎘ Copy article link</button>
       </div>
     </div>
 
@@ -342,8 +350,8 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
 <div class="article-cta" id="newsletter-cta">
   <div class="cta-eyebrow"><span class="cta-dot"></span> <span data-es="Boletín Semanal Gratuito">Free Weekly Newsletter</span></div>
-  <h2 class="cta-title" data-es="¿Te gustó esta historia?<br><em>Recibe la próxima gratis.</em>">Enjoyed this story?<br><em>Get the next one free.</em></h2>
-  <p class="cta-desc" data-es="Cada martes — la historia de innovación alimentaria más importante de América Latina, en tu bandeja de entrada. Bilingüe. Gratis para siempre.">Every Tuesday — the most important food innovation story from Latin America, in your inbox. Bilingual. Free forever.</p>
+  <h2 class="cta-title" data-es="¿Te gustó este artículo?<br><em>Suscríbete gratis y recíbelos cada semana.</em>">Enjoyed this article?<br><em>Subscribe free and get them every week.</em></h2>
+  <p class="cta-desc" data-es="Cada semana — la historia de innovación alimentaria más importante de América Latina, en tu bandeja de entrada. Bilingüe. Gratis para siempre.">Every week — the most important food innovation story from Latin America, in your inbox. Bilingual. Free forever.</p>
   <div class="cta-form">
     <input class="cta-input" type="email" placeholder="your@email.com" aria-label="Email address" data-es-aria-label="Correo electrónico"/>
     <button class="cta-btn" data-es="Suscríbete →">Subscribe →</button>
@@ -365,7 +373,8 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   </div>
 </footer>
 <script src="i18n.js" defer></script>
-<script src="newsletter.js" defer></script>
+<script src="newsletter.js?v=2" defer></script>
+<script src="share.js?v=1" defer></script>
 <script src="media.js?v=1" defer></script>
 
 <script>
@@ -384,26 +393,7 @@ window.addEventListener('scroll', () => {
   tocItems.forEach((item, i) => { item.classList.toggle('active', i === active); });
 });
 
-function shareArticle(platform) {
-  const url = encodeURIComponent(window.location.href);
-  const title = encodeURIComponent(document.title);
-  const urls = {
-    twitter:  `https://twitter.com/intent/tweet?url=${url}&text=${title}&via=futurofood`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-    whatsapp: `https://wa.me/?text=${title}%20${url}`
-  };
-  if (urls[platform]) window.open(urls[platform], '_blank', 'noopener,width=600,height=400');
-}
 
-function copyLink() {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    const btn = event.target;
-    const orig = btn.textContent;
-    btn.textContent = '✓ Copied!';
-    btn.style.color = 'var(--green)';
-    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
-  });
-}
 </script>
 </body>
 </html>

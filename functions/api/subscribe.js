@@ -5,6 +5,13 @@
 //   BEEHIIV_PUBLICATION_ID   — Beehiiv publication id (starts with "pub_")
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Attribution forwarded to Beehiiv — only short, plain tokens and site paths
+const UTM_RE = /^[\w.-]{1,64}$/;
+const PATH_RE = /^\/[\w\-\/.]{0,200}$/;
+
+function utm(value, fallback) {
+  return typeof value === "string" && UTM_RE.test(value) ? value : fallback;
+}
 
 function json(data, status) {
   return new Response(JSON.stringify(data), {
@@ -46,7 +53,12 @@ export async function onRequestPost({ request, env }) {
           email,
           reactivate_existing: true,
           send_welcome_email: true,
-          utm_source: "futurofood.com",
+          utm_source: utm(body.utm_source, "futurofood.com"),
+          utm_medium: utm(body.utm_medium, "website"),
+          utm_campaign: utm(body.utm_campaign, undefined),
+          referring_site: typeof body.page === "string" && PATH_RE.test(body.page)
+            ? `https://futurofood.com${body.page}`
+            : undefined,
         }),
       }
     );
