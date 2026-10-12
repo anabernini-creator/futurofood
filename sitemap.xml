@@ -44,6 +44,13 @@
 
   <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated urls here — do not hand-edit between markers) -->
   <url>
+    <loc>https://futurofood.com/futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+<url>
     <loc>https://futurofood.com/futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
