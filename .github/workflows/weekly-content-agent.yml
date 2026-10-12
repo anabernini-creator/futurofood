@@ -42,12 +42,24 @@ jobs:
         with:
           node-version: "20"
 
+      # Sources listed in earlier review PRs (including discarded ones) are never
+      # proposed again. PR descriptions survive even after the branch is deleted.
+      - name: Collect sources from earlier review PRs
+        if: steps.pending.outputs.url == ''
+        run: |
+          gh pr list --state closed --limit 100 --json headRefName,body \
+            -q '.[] | select(.headRefName | startswith("content/weekly-")) | .body' \
+            | perl -nle 'print $1 while /\*\*Fuente:\*\* \[[^\]]*\]\(([^)\s]+)\)/g' \
+            | sort -u > "$RUNNER_TEMP/skip-urls.txt"
+          echo "$(wc -l < "$RUNNER_TEMP/skip-urls.txt") source(s) from earlier review PRs"
+
       - name: Run content agent
         if: steps.pending.outputs.url == ''
         id: agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           REVIEW_SUMMARY_PATH: ${{ runner.temp }}/review-summary.md
+          SKIP_URLS_PATH: ${{ runner.temp }}/skip-urls.txt
         run: |
           branch="content/weekly-$(date -u +%F)"
           echo "branch=$branch" >> "$GITHUB_OUTPUT"

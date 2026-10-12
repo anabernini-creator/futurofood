@@ -10,6 +10,8 @@
 // Requires env: ANTHROPIC_API_KEY (optional: ANTHROPIC_MODEL)
 // Optional env for the review PR: REVIEW_SUMMARY_PATH (writes a Markdown summary
 // of the new articles there) and PREVIEW_BASE_URL (Cloudflare branch preview).
+// Optional env SKIP_URLS_PATH: file with one source URL per line from earlier
+// review PRs (e.g. discarded ones) so those stories are never proposed again.
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -323,6 +325,12 @@ All Spanish must read as natural Latin American Spanish, not a literal translati
 
 // ---------- rendering ----------
 
+function readSkipUrls() {
+  const path = process.env.SKIP_URLS_PATH;
+  if (!path || !existsSync(path)) return [];
+  return readFileSync(path, "utf8").split("\n").map((l) => l.trim()).filter(Boolean);
+}
+
 function readRegistry() {
   if (!existsSync(REGISTRY_PATH)) return [];
   try { return JSON.parse(readFileSync(REGISTRY_PATH, "utf8")); } catch { return []; }
@@ -469,6 +477,9 @@ async function main() {
 
   const registry = readRegistry();
   const usedUrls = new Set(registry.map((r) => r.source_url));
+  const skipUrls = readSkipUrls();
+  for (const url of skipUrls) usedUrls.add(url);
+  log(`${skipUrls.length} source(s) from earlier review PRs will be skipped`);
 
   log("fetching RSS candidates...");
   const candidates = await fetchCandidates();
@@ -590,6 +601,8 @@ export function renderReviewSummary(entries, previewBaseUrl) {
       `*${e.title_en}*`,
       "",
       `- **Categoría:** ${e.tag_es}`,
+      // The workflow parses this exact "**Fuente:** [name](url)" line to remember
+      // sources from earlier review PRs — keep the format if you edit it.
       `- **Fuente:** [${e.source_name}](${e.source_url})`,
       preview ? `- **Vista previa:** ${preview}` : `- **Archivo:** \`${e.filename}\``,
     ].join("\n");
