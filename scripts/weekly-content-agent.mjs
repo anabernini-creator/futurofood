@@ -377,7 +377,12 @@ Respond with ONLY JSON: {"video_url": "https://www.youtube.com/watch?v=..." or n
     if (!res.ok) throw new Error(`anthropic_error ${res.status}: ${(await res.text()).slice(0, 300)}`);
     data = await res.json();
     for (const block of data.content || []) {
-      if (block.type !== "web_search_tool_result" || !Array.isArray(block.content)) continue;
+      if (block.type !== "web_search_tool_result") continue;
+      // Search errors come back as HTTP 200 with an error object instead of a result list
+      if (!Array.isArray(block.content)) {
+        log("web search error:", block.content?.error_code || JSON.stringify(block.content).slice(0, 200));
+        continue;
+      }
       for (const result of block.content) {
         const parsed = parseVideoUrl(result.url);
         if (parsed?.type === "youtube") seenIds.add(parsed.id);
