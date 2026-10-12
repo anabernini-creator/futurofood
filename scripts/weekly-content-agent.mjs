@@ -368,11 +368,13 @@ Respond with ONLY JSON: {"video_url": "https://www.youtube.com/watch?v=..." or n
         body: JSON.stringify({
           model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5",
           max_tokens: 16000,
-          tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 3, allowed_domains: ["youtube.com"] }],
+          // Picking one video is a simple task: low effort and the basic search tool keep it fast
+          output_config: { effort: "low" },
+          tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 3, allowed_domains: ["youtube.com"] }],
           messages,
         }),
       },
-      180000
+      300000
     );
     if (!res.ok) throw new Error(`anthropic_error ${res.status}: ${(await res.text()).slice(0, 300)}`);
     data = await res.json();
