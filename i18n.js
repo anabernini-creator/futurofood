@@ -1,5 +1,5 @@
 (function(){
-  var STORAGE_KEY = 'ff-lang';
+  var STORAGE_KEY = 'ff-lang-choice'; // only manual EN/ES choices (older 'ff-lang' was saved automatically)
   var ATTRS = ['placeholder','aria-label','title'];
 
   function getSaved(){
@@ -9,7 +9,13 @@
     try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
   }
 
-  function applyLang(lang){
+  // First visit: Spanish if the browser's main language is Spanish (es, es-CR,
+  // es-419…), English otherwise. A manual EN/ES click is saved and wins.
+  function detected(){
+    return /^es\b/i.test(navigator.language || '') ? 'es' : 'en';
+  }
+
+  function applyLang(lang, remember){
     document.documentElement.setAttribute('lang', lang);
 
     document.querySelectorAll('[data-es]').forEach(function(el){
@@ -33,15 +39,17 @@
       b.classList.toggle('active', b.getAttribute('data-lang') === lang);
     });
 
-    setSaved(lang);
+    if(remember) setSaved(lang);
+    // Revealed again after the head snippet hid the page to avoid a flash of English
+    document.documentElement.classList.remove('i18n-pending');
   }
 
   function init(){
-    applyLang(getSaved() || 'en');
+    applyLang(getSaved() || detected(), false);
     document.addEventListener('click', function(e){
       var btn = e.target.closest('.lang-btn');
       if(!btn) return;
-      applyLang(btn.getAttribute('data-lang'));
+      applyLang(btn.getAttribute('data-lang'), true);
     });
   }
 
