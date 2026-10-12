@@ -43,6 +43,11 @@
 
   function update() {
     if (closed) return;
+    // Wait while the cookie notice (consent.js) is open — they share the bottom of the screen
+    if (document.documentElement.classList.contains('consent-open')) {
+      bar.classList.remove('is-visible');
+      return;
+    }
     var rect = article.getBoundingClientRect();
     var halfway = rect.top + rect.height / 2 <= window.innerHeight;
     bar.classList.toggle('is-visible', halfway && !endCtaVisible);
@@ -71,6 +76,7 @@
       update();
     }).observe(endCta);
   }
+  document.addEventListener('ff:consent-closed', update);
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
 })();

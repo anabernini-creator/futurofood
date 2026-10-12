@@ -6,6 +6,15 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2: analytics cookies stay off until consent.js confirms the
+  // visitor is outside the EU/EEA, UK, Switzerland and Brazil, or they accept.
+  gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 1000});
+  try {
+    var ffc = JSON.parse(localStorage.getItem('ff-consent') || 'null');
+    var ffr = sessionStorage.getItem('ff-consent-required');
+    if (ffc) gtag('consent', 'update', {analytics_storage: ffc.analytics ? 'granted' : 'denied'});
+    else if (ffr === '0') gtag('consent', 'update', {analytics_storage: 'granted'});
+  } catch (e) {}
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
@@ -15,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="consent.css?v=1"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#0A0F0A;--leaf:#E8F5E0;--panel:#111A11;--panel2:#162016;--green:#4ADE80;--fire:#FF6B35;--mist:rgba(232,245,224,0.65);--mist2:rgba(232,245,224,0.30);--border:rgba(232,245,224,0.10);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
@@ -107,6 +117,7 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.25re
   <div class="footer-brand">Futuro<em>Food</em></div>
   <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
 </footer>
+<script src="consent.js?v=1" defer></script>
 <script src="i18n.js" defer></script>
 <script src="analytics.js?v=2" defer></script>
 </body>

@@ -6,6 +6,15 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2: analytics cookies stay off until consent.js confirms the
+  // visitor is outside the EU/EEA, UK, Switzerland and Brazil, or they accept.
+  gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 1000});
+  try {
+    var ffc = JSON.parse(localStorage.getItem('ff-consent') || 'null');
+    var ffr = sessionStorage.getItem('ff-consent-required');
+    if (ffc) gtag('consent', 'update', {analytics_storage: ffc.analytics ? 'granted' : 'denied'});
+    else if (ffr === '0') gtag('consent', 'update', {analytics_storage: 'granted'});
+  } catch (e) {}
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
@@ -17,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="consent.css?v=1"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
@@ -146,12 +156,14 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem
     </ul>
     <p data-es='Para ejercer cualquiera de estos derechos, escríbenos a <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>. Responderemos dentro de 30 días.'>To exercise any of these rights, email us at <a href="mailto:privacy@futurofood.com">privacy@futurofood.com</a>. We will respond within 30 days.</p>
 
-    <h2 data-es="8. Cookies">8. Cookies</h2>
+    <h2 id="cookies" data-es="8. Cookies">8. Cookies</h2>
     <p data-es="Nuestro sitio web usa pocas cookies. No usamos cookies publicitarias. Usamos:">Our website uses a small number of cookies. We do not use advertising cookies. We use:</p>
     <ul>
       <li data-es="<strong>Cookies y almacenamiento esenciales</strong> — para la funcionalidad básica del sitio (gestión de sesión) y, en el almacenamiento local de tu navegador, para recordar tu idioma y si ya te suscribiste o cerraste el aviso de suscripción"><strong>Essential cookies and storage</strong> — for basic site functionality (session management) and, in your browser's local storage, to remember your language and whether you already subscribed or closed the subscribe banner</li>
       <li data-es='<strong>Analítica</strong> — Google Analytics 4 usa las cookies <code>_ga</code> y <code>_ga_*</code> para medir visitas y cómo se usan las páginas (por ejemplo, tiempo de lectura y fuente del tráfico). Google no recibe tu correo electrónico. Puedes desactivarla con el <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">complemento de inhabilitación de Google Analytics</a>.'><strong>Analytics</strong> — Google Analytics 4 sets the <code>_ga</code> and <code>_ga_*</code> cookies to measure visits and how pages are used (for example, reading time and traffic source). Google does not receive your email address. You can opt out with the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.</li>
     </ul>
+    <p data-es="Si nos visitas desde la Unión Europea, el Espacio Económico Europeo, el Reino Unido, Suiza o Brasil, las cookies de analítica solo se activan si las aceptas en el aviso de cookies. Puedes cambiar tu elección en cualquier momento:">If you visit from the European Union, the European Economic Area, the United Kingdom, Switzerland or Brazil, analytics cookies are only set if you accept them in the cookie notice. You can change your choice at any time:</p>
+    <p><button type="button" class="consent-pref-btn" data-consent-open data-es="Preferencias de cookies">Cookie preferences</button></p>
 
     <h2 data-es="9. Privacidad de Menores">9. Children's Privacy</h2>
     <p data-es="FuturoFood no está dirigido a menores de 13 años. No recopilamos a sabiendas información personal de menores de 13 años. Si crees que un menor nos ha proporcionado información personal, contáctanos.">FuturoFood is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us.</p>
@@ -182,6 +194,7 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem
   <div class="footer-brand">Futuro<em>Food</em></div>
   <span class="footer-copy" data-es="© 2026 FuturoFood.com · Todos los derechos reservados">© 2026 FuturoFood.com · All rights reserved</span>
 </footer>
+<script src="consent.js?v=1" defer></script>
 <script src="i18n.js" defer></script>
 <script src="analytics.js?v=2" defer></script>
 </body>

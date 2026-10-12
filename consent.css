@@ -1,0 +1,32 @@
+/* FuturoFood cookie consent notice — behaviour in consent.js */
+.consent-banner{
+  position:fixed;left:20px;bottom:20px;z-index:95;
+  width:min(400px, calc(100% - 40px));
+  display:none;
+  padding:1rem 1.1rem;
+  background:#111A11;
+  border:1px solid rgba(232,245,224,.14);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);
+  color:#E8F5E0;
+}
+.consent-banner.is-visible{display:block}
+.consent-text{margin:0 0 .85rem;font-family:'DM Sans',system-ui,sans-serif;font-size:.84rem;line-height:1.5;color:rgba(232,245,224,.82)}
+.consent-text a{color:#4ADE80;text-decoration:underline;text-underline-offset:2px}
+.consent-actions{display:flex;gap:.5rem;justify-content:flex-end}
+.consent-btn{
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:.6rem 1rem;cursor:pointer;border:1px solid rgba(232,245,224,.2);background:transparent;color:#E8F5E0;
+}
+.consent-btn:hover{border-color:#4ADE80;color:#4ADE80}
+.consent-accept{background:#4ADE80;border-color:#4ADE80;color:#0A0F0A}
+.consent-accept:hover{background:#6EE89A;border-color:#6EE89A;color:#0A0F0A}
+.consent-btn:focus-visible{outline:2px solid #4ADE80;outline-offset:2px}
+@media (max-width:640px){
+  .consent-banner{left:0;bottom:0;width:100%;border-left:none;border-right:none}
+}
+/* "Cookie preferences" button on the privacy page */
+.consent-pref-btn{
+  margin-top:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:.55rem .9rem;cursor:pointer;background:transparent;color:#4ADE80;border:1px solid #4ADE80;
+}
+.consent-pref-btn:hover{background:#4ADE80;color:#0A0F0A}
