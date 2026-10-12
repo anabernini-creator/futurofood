@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in",
+    "filename": "futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in.html",
+    "title_en": "Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South",
+    "title_es": "Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global",
+    "deck_en": "The India-based startup, which turns WhatsApp messages and phone calls from field teams into structured data, plans to use fresh pre-seed funding to expand into Latin America, Africa and Southeast Asia.",
+    "deck_es": "La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático.",
+    "tag_slug": "tech",
+    "tag_en": "Food Tech",
+    "tag_es": "Tecnología Alimentaria",
+    "emoji": "🤖",
+    "read_minutes": 3,
+    "source_name": "AgFunderNews",
+    "source_url": "https://agfundernews.com/myca-raises-1-3m-pre-seed-to-put-ai-agents-in-charge-of-agribusiness-field-operations",
+    "date_iso": "2026-10-12"
+  },
+  {
+    "slug": "charolais-cattle-breed-reinvents-itself-to-win-over-brazilia",
+    "filename": "futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia.html",
+    "title_en": "Charolais cattle breed reinvents itself to win over Brazilian ranchers",
+    "title_es": "La raza Charolesa se reinventa para conquistar a los ganaderos brasileños",
+    "deck_en": "Three decades of genetic selection have turned a slow-maturing giant breed into an early-finishing favorite for industrial crossbreeding in Brazil's feedlot-driven cattle industry.",
+    "deck_es": "Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil.",
+    "tag_slug": "tech",
+    "tag_en": "Food Tech",
+    "tag_es": "Tecnología Alimentaria",
+    "emoji": "🐂",
+    "read_minutes": 3,
+    "source_name": "AgFeed",
+    "source_url": "https://agfeed.com.br/negocios/de-gigante-tardio-a-boi-precoce-a-transformacao-do-charoles-para-conquistar-o-coracao-do-pecuarista/",
+    "date_iso": "2026-10-12"
+  },
+  {
+    "slug": "totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ",
+    "filename": "futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html",
+    "title_en": "TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026",
+    "title_es": "TOTVS redobla su apuesta agtech con una trilla de IA en Universo TOTVS 2026",
+    "deck_en": "Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC.",
+    "deck_es": "La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC.",
+    "tag_slug": "tech",
+    "tag_en": "Food Tech",
+    "tag_es": "Tecnología Alimentaria",
+    "emoji": "🌾",
+    "read_minutes": 3,
+    "source_name": "AgFeed",
+    "source_url": "https://agfeed.com.br/agtech/universo-totvs-2026-reforca-aposta-da-empresa-no-agro-com-trilha-dedicada-ao-setor-focada-em-ia-e-gestao/",
+    "date_iso": "2026-10-12"
+  }
+]

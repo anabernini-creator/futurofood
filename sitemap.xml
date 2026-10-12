@@ -35,7 +35,27 @@
   </url>
 
   <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated urls here — do not hand-edit between markers) -->
-  <!-- AGENT:ARTICLES:END -->
+  <url>
+    <loc>https://futurofood.com/futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://futurofood.com/futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://futurofood.com/futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+    <!-- AGENT:ARTICLES:END -->
 
   <!--
     NOTE: When Ghost CMS is connected, Ghost generates
