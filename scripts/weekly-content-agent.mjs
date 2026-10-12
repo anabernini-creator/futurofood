@@ -277,6 +277,9 @@ async function draftArticle(candidate) {
   const model = process.env.ANTHROPIC_MODEL || "claude-sonnet-5";
   const prompt = `You are FuturoFood's editorial agent, writing for a bilingual (English/Spanish) news outlet covering food-tech, agtech, and food innovation across Latin America.
 
+FuturoFood's editorial promise — it decides both which stories we run and how we title them:
+"Stories of those who grow, research and build to change the food system" / "Historias de quienes cultivan, investigan y emprenden para cambiar el sistema".
+
 Write a short, original news article based ONLY on the excerpt below. Do not invent quotes, numbers, or facts that aren't in the excerpt or headline. If the excerpt looks thin, paywalled, or unrelated to the headline, keep the article brief and high-level and lean on the headline + outlet context instead of fabricating detail. Attribute claims to the outlet (e.g. "according to ${candidate.sourceName}" / "según ${candidate.sourceName}").
 
 SOURCE OUTLET: ${candidate.sourceName}
@@ -288,17 +291,21 @@ ARTICLE EXCERPT (auto-extracted, may include boilerplate — use your judgment):
 ${candidate.excerpt}
 """
 
-If the story is NOT substantially about food, agriculture, or food technology in Latin America (for example it is about another region, or food is only mentioned in passing), respond with ONLY {"skip": true, "reason": "one short sentence"} and nothing else.
+Respond with ONLY {"skip": true, "reason": "one short sentence"} and nothing else if either is true:
+- The story is NOT substantially about food, agriculture, or food technology in Latin America (for example it is about another region, or food is only mentioned in passing).
+- It does not fit the editorial promise: there are no farmers, researchers, or entrepreneurs/companies actually changing how food is grown, made, or distributed at its center. Pure finance or market news (commodity prices, debt restructurings, earnings, corporate event agendas) is skipped unless it is centered on such a change.
 
 Otherwise respond with ONLY valid JSON, no markdown fences, no commentary, matching exactly this shape:
 {
   "tag_slug": "one of lab (Lab-Grown), regen (Regenerative), insects (Insect Protein), tech (Food Tech), water (Water), ancestral (Ancestral) — pick the closest category",
   "emoji": "one relevant emoji",
-  "title_en": "headline, punchy, ~12-16 words", "title_es": "natural Spanish translation, not literal",
+  "title_en": "headline, ~10-16 words — see TITLES below", "title_es": "natural Spanish headline (adapted, not a literal translation)",
   "deck_en": "one-sentence dek, ~25-35 words", "deck_es": "...",
   "takeaways": [{"en":"...","es":"..."}, {"en":"...","es":"..."}, {"en":"...","es":"..."}],
   "body": [{"type":"p","en":"...","es":"..."}, {"type":"h2","en":"...","es":"..."}, "5 to 8 items total, at least 2 of type h2, each p is 2-4 sentences"]
 }
+TITLES: name who is driving the change and what they are concretely doing — the protagonist (farmers, a research team, a startup or company) and the change in how food is grown, made, or distributed. Lead with the change, not with funding amounts, events, or personalities; no nicknames or sensational labels for people (e.g. not "the 'neurotic' CEO"). Claim only what the excerpt supports, and keep its tense: what is planned or in pilot must not read as already happening at scale (e.g. robots that will replant are not robots that harvest).
+
 All Spanish must read as natural Latin American Spanish, not a literal translation. Sources may be in Portuguese — watch for Portuguese false friends (e.g. an event "trilha" is a "programa" or "eje temático" in Spanish, never "trilla").`;
 
   const res = await fetchWithTimeout(
@@ -802,6 +809,7 @@ export function renderReviewSummary(entries, previewBaseUrl) {
     "",
     ...articles.flatMap((a) => [a, ""]),
     "### Antes de aprobar",
+    "- [ ] Encaja con la promesa: *historias de quienes cultivan, investigan y emprenden para cambiar el sistema*, y el título nombra a quién y qué cambia",
     "- [ ] Las cifras y nombres coinciden con la fuente",
     "- [ ] La noticia es de verdad sobre Latinoamérica",
     "- [ ] La categoría es la correcta",
