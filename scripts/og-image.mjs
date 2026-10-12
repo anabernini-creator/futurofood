@@ -101,7 +101,7 @@ function chromePath() {
 }
 
 // Points the page's preview tags at the card (or the default image).
-export function applyOgMeta(html, { title, excerpt, imageUrl }) {
+export function applyOgMeta(html, { title, excerpt, imageUrl, pageUrl }) {
   const desc = clip(excerpt);
   const set = (attr, key, value) => {
     const re = new RegExp(`<meta ${attr}="${key}" content="[^"]*"\\/>`);
@@ -117,6 +117,11 @@ export function applyOgMeta(html, { title, excerpt, imageUrl }) {
   set("name", "twitter:title", title);
   set("name", "twitter:description", desc);
   set("name", "twitter:image", imageUrl);
+  // Canonical URL (clean, no .html) so search engines index a single address
+  const canonical = `<link rel="canonical" href="${pageUrl}"/>`;
+  html = /<link rel="canonical"[^>]*\/>/.test(html)
+    ? html.replace(/<link rel="canonical"[^>]*\/>/, () => canonical)
+    : html.replace(/<meta property="og:site_name"[^>]*\/>\n/, (m) => `${canonical}\n${m}`);
   return html;
 }
 
@@ -171,7 +176,7 @@ export async function updateOgCards(files, log = console.log) {
           log(`[og] card failed for ${file}: ${e.message}`);
         }
       }
-      writeFileSync(path, applyOgMeta(html, { ...data, imageUrl }));
+      writeFileSync(path, applyOgMeta(html, { ...data, imageUrl, pageUrl: `${SITE}/${basename(file, ".html")}` }));
       log(`[og] ${file} → ${imageUrl}${fit ? ` (title ${fit.size}px, ${fit.lines} lines)` : ""}`);
     }
   } finally {
