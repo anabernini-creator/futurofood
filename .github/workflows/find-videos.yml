@@ -1,0 +1,56 @@
+name: Find videos for published articles
+
+# Manual backfill: searches YouTube for a video about each published article
+# that has none yet, and opens a review PR. Nothing changes until it's merged.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: weekly-content-agent
+  cancel-in-progress: false
+
+jobs:
+  find-videos:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Search videos
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REVIEW_SUMMARY_PATH: ${{ runner.temp }}/review-summary.md
+        run: node scripts/weekly-content-agent.mjs --find-videos
+
+      - name: Open review pull request
+        env:
+          SUMMARY: ${{ runner.temp }}/review-summary.md
+        run: |
+          shopt -s nullglob
+          git config user.name "FuturoFood Content Agent"
+          git config user.email "actions@users.noreply.github.com"
+          git add futurofood-blog.html scripts/articles-registry.json
+          article_files=(futurofood-article-*.html)
+          [ ${#article_files[@]} -gt 0 ] && git add "${article_files[@]}"
+          if git diff --cached --quiet; then
+            echo "No videos found."
+            exit 0
+          fi
+          branch="content/videos-$(date -u +%F)"
+          git switch -c "$branch"
+          git commit -m "content: add videos to published articles"
+          git push --force -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "Videos para artículos publicados — $(date -u +%F)" \
+            --body-file "$SUMMARY"

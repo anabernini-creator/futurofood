@@ -32,6 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="media.css?v=1"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -89,8 +90,7 @@ a{color:inherit;text-decoration:none}
 
 /* FEATURE IMAGE */
 .feature-image-wrap{max-width:1280px;margin:0 auto;border-left:1px solid var(--border2);border-right:1px solid var(--border2)}
-.feature-image{width:100%;aspect-ratio:21/9;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:6rem;color:rgba(232,245,224,.06);position:relative;border-bottom:1px solid var(--border)}
-.feature-caption{position:absolute;bottom:0;left:0;right:0;padding:.6rem 1.25rem;background:rgba(10,15,10,.75);font-family:var(--mono);font-size:.58rem;color:var(--mist2);letter-spacing:.05em}
+.feature-image{width:100%;aspect-ratio:21/9;border-bottom:1px solid var(--border)}
 
 /* ARTICLE BODY LAYOUT */
 .article-layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 300px;gap:0;border-left:1px solid var(--border2);border-right:1px solid var(--border2)}
@@ -295,9 +295,10 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
 <!-- FEATURE IMAGE -->
 <div class="feature-image-wrap">
-  <div class="feature-image">
-    🧬
-    <div class="feature-caption" data-es="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — sitio de investigación de carne cultivada">Embrapa's Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research site</div>
+  <!-- Video: paste a YouTube, Vimeo or .mp4/.webm URL in data-video-url (empty = editorial placeholder) -->
+  <div class="feature-image media-frame" data-video-url="" data-video-title="Embrapa cultivated meat research, Brasília" role="img" aria-label="Embrapa's Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research site" data-es-aria-label="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — sitio de investigación de carne cultivada">
+    <span class="media-emoji" aria-hidden="true">🧬</span>
+    <span class="media-caption" aria-hidden="true">Embrapa · Brasília · 2026</span>
   </div>
 </div>
 
@@ -481,6 +482,7 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 </footer>
 <script src="i18n.js" defer></script>
 <script src="newsletter.js" defer></script>
+<script src="media.js?v=1" defer></script>
 
 <script>
 // ── READ PROGRESS ──────────────────────────────────────────────────────
