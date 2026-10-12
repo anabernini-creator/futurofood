@@ -1,0 +1,57 @@
+/*
+ * FuturoFood media frames — editorial placeholder and video embeds.
+ * Shared by the home cover story, the blog (featured story + cards) and
+ * article pages. Behaviour lives in media.js. Each page sets the frame's
+ * size (aspect-ratio / height); this file only styles what is inside.
+ */
+.media-frame{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(74,222,128,.12), transparent 62%),
+    linear-gradient(160deg, #123420 0%, #0C2214 55%, #08160D 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.1rem;
+}
+/* thin inset frame, like a mat around a print */
+.media-frame::after{
+  content:"";
+  position:absolute;inset:12px;
+  border:1px solid rgba(232,245,224,.08);
+  pointer-events:none;
+}
+.media-emoji{
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  font-size:clamp(2.75rem,6vw,4.25rem);
+  line-height:1;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.45));
+  user-select:none;
+}
+.media-caption{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+  color:rgba(232,245,224,.62);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  text-align:center;
+  padding:0 2rem;
+}
+
+/* With a video: the player fills a 16:9 frame and the placeholder hides */
+.media-frame.has-video{aspect-ratio:16/9;height:auto;min-height:0;background:#000}
+.media-frame.has-video::after,
+.media-frame.has-video > :not(.media-embed){display:none}
+.media-embed{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+video.media-embed{object-fit:contain}
+
+/* Card thumbnails: compact placeholder + "▶ Video" badge, never a player */
+.media-frame.is-thumb{gap:0}
+.media-frame.is-thumb::after{inset:4px}
+.media-frame.is-thumb .media-emoji{font-size:1.6rem;filter:none}
+.media-badge{
+  position:absolute;right:5px;bottom:5px;z-index:1;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.48rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.15rem .3rem;
+  background:#4ADE80;color:#0A0F0A;
+}

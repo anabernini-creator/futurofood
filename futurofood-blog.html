@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="media.css?v=1"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -270,20 +271,8 @@ a{color:inherit;text-decoration:none}
 }
 .byline-sm span{color:var(--mist)}
 .featured-img{
-  background:var(--panel2);
   border-left:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:5rem;
-  color:rgba(232,245,224,.06);
-  position:relative;
   min-height:280px;
-}
-.featured-img-overlay{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:.6rem .875rem;
-  background:rgba(10,15,10,.8);
-  font-family:var(--mono);font-size:.55rem;
-  color:var(--mist2);letter-spacing:.05em;
 }
 .read-cta{
   display:inline-flex;align-items:center;gap:.4rem;
@@ -371,11 +360,7 @@ a{color:inherit;text-decoration:none}
 }
 .card-img{
   width:100px;height:70px;
-  background:var(--panel2);
   border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.75rem;
-  color:rgba(232,245,224,.15);
   flex-shrink:0;
 }
 
@@ -716,9 +701,10 @@ footer{
       </div>
       <a href="#newsletter" class="read-cta" data-es="Leer historia completa →">Read full story →</a>
     </div>
-    <div class="featured-img">
-      🦗
-      <div class="featured-img-overlay" data-es="Instalación de proteína de mosca soldado negra · Colombia">Black Soldier Fly protein facility · Colombia</div>
+    <!-- Video: paste a YouTube, Vimeo or .mp4/.webm URL in data-video-url (empty = editorial placeholder) -->
+    <div class="featured-img media-frame" data-video-url="" data-video-title="Enthos insect-protein plant, Colombia" role="img" aria-label="Black Soldier Fly protein facility · Colombia" data-es-aria-label="Instalación de proteína de mosca soldado negra · Colombia">
+      <span class="media-emoji" aria-hidden="true">🦗</span>
+      <span class="media-caption" aria-hidden="true">Enthos · Colombia · 2026</span>
     </div>
   </div>
 </div>
@@ -763,7 +749,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
-      <div class="card-img">🤖</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🤖</span></div>
     </a>
 
     <a class="article-card" data-tag="tech" href="futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia.html">
@@ -779,7 +765,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
-      <div class="card-img">🐂</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🐂</span></div>
     </a>
 
     <a class="article-card" data-tag="tech" href="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html">
@@ -795,7 +781,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
-      <div class="card-img">🌾</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🌾</span></div>
     </a>
     <!-- AGENT:ARTICLES:END -->
 
@@ -812,7 +798,7 @@ footer{
           <span class="tag tag-lab" data-es="Cultivado en Lab">Lab-Grown</span>
         </div>
       </div>
-      <div class="card-img">🧬</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🧬</span></div>
     </a>
 
     <article class="article-card" data-tag="regen">
@@ -828,7 +814,7 @@ footer{
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
         </div>
       </div>
-      <div class="card-img">🌱</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🌱</span></div>
     </article>
 
     <article class="article-card" data-tag="regen">
@@ -844,7 +830,7 @@ footer{
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
         </div>
       </div>
-      <div class="card-img">🏦</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🏦</span></div>
     </article>
 
     <article class="article-card" data-tag="insects">
@@ -860,7 +846,7 @@ footer{
           <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
         </div>
       </div>
-      <div class="card-img">🪲</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🪲</span></div>
     </article>
 
     <article class="article-card" data-tag="insects">
@@ -876,7 +862,7 @@ footer{
           <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
         </div>
       </div>
-      <div class="card-img">♻️</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">♻️</span></div>
     </article>
 
     <article class="article-card" data-tag="regen">
@@ -892,7 +878,7 @@ footer{
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
         </div>
       </div>
-      <div class="card-img">☕</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">☕</span></div>
     </article>
 
     <!-- PENDING: editorial placeholders below — replace with verified reporting before publishing -->
@@ -909,7 +895,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
-      <div class="card-img">💧</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">💧</span></div>
     </article>
 
     <article class="article-card" data-tag="water">
@@ -925,7 +911,7 @@ footer{
           <span class="tag tag-water" data-es="Agua">Water</span>
         </div>
       </div>
-      <div class="card-img">🏔️</div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🏔️</span></div>
     </article>
 
     <p class="no-results" id="no-results" role="status" data-es="Ninguna historia coincide con este tema o búsqueda.">No stories match this topic or search.</p>
@@ -1058,6 +1044,7 @@ footer{
 </footer>
 <script src="i18n.js" defer></script>
 <script src="newsletter.js" defer></script>
+<script src="media.js?v=1" defer></script>
 
 <script>
 /*

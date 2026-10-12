@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="media.css?v=1"/>
 <style>
 /* ─── RESET ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -310,35 +311,8 @@ a{color:inherit;text-decoration:none}
 .flagship-img{
   width:100%;
   aspect-ratio:16/7;
-  /* Editorial placeholder until a licensed photo is available */
-  background:
-    radial-gradient(ellipse at 50% 42%, rgba(74,222,128,.12), transparent 62%),
-    linear-gradient(160deg, #123420 0%, #0C2214 55%, #08160D 100%);
   border:1px solid var(--border);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1.1rem;
   margin-bottom:1.5rem;
-  position:relative;
-  overflow:hidden;
-}
-.flagship-img::after{
-  content:"";
-  position:absolute;inset:12px;
-  border:1px solid rgba(232,245,224,.08);
-  pointer-events:none;
-}
-.flagship-img-inner{
-  font-size:clamp(2.75rem,6vw,4.25rem);
-  line-height:1;
-  filter:drop-shadow(0 8px 20px rgba(0,0,0,.45));
-  user-select:none;
-}
-.flagship-img-caption{
-  font-family:var(--mono);
-  font-size:.6rem;
-  color:rgba(232,245,224,.62);
-  letter-spacing:.22em;
-  text-transform:uppercase;
 }
 .byline{
   font-family:var(--mono);
@@ -973,9 +947,10 @@ footer{
     <!-- CENTER COL — FLAGSHIP -->
     <div class="bs-col bs-center">
       <span class="flagship-label" data-es="↗ Historia Principal">↗ Cover Story</span>
-      <div class="flagship-img" role="img" aria-label="Embrapa Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research" data-es-aria-label="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — investigación de carne cultivada">
-        <span class="flagship-img-inner" aria-hidden="true">🧬</span>
-        <span class="flagship-img-caption" aria-hidden="true">Embrapa · Brasília · 2026</span>
+      <!-- Video: paste a YouTube, Vimeo or .mp4/.webm URL in data-video-url (empty = editorial placeholder) -->
+      <div class="flagship-img media-frame" data-video-url="" data-video-title="Embrapa cultivated meat research, Brasília" role="img" aria-label="Embrapa Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research" data-es-aria-label="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — investigación de carne cultivada">
+        <span class="media-emoji" aria-hidden="true">🧬</span>
+        <span class="media-caption" aria-hidden="true">Embrapa · Brasília · 2026</span>
       </div>
       <h1 class="flagship-title" data-es="La agencia estatal de investigación de Brasil cultiva carne de pollo a partir de<em> células</em> — y el mayor exportador de carne vacuna del mundo dice que esto es solo el comienzo">
         Brazil's state research agency is growing chicken meat from<em> cells</em> — and the world's top beef exporter says it's just the beginning
@@ -1275,5 +1250,6 @@ footer{
 
 <script src="i18n.js" defer></script>
 <script src="newsletter.js" defer></script>
+<script src="media.js?v=1" defer></script>
 </body>
 </html>

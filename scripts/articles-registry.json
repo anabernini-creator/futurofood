@@ -13,7 +13,10 @@
     "read_minutes": 3,
     "source_name": "AgFunderNews",
     "source_url": "https://agfundernews.com/myca-raises-1-3m-pre-seed-to-put-ai-agents-in-charge-of-agribusiness-field-operations",
-    "date_iso": "2026-10-12"
+    "date_iso": "2026-10-12",
+    "video_url": null,
+    "video_title": null,
+    "video_channel": null
   },
   {
     "slug": "charolais-cattle-breed-reinvents-itself-to-win-over-brazilia",
@@ -29,7 +32,10 @@
     "read_minutes": 3,
     "source_name": "AgFeed",
     "source_url": "https://agfeed.com.br/negocios/de-gigante-tardio-a-boi-precoce-a-transformacao-do-charoles-para-conquistar-o-coracao-do-pecuarista/",
-    "date_iso": "2026-10-12"
+    "date_iso": "2026-10-12",
+    "video_url": null,
+    "video_title": null,
+    "video_channel": null
   },
   {
     "slug": "totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ",
@@ -45,6 +51,9 @@
     "read_minutes": 3,
     "source_name": "AgFeed",
     "source_url": "https://agfeed.com.br/agtech/universo-totvs-2026-reforca-aposta-da-empresa-no-agro-com-trilha-dedicada-ao-setor-focada-em-ia-e-gestao/",
-    "date_iso": "2026-10-12"
+    "date_iso": "2026-10-12",
+    "video_url": null,
+    "video_title": null,
+    "video_channel": null
   }
 ]

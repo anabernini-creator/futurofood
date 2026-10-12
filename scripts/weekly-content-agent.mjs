@@ -10,15 +10,24 @@
 // Requires env: ANTHROPIC_API_KEY (optional: ANTHROPIC_MODEL)
 // Optional env for the review PR: REVIEW_SUMMARY_PATH (writes a Markdown summary
 // of the new articles there) and PREVIEW_BASE_URL (Cloudflare branch preview).
+// 6. Searches YouTube (Claude web search, youtube.com only) for a video about
+//    each story; a verified, embeddable match is stored as video_url and
+//    embedded in the article, otherwise the editorial placeholder shows.
+//
+// Manual video override: node scripts/weekly-content-agent.mjs --set-video <slug> <url|none>
+// Backfill: --find-videos searches a video for every published article without one.
 // Optional env SKIP_URLS_PATH: file with one source URL per line from earlier
 // review PRs (e.g. discarded ones) so those stories are never proposed again.
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
+import { createRequire } from "node:module";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+// Same URL rules as the browser (media.js), so the agent only stores videos the site can play.
+const { parseVideoUrl } = createRequire(import.meta.url)("../media.js");
 const ROOT = join(__dirname, "..");
 const REGISTRY_PATH = join(__dirname, "articles-registry.json");
 const TEMPLATE_PATH = join(__dirname, "article-template.html");
@@ -323,6 +332,141 @@ All Spanish must read as natural Latin American Spanish, not a literal translati
   return parsed;
 }
 
+// ---------- video ----------
+
+// Asks Claude to search youtube.com for a video about this specific story.
+// The pick is only kept if its id appeared in the search results (never a
+// guessed URL) and YouTube's oEmbed confirms it exists and can be embedded.
+async function findVideo(candidate, draft) {
+  const prompt = `Find a YouTube video about this specific news story for FuturoFood, a food-tech news site covering Latin America.
+
+STORY: ${draft.title_en}
+SUMMARY: ${draft.deck_en}
+SOURCE: ${candidate.sourceName} — ${candidate.verifiedUrl}
+
+Rules:
+- Only pick a video that covers this specific story, company, product, project or event — for example from the company's own channel, the source outlet, or a news report about it. A general video about the broader topic does NOT qualify.
+- Prefer official channels and reputable news outlets, and recent videos.
+- Only use a youtube.com/watch URL that appeared in your search results. Never construct or guess one.
+- Finding nothing suitable is a normal outcome — answer null rather than settling for a loosely related video.
+
+Respond with ONLY JSON: {"video_url": "https://www.youtube.com/watch?v=..." or null, "reason": "one short sentence"}`;
+
+  const messages = [{ role: "user", content: prompt }];
+  const seenIds = new Set();
+  let data;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const res = await fetchWithTimeout(
+      "https://api.anthropic.com/v1/messages",
+      {
+        method: "POST",
+        headers: {
+          "x-api-key": process.env.ANTHROPIC_API_KEY,
+          "anthropic-version": "2023-06-01",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5",
+          max_tokens: 16000,
+          tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 3, allowed_domains: ["youtube.com"] }],
+          messages,
+        }),
+      },
+      180000
+    );
+    if (!res.ok) throw new Error(`anthropic_error ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    data = await res.json();
+    for (const block of data.content || []) {
+      if (block.type !== "web_search_tool_result" || !Array.isArray(block.content)) continue;
+      for (const result of block.content) {
+        const parsed = parseVideoUrl(result.url);
+        if (parsed?.type === "youtube") seenIds.add(parsed.id);
+      }
+    }
+    // A long server-side search can pause; resend the turn so it resumes.
+    if (data.stop_reason !== "pause_turn") break;
+    messages.splice(1, messages.length - 1, { role: "assistant", content: data.content });
+  }
+  if (data.stop_reason !== "end_turn") throw new Error(`stop_reason ${data.stop_reason}`);
+
+  const text = data.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+  const pick = JSON.parse(extractJsonBlock(text));
+  if (!pick.video_url) {
+    log("video: none —", pick.reason || "");
+    return null;
+  }
+  const parsed = parseVideoUrl(pick.video_url);
+  if (parsed?.type !== "youtube") throw new Error(`not a YouTube URL: ${pick.video_url}`);
+  if (!seenIds.has(parsed.id)) throw new Error(`video ${parsed.id} was not in the search results`);
+  return verifyYouTube(parsed.id);
+}
+
+async function verifyYouTube(id) {
+  const url = `https://www.youtube.com/watch?v=${id}`;
+  const res = await fetchWithTimeout(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(url)}`);
+  // 401 = embedding disabled by the owner, 404/400 = missing or private
+  if (!res.ok) throw new Error(`oEmbed ${res.status} for ${url}`);
+  const meta = await res.json();
+  return { url, title: meta.title || null, channel: meta.author_name || null };
+}
+
+// --set-video <slug|filename> <url|none>: add, replace or remove a story's video by hand.
+async function setVideo(target, rawUrl) {
+  const registry = readRegistry();
+  const entry = registry.find((r) => r.slug === target || r.filename === target || r.filename === `futurofood-article-${target}.html`);
+  if (!entry) throw new Error(`no article "${target}" in the registry`);
+  let video = { url: null, title: null, channel: null };
+  if (rawUrl && rawUrl !== "none") {
+    const parsed = parseVideoUrl(rawUrl);
+    if (!parsed) throw new Error(`unsupported video URL: ${rawUrl} (YouTube, Vimeo or a .mp4/.webm/.ogg file)`);
+    video = parsed.type === "youtube" ? await verifyYouTube(parsed.id) : { url: rawUrl, title: null, channel: null };
+  }
+  Object.assign(entry, { video_url: video.url, video_title: video.title, video_channel: video.channel });
+
+  const pagePath = join(ROOT, entry.filename);
+  const page = readFileSync(pagePath, "utf8");
+  const re = /(<div class="feature-image media-frame" data-video-url=")[^"]*(")/;
+  if (!re.test(page)) throw new Error(`no media frame in ${entry.filename}`);
+  writeFileSync(pagePath, page.replace(re, (_, a, b) => `${a}${escapeAttr(video.url || "")}${b}`));
+  writeRegistry(registry);
+  rebuildCards();
+  log(video.url ? `video set on ${entry.filename}: ${video.url}` : `video removed from ${entry.filename}`);
+}
+
+// --find-videos: search a video for each registry article that has none yet.
+async function findMissingVideos() {
+  const registry = readRegistry();
+  const found = [];
+  for (const entry of registry.filter((r) => !r.video_url)) {
+    let video = null;
+    try {
+      video = await findVideo(
+        { sourceName: entry.source_name, verifiedUrl: entry.source_url },
+        { title_en: entry.title_en, deck_en: entry.deck_en }
+      );
+    } catch (e) {
+      log("video search failed", entry.slug, e.message);
+    }
+    log(video ? `video for ${entry.slug}: ${video.url} (${video.channel})` : `no video for ${entry.slug}`);
+    if (video) {
+      await setVideo(entry.slug, video.url);
+      found.push({ ...entry, video_url: video.url, video_title: video.title, video_channel: video.channel });
+    }
+  }
+  if (process.env.REVIEW_SUMMARY_PATH && found.length) {
+    writeFileSync(process.env.REVIEW_SUMMARY_PATH, [
+      `El agente encontró video para ${found.length} artículo(s) ya publicados. **Nada cambia en el sitio hasta que hagas Merge.**`,
+      "",
+      ...found.flatMap((e) => [`- **${e.title_es}** → [${e.video_title || e.video_url}](${e.video_url})${e.video_channel ? ` — ${e.video_channel}` : ""}`]),
+      "",
+      "- [ ] Cada video trata de esa noticia (no de un tema general)",
+      "",
+      "**Para aceptar:** *Merge pull request*. **Para rechazar todo:** *Close pull request*. **Para quitar un solo video:** pídeselo a Claude con el número de este PR.",
+      "",
+    ].join("\n"));
+  }
+}
+
 // ---------- rendering ----------
 
 function readSkipUrls() {
@@ -373,7 +517,7 @@ export function renderCard(entry) {
           <span class="tag tag-${entry.tag_slug}" data-es="${escapeAttr(entry.tag_es)}">${escapeHtml(entry.tag_en)}</span>
         </div>
       </div>
-      <div class="card-img">${entry.emoji}</div>
+      <div class="card-img media-frame is-thumb" data-video-url="${escapeAttr(entry.video_url || "")}"><span class="media-emoji" aria-hidden="true">${entry.emoji}</span></div>
     </a>`;
 }
 
@@ -442,7 +586,9 @@ export function renderArticlePage(draft, meta, related) {
   const wordCount = draft.body.reduce((n, b) => n + b.en.split(/\s+/).length, 0);
   const readMinutes = Math.max(3, Math.round(wordCount / 200));
 
-  const dateHuman = new Date(meta.date_iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const longDate = { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" };
+  const dateHuman = new Date(`${meta.date_iso}T12:00:00Z`).toLocaleDateString("en-US", longDate);
+  const dateHumanEs = new Date(`${meta.date_iso}T12:00:00Z`).toLocaleDateString("es", longDate);
 
   const replacements = {
     "{{TITLE_EN}}": escapeHtml(draft.title_en),
@@ -461,6 +607,8 @@ export function renderArticlePage(draft, meta, related) {
     "{{READ_MINUTES}}": String(readMinutes),
     "{{DATE_ISO}}": meta.date_iso,
     "{{DATE_HUMAN}}": dateHuman,
+    "{{DATE_HUMAN_ES}}": dateHumanEs,
+    "{{VIDEO_URL_ATTR}}": escapeAttr(meta.video_url || ""),
     "{{TAKEAWAYS_HTML}}": takeawaysHtml,
     "{{BODY_HTML}}": bodyHtml,
     "{{TAGS_HTML}}": tagsHtml,
@@ -489,6 +637,9 @@ function rebuildCards() {
 
 async function main() {
   if (process.argv.includes("--rebuild-cards")) return rebuildCards();
+  if (process.argv.includes("--find-videos")) return findMissingVideos();
+  const setVideoAt = process.argv.indexOf("--set-video");
+  if (setVideoAt !== -1) return setVideo(process.argv[setVideoAt + 1], process.argv[setVideoAt + 2]);
   const dryRun = process.argv.includes("--dry-run");
   if (!dryRun && !process.env.ANTHROPIC_API_KEY) {
     console.error("Missing ANTHROPIC_API_KEY env var. Aborting. (use --dry-run to test the feed/verify pipeline without it)");
@@ -558,7 +709,15 @@ async function main() {
     }
     const filename = `futurofood-article-${slug}.html`;
 
-    const meta = { source_name: candidate.sourceName, source_url: candidate.verifiedUrl, date_iso: todayIso };
+    let video = null;
+    try {
+      video = await findVideo(candidate, draft);
+      log(video ? `video: ${video.url} (${video.channel})` : "no matching video — placeholder");
+    } catch (e) {
+      log("video search failed — placeholder", e.message);
+    }
+
+    const meta = { source_name: candidate.sourceName, source_url: candidate.verifiedUrl, date_iso: todayIso, video_url: video?.url };
     const related = registry.slice(0, 3);
     const { html, readMinutes } = renderArticlePage(draft, meta, related);
 
@@ -580,6 +739,9 @@ async function main() {
       source_name: candidate.sourceName,
       source_url: candidate.verifiedUrl,
       date_iso: todayIso,
+      video_url: video?.url ?? null,
+      video_title: video?.title ?? null,
+      video_channel: video?.channel ?? null,
     };
     registry.unshift(entry);
     newRegistryEntries.push(entry);
@@ -622,6 +784,9 @@ export function renderReviewSummary(entries, previewBaseUrl) {
       // The workflow parses this exact "**Fuente:** [name](url)" line to remember
       // sources from earlier review PRs — keep the format if you edit it.
       `- **Fuente:** [${e.source_name}](${e.source_url})`,
+      e.video_url
+        ? `- **Video:** [${e.video_title || e.video_url}](${e.video_url})${e.video_channel ? ` — ${e.video_channel}` : ""}`
+        : "- **Video:** ninguno — se muestra el placeholder",
       preview ? `- **Vista previa:** ${preview}` : `- **Archivo:** \`${e.filename}\``,
     ].join("\n");
   });
@@ -634,10 +799,11 @@ export function renderReviewSummary(entries, previewBaseUrl) {
     "- [ ] La noticia es de verdad sobre Latinoamérica",
     "- [ ] La categoría es la correcta",
     "- [ ] El español suena natural (ojo con calcos del portugués o del inglés)",
+    "- [ ] Si hay video, trata de esta noticia (no de un tema general)",
     "",
     "**Para publicar:** botón *Merge pull request*. Cloudflare lo sube a futurofood.com en unos 2 minutos.",
     "**Para descartar todo:** *Close pull request*.",
-    "**Para quitar un solo artículo o corregir texto:** pídeselo a Claude indicando el número de este PR.",
+    "**Para quitar un solo artículo, cambiar o quitar un video, o corregir texto:** pídeselo a Claude indicando el número de este PR.",
     "",
   ].join("\n");
 }
