@@ -177,6 +177,32 @@ a{color:inherit;text-decoration:none}
   vertical-align:middle;
 }
 
+/* ── SEARCH ── */
+.search-bar{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+  padding:.6rem 2rem;
+  display:flex;align-items:center;gap:.75rem;
+  transition:border-color .2s;
+}
+.search-bar:focus-within{border-bottom-color:var(--green)}
+.search-icon{width:15px;height:15px;color:var(--mist2);flex-shrink:0}
+.search-input{
+  flex:1;min-width:0;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;
+  color:var(--leaf);background:transparent;
+  border:none;outline:none;padding:.45rem 0;
+}
+.search-input::placeholder{color:var(--mist2)}
+.no-results{
+  display:none;padding:3rem 2rem;text-align:center;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  color:var(--mist);
+}
+.no-results.visible{display:block}
+
 /* ── FEATURED STORY (large card) ── */
 .featured-wrap{
   max-width:1280px;margin:0 auto;
@@ -556,6 +582,7 @@ footer{
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
+  .search-bar{padding:.5rem 1rem}
   .blog-layout{grid-template-columns:1fr}
   .sidebar{border-top:1px solid var(--border)}
   .featured-card{grid-template-columns:1fr}
@@ -636,28 +663,36 @@ footer{
 </div>
 
 <!-- FILTER BAR -->
-<div class="filter-bar" id="topics" role="navigation" aria-label="Filter by topic">
+<div class="filter-bar" id="topics" role="navigation" aria-label="Filter by topic" data-es-aria-label="Filtrar por tema">
   <button class="filter-btn active" data-tag="all" onclick="filterCards(this,'all')">
-    <span data-es="Todas">All</span> <span class="filter-count">28</span>
-  </button>
-  <button class="filter-btn" data-tag="insects" onclick="filterCards(this,'insects')">
-    <span data-es="🦗 Proteína de Insectos">🦗 Insect Protein</span> <span class="filter-count">7</span>
+    <span data-es="Todas">All</span> <span class="filter-count"></span>
   </button>
   <button class="filter-btn" data-tag="lab" onclick="filterCards(this,'lab')">
-    <span data-es="🧬 Cultivado en Lab">🧬 Lab-Grown</span> <span class="filter-count">5</span>
+    <span data-es="🧬 Cultivado en Lab">🧬 Lab-Grown</span> <span class="filter-count"></span>
   </button>
   <button class="filter-btn" data-tag="regen" onclick="filterCards(this,'regen')">
-    <span data-es="🌱 Regenerativo">🌱 Regenerative</span> <span class="filter-count">8</span>
+    <span data-es="🌱 Regenerativo">🌱 Regenerative</span> <span class="filter-count"></span>
   </button>
-  <button class="filter-btn" data-tag="ancestral" onclick="filterCards(this,'ancestral')">
-    <span data-es="🌽 Ancestral">🌽 Ancestral</span> <span class="filter-count">4</span>
+  <button class="filter-btn" data-tag="insects" onclick="filterCards(this,'insects')">
+    <span data-es="🦗 Proteína de Insectos">🦗 Insect Protein</span> <span class="filter-count"></span>
   </button>
   <button class="filter-btn" data-tag="tech" onclick="filterCards(this,'tech')">
-    <span data-es="🤖 Tecnología Alimentaria">🤖 Food Tech</span> <span class="filter-count">9</span>
+    <span data-es="🤖 Tecnología Alimentaria">🤖 Food Tech</span> <span class="filter-count"></span>
   </button>
   <button class="filter-btn" data-tag="water" onclick="filterCards(this,'water')">
-    <span data-es="💧 Agua">💧 Water</span> <span class="filter-count">3</span>
+    <span data-es="💧 Agua">💧 Water</span> <span class="filter-count"></span>
   </button>
+  <button class="filter-btn" data-tag="ancestral" onclick="filterCards(this,'ancestral')">
+    <span data-es="🌽 Ancestral">🌽 Ancestral</span> <span class="filter-count"></span>
+  </button>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar" role="search">
+  <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+  <input id="story-search" class="search-input" type="search" autocomplete="off"
+    placeholder="Search stories by title or summary…" data-es-placeholder="Busca historias por título o resumen…"
+    aria-label="Search stories" data-es-aria-label="Buscar historias"/>
 </div>
 
 <!-- FEATURED STORY -->
@@ -724,27 +759,27 @@ footer{
         <h3 class="card-title" data-es="El CEO 'neurótico' de Solinftec reestructura la empresa para subirse al tren de la IA">Solinftec's 'neurotic' CEO overhauls company to ride the AI wave</h3>
         <p class="card-excerpt" data-es="Britaldo Hernandez impulsa a Solinftec más allá de los robots y el software para convertirla en una empresa de 'IA física' basada en una década de datos de campo en Brasil y Estados Unidos.">Britaldo Hernandez is pushing Solinftec beyond robots and software toward becoming a 'physical AI' knowledge company built on a decade of field data from Brazil and the US.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: AgFeed">Source: AgFeed</span>
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026">Oct 12, 2026</time> · <span data-es="Fuente: AgFeed">Source: AgFeed</span></span>
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
       <div class="card-img">🤖</div>
     </a>
 
-<a class="article-card" data-tag="tech" href="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html">
+    <a class="article-card" data-tag="tech" href="futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in.html">
       <div>
         <div class="card-top">
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="3 min">3 min</span>
         </div>
-        <h3 class="card-title" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026">TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026</h3>
-        <p class="card-excerpt" data-es="La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC.">Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC.</p>
+        <h3 class="card-title" data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global">Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South</h3>
+        <p class="card-excerpt" data-es="La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático.">The India-based startup, which turns WhatsApp messages and phone calls from field teams into structured data, plans to use fresh pre-seed funding to expand into Latin America, Africa and Southeast Asia.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: AgFeed">Source: AgFeed</span>
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026">Oct 12, 2026</time> · <span data-es="Fuente: AgFunderNews">Source: AgFunderNews</span></span>
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
-      <div class="card-img">🌾</div>
+      <div class="card-img">🤖</div>
     </a>
 
     <a class="article-card" data-tag="tech" href="futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia.html">
@@ -756,27 +791,27 @@ footer{
         <h3 class="card-title" data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños">Charolais cattle breed reinvents itself to win over Brazilian ranchers</h3>
         <p class="card-excerpt" data-es="Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil.">Three decades of genetic selection have turned a slow-maturing giant breed into an early-finishing favorite for industrial crossbreeding in Brazil's feedlot-driven cattle industry.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: AgFeed">Source: AgFeed</span>
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026">Oct 12, 2026</time> · <span data-es="Fuente: AgFeed">Source: AgFeed</span></span>
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
       <div class="card-img">🐂</div>
     </a>
 
-    <a class="article-card" data-tag="tech" href="futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in.html">
+    <a class="article-card" data-tag="tech" href="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html">
       <div>
         <div class="card-top">
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="3 min">3 min</span>
         </div>
-        <h3 class="card-title" data-es="Myca levanta US<!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated cards here — do not hand-edit between markers) -->.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global">Myca Raises <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated cards here — do not hand-edit between markers) -->.3M to Bring AI Field Agents to Agribusiness in the Global South</h3>
-        <p class="card-excerpt" data-es="La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático.">The India-based startup, which turns WhatsApp messages and phone calls from field teams into structured data, plans to use fresh pre-seed funding to expand into Latin America, Africa and Southeast Asia.</p>
+        <h3 class="card-title" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026">TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026</h3>
+        <p class="card-excerpt" data-es="La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC.">Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: AgFunderNews">Source: AgFunderNews</span>
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026">Oct 12, 2026</time> · <span data-es="Fuente: AgFeed">Source: AgFeed</span></span>
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
-      <div class="card-img">🤖</div>
+      <div class="card-img">🌾</div>
     </a>
     <!-- AGENT:ARTICLES:END -->
 
@@ -789,7 +824,7 @@ footer{
         <h3 class="card-title" data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal">Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered</h3>
         <p class="card-excerpt" data-es="La agencia estatal de investigación Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027, apoyándose en las normas regulatorias que Brasil estableció en 2023.">State research agency Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027, building on regulatory rules Brazil set in 2023.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: Embrapa / Rio Times">Source: Embrapa / Rio Times</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Embrapa / Rio Times">Source: Embrapa / Rio Times</span></span>
           <span class="tag tag-lab" data-es="Cultivado en Lab">Lab-Grown</span>
         </div>
       </div>
@@ -805,7 +840,7 @@ footer{
         <h3 class="card-title" data-es="350 agricultores costarricenses reciben pago por restaurar el suelo a través de la red AmistOsa">350 Costa Rican farmers are getting paid to restore soil through the AmistOsa network</h3>
         <p class="card-excerpt" data-es="Osa Conservation se asocia con agricultores del corredor ecológico AmistOsa, en el sur de Costa Rica, en prácticas regenerativas que aumentan la productividad mientras capturan carbono, con el respaldo de la Fundación Walmart.">Osa Conservation is partnering with farmers in southern Costa Rica's AmistOsa ecological corridor on regenerative practices that boost productivity while sequestering carbon, backed by Walmart Foundation funding.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: Osa Conservation">Source: Osa Conservation</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Osa Conservation">Source: Osa Conservation</span></span>
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
         </div>
       </div>
@@ -821,7 +856,7 @@ footer{
         <h3 class="card-title" data-es="El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica">World Bank commits $120M loan to sustainable agriculture in Costa Rica</h3>
         <p class="card-excerpt" data-es="El financiamiento respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar.">The financing supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane production chains.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: Banco Mundial">Source: World Bank</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Banco Mundial">Source: World Bank</span></span>
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
         </div>
       </div>
@@ -837,7 +872,7 @@ footer{
         <h3 class="card-title" data-es="Enthos asegura respaldo de capital de riesgo para ampliar la mayor planta de proteína de insectos de Colombia">Enthos secures VC backing to scale Colombia's largest insect-protein facility</h3>
         <p class="card-excerpt" data-es="S2G Investments y Ocean 14 Capital invirtieron en Enthos, que procesa 200 toneladas de residuos orgánicos al día en proteína y aceite de mosca soldado negra para los mercados de acuicultura y alimento para ganado.">S2G Investments and Ocean 14 Capital invested in Enthos, which processes 200 tons of organic waste per day into Black Soldier Fly protein and oil for the aquaculture and livestock feed markets.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: Aquafeed.com">Source: Aquafeed.com</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Aquafeed.com">Source: Aquafeed.com</span></span>
           <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
         </div>
       </div>
@@ -853,7 +888,7 @@ footer{
         <h3 class="card-title" data-es="La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica">IFC invests $2M in ProNuvo, a Costa Rican insect-feed producer in Guápiles</h3>
         <p class="card-excerpt" data-es="El financiamiento ayuda a ProNuvo a completar una planta industrial de alimento para insectos de 4,000 TM/año. La empresa cosecha larvas de mosca soldado negra nativas de Costa Rica, usando una fracción de la tierra, el tiempo y el agua de las fuentes de proteína convencionales.">The financing helps ProNuvo complete a 4,000 MT/year industrial insect-feed plant. The company harvests Black Soldier Fly larvae native to Costa Rica, using a fraction of the land, time, and water of conventional protein sources.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: IFC / Grupo Banco Mundial">Source: IFC / World Bank Group</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: IFC / Grupo Banco Mundial">Source: IFC / World Bank Group</span></span>
           <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
         </div>
       </div>
@@ -869,7 +904,7 @@ footer{
         <h3 class="card-title" data-es="Finca Aquiares: cómo una finca cafetalera costarricense de 600 hectáreas se volvió carbono neutral">Aquiares Estate: how a 600-hectare Costa Rican coffee farm became carbon neutral</h3>
         <p class="card-excerpt" data-es="La finca certificada por Rainforest Alliance, en las laderas del volcán Turrialba, alcanzó la neutralidad de carbono en 2016 y ahora captura más carbono del que emite — un modelo de café regenerativo que abarca tres generaciones de trabajadores.">The Rainforest Alliance Certified farm on the slopes of Turrialba Volcano achieved carbon neutrality in 2016 and now sequesters more carbon than it emits — a regenerative coffee model spanning three generations of workers.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: Rainforest Alliance">Source: Rainforest Alliance</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Rainforest Alliance">Source: Rainforest Alliance</span></span>
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
         </div>
       </div>
@@ -886,7 +921,7 @@ footer{
         <h3 class="card-title" data-es="La argentina Kilimo ha ahorrado 72 mil millones de litros de agua con riego impulsado por IA — ya está presente en 7 países">Argentina's Kilimo has saved 72 billion liters of water with AI-powered irrigation — now in 7 countries</h3>
         <p class="card-excerpt" data-es="La plataforma de Kilimo analiza datos satelitales, pronósticos meteorológicos y sensores de suelo para indicar a los agricultores exactamente cuándo y cuánto regar. Quienes la usan han reducido el consumo de agua hasta en un 20% manteniendo el rendimiento, llegando a más de 2,000 agricultores en Argentina, México, Chile y otros cuatro países.">Kilimo's platform analyzes satellite data, weather forecasts, and soil sensors to tell farmers exactly when and how much to irrigate. Farmers using it have cut water consumption by up to 20% while maintaining yields, reaching over 2,000 farmers across Argentina, Mexico, Chile, and four other countries.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: Borgen Project">Source: Borgen Project</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Borgen Project">Source: Borgen Project</span></span>
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
         </div>
       </div>
@@ -902,12 +937,14 @@ footer{
         <h3 class="card-title" data-es="Los glaciares andinos se adelgazan un 35% más rápido que el promedio mundial — y 90 millones de personas dependen de ellos">Andean glaciers are thinning 35% faster than the global average — and 90 million people depend on them</h3>
         <p class="card-excerpt" data-es="Un informe de política de las universidades de Sheffield y Newcastle advierte que los glaciares andinos, que se adelgazan 0.7 metros al año, amenazan la seguridad hídrica y alimentaria de ciudades desde La Paz hasta Santiago. En la cordillera central de Perú, algunos glaciares podrían desaparecer por completo para la década de 2050.">A policy brief from the Universities of Sheffield and Newcastle warns that Andean glaciers, thinning by 0.7 meters a year, threaten the water and food security of cities from La Paz to Santiago. In Peru's central range, some glaciers could disappear entirely by the 2050s.</p>
         <div class="card-bottom">
-          <span class="card-date" data-es="Fuente: University of Sheffield">Source: University of Sheffield</span>
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: University of Sheffield">Source: University of Sheffield</span></span>
           <span class="tag tag-water" data-es="Agua">Water</span>
         </div>
       </div>
       <div class="card-img">🏔️</div>
     </article>
+
+    <p class="no-results" id="no-results" role="status" data-es="Ninguna historia coincide con este tema o búsqueda.">No stories match this topic or search.</p>
 
     <!-- GHOST LOADING STATE (hidden by default, shown by JS when fetching) -->
     <div class="ghost-loading" id="ghost-loading">
@@ -945,29 +982,29 @@ footer{
     <div class="sidebar-block">
       <div class="sidebar-title" data-es="Explorar por Tema">Browse by Topic</div>
       <div class="topic-list">
-        <div class="topic-item" onclick="filterCards(null,'insects')">
-          <span class="topic-name"><span class="topic-icon">🦗</span> <span data-es="Proteína de Insectos">Insect Protein</span></span>
-          <span class="topic-count">7</span>
-        </div>
-        <div class="topic-item" onclick="filterCards(null,'lab')">
+        <div class="topic-item" data-tag="lab" onclick="filterCards(null,'lab')">
           <span class="topic-name"><span class="topic-icon">🧬</span> <span data-es="Cultivado en Lab">Lab-Grown</span></span>
-          <span class="topic-count">5</span>
+          <span class="topic-count"></span>
         </div>
-        <div class="topic-item" onclick="filterCards(null,'regen')">
+        <div class="topic-item" data-tag="regen" onclick="filterCards(null,'regen')">
           <span class="topic-name"><span class="topic-icon">🌱</span> <span data-es="Regenerativo">Regenerative</span></span>
-          <span class="topic-count">8</span>
+          <span class="topic-count"></span>
         </div>
-        <div class="topic-item" onclick="filterCards(null,'ancestral')">
-          <span class="topic-name"><span class="topic-icon">🌽</span> <span data-es="Ancestral">Ancestral</span></span>
-          <span class="topic-count">4</span>
+        <div class="topic-item" data-tag="insects" onclick="filterCards(null,'insects')">
+          <span class="topic-name"><span class="topic-icon">🦗</span> <span data-es="Proteína de Insectos">Insect Protein</span></span>
+          <span class="topic-count"></span>
         </div>
-        <div class="topic-item" onclick="filterCards(null,'tech')">
+        <div class="topic-item" data-tag="tech" onclick="filterCards(null,'tech')">
           <span class="topic-name"><span class="topic-icon">🤖</span> <span data-es="Tecnología Alimentaria">Food Tech</span></span>
-          <span class="topic-count">9</span>
+          <span class="topic-count"></span>
         </div>
-        <div class="topic-item" onclick="filterCards(null,'water')">
+        <div class="topic-item" data-tag="water" onclick="filterCards(null,'water')">
           <span class="topic-name"><span class="topic-icon">💧</span> <span data-es="Agua">Water</span></span>
-          <span class="topic-count">3</span>
+          <span class="topic-count"></span>
+        </div>
+        <div class="topic-item" data-tag="ancestral" onclick="filterCards(null,'ancestral')">
+          <span class="topic-name"><span class="topic-icon">🌽</span> <span data-es="Ancestral">Ancestral</span></span>
+          <span class="topic-count"></span>
         </div>
       </div>
     </div>
@@ -1170,18 +1207,15 @@ function renderGhostPosts(posts, pagination) {
     `${pagination.total} stories · Page ${pagination.page} of ${pagination.pages}`;
 }
 
-// ── FILTER (static mode) ──────────────────────────────────────────────
+// ── FILTER + SEARCH (static mode) ─────────────────────────────────────
+// Category filter and search combine: a card shows when it matches both.
+let activeTag = 'all';
+
 function filterCards(btn, tag) {
   // Update active button
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) {
-    btn.classList.add('active');
-  } else {
-    // called from sidebar topic list
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      if (b.dataset.tag === tag) b.classList.add('active');
-    });
-  }
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', btn ? b === btn : b.dataset.tag === tag);
+  });
 
   // If Ghost is configured, fetch from API
   if (!GHOST_URL.includes('YOUR-GHOST-SITE')) {
@@ -1191,22 +1225,64 @@ function filterCards(btn, tag) {
     return;
   }
 
-  // Static fallback: show/hide cards by data-tag
-  const cards = document.querySelectorAll('.article-card');
-  cards.forEach(card => {
-    if (tag === 'all' || card.dataset.tag === tag) {
-      card.style.display = 'grid';
-    } else {
-      card.style.display = 'none';
-    }
-  });
+  activeTag = tag;
+  applyFilters();
+  // Called from the sidebar: bring the list into view (the sidebar sits below it on mobile)
+  if (!btn) document.getElementById('topics').scrollIntoView({ behavior: 'smooth' });
+}
 
-  // Update count
-  const visible = tag === 'all'
-    ? cards.length
-    : [...cards].filter(c => c.dataset.tag === tag).length;
-  document.getElementById('post-count').textContent =
-    `${visible} stories · Demo mode`;
+const normalizeText = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const htmlToText = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+
+// Title + excerpt in both languages, so a search matches whichever language is shown.
+function searchText(card) {
+  if (card.dataset.search === undefined) {
+    const parts = [];
+    card.querySelectorAll('.card-title, .card-excerpt').forEach(el => {
+      parts.push(el.dataset.en !== undefined ? htmlToText(el.dataset.en) : el.textContent);
+      if (el.dataset.es) parts.push(htmlToText(el.dataset.es));
+    });
+    card.dataset.search = normalizeText(parts.join(' '));
+  }
+  return card.dataset.search;
+}
+
+function storyCards() {
+  return [...document.querySelectorAll('#articles-container .article-card')];
+}
+
+function applyFilters() {
+  const terms = normalizeText(document.getElementById('story-search').value).split(/\s+/).filter(Boolean);
+  const cards = storyCards();
+  let visible = 0;
+  cards.forEach(card => {
+    const show = (activeTag === 'all' || card.dataset.tag === activeTag)
+      && terms.every(t => searchText(card).includes(t));
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('no-results').classList.toggle('visible', visible === 0);
+  updatePostCount(visible, cards.length);
+}
+
+function updatePostCount(visible, total) {
+  const es = document.documentElement.lang === 'es';
+  const noun = n => es ? (n === 1 ? 'historia' : 'historias') : (n === 1 ? 'story' : 'stories');
+  document.getElementById('post-count').textContent = visible === total
+    ? `${total} ${noun(total)}`
+    : (es ? `${visible} de ${total} ${noun(total)}` : `${visible} of ${total} ${noun(total)}`);
+}
+
+function updateTagCounts() {
+  const cards = storyCards();
+  const counts = { all: cards.length };
+  cards.forEach(c => { counts[c.dataset.tag] = (counts[c.dataset.tag] || 0) + 1; });
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.querySelector('.filter-count').textContent = counts[b.dataset.tag] || 0;
+  });
+  document.querySelectorAll('.topic-item[data-tag]').forEach(item => {
+    item.querySelector('.topic-count').textContent = counts[item.dataset.tag] || 0;
+  });
 }
 
 // ── PAGINATION ────────────────────────────────────────────────────────
@@ -1257,8 +1333,17 @@ async function initGhost() {
 // ── ACTIVATE GHOST (uncomment when ready) ─────────────────────────────
 // initGhost();
 //
-// For now, update static post count
-document.getElementById('post-count').textContent = '28 stories · Demo mode';
+// Static mode: real counts, live search, and no Ghost pagination (it only works with Ghost)
+if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
+  const postCount = document.getElementById('post-count');
+  postCount.removeAttribute('data-es'); // filled in by updatePostCount in both languages
+  document.querySelector('.pagination').style.display = 'none';
+  document.getElementById('story-search').addEventListener('input', applyFilters);
+  // i18n.js switches languages by setting <html lang>; refresh the count text when it does
+  new MutationObserver(applyFilters).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  updateTagCounts();
+  applyFilters();
+}
 </script>
 </body>
 </html>
