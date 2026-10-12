@@ -399,12 +399,12 @@ Respond with ONLY JSON: {"video_url": "https://www.youtube.com/watch?v=..." or n
   const text = data.content.filter((b) => b.type === "text").map((b) => b.text).join("");
   const pick = JSON.parse(extractJsonBlock(text));
   if (!pick.video_url) {
-    log("video: none —", pick.reason || "");
+    log(`video: none (${seenIds.size} YouTube results checked) —`, pick.reason || "");
     return null;
   }
   const parsed = parseVideoUrl(pick.video_url);
   if (parsed?.type !== "youtube") throw new Error(`not a YouTube URL: ${pick.video_url}`);
-  if (!seenIds.has(parsed.id)) throw new Error(`video ${parsed.id} was not in the search results`);
+  if (!seenIds.has(parsed.id)) throw new Error(`video ${parsed.id} was not in the ${seenIds.size} search results`);
   return verifyYouTube(parsed.id);
 }
 
