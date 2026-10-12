@@ -6,6 +6,23 @@
     error: { en: 'Something went wrong. Try again.', es: 'Algo salió mal. Intentá de nuevo.' }
   };
 
+  // Remember how the reader arrived (e.g. ?utm_source=whatsapp&utm_medium=share
+  // from a shared article) so the signup can be attributed in Beehiiv, even if
+  // they subscribe on another page of the visit.
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
+  function landingUtm() {
+    var params = new URLSearchParams(location.search);
+    var fromUrl = {};
+    UTM_KEYS.forEach(function (k) { if (params.get(k)) fromUrl[k] = params.get(k).slice(0, 64); });
+    try {
+      if (Object.keys(fromUrl).length) sessionStorage.setItem('ff-utm', JSON.stringify(fromUrl));
+      return JSON.parse(sessionStorage.getItem('ff-utm') || '{}');
+    } catch (e) {
+      return fromUrl;
+    }
+  }
+  var UTM = landingUtm();
+
   function lang() {
     return document.documentElement.getAttribute('lang') === 'es' ? 'es' : 'en';
   }
@@ -61,7 +78,13 @@
       fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({
+          email: email,
+          utm_source: UTM.utm_source,
+          utm_medium: UTM.utm_medium,
+          utm_campaign: UTM.utm_campaign,
+          page: location.pathname
+        })
       })
         .then(function (res) { return res.json().then(function (data) { return { ok: res.ok && data.ok, data: data }; }); })
         .then(function (result) {

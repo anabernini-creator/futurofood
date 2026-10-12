@@ -1,0 +1,34 @@
+/*
+ * FuturoFood share buttons — WhatsApp is the primary (most used channel in
+ * LATAM), the rest keep each page's outline style. Loaded before the page's
+ * own <style>, so selectors here are specific enough to win where needed.
+ */
+a.share-wa.share-btn,
+a.share-wa.share-inline-btn,
+a.share-wa.share-side-btn{
+  background:#25D366;
+  border-color:#25D366;
+  color:#0A0F0A;
+  font-weight:700;
+}
+a.share-wa.share-btn:hover,
+a.share-wa.share-inline-btn:hover,
+a.share-wa.share-side-btn:hover{
+  background:#1EBE5B;
+  border-color:#1EBE5B;
+  color:#0A0F0A;
+}
+/* End-of-article block: WhatsApp takes the full first row */
+.share-inline a.share-wa.share-inline-btn{
+  flex:1 1 100%;
+  text-align:center;
+  font-size:.72rem;
+  padding:.95rem 1rem;
+}
+[data-share]{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;text-decoration:none}
+.share-side-btn[data-share]{justify-content:flex-start}
+button[data-share].is-copied{border-color:#4ADE80;color:#4ADE80}
+/* Inside the article body, links are green and underlined; share buttons
+   that are links keep the outline style instead */
+.share-inline a.share-inline-btn:not(.share-wa){color:var(--mist);border:1px solid var(--border)}
+.share-inline a.share-inline-btn:not(.share-wa):hover{color:#4ADE80;border-color:#4ADE80}
