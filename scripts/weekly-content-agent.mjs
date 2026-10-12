@@ -23,6 +23,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 import { createRequire } from "node:module";
+import { updateOgCards } from "./og-image.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -738,6 +739,12 @@ async function main() {
 
     writeFileSync(join(ROOT, filename), html);
     log("wrote", filename);
+    // Link-preview card (og/<page>.jpg); falls back to og-default.jpg on failure
+    try {
+      await updateOgCards([filename], log);
+    } catch (e) {
+      log("og card failed — default preview image", e.message);
+    }
 
     const entry = {
       slug,

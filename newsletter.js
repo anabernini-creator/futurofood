@@ -89,6 +89,9 @@
         .then(function (res) { return res.json().then(function (data) { return { ok: res.ok && data.ok, data: data }; }); })
         .then(function (result) {
           if (result.ok) {
+            // Remembered so the floating banner stops asking (subscribe-float.js)
+            try { localStorage.setItem('ff-subscribed', '1'); } catch (e) {}
+            document.dispatchEvent(new CustomEvent('ff:subscribed'));
             input.value = '';
             button.textContent = originalBtn;
             setNote(note, MSG.success[lang()], false);
