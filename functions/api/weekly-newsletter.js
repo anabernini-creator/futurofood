@@ -104,7 +104,8 @@ export async function onRequestPost({ request, env }) {
   console.error("beehiiv_create_post_failed", res.status, JSON.stringify(data).slice(0, 500));
   // 403 / plan wording = the endpoint isn't in this Beehiiv plan; 401 = bad key
   const plan = res.status === 403 || (res.status !== 401 && /\bplan\b|enterprise/i.test(JSON.stringify(data)));
-  return json({ ok: false, error: plan ? "plan_not_supported" : "beehiiv_error", beehiiv_status: res.status, beehiiv: data?.errors || data, ...issue }, 502);
+  // 424, not 502: Cloudflare replaces 502 bodies on the custom domain with its own error page
+  return json({ ok: false, error: plan ? "plan_not_supported" : "beehiiv_error", beehiiv_status: res.status, beehiiv: data?.errors || data, ...issue }, 424);
 }
 
 export async function onRequestGet() {
