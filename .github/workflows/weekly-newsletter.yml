@@ -1,0 +1,88 @@
+name: Weekly newsletter
+
+# Runs when Ana merges a weekly review PR (content/weekly-*): the articles are
+# then live, so "FuturoFood Weekly — <fecha>" is created in Beehiiv and sent to
+# all subscribers. Manual runs default to a draft, for testing.
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "draft (only create it in Beehiiv) or send"
+        type: choice
+        options: [draft, send]
+        default: draft
+      base_ref:
+        description: "Commit before the articles to include were added"
+        required: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: weekly-newsletter
+  cancel-in-progress: false
+
+jobs:
+  newsletter:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'content/weekly-'))
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OUT: ${{ runner.temp }}/newsletter
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Create / send the issue in Beehiiv
+        env:
+          NEWSLETTER_TRIGGER_TOKEN: ${{ secrets.NEWSLETTER_TRIGGER_TOKEN }}
+          BASE_REGISTRY_REF: ${{ github.event.pull_request.base.sha || inputs.base_ref }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'send' }}
+          OUTPUT_DIR: ${{ runner.temp }}/newsletter
+          WAIT_FOR_LIVE: "1"
+        run: node scripts/weekly-newsletter.mjs
+
+      - name: Report
+        if: always()
+        env:
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          [ -f "$OUT/result.json" ] || { echo "No newsletter result (no new articles?)." >> "$GITHUB_STEP_SUMMARY"; exit 0; }
+          ok=$(jq -r '.ok' "$OUT/result.json"); err=$(jq -r '.error // ""' "$OUT/result.json")
+          subject=$(jq -r '.subject // ""' "$OUT/result.json")
+          if [ "$ok" = "true" ]; then
+            echo "✅ **$subject** — $(jq -r '.mode // "ya existía"' "$OUT/result.json") en Beehiiv ($(jq -r '.status // ""' "$OUT/result.json"))." >> "$GITHUB_STEP_SUMMARY"
+            [ -n "$PR" ] && gh pr comment "$PR" --body "✅ Newsletter **$subject** enviado a los suscriptores desde Beehiiv."
+          elif [ "$err" = "plan_not_supported" ]; then
+            {
+              echo "Tu plan de Beehiiv no permite crear correos por API (solo Max / Enterprise), así que el envío no salió solo."
+              echo "Está listo para pegar en Beehiiv → **New post**:"
+              echo
+              echo "**Asunto:** $subject"
+              echo
+              echo "<details><summary>HTML del correo (copiar y pegar en un bloque HTML)</summary>"
+              echo
+              echo '```html'
+              cat "$OUT/issue.html"
+              echo '```'
+              echo "</details>"
+            } > "$OUT/comment.md"
+            cat "$OUT/comment.md" >> "$GITHUB_STEP_SUMMARY"
+            [ -n "$PR" ] && gh pr comment "$PR" --body-file "$OUT/comment.md"
+          else
+            echo "❌ Newsletter no enviado: $err" >> "$GITHUB_STEP_SUMMARY"
+          fi
