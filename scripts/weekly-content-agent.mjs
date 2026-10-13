@@ -520,15 +520,21 @@ export function formatCardDate(iso) {
   return { en: d.toLocaleDateString("en-US", opts), es: d.toLocaleDateString("es", opts) };
 }
 
+// Heart icon (Feather "heart", MIT) for the blog's save button
+const SAVE_BUTTON = `<button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>`;
+
+// Blog card: the title link stretches over the whole card (CSS), so the save
+// button can sit on top as a real button instead of being nested in a link.
 export function renderCard(entry) {
   const date = formatCardDate(entry.date_iso);
-  return `    <a class="article-card" data-tag="${entry.tag_slug}" href="${entry.filename}">
+  return `    <article class="article-card" data-tag="${entry.tag_slug}" data-id="${entry.filename}">
       <div>
         <div class="card-top">
           <span class="tag tag-${entry.tag_slug}" data-es="${escapeAttr(entry.tag_es)}">${escapeHtml(entry.tag_en)}</span>
-          <span class="card-readtime" data-es="${entry.read_minutes} min">${entry.read_minutes} min</span>
+          <span class="card-readtime" data-es="${entry.read_minutes} min de lectura">${entry.read_minutes} min read</span>
+          ${SAVE_BUTTON}
         </div>
-        <h3 class="card-title" data-es="${escapeAttr(entry.title_es)}">${escapeHtml(entry.title_en)}</h3>
+        <h3 class="card-title"><a class="card-link" href="${entry.filename}" data-es="${escapeAttr(entry.title_es)}">${escapeHtml(entry.title_en)}</a></h3>
         <p class="card-excerpt" data-es="${escapeAttr(entry.deck_es)}">${escapeHtml(entry.deck_en)}</p>
         <div class="card-bottom">
           <span class="card-date"><time datetime="${entry.date_iso}" data-es="${date.es}">${date.en}</time> · <span data-es="Fuente: ${escapeAttr(entry.source_name)}">Source: ${escapeHtml(entry.source_name)}</span></span>
@@ -536,7 +542,7 @@ export function renderCard(entry) {
         </div>
       </div>
       <div class="card-img media-frame is-thumb" data-video-url="${escapeAttr(entry.video_url || "")}"><span class="media-emoji" aria-hidden="true">${entry.emoji}</span></div>
-    </a>`;
+    </article>`;
 }
 
 export function renderSitemapUrl(entry) {
@@ -608,8 +614,10 @@ export function renderArticlePage(draft, meta, related) {
     `      <span class="article-tag-item" data-es="Tecnología Alimentaria">Food Tech</span>`,
   ].join("\n");
 
-  const wordCount = draft.body.reduce((n, b) => n + b.en.split(/\s+/).length, 0);
-  const readMinutes = Math.max(3, Math.round(wordCount / 200));
+  // Reading time at 200 words per minute (deck, takeaways and body, English)
+  const words = (t) => String(t).split(/\s+/).filter(Boolean).length;
+  const wordCount = words(draft.deck_en) + draft.takeaways.reduce((n, t) => n + words(t.en), 0) + draft.body.reduce((n, b) => n + words(b.en), 0);
+  const readMinutes = Math.max(1, Math.ceil(wordCount / 200));
 
   const keywords = (Array.isArray(draft.keywords_en) && draft.keywords_en.length
     ? draft.keywords_en
