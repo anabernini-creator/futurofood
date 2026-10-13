@@ -34,7 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
-      OUT: ${{ runner.temp }}/newsletter
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,6 +60,7 @@ jobs:
         env:
           PR: ${{ github.event.pull_request.number }}
         run: |
+          OUT="$RUNNER_TEMP/newsletter"
           [ -f "$OUT/result.json" ] || { echo "No newsletter result (no new articles?)." >> "$GITHUB_STEP_SUMMARY"; exit 0; }
           ok=$(jq -r '.ok' "$OUT/result.json"); err=$(jq -r '.error // ""' "$OUT/result.json")
           subject=$(jq -r '.subject // ""' "$OUT/result.json")
