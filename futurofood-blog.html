@@ -674,6 +674,19 @@ footer{
   .banner-dot,.ghost-loading{animation:none}
   *{transition-duration:0ms!important}
 }
+
+/* ── SPONSOR SLOTS (728×90) ── */
+.ad-slot{max-width:calc(728px + 4rem);margin:0 auto;padding:1.5rem 2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem}
+.ad-label{align-self:flex-start;font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist2)}
+.ad-slot img{display:block;width:100%;max-width:728px;height:auto;aspect-ratio:728/90}
+.ad-empty{width:100%;max-width:728px;aspect-ratio:728/90;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;padding:.5rem 1rem;text-align:center;text-decoration:none;
+  border:1px dashed rgba(74,222,128,.35);
+  background:radial-gradient(ellipse at 50% 50%, rgba(74,222,128,.07), transparent 70%),var(--panel);
+  transition:border-color .2s,background .2s}
+.ad-empty:hover{border-color:var(--green);border-style:solid}
+.ad-empty-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--leaf)}
+.ad-empty-sub{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+@media(max-width:640px){.ad-slot{padding:1.25rem 1rem}.ad-empty{aspect-ratio:auto;min-height:90px}}
 </style>
 </head>
 <body>
@@ -686,7 +699,7 @@ footer{
       <a href="futurofood-blog.html" class="active" data-es="Historias">Stories</a>
       <a href="#topics" data-es="Temas">Topics</a>
       <a href="index.html#newsletter" data-es="Boletín">Newsletter</a>
-      <a href="index.html#sponsors" data-es="Anunciarse">Advertise</a>
+      <a href="patrocinadores.html" data-es="Anunciarse">Advertise</a>
     </nav>
     <a href="index.html" class="mast-logo">
       <span>Futuro<em>Food</em></span>
@@ -777,6 +790,16 @@ footer{
     </div>
   </div>
 </div>
+
+<!-- SPONSOR SLOT "blog-top" (728×90). Empty until the first sponsor signs. To fill it, replace the
+     <a class="ad-empty"> with: <a href="SPONSOR_URL" rel="sponsored noopener" target="_blank"><img src="ads/SPONSOR.png" width="728" height="90" alt="SPONSOR NAME"/></a> -->
+<aside class="ad-slot" data-slot="blog-top" aria-label="Sponsored" data-es-aria-label="Patrocinado">
+  <span class="ad-label" data-es="Patrocinado por…">Sponsored by…</span>
+  <a class="ad-empty" href="patrocinadores.html">
+    <span class="ad-empty-title" data-es="Tu marca aquí">Your brand here</span>
+    <span class="ad-empty-sub" data-es="Espacio disponible · 728×90 · Llega a innovadores, inversionistas y productores de LATAM →">Available · 728×90 · Reach LATAM food innovators, investors and producers →</span>
+  </a>
+</aside>
 
 <!-- MAIN LAYOUT -->
 <div class="blog-layout">
@@ -1014,6 +1037,16 @@ footer{
 
     <p class="no-results" id="no-results" role="status"></p>
 
+    <!-- SPONSOR SLOT "blog-list" (728×90). Empty until the first sponsor signs. To fill it, replace the
+         <a class="ad-empty"> with: <a href="SPONSOR_URL" rel="sponsored noopener" target="_blank"><img src="ads/SPONSOR.png" width="728" height="90" alt="SPONSOR NAME"/></a> -->
+    <aside class="ad-slot" data-slot="blog-list" aria-label="Sponsored" data-es-aria-label="Patrocinado">
+      <span class="ad-label" data-es="Patrocinado por…">Sponsored by…</span>
+      <a class="ad-empty" href="patrocinadores.html">
+        <span class="ad-empty-title" data-es="Tu marca aquí">Your brand here</span>
+        <span class="ad-empty-sub" data-es="Espacio disponible · 728×90 · Tu empresa entre las historias →">Available · 728×90 · Your company among the stories →</span>
+      </a>
+    </aside>
+
     <nav class="blog-pager" id="blog-pager" aria-label="Pagination" data-es-aria-label="Paginación" hidden>
       <button type="button" class="pager-btn" id="pager-prev" data-es="← Anterior">← Previous</button>
       <span class="pager-info" id="pager-info" aria-live="polite"></span>
@@ -1124,7 +1157,7 @@ footer{
       <div class="sponsor-mini">
         <span class="sponsor-mini-label" data-es="Patrocinado por">Sponsored by</span>
         <div class="sponsor-logo-box"><span>YOUR LOGO HERE</span></div>
-        <a href="futurofood.html#sponsors" class="sponsor-mini-cta" data-es="Anúnciate con FuturoFood →">Advertise with FuturoFood →</a>
+        <a href="patrocinadores.html" class="sponsor-mini-cta" data-es="Anúnciate con FuturoFood →">Advertise with FuturoFood →</a>
       </div>
     </div>
 
@@ -1139,7 +1172,7 @@ footer{
       <a href="futurofood.html" data-es="Inicio">Home</a>
       <a href="#" data-es="Nosotros">About</a>
       <a href="#newsletter" data-es="Boletín">Newsletter</a>
-      <a href="index.html#sponsors" data-es="Anunciarse">Advertise</a>
+      <a href="patrocinadores.html" data-es="Anunciarse">Advertise</a>
       <a href="#" data-es="Contacto">Contact</a>
       <a href="#" data-es="Privacidad">Privacy</a>
     </div>

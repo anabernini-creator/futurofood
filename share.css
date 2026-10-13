@@ -32,3 +32,11 @@ button[data-share].is-copied{border-color:#4ADE80;color:#4ADE80}
    that are links keep the outline style instead */
 .share-inline a.share-inline-btn:not(.share-wa){color:var(--mist);border:1px solid var(--border)}
 .share-inline a.share-inline-btn:not(.share-wa):hover{color:#4ADE80;border-color:#4ADE80}
+
+/* End-of-article sponsor invitation (links to /patrocinadores) */
+.sponsor-band{max-width:1280px;margin:0 auto;padding:1.4rem 2rem;text-align:center;
+  border-left:1px solid rgba(232,245,224,.06);border-right:1px solid rgba(232,245,224,.06);border-bottom:1px solid rgba(232,245,224,.10);
+  background:#0D150D}
+.sponsor-band p{margin:0;font-family:'DM Sans',system-ui,sans-serif;font-size:.92rem;color:rgba(232,245,224,.75);line-height:1.6}
+.sponsor-band a{margin-left:.35rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4ADE80;text-decoration:none;white-space:nowrap}
+.sponsor-band a:hover{text-decoration:underline;text-underline-offset:3px}
