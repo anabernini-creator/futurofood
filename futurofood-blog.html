@@ -35,8 +35,11 @@
 <style>.i18n-pending body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="canonical" href="https://futurofood.com/futurofood-blog"/>
-<title>Stories — FuturoFood</title>
-<meta name="description" content="FuturoFood stories on insect protein, lab-grown meat, regenerative farming, and food innovation across Latin America."/>
+<title>Food-Tech Stories from Latin America | FuturoFood</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<meta name="keywords" content="food tech news, Latin America, agtech startups, lab-grown meat, insect protein, regenerative farming, water, ancestral foods"/>
+<meta name="description" content="Every FuturoFood story in one place: lab-grown meat, insect protein, regenerative farming, water and ancestral foods across Latin America."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
@@ -1370,7 +1373,11 @@ if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
   const postCount = document.getElementById('post-count');
   postCount.removeAttribute('data-es'); // filled in by updatePostCount in both languages
   document.querySelector('.pagination').style.display = 'none';
-  document.getElementById('story-search').addEventListener('input', applyFilters);
+  const searchBox = document.getElementById('story-search');
+  // ?q= opens the blog already filtered (used by the WebSite search markup on the home page)
+  const initialQuery = new URLSearchParams(location.search).get('q');
+  if (initialQuery) searchBox.value = initialQuery.slice(0, 100);
+  searchBox.addEventListener('input', applyFilters);
   // i18n.js switches languages by setting <html lang>; refresh the count text when it does
   new MutationObserver(applyFilters).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   updateTagCounts();

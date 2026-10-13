@@ -117,6 +117,8 @@ export function applyOgMeta(html, { title, excerpt, imageUrl, pageUrl }) {
   set("name", "twitter:title", title);
   set("name", "twitter:description", desc);
   set("name", "twitter:image", imageUrl);
+  // Structured data points at the same image as the preview tags
+  html = html.replace(/"image": \[[^\]]*\]/, () => `"image": [${JSON.stringify(imageUrl)}]`);
   // Canonical URL (clean, no .html) so search engines index a single address
   const canonical = `<link rel="canonical" href="${pageUrl}"/>`;
   html = /<link rel="canonical"[^>]*\/>/.test(html)

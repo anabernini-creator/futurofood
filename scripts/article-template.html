@@ -34,8 +34,12 @@
 </script>
 <style>.i18n-pending body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>{{TITLE_EN}} — FuturoFood</title>
-<meta name="description" content="{{DECK_EN_ATTR}}"/>
+<title>{{SEO_TITLE}}</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<meta name="keywords" content="{{KEYWORDS_ATTR}}"/>
+<meta name="description" content="{{META_DESC_ATTR}}"/>
+<link rel="canonical" href="https://futurofood.com/{{PAGE_PATH}}"/>
 <meta property="og:title" content="{{TITLE_EN_ATTR}} — FuturoFood"/>
 <meta property="og:description" content="{{DECK_EN_ATTR}}"/>
 <meta property="og:type" content="article"/>
@@ -50,15 +54,20 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "NewsArticle",
   "headline": "{{TITLE_EN_JSON}}",
-  "description": "{{DECK_EN_JSON}}",
-  "author": { "@type": "Organization", "name": "FuturoFood Editorial" },
-  "publisher": { "@type": "Organization", "name": "FuturoFood", "url": "https://futurofood.com" },
+  "description": "{{META_DESC_JSON}}",
+  "image": ["https://futurofood.com/og/{{PAGE_PATH}}.jpg"],
   "datePublished": "{{DATE_ISO}}",
   "dateModified": "{{DATE_ISO}}",
+  "author": { "@type": "Organization", "name": "FuturoFood Editorial", "url": "https://futurofood.com/futurofood-about" },
+  "publisher": { "@type": "Organization", "@id": "https://futurofood.com/#organization", "name": "FuturoFood", "url": "https://futurofood.com/", "logo": { "@type": "ImageObject", "url": "https://futurofood.com/logo.png", "width": 512, "height": 512 } },
+  "mainEntityOfPage": "https://futurofood.com/{{PAGE_PATH}}",
+  "articleSection": "{{TAG_EN_JSON}}",
+  "keywords": {{KEYWORDS_JSON}},
   "inLanguage": "en",
-  "keywords": "{{TAG_EN}}, food tech, LATAM"
+  "isAccessibleForFree": true,
+  "isBasedOn": "{{SOURCE_URL_JSON}}"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>

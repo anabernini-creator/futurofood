@@ -302,6 +302,9 @@ Otherwise respond with ONLY valid JSON, no markdown fences, no commentary, match
   "emoji": "one relevant emoji",
   "title_en": "headline, ~10-16 words — see TITLES below", "title_es": "natural Spanish headline (adapted, not a literal translation)",
   "deck_en": "one-sentence dek, ~25-35 words", "deck_es": "...",
+  "seo_title_en": "search-result title, max 47 characters, main keyword first (company/topic + change), faithful to the excerpt",
+  "meta_description_en": "search-result description, max 155 characters, specific and inviting, no claims beyond the excerpt",
+  "keywords_en": ["5 to 7 search keywords: company or people, topic, technology, country, 'Latin America'"],
   "takeaways": [{"en":"...","es":"..."}, {"en":"...","es":"..."}, {"en":"...","es":"..."}],
   "body": [{"type":"p","en":"...","es":"..."}, {"type":"h2","en":"...","es":"..."}, "5 to 8 items total, at least 2 of type h2, each p is 2-4 sentences"]
 }
@@ -572,6 +575,13 @@ export function renderRelated(related) {
     .join("\n");
 }
 
+// Shortens text at a word boundary (search-result limits)
+function fitLength(text, max) {
+  const t = String(text || "").replace(/\s+/g, " ").trim();
+  if (t.length <= max) return t;
+  return t.slice(0, max - 1).replace(/\s+\S*$/, "").replace(/[,;:—-]\s*$/, "") + "…";
+}
+
 export function renderArticlePage(draft, meta, related) {
   const template = readFileSync(TEMPLATE_PATH, "utf8");
 
@@ -601,12 +611,24 @@ export function renderArticlePage(draft, meta, related) {
   const wordCount = draft.body.reduce((n, b) => n + b.en.split(/\s+/).length, 0);
   const readMinutes = Math.max(3, Math.round(wordCount / 200));
 
+  const keywords = (Array.isArray(draft.keywords_en) && draft.keywords_en.length
+    ? draft.keywords_en
+    : [draft.tag_en, "food tech", "Latin America"]).map((k) => String(k).trim()).filter(Boolean)
+    .filter((k, i, all) => all.findIndex((x) => x.toLowerCase() === k.toLowerCase()) === i).slice(0, 8);
   const longDate = { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" };
   const dateHuman = new Date(`${meta.date_iso}T12:00:00Z`).toLocaleDateString("en-US", longDate);
   const dateHumanEs = new Date(`${meta.date_iso}T12:00:00Z`).toLocaleDateString("es", longDate);
 
   const replacements = {
     "{{TITLE_EN}}": escapeHtml(draft.title_en),
+    // SEO: title ≤ 60 characters with the suffix, description ≤ 155
+    "{{SEO_TITLE}}": escapeHtml(`${fitLength(draft.seo_title_en || draft.title_en, 47)} | FuturoFood`),
+    "{{META_DESC_ATTR}}": escapeAttr(fitLength(draft.meta_description_en || draft.deck_en, 155)),
+    "{{META_DESC_JSON}}": escapeJson(fitLength(draft.meta_description_en || draft.deck_en, 155)),
+    "{{KEYWORDS_ATTR}}": escapeAttr(keywords.join(", ")),
+    "{{KEYWORDS_JSON}}": JSON.stringify(keywords),
+    "{{TAG_EN_JSON}}": escapeJson(draft.tag_en),
+    "{{SOURCE_URL_JSON}}": escapeJson(meta.source_url),
     "{{TITLE_EN_ATTR}}": escapeAttr(draft.title_en),
     "{{TITLE_ES_ATTR}}": escapeAttr(draft.title_es),
     "{{TITLE_EN_JSON}}": escapeJson(draft.title_en),
