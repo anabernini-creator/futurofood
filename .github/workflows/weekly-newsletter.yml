@@ -17,6 +17,9 @@ on:
       base_ref:
         description: "Commit before the articles to include were added"
         required: true
+      pr:
+        description: "Optional: PR number to post the result on"
+        required: false
 
 permissions:
   contents: read
@@ -58,7 +61,7 @@ jobs:
       - name: Report
         if: always()
         env:
-          PR: ${{ github.event.pull_request.number }}
+          PR: ${{ github.event.pull_request.number || inputs.pr }}
         run: |
           OUT="$RUNNER_TEMP/newsletter"
           [ -f "$OUT/result.json" ] || { echo "No newsletter result (no new articles?)." >> "$GITHUB_STEP_SUMMARY"; exit 0; }
@@ -66,11 +69,15 @@ jobs:
           subject=$(jq -r '.subject // ""' "$OUT/result.json")
           if [ "$ok" = "true" ]; then
             echo "✅ **$subject** — $(jq -r '.mode // "ya existía"' "$OUT/result.json") en Beehiiv ($(jq -r '.status // ""' "$OUT/result.json"))." >> "$GITHUB_STEP_SUMMARY"
-            [ -n "$PR" ] && gh pr comment "$PR" --body "✅ Newsletter **$subject** enviado a los suscriptores desde Beehiiv."
+            if [ -n "$PR" ]; then gh pr comment "$PR" --body "✅ Newsletter **$subject** creado en Beehiiv ($(jq -r '.status // ""' "$OUT/result.json"))."; fi
           elif [ "$err" = "plan_not_supported" ]; then
             {
-              echo "Tu plan de Beehiiv no permite crear correos por API (solo Max / Enterprise), así que el envío no salió solo."
-              echo "Está listo para pegar en Beehiiv → **New post**:"
+              echo "📬 **Newsletter de la semana listo para enviar.** Tu plan de Beehiiv no permite crear correos por API, así que hay que pegarlo a mano (2 minutos):"
+              echo
+              echo "1. Beehiiv → **Start writing** (nuevo post)."
+              echo "2. Título y asunto: **$subject**"
+              echo "3. Agrega un bloque **HTML** y pega el contenido de abajo."
+              echo "4. Audiencia: todos los suscriptores → **Publish / Send**."
               echo
               echo "**Asunto:** $subject"
               echo
@@ -82,7 +89,7 @@ jobs:
               echo "</details>"
             } > "$OUT/comment.md"
             cat "$OUT/comment.md" >> "$GITHUB_STEP_SUMMARY"
-            [ -n "$PR" ] && gh pr comment "$PR" --body-file "$OUT/comment.md"
+            if [ -n "$PR" ]; then gh pr comment "$PR" --body-file "$OUT/comment.md"; fi
           else
             echo "❌ Newsletter no enviado: $err" >> "$GITHUB_STEP_SUMMARY"
           fi
