@@ -1,14 +1,16 @@
 // Cloudflare Pages Function — POST /api/sponsor-inquiry
-// Emails sponsorship inquiries from /patrocinadores to Ana through Cloudflare
-// Email Service (REST API). Sending to a verified destination address of the
-// account is free. Reply-To is the sender, so Ana can answer them directly.
-//
-// Requires the Pages secret CF_EMAIL_TOKEN: a Cloudflare API token with the
-// "Email Sending: Edit" permission (set with `wrangler pages secret put`).
+// Emails sponsorship inquiries from /patrocinadores to Ana (free: her Gmail is
+// a verified Email Routing destination). Reply-To is the sender, so Ana can
+// answer them directly. Two ways to send, in this order:
+//   1. the futurofood-mailer Worker (workers/mailer) with the shared secret
+//      MAILER_TOKEN — Pages Functions can't use the email binding themselves;
+//   2. the Email Service REST API with CF_EMAIL_TOKEN (an API token with
+//      "Email Sending: Edit"), if one is ever created.
 
 const ACCOUNT_ID = "7ff771f8ba9f746f18e6ee1bb8fa5cdd";
 const TO = "anabernini@gmail.com";
 const FROM = "patrocinadores@futurofood.com";
+const MAILER_URL = "https://futurofood-mailer.anabernini.workers.dev";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FORMATS = {
@@ -61,8 +63,9 @@ export async function onRequestPost({ request, env }) {
   if (!message || message.length < 10) return json({ ok: false, error: "missing_message" }, 400);
   if (website === null) return json({ ok: false, error: "invalid_website" }, 400);
 
+  const mailerToken = env.MAILER_TOKEN?.trim();
   const token = env.CF_EMAIL_TOKEN?.trim();
-  if (!token) return json({ ok: false, error: "not_configured" }, 503);
+  if (!mailerToken && !token) return json({ ok: false, error: "not_configured" }, 503);
 
   const text = [
     "Nueva consulta de patrocinio desde futurofood.com/patrocinadores",
@@ -81,6 +84,24 @@ export async function onRequestPost({ request, env }) {
     "— Responde a este correo para contestarle directamente.",
   ].join("\n");
 
+  const subject = `Patrocinio: ${company} — ${FORMATS[format]}`;
+
+  if (mailerToken) {
+    try {
+      const res = await fetch(MAILER_URL, {
+        method: "POST",
+        headers: { authorization: `Bearer ${mailerToken}`, "content-type": "application/json" },
+        body: JSON.stringify({ subject, text, reply_to: email }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) return json({ ok: true }, 200);
+      console.error("sponsor_inquiry_mailer_failed", res.status, JSON.stringify(data));
+    } catch (err) {
+      console.error("sponsor_inquiry_mailer_fetch_failed", err?.message);
+    }
+    if (!token) return json({ ok: false, error: "send_failed" }, 424);
+  }
+
   try {
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID || ACCOUNT_ID}/email/sending/send`, {
       method: "POST",
@@ -89,17 +110,17 @@ export async function onRequestPost({ request, env }) {
         to: TO,
         from: FROM,
         reply_to: email,
-        subject: `Patrocinio: ${company} — ${FORMATS[format]}`,
+        subject,
         text,
       }),
     });
     const data = await res.json().catch(() => ({}));
     if (res.ok && data.success) return json({ ok: true }, 200);
     console.error("sponsor_inquiry_send_failed", res.status, JSON.stringify(data.errors || data));
-    return json({ ok: false, error: "send_failed" }, 502);
+    return json({ ok: false, error: "send_failed" }, 424);
   } catch (err) {
     console.error("sponsor_inquiry_fetch_failed", err?.message);
-    return json({ ok: false, error: "send_failed" }, 502);
+    return json({ ok: false, error: "send_failed" }, 424);
   }
 }
 

@@ -1,0 +1,11 @@
+# futurofood-mailer — sends site notifications (sponsor inquiries) to Ana.
+# Deployed separately from the Pages site: `wrangler deploy` from this folder.
+# The send_email binding can only deliver to Ana's verified address.
+name = "futurofood-mailer"
+main = "index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[[send_email]]
+name = "EMAIL"
+destination_address = "anabernini@gmail.com"
