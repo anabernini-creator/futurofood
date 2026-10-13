@@ -713,23 +713,6 @@ footer{
   </div>
 </div>
 
-<!-- STATUS BANNER — hide when Ghost is live -->
-<div class="static-banner">
-  <div class="static-banner-inner">
-    <span class="banner-dot"></span>
-    <span data-es='<strong>Modo demo</strong> — Mostrando historias de muestra. Conecta Ghost CMS para cargar automáticamente historias generadas por IA en vivo.'>
-      <strong>Demo mode</strong> — Showing sample stories.
-      <!--
-        GHOST INTEGRATION: Once Ghost CMS is connected,
-        replace this entire .static-banner div with:
-        <div class="ghost-connected-banner" style="display:none"></div>
-        and the JS will populate live posts automatically.
-      -->
-      Connect Ghost CMS to load live AI-generated stories automatically.
-    </span>
-  </div>
-</div>
-
 <!-- FILTER BAR -->
 <div class="filter-bar" id="topics" role="navigation" aria-label="Filter by topic" data-es-aria-label="Filtrar por tema">
   <button class="filter-btn active" data-tag="all" onclick="filterCards(this,'all')">
@@ -772,20 +755,20 @@ footer{
     <div class="featured-body">
       <div class="featured-top">
         <span class="featured-label" data-es="↗ Historia Principal">↗ Cover Story</span>
-        <span class="featured-readtime" data-es="1 min de lectura">1 min read</span>
+        <span class="featured-readtime" data-es="2 min de lectura">2 min read</span>
       </div>
       <h2 class="featured-title" data-es="Colombia está construyendo una de las plantas de proteína de insectos más grandes de América Latina — financiada por capital de riesgo internacional">
         Colombia is building one of Latin America's largest insect-protein plants — funded by international venture capital
       </h2>
-      <p class="featured-deck" data-es="S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa que convierte residuos orgánicos en proteína y aceite de calidad alimentaria usando larvas de mosca soldado negra. La instalación procesará 200 toneladas de residuos al día, orientada a reemplazar la harina de pescado en el alimento para acuicultura.">
-        S2G Investments and Ocean 14 Capital backed Enthos, a company converting organic waste into food-grade protein and oil using Black Soldier Fly larvae. The facility will process 200 tons of waste per day, aimed at replacing fishmeal in aquaculture feed.
+      <p class="featured-deck" data-es="S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa colombiana que usa larvas de mosca soldado negra para convertir residuos de comida en harina y aceite de insectos para alimento animal y acuícola, como alternativa a la harina de pescado.">
+        S2G Investments and Ocean 14 Capital backed Enthos, a Colombian company using black soldier fly larvae to turn food waste into insect meal and oil for animal and aquaculture feed, as an alternative to fishmeal.
       </p>
       <div class="featured-meta">
         <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
         <span class="byline-sm" data-es='Por <span>Equipo Editorial FuturoFood</span>'>By <span>FuturoFood Editorial</span></span>
-        <span class="byline-sm" data-es="Fuente: Aquafeed.com, Undercurrent News">Source: Aquafeed.com, Undercurrent News</span>
+        <span class="byline-sm" data-es="Fuente: The Fish Site, S2G Investments">Source: The Fish Site, S2G Investments</span>
       </div>
-      <a href="#newsletter" class="read-cta" data-es="Leer historia completa →">Read full story →</a>
+      <a href="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html" class="read-cta" data-es="Leer historia completa →">Read full story →</a>
     </div>
     <!-- Video: paste a YouTube, Vimeo or .mp4/.webm URL in data-video-url (empty = editorial placeholder) -->
     <div class="featured-img media-frame" data-video-url="" data-video-title="Enthos insect-protein plant, Colombia" role="img" aria-label="Black Soldier Fly protein facility · Colombia" data-es-aria-label="Instalación de proteína de mosca soldado negra · Colombia">
@@ -822,6 +805,23 @@ footer{
     -->
 
     <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated cards here — do not hand-edit between markers) -->
+    <article class="article-card" data-tag="insects" data-id="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
+          <span class="card-readtime" data-es="2 min de lectura">2 min read</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html" data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces">Enthos is turning food waste into insect protein for animal and fish feed</a></h3>
+        <p class="card-excerpt" data-es="Con el respaldo de S2G Investments y Ocean 14 Capital, la empresa colombiana construye Enthos 1, una planta de mosca soldado negra pensada para ser uno de los mayores centros de proteína de insectos de América Latina.">Backed by S2G Investments and Ocean 14 Capital, the Colombian company is building Enthos 1, a black soldier fly plant designed to become one of Latin America's largest insect protein sites.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-10-13" data-es="13 oct 2026">Oct 13, 2026</time> · <span data-es="Fuente: The Fish Site">Source: The Fish Site</span></span>
+          <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🦗</span></div>
+    </article>
+
     <article class="article-card" data-tag="tech" data-id="futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields.html">
       <div>
         <div class="card-top">
@@ -942,22 +942,6 @@ footer{
       <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🏦</span></div>
     </article>
 
-    <article class="article-card" data-tag="insects" data-id="enthos-secures-vc-backing-to-scale-colombia-s-largest-insect">
-      <div>
-        <div class="card-top">
-          <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
-          <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
-          <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <h3 class="card-title" data-es="Enthos asegura respaldo de capital de riesgo para ampliar la mayor planta de proteína de insectos de Colombia">Enthos secures VC backing to scale Colombia's largest insect-protein facility</h3>
-        <p class="card-excerpt" data-es="S2G Investments y Ocean 14 Capital invirtieron en Enthos, que procesa 200 toneladas de residuos orgánicos al día en proteína y aceite de mosca soldado negra para los mercados de acuicultura y alimento para ganado.">S2G Investments and Ocean 14 Capital invested in Enthos, which processes 200 tons of organic waste per day into Black Soldier Fly protein and oil for the aquaculture and livestock feed markets.</p>
-        <div class="card-bottom">
-          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026">Jun 30, 2026</time> · <span data-es="Fuente: Aquafeed.com">Source: Aquafeed.com</span></span>
-          <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
-        </div>
-      </div>
-      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🪲</span></div>
-    </article>
 
     <article class="article-card" data-tag="insects" data-id="ifc-invests-2m-in-pronuvo-a-costa-rican-insect-feed-producer">
       <div>
