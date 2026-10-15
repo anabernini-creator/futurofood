@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<!-- Google Analytics 4 — gtag.js loads async, so it never blocks rendering -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DB7ETK6YM5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2: analytics cookies stay off until consent.js confirms the
+  // visitor is outside the EU/EEA, UK, Switzerland and Brazil, or they accept.
+  gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 1000});
+  try {
+    var ffc = JSON.parse(localStorage.getItem('ff-consent') || 'null');
+    var ffr = sessionStorage.getItem('ff-consent-required');
+    if (ffc) gtag('consent', 'update', {analytics_storage: ffc.analytics ? 'granted' : 'denied'});
+    else if (ffr === '0') gtag('consent', 'update', {analytics_storage: 'granted'});
+  } catch (e) {}
+  gtag('js', new Date());
+  gtag('config', 'G-DB7ETK6YM5');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
+<link rel="canonical" href="https://futurofood.com/es/futurofood-blog"/>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-blog"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-blog"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/futurofood-blog"/>
+<title data-es="Historias de food-tech de América Latina | FuturoFood">Historias de food-tech de América Latina | FuturoFood</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<meta name="keywords" content="food tech news, Latin America, agtech startups, lab-grown meat, insect protein, regenerative farming, water, ancestral foods"/>
+<meta name="description" content="Todas las historias de FuturoFood: carne cultivada, proteína de insectos, agricultura regenerativa, agua y alimentos ancestrales en América Latina." data-es-content="Todas las historias de FuturoFood: carne cultivada, proteína de insectos, agricultura regenerativa, agua y alimentos ancestrales en América Latina." data-en-content="Every FuturoFood story in one place: lab-grown meat, insect protein, regenerative farming, water and ancestral foods across Latin America."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<meta property="og:title" content="Todas las historias — FuturoFood" data-es-content="Todas las historias — FuturoFood" data-en-content="All Stories — FuturoFood"/>
+<meta property="og:description" content="Innovación alimentaria en América Latina: cultivado en laboratorio, regenerativo, proteína de insectos, tecnología alimentaria, agua y alimentos ancestrales." data-es-content="Innovación alimentaria en América Latina: cultivado en laboratorio, regenerativo, proteína de insectos, tecnología alimentaria, agua y alimentos ancestrales." data-en-content="Food innovation across Latin America: lab-grown, regenerative, insect protein, food tech, water and ancestral foods. Bilingual EN/ES."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="es_LA"/>
+<meta property="og:locale:alternate" content="en_US"/>
+<meta property="og:site_name" content="FuturoFood"/>
+<meta property="og:url" content="https://futurofood.com/es/futurofood-blog"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:image" content="https://futurofood.com/og-default.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema" data-es-content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema" data-en-content="FuturoFood — Stories of the people who grow, research and build to change the food system"/>
+<meta name="twitter:image" content="https://futurofood.com/og-default.jpg"/>
+<link rel="stylesheet" href="/media.css?v=1"/>
+<link rel="stylesheet" href="/share.css?v=5"/>
+<link rel="stylesheet" href="/capture.css?v=1"/>
+<link rel="stylesheet" href="/consent.css?v=1"/>
+<link rel="stylesheet" href="/wa-channel.css?v=1"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+
+:root{
+  --ink:    #0A0F0A;
+  --leaf:   #E8F5E0;
+  --panel:  #111A11;
+  --panel2: #162016;
+  --green:  #4ADE80;
+  --fire:   #FF6B35;
+  --gold:   #F5C842;
+  --mist:   rgba(232,245,224,0.65);
+  --mist2:  rgba(232,245,224,0.35);
+  --border: rgba(232,245,224,0.10);
+  --border2:rgba(232,245,224,0.06);
+  --serif:  'Playfair Display',Georgia,serif;
+  --sans:   'DM Sans',system-ui,sans-serif;
+  --mono:   'JetBrains Mono',monospace;
+}
+
+body{
+  background:var(--ink);
+  color:var(--leaf);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* ── MASTHEAD ── */
+.masthead{
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,15,10,0.93);
+  backdrop-filter:blur(16px);
+}
+.masthead-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  min-height:64px;
+  gap:1rem;
+}
+.mast-nav{display:flex;gap:1.75rem;align-items:center}
+.mast-nav a{
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mist);transition:color .2s;
+}
+.mast-nav a:hover,.mast-nav a.active{color:var(--green)}
+.mast-logo{
+  text-align:center;font-family:var(--serif);
+  font-size:1.6rem;font-weight:900;letter-spacing:-.02em;line-height:1;
+  display:block;cursor:pointer;
+}
+.mast-logo em{color:var(--green);font-style:normal}
+.mast-logo small{
+  display:block;font-family:var(--mono);font-size:.55rem;
+  font-weight:400;letter-spacing:.22em;color:var(--mist);margin-top:3px;
+}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:1rem}
+.btn-subscribe{
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:var(--green);color:var(--ink);
+  padding:.5rem 1.25rem;border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+  text-decoration:none;display:inline-block;
+}
+.btn-subscribe:hover{background:#6ee89a;transform:translateY(-1px)}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  max-width:1280px;margin:0 auto;
+  padding:3rem 2rem 0;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+}
+.page-header-inner{
+  border-bottom:3px solid var(--leaf);
+  padding-bottom:1.25rem;
+  margin-bottom:2.5rem;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:1rem;
+}
+.page-title{
+  font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:900;letter-spacing:-.03em;line-height:1;
+}
+.page-title em{color:var(--green);font-style:normal}
+.page-meta{
+  font-family:var(--mono);font-size:.62rem;
+  color:var(--mist);letter-spacing:.08em;
+  text-align:right;line-height:1.6;
+}
+
+/* ── STATUS BANNER ── */
+/* 
+  ╔══════════════════════════════════════════════════════╗
+  ║  GHOST CMS INTEGRATION POINT                         ║
+  ║  When Ghost is live, hide .static-banner             ║
+  ║  and show .ghost-connected-banner instead            ║
+  ╚══════════════════════════════════════════════════════╝
+*/
+.static-banner{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+}
+.static-banner-inner{
+  margin:0 2rem;
+  background:var(--panel2);
+  border:1px solid rgba(245,200,66,.2);
+  border-left:3px solid var(--gold);
+  padding:.75rem 1.25rem;
+  display:flex;align-items:center;gap:.75rem;
+  font-family:var(--mono);font-size:.65rem;
+  color:var(--gold);letter-spacing:.06em;
+  margin-bottom:2rem;
+}
+.banner-dot{
+  width:6px;height:6px;background:var(--gold);
+  border-radius:50%;flex-shrink:0;
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── FILTER BAR ── */
+.filter-bar{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.filter-bar::-webkit-scrollbar{display:none}
+@media(min-width:961px){.filter-bar{flex-wrap:wrap;overflow-x:visible}}
+.filter-btn{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--mist);background:transparent;border:none;
+  padding:1rem 1rem;cursor:pointer;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;transition:color .2s,border-color .2s;
+}
+.filter-btn:hover{color:var(--leaf)}
+.filter-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.filter-count{
+  display:inline-block;
+  background:var(--panel2);
+  color:var(--mist2);
+  font-size:.5rem;
+  padding:.1rem .35rem;
+  margin-left:.3rem;
+  vertical-align:middle;
+}
+
+/* ── SEARCH ── */
+.search-bar{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  border-bottom:1px solid var(--border);
+  padding:.6rem 2rem;
+  display:flex;align-items:center;gap:.75rem;
+  transition:border-color .2s;
+}
+.search-bar:focus-within{border-bottom-color:var(--green)}
+.search-icon{font-size:.95rem;line-height:1;flex-shrink:0}
+.search-input{
+  flex:1;min-width:0;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;
+  color:var(--leaf);background:transparent;
+  border:none;outline:none;padding:.45rem 0;
+}
+.search-input::placeholder{color:var(--mist2)}
+.no-results{
+  display:none;padding:3rem 2rem;text-align:center;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  color:var(--mist);
+}
+.no-results.visible{display:block}
+
+/* ── FEATURED STORY (large card) ── */
+.featured-wrap{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  padding:2rem;
+  border-bottom:1px solid var(--border);
+}
+.featured-card{
+  display:grid;
+  grid-template-columns:3fr 2fr;
+  gap:0;
+  border:1px solid var(--border);
+  background:var(--panel);
+  transition:background .2s;
+  cursor:pointer;
+}
+.featured-card:hover{background:var(--panel2)}
+.featured-body{padding:2.5rem 2rem;}
+.featured-top{
+  display:flex;align-items:center;gap:.75rem;
+  margin-bottom:1.25rem;
+}
+.featured-label{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:var(--green);color:var(--ink);
+  padding:.25rem .65rem;
+}
+.featured-readtime{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.06em;
+}
+.featured-title{
+  font-family:var(--serif);
+  font-size:clamp(1.5rem,2.5vw,2.2rem);
+  font-weight:900;letter-spacing:-.02em;line-height:1.1;
+  margin-bottom:1rem;
+}
+.featured-deck{
+  font-family:var(--serif);font-size:1rem;
+  font-style:italic;color:var(--mist);
+  line-height:1.6;margin-bottom:1.5rem;
+  padding-left:.875rem;
+  border-left:3px solid var(--green);
+}
+.featured-meta{
+  display:flex;align-items:center;gap:1rem;
+  flex-wrap:wrap;
+}
+.tag{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .6rem;
+}
+.tag-insects{background:rgba(74,222,128,.12);color:var(--green)}
+.tag-lab    {background:rgba(245,200,66,.12);color:var(--gold)}
+.tag-regen  {background:rgba(255,107,53,.12);color:var(--fire)}
+.tag-tech   {background:rgba(232,245,224,.08);color:var(--mist)}
+.tag-ancestral{background:rgba(245,200,66,.08);color:var(--gold)}
+.tag-water  {background:rgba(74,222,128,.06);color:rgba(74,222,128,.7)}
+.byline-sm{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.byline-sm span{color:var(--mist)}
+.featured-img{
+  border-left:1px solid var(--border);
+  min-height:280px;
+}
+.read-cta{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--green);margin-top:1.25rem;
+  border-bottom:1px solid rgba(74,222,128,.3);
+  padding-bottom:2px;
+  transition:border-color .2s;
+}
+.read-cta:hover{border-color:var(--green)}
+
+/* ── MAIN GRID ── */
+.blog-layout{
+  max-width:1280px;margin:0 auto;
+  border-left:1px solid var(--border2);
+  border-right:1px solid var(--border2);
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:0;
+  border-bottom:1px solid var(--border);
+}
+
+/* Articles list */
+.articles-list{border-right:1px solid var(--border)}
+
+/*
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  GHOST CMS INTEGRATION — ARTICLE CARDS                          ║
+  ║                                                                  ║
+  ║  Step 1: Get your Ghost API key:                                 ║
+  ║    Ghost Admin → Settings → Integrations → Add custom           ║
+  ║    Copy the "Content API Key"                                    ║
+  ║                                                                  ║
+  ║  Step 2: Replace GHOST_URL and GHOST_KEY below in the JS        ║
+  ║    const GHOST_URL = 'https://your-ghost-site.com'              ║
+  ║    const GHOST_KEY = 'your-content-api-key'                     ║
+  ║                                                                  ║
+  ║  Step 3: The fetchGhostPosts() function will replace             ║
+  ║    the static cards with live Ghost content automatically        ║
+  ║                                                                  ║
+  ║  Ghost Content API endpoint used:                                ║
+  ║    GET /ghost/api/content/posts/                                 ║
+  ║    ?key={key}&include=tags,authors&limit=12&page={n}            ║
+  ╚══════════════════════════════════════════════════════════════════╝
+*/
+
+.article-card{
+  padding:2rem;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr 100px;
+  gap:1.5rem;
+  align-items:start;
+  cursor:pointer;
+  transition:background .2s;
+  color:inherit;
+  text-decoration:none;
+}
+.article-card:hover{background:var(--panel2)}
+.article-card{position:relative}
+/* The title link covers the whole card; the save button sits above it */
+.card-link{color:inherit;text-decoration:none}
+.card-link::after{content:"";position:absolute;inset:0;z-index:1}
+.card-link:focus-visible{outline:none}
+.article-card:focus-within{outline:2px solid var(--green);outline-offset:-2px}
+.save-btn{
+  position:relative;z-index:2;margin-left:auto;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:2rem;height:2rem;padding:0;
+  background:transparent;border:none;cursor:pointer;
+  color:var(--mist2);transition:color .2s,transform .15s;
+}
+.save-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+.save-btn:hover,.save-btn[aria-pressed="true"]{color:var(--fire)}
+.save-btn[aria-pressed="true"] svg{fill:currentColor}
+.save-btn:active{transform:scale(.88)}
+.save-btn:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.filter-saved.active{color:var(--fire);border-bottom-color:var(--fire)}
+/* Pagination (static mode) */
+.blog-pager{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.75rem 2rem;border-top:1px solid var(--border)}
+.blog-pager[hidden]{display:none}
+.pager-info{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
+.pager-btn{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--leaf);border:1px solid var(--border);
+  padding:.65rem 1.1rem;cursor:pointer;transition:border-color .2s,color .2s;
+}
+.pager-btn:hover:not(:disabled){border-color:var(--green);color:var(--green)}
+.pager-btn:disabled{opacity:.3;cursor:default}
+@media(max-width:640px){
+  .blog-pager{padding:1.25rem 1rem;gap:.5rem}
+  .pager-btn{padding:.6rem .7rem;white-space:nowrap}
+  .pager-info{white-space:nowrap;font-size:.58rem;letter-spacing:.06em}
+}
+.article-card:last-child{border-bottom:none}
+.card-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-title{
+  font-family:var(--serif);font-size:1.15rem;
+  font-weight:700;line-height:1.25;letter-spacing:-.01em;
+  margin-bottom:.6rem;
+}
+.card-excerpt{
+  font-size:.85rem;color:var(--mist);
+  line-height:1.6;margin-bottom:.875rem;
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;
+}
+.card-bottom{
+  display:flex;align-items:center;gap:.875rem;
+  flex-wrap:wrap;
+}
+.card-date{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.card-readtime{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+.card-img{
+  width:100px;height:70px;
+  border:1px solid var(--border);
+  flex-shrink:0;
+}
+
+/* Pagination */
+.pagination{
+  padding:2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);
+}
+.page-info{
+  font-family:var(--mono);font-size:.62rem;
+  color:var(--mist2);letter-spacing:.06em;
+}
+.page-btns{display:flex;gap:.5rem}
+.page-btn{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--mist);
+  border:1px solid var(--border);
+  padding:.5rem 1rem;cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.page-btn:hover{border-color:var(--green);color:var(--green)}
+.page-btn:disabled{opacity:.3;cursor:not-allowed}
+.page-btn.active{background:var(--green);color:var(--ink);border-color:var(--green)}
+
+/* ── SIDEBAR ── */
+.sidebar{padding:2rem 1.5rem}
+
+.sidebar-block{margin-bottom:2.5rem}
+.sidebar-title{
+  font-family:var(--mono);font-size:.62rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mist2);
+  padding-bottom:.75rem;
+  border-bottom:1px solid var(--border);
+  margin-bottom:1.25rem;
+}
+
+/* Newsletter mini */
+.nl-mini{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-top:2px solid var(--green);
+  padding:1.25rem;
+}
+.nl-mini-title{
+  font-family:var(--serif);font-size:1.1rem;
+  font-weight:700;line-height:1.2;
+  margin-bottom:.5rem;
+}
+.nl-mini-title em{color:var(--green);font-style:normal}
+.nl-mini-desc{
+  font-size:.78rem;color:var(--mist);
+  line-height:1.55;margin-bottom:1rem;
+}
+.nl-mini-input{
+  width:100%;background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--leaf);font-family:var(--sans);
+  font-size:.82rem;padding:.7rem .875rem;
+  outline:none;transition:border-color .2s;
+  margin-bottom:.5rem;
+}
+.nl-mini-input::placeholder{color:var(--mist2)}
+.nl-mini-input:focus{border-color:var(--green)}
+.nl-mini-btn{
+  width:100%;background:var(--green);color:var(--ink);
+  font-family:var(--mono);font-size:.62rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.75rem;border:none;cursor:pointer;
+  transition:background .2s;
+}
+.nl-mini-btn:hover{background:#6ee89a}
+.nl-mini-note{
+  font-family:var(--mono);font-size:.52rem;
+  color:var(--mist2);letter-spacing:.05em;
+  margin-top:.5rem;
+}
+
+/* Topic list */
+.topic-list{display:flex;flex-direction:column;gap:0}
+.topic-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.6rem 0;
+  border-bottom:1px solid var(--border2);
+  cursor:pointer;
+  transition:color .2s;
+}
+.topic-item:last-child{border-bottom:none}
+.topic-item:hover .topic-name{color:var(--green)}
+.topic-name{
+  font-size:.88rem;font-weight:500;
+  display:flex;align-items:center;gap:.6rem;
+  transition:color .2s;
+}
+.topic-icon{font-size:.875rem}
+.topic-count{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--mist2);letter-spacing:.05em;
+}
+
+/* Most read */
+.most-read-list{display:flex;flex-direction:column;gap:1rem}
+.mr-item{
+  display:grid;grid-template-columns:28px 1fr;
+  gap:.75rem;align-items:start;
+  cursor:pointer;
+}
+.mr-num{
+  font-family:var(--serif);font-size:1.4rem;
+  font-weight:900;color:var(--border);
+  line-height:1;
+}
+.mr-title{
+  font-family:var(--serif);font-size:.88rem;
+  font-weight:700;line-height:1.25;
+  transition:color .2s;
+}
+.mr-item:hover .mr-title{color:var(--green)}
+.mr-tag{
+  font-family:var(--mono);font-size:.52rem;
+  color:var(--mist2);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:.25rem;display:block;
+}
+
+/* Sponsor mini */
+.sponsor-mini{
+  border:1px solid var(--border);padding:1.25rem;
+  text-align:center;background:var(--panel2);
+}
+.sponsor-mini-label{
+  font-family:var(--mono);font-size:.55rem;
+  color:var(--mist2);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:.875rem;display:block;
+}
+.sponsor-logo-box{
+  width:100%;height:50px;
+  border:1px dashed rgba(74,222,128,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.875rem;
+}
+.sponsor-logo-box span{
+  font-family:var(--mono);font-size:.55rem;
+  color:rgba(232,245,224,.2);letter-spacing:.06em;
+}
+.sponsor-mini-cta{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);border:1px solid rgba(74,222,128,.3);
+  display:block;padding:.5rem;
+  transition:background .2s,color .2s;
+}
+.sponsor-mini-cta:hover{background:var(--green);color:var(--ink)}
+
+/* ── GHOST LOADING STATE ── */
+/*
+  ╔═══════════════════════════════════════════════╗
+  ║  When Ghost loads, show .ghost-loading        ║
+  ║  and hide it when posts render                ║
+  ╚═══════════════════════════════════════════════╝
+*/
+.ghost-loading{
+  padding:3rem 2rem;
+  text-align:center;
+  display:none; /* shown by JS when fetching */
+}
+.ghost-loading-text{
+  font-family:var(--mono);font-size:.68rem;
+  color:var(--mist2);letter-spacing:.1em;text-transform:uppercase;
+}
+.skeleton{
+  background:var(--panel2);
+  animation:shimmer 1.5s infinite;
+}
+@keyframes shimmer{
+  0%,100%{opacity:.5}
+  50%{opacity:.8}
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:3px solid var(--leaf);
+  background:var(--panel);
+}
+.footer-bottom{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 2rem;flex-wrap:wrap;gap:.75rem;
+}
+.footer-brand{font-family:var(--serif);font-weight:900;font-size:1.1rem}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--mist2);letter-spacing:.06em;text-transform:uppercase;
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{
+  font-family:var(--mono);font-size:.58rem;
+  color:rgba(232,245,224,.25);letter-spacing:.05em;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .search-bar{padding:.5rem 1rem}
+  .blog-layout{grid-template-columns:1fr}
+  .sidebar{border-top:1px solid var(--border)}
+  .featured-card{grid-template-columns:1fr}
+  .featured-img{min-height:180px;border-left:none;border-top:1px solid var(--border)}
+  .masthead-inner{display:flex;flex-wrap:wrap;align-items:center;row-gap:.5rem}
+  .mast-nav{display:none}
+  .masthead{padding:0 1rem}
+  .mast-logo{text-align:left;font-size:1.15rem;width:100%}
+  .mast-logo small{display:none}
+  .mast-right{gap:.35rem;width:100%;justify-content:flex-end;flex-wrap:wrap}
+  .lang-btn{padding:.3rem .5rem;font-size:.6rem}
+  .btn-subscribe{padding:.35rem .7rem;font-size:.6rem}
+}
+@media(max-width:640px){
+  .article-card{grid-template-columns:1fr}
+  .card-img{display:none}
+  .page-header-inner{flex-direction:column;align-items:flex-start}
+  .page-meta{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+  .banner-dot,.ghost-loading{animation:none}
+  *{transition-duration:0ms!important}
+}
+
+/* ── SPONSOR SLOTS (728×90) ── */
+.ad-slot{max-width:calc(728px + 4rem);margin:0 auto;padding:1.5rem 2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem}
+.ad-label{align-self:flex-start;font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist2)}
+.ad-slot img{display:block;width:100%;max-width:728px;height:auto;aspect-ratio:728/90}
+.ad-empty{width:100%;max-width:728px;aspect-ratio:728/90;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;padding:.5rem 1rem;text-align:center;text-decoration:none;
+  border:1px dashed rgba(74,222,128,.35);
+  background:radial-gradient(ellipse at 50% 50%, rgba(74,222,128,.07), transparent 70%),var(--panel);
+  transition:border-color .2s,background .2s}
+.ad-empty:hover{border-color:var(--green);border-style:solid}
+.ad-empty-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--leaf)}
+.ad-empty-sub{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+@media(max-width:640px){.ad-slot{padding:1.25rem 1rem}.ad-empty{aspect-ratio:auto;min-height:90px}}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <nav class="mast-nav">
+      <a href="/es/" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="/es/futurofood-blog" class="active" data-es="Historias" data-en="Stories">Historias</a>
+      <a href="#topics" data-es="Temas" data-en="Topics">Temas</a>
+      <a href="/es/#newsletter" data-es="Boletín" data-en="Newsletter">Boletín</a>
+      <a href="/es/patrocinadores" data-es="Anunciarse" data-en="Advertise">Anunciarse</a>
+    </nav>
+    <a href="/es/" class="mast-logo">
+      <span>Futuro<em>Food</em></span>
+      <small data-es="El futuro de la alimentación · LATAM" data-en="The Future of Food · LATAM">El futuro de la alimentación · LATAM</small>
+    </a>
+    <div class="mast-right">
+      <div class="lang-switch" role="group" aria-label="Selector de idioma" data-es-aria-label="Selector de idioma" data-en-aria-label="Language selector">
+        <a class="lang-btn" data-lang="en" href="/futurofood-blog" hreflang="en">EN</a>
+        <a class="lang-btn active" data-lang="es" href="/es/futurofood-blog" hreflang="es" aria-current="true">ES</a>
+      </div>
+      <a href="#newsletter" class="btn-subscribe" data-es="Suscríbete Gratis" data-en="Subscribe Free">Suscríbete Gratis</a>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1 class="page-title" data-es="Todas las <em>Historias</em>" data-en="All <em>Stories</em>">Todas las <em>Historias</em></h1>
+    <div class="page-meta">
+      <div id="post-count" data-es="Cargando historias..." data-en="Loading stories...">Cargando historias...</div>
+      <div data-es="Actualizado semanalmente · EN / ES" data-en="Updated weekly · EN / ES">Actualizado semanalmente · EN / ES</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="topics" role="navigation" aria-label="Filtrar por tema" data-es-aria-label="Filtrar por tema" data-en-aria-label="Filter by topic">
+  <button class="filter-btn active" data-tag="all" onclick="filterCards(this,'all')">
+    <span data-es="Todas" data-en="All">Todas</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn" data-tag="lab" onclick="filterCards(this,'lab')">
+    <span data-es="🧬 Cultivado en Lab" data-en="🧬 Lab-Grown">🧬 Cultivado en Lab</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn" data-tag="regen" onclick="filterCards(this,'regen')">
+    <span data-es="🌱 Regenerativo" data-en="🌱 Regenerative">🌱 Regenerativo</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn" data-tag="insects" onclick="filterCards(this,'insects')">
+    <span data-es="🦗 Proteína de Insectos" data-en="🦗 Insect Protein">🦗 Proteína de Insectos</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn" data-tag="tech" onclick="filterCards(this,'tech')">
+    <span data-es="🤖 Tecnología Alimentaria" data-en="🤖 Food Tech">🤖 Tecnología Alimentaria</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn" data-tag="water" onclick="filterCards(this,'water')">
+    <span data-es="💧 Agua" data-en="💧 Water">💧 Agua</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn" data-tag="ancestral" onclick="filterCards(this,'ancestral')">
+    <span data-es="🌽 Ancestral" data-en="🌽 Ancestral">🌽 Ancestral</span> <span class="filter-count"></span>
+  </button>
+  <button class="filter-btn filter-saved" data-tag="saved" onclick="filterCards(this,'saved')">
+    <span data-es="♥ Mis guardados" data-en="♥ Saved">♥ Mis guardados</span> <span class="filter-count"></span>
+  </button>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar" role="search">
+  <span class="search-icon" aria-hidden="true">🔍</span>
+  <input id="story-search" class="search-input" type="search" autocomplete="off"
+    placeholder="Busca historias por título o resumen…" data-es-placeholder="Busca historias por título o resumen…"
+    aria-label="Buscar historias" data-es-aria-label="Buscar historias" data-en-placeholder="Search stories by title or summary…" data-en-aria-label="Search stories"/>
+</div>
+
+<!-- FEATURED STORY -->
+<div class="featured-wrap">
+  <div class="featured-card" data-tag="insects">
+    <div class="featured-body">
+      <div class="featured-top">
+        <span class="featured-label" data-es="↗ Historia Principal" data-en="↗ Cover Story">↗ Historia Principal</span>
+        <span class="featured-readtime" data-es="2 min de lectura" data-en="2 min read">2 min de lectura</span>
+      </div>
+      <h2 class="featured-title" data-es="Colombia está construyendo una de las plantas de proteína de insectos más grandes de América Latina — financiada por capital de riesgo internacional" data-en="
+        Colombia is building one of Latin America's largest insect-protein plants — funded by international venture capital
+      ">Colombia está construyendo una de las plantas de proteína de insectos más grandes de América Latina — financiada por capital de riesgo internacional</h2>
+      <p class="featured-deck" data-es="S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa colombiana que usa larvas de mosca soldado negra para convertir residuos de comida en harina y aceite de insectos para alimento animal y acuícola, como alternativa a la harina de pescado." data-en="
+        S2G Investments and Ocean 14 Capital backed Enthos, a Colombian company using black soldier fly larvae to turn food waste into insect meal and oil for animal and aquaculture feed, as an alternative to fishmeal.
+      ">S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa colombiana que usa larvas de mosca soldado negra para convertir residuos de comida en harina y aceite de insectos para alimento animal y acuícola, como alternativa a la harina de pescado.</p>
+      <div class="featured-meta">
+        <span class="tag tag-insects" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span>
+        <span class="byline-sm" data-es='Por <span>Equipo Editorial FuturoFood</span>' data-en="By <span>FuturoFood Editorial</span>">Por <span>Equipo Editorial FuturoFood</span></span>
+        <span class="byline-sm" data-es="Fuente: The Fish Site, S2G Investments" data-en="Source: The Fish Site, S2G Investments">Fuente: The Fish Site, S2G Investments</span>
+      </div>
+      <a href="/es/futurofood-article-enthos-insect-protein-from-food-waste-colombia" class="read-cta" data-es="Leer historia completa →" data-en="Read full story →">Leer historia completa →</a>
+    </div>
+    <!-- Video: paste a YouTube, Vimeo or .mp4/.webm URL in data-video-url (empty = editorial placeholder) -->
+    <div class="featured-img media-frame" data-video-url="" data-video-title="Enthos insect-protein plant, Colombia" role="img" aria-label="Instalación de proteína de mosca soldado negra · Colombia" data-es-aria-label="Instalación de proteína de mosca soldado negra · Colombia" data-en-aria-label="Black Soldier Fly protein facility · Colombia">
+      <span class="media-emoji" aria-hidden="true">🦗</span>
+      <span class="media-caption" aria-hidden="true">Enthos · Colombia · 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- SPONSOR SLOT "blog-top" (728×90). Empty until the first sponsor signs. To fill it, replace the
+     <a class="ad-empty"> with: <a href="SPONSOR_URL" rel="sponsored noopener" target="_blank"><img src="ads/SPONSOR.png" width="728" height="90" alt="SPONSOR NAME"/></a> -->
+<aside class="ad-slot" data-slot="blog-top" aria-label="Patrocinado" data-es-aria-label="Patrocinado" data-en-aria-label="Sponsored">
+  <span class="ad-label" data-es="Patrocinado por…" data-en="Sponsored by…">Patrocinado por…</span>
+  <a class="ad-empty" href="/es/patrocinadores">
+    <span class="ad-empty-title" data-es="Tu marca aquí" data-en="Your brand here">Tu marca aquí</span>
+    <span class="ad-empty-sub" data-es="Espacio disponible · 728×90 · Llega a innovadores, inversionistas y productores de LATAM →" data-en="Available · 728×90 · Reach LATAM food innovators, investors and producers →">Espacio disponible · 728×90 · Llega a innovadores, inversionistas y productores de LATAM →</span>
+  </a>
+</aside>
+
+<!-- MAIN LAYOUT -->
+<div class="blog-layout">
+
+  <!-- ARTICLES LIST -->
+  <div class="articles-list" id="articles-container">
+
+    <!--
+    ╔══════════════════════════════════════════════════════════════════════════╗
+    ║  GHOST CMS — DYNAMIC CONTENT INTEGRATION                                 ║
+    ║                                                                          ║
+    ║  When Ghost is connected, the JavaScript below replaces these            ║
+    ║  static cards with posts from the Ghost Content API.                     ║
+    ║                                                                          ║
+    ║  Each Ghost post maps to .article-card like this:                        ║
+    ║    post.title      → .card-title                                         ║
+    ║    post.excerpt    → .card-excerpt                                       ║
+    ║    post.tags[0]    → .tag (mapped to tag-insects, tag-lab, etc.)         ║
+    ║    post.published_at → .card-date (formatted)                            ║
+    ║    post.reading_time → .card-readtime                                    ║
+    ║    post.feature_image → .card-img (or emoji fallback)                    ║
+    ║    post.url        → href of entire card / read-cta                      ║
+    ║                                                                          ║
+    ║  See fetchGhostPosts() function at bottom of this file                   ║
+    ╚══════════════════════════════════════════════════════════════════════════╝
+    -->
+
+    <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated cards here — do not hand-edit between markers) -->
+    <article class="article-card" data-tag="insects" data-id="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-insects" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span>
+          <span class="card-readtime" data-es="2 min de lectura" data-en="2 min read">2 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="/es/futurofood-article-enthos-insect-protein-from-food-waste-colombia" data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces" data-en="Enthos is turning food waste into insect protein for animal and fish feed">Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces</a></h3>
+        <p class="card-excerpt" data-es="Con el respaldo de S2G Investments y Ocean 14 Capital, la empresa colombiana construye Enthos 1, una planta de mosca soldado negra pensada para ser uno de los mayores centros de proteína de insectos de América Latina." data-en="Backed by S2G Investments and Ocean 14 Capital, the Colombian company is building Enthos 1, a black soldier fly plant designed to become one of Latin America's largest insect protein sites.">Con el respaldo de S2G Investments y Ocean 14 Capital, la empresa colombiana construye Enthos 1, una planta de mosca soldado negra pensada para ser uno de los mayores centros de proteína de insectos de América Latina.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-10-13" data-es="13 oct 2026" data-en="Oct 13, 2026">13 oct 2026</time> · <span data-es="Fuente: The Fish Site" data-en="Source: The Fish Site">Fuente: The Fish Site</span></span>
+          <span class="tag tag-insects" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🦗</span></div>
+    </article>
+
+    <article class="article-card" data-tag="tech" data-id="futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+          <span class="card-readtime" data-es="3 min de lectura" data-en="3 min read">3 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="/es/futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields" data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales" data-en="The Brazilian company bringing AI and autonomous robots to sugarcane fields">La empresa brasileña que lleva IA y robots autónomos a los cañaverales</a></h3>
+        <p class="card-excerpt" data-es="Britaldo Hernandez impulsa a Solinftec más allá de los robots y el software para convertirla en una empresa de 'IA física' basada en una década de datos de campo en Brasil y Estados Unidos." data-en="Britaldo Hernandez is pushing Solinftec beyond robots and software toward becoming a 'physical AI' knowledge company built on a decade of field data from Brazil and the US.">Britaldo Hernandez impulsa a Solinftec más allá de los robots y el software para convertirla en una empresa de 'IA física' basada en una década de datos de campo en Brasil y Estados Unidos.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026" data-en="Oct 12, 2026">12 oct 2026</time> · <span data-es="Fuente: AgFeed" data-en="Source: AgFeed">Fuente: AgFeed</span></span>
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🤖</span></div>
+    </article>
+
+    <article class="article-card" data-tag="tech" data-id="futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+          <span class="card-readtime" data-es="3 min de lectura" data-en="3 min read">3 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="/es/futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in" data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global" data-en="Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South">Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global</a></h3>
+        <p class="card-excerpt" data-es="La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático." data-en="The India-based startup, which turns WhatsApp messages and phone calls from field teams into structured data, plans to use fresh pre-seed funding to expand into Latin America, Africa and Southeast Asia.">La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026" data-en="Oct 12, 2026">12 oct 2026</time> · <span data-es="Fuente: AgFunderNews" data-en="Source: AgFunderNews">Fuente: AgFunderNews</span></span>
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🤖</span></div>
+    </article>
+
+    <article class="article-card" data-tag="tech" data-id="futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+          <span class="card-readtime" data-es="3 min de lectura" data-en="3 min read">3 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="/es/futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia" data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños" data-en="Charolais cattle breed reinvents itself to win over Brazilian ranchers">La raza Charolesa se reinventa para conquistar a los ganaderos brasileños</a></h3>
+        <p class="card-excerpt" data-es="Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil." data-en="Three decades of genetic selection have turned a slow-maturing giant breed into an early-finishing favorite for industrial crossbreeding in Brazil's feedlot-driven cattle industry.">Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026" data-en="Oct 12, 2026">12 oct 2026</time> · <span data-es="Fuente: AgFeed" data-en="Source: AgFeed">Fuente: AgFeed</span></span>
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🐂</span></div>
+    </article>
+
+    <article class="article-card" data-tag="tech" data-id="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+          <span class="card-readtime" data-es="3 min de lectura" data-en="3 min read">3 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="/es/futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026" data-en="TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026">TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026</a></h3>
+        <p class="card-excerpt" data-es="La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC." data-en="Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC.">La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-10-12" data-es="12 oct 2026" data-en="Oct 12, 2026">12 oct 2026</time> · <span data-es="Fuente: AgFeed" data-en="Source: AgFeed">Fuente: AgFeed</span></span>
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🌾</span></div>
+    </article>
+    <!-- AGENT:ARTICLES:END -->
+
+    <article class="article-card" data-tag="lab" data-id="futurofood-article.html">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-lab" data-es="Cultivado en Lab" data-en="Lab-Grown">Cultivado en Lab</span>
+          <span class="card-readtime" data-es="4 min de lectura" data-en="4 min read">4 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title"><a class="card-link" href="/es/futurofood-article" data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal" data-en="Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered">Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal</a></h3>
+        <p class="card-excerpt" data-es="La agencia estatal de investigación Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027, apoyándose en las normas regulatorias que Brasil estableció en 2023." data-en="State research agency Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027, building on regulatory rules Brazil set in 2023.">La agencia estatal de investigación Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027, apoyándose en las normas regulatorias que Brasil estableció en 2023.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: Embrapa / Rio Times" data-en="Source: Embrapa / Rio Times">Fuente: Embrapa / Rio Times</span></span>
+          <span class="tag tag-lab" data-es="Cultivado en Lab" data-en="Lab-Grown">Cultivado en Lab</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🧬</span></div>
+    </article>
+
+    <article class="article-card" data-tag="regen" data-id="350-costa-rican-farmers-are-getting-paid-to-restore-soil-thr">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
+          <span class="card-readtime" data-es="1 min de lectura" data-en="1 min read">1 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title" data-es="Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa" data-en="Osa Conservation will help 350 Costa Rican farmers adopt regenerative farming in AmistOsa">Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa</h3>
+        <p class="card-excerpt" data-es="Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono." data-en="With a three-year Walmart Foundation grant, Osa Conservation's Farms for Nature project will give 350 farmers in southern Costa Rica's AmistOsa landscape tailored regenerative farming plans, aiming to raise productivity and store carbon.">Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: Osa Conservation" data-en="Source: Osa Conservation">Fuente: Osa Conservation</span></span>
+          <span class="tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🌱</span></div>
+    </article>
+
+    <article class="article-card" data-tag="regen" data-id="world-bank-commits-120m-loan-to-sustainable-agriculture-in-c">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
+          <span class="card-readtime" data-es="1 min de lectura" data-en="1 min read">1 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title" data-es="El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica" data-en="World Bank commits $120M loan to sustainable agriculture in Costa Rica">El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica</h3>
+        <p class="card-excerpt" data-es="El financiamiento respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar." data-en="The financing supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane production chains.">El financiamiento respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: Banco Mundial" data-en="Source: World Bank">Fuente: Banco Mundial</span></span>
+          <span class="tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🏦</span></div>
+    </article>
+
+
+    <article class="article-card" data-tag="insects" data-id="ifc-invests-2m-in-pronuvo-a-costa-rican-insect-feed-producer">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-insects" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span>
+          <span class="card-readtime" data-es="1 min de lectura" data-en="1 min read">1 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title" data-es="La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica" data-en="IFC invests $2M in ProNuvo, a Costa Rican insect-feed producer in Guápiles">La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica</h3>
+        <p class="card-excerpt" data-es="El financiamiento ayuda a ProNuvo a completar una planta industrial de alimento para insectos de 4,000 TM/año. La empresa cosecha larvas de mosca soldado negra nativas de Costa Rica, usando una fracción de la tierra, el tiempo y el agua de las fuentes de proteína convencionales." data-en="The financing helps ProNuvo complete a 4,000 MT/year industrial insect-feed plant. The company harvests Black Soldier Fly larvae native to Costa Rica, using a fraction of the land, time, and water of conventional protein sources.">El financiamiento ayuda a ProNuvo a completar una planta industrial de alimento para insectos de 4,000 TM/año. La empresa cosecha larvas de mosca soldado negra nativas de Costa Rica, usando una fracción de la tierra, el tiempo y el agua de las fuentes de proteína convencionales.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: IFC / Grupo Banco Mundial" data-en="Source: IFC / World Bank Group">Fuente: IFC / Grupo Banco Mundial</span></span>
+          <span class="tag tag-insects" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">♻️</span></div>
+    </article>
+
+    <article class="article-card" data-tag="regen" data-id="aquiares-estate-how-a-600-hectare-costa-rican-coffee-farm-be">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
+          <span class="card-readtime" data-es="1 min de lectura" data-en="1 min read">1 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title" data-es="Finca Aquiares: cómo una finca cafetalera costarricense de 600 hectáreas se volvió carbono neutral" data-en="Aquiares Estate: how a 600-hectare Costa Rican coffee farm became carbon neutral">Finca Aquiares: cómo una finca cafetalera costarricense de 600 hectáreas se volvió carbono neutral</h3>
+        <p class="card-excerpt" data-es="La finca certificada por Rainforest Alliance, en las laderas del volcán Turrialba, alcanzó la neutralidad de carbono en 2016 y ahora captura más carbono del que emite — un modelo de café regenerativo que abarca tres generaciones de trabajadores." data-en="The Rainforest Alliance Certified farm on the slopes of Turrialba Volcano achieved carbon neutrality in 2016 and now sequesters more carbon than it emits — a regenerative coffee model spanning three generations of workers.">La finca certificada por Rainforest Alliance, en las laderas del volcán Turrialba, alcanzó la neutralidad de carbono en 2016 y ahora captura más carbono del que emite — un modelo de café regenerativo que abarca tres generaciones de trabajadores.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: Rainforest Alliance" data-en="Source: Rainforest Alliance">Fuente: Rainforest Alliance</span></span>
+          <span class="tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">☕</span></div>
+    </article>
+
+    <!-- PENDING: editorial placeholders below — replace with verified reporting before publishing -->
+    <article class="article-card" data-tag="tech" data-id="argentina-s-kilimo-has-saved-72-billion-liters-of-water-with">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+          <span class="card-readtime" data-es="1 min de lectura" data-en="1 min read">1 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title" data-es="La argentina Kilimo ha ahorrado 72 mil millones de litros de agua con riego impulsado por IA — ya está presente en 7 países" data-en="Argentina's Kilimo has saved 72 billion liters of water with AI-powered irrigation — now in 7 countries">La argentina Kilimo ha ahorrado 72 mil millones de litros de agua con riego impulsado por IA — ya está presente en 7 países</h3>
+        <p class="card-excerpt" data-es="Kilimo combina datos satelitales, meteorológicos y de suelo para indicar a los agricultores cuándo y cuánto regar. Según su cofundadora, quienes la usan ahorran hasta un 30% de agua; la empresa ya llega a más de 2.000 agricultores en siete países, entre ellos Argentina, México y Chile." data-en="Kilimo combines satellite, weather and soil data to tell farmers when and how much to irrigate. Its co-founder says users save up to 30% of water; the company has reached more than 2,000 farmers in seven countries, including Argentina, Mexico and Chile.">Kilimo combina datos satelitales, meteorológicos y de suelo para indicar a los agricultores cuándo y cuánto regar. Según su cofundadora, quienes la usan ahorran hasta un 30% de agua; la empresa ya llega a más de 2.000 agricultores en siete países, entre ellos Argentina, México y Chile.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: Forbes Argentina, AFP" data-en="Source: Forbes Argentina, AFP">Fuente: Forbes Argentina, AFP</span></span>
+          <span class="tag tag-tech" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">💧</span></div>
+    </article>
+
+    <article class="article-card" data-tag="water" data-id="andean-glaciers-are-thinning-35-faster-than-the-global-avera">
+      <div>
+        <div class="card-top">
+          <span class="tag tag-water" data-es="Agua" data-en="Water">Agua</span>
+          <span class="card-readtime" data-es="1 min de lectura" data-en="1 min read">1 min de lectura</span>
+          <button type="button" class="save-btn" aria-pressed="false" aria-label="Guardar artículo" data-es-aria-label="Guardar artículo" data-en-aria-label="Save article"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        </div>
+        <h3 class="card-title" data-es="Los glaciares andinos se adelgazan un 35% más rápido que el promedio mundial — y 90 millones de personas dependen de ellos" data-en="Andean glaciers are thinning 35% faster than the global average — and 90 million people depend on them">Los glaciares andinos se adelgazan un 35% más rápido que el promedio mundial — y 90 millones de personas dependen de ellos</h3>
+        <p class="card-excerpt" data-es="Un informe de política de las universidades de Sheffield y Newcastle advierte que los glaciares andinos, que se adelgazan 0.7 metros al año, amenazan la seguridad hídrica y alimentaria de millones de personas río abajo — y algunas zonas de los Andes podrían quedar casi sin hielo hacia 2100." data-en="A policy brief from the Universities of Sheffield and Newcastle warns that Andean glaciers, thinning by 0.7 meters a year, threaten the water and food security of millions of people downstream — and parts of the Andes could be almost ice-free by 2100.">Un informe de política de las universidades de Sheffield y Newcastle advierte que los glaciares andinos, que se adelgazan 0.7 metros al año, amenazan la seguridad hídrica y alimentaria de millones de personas río abajo — y algunas zonas de los Andes podrían quedar casi sin hielo hacia 2100.</p>
+        <div class="card-bottom">
+          <span class="card-date"><time datetime="2026-06-30" data-es="30 jun 2026" data-en="Jun 30, 2026">30 jun 2026</time> · <span data-es="Fuente: University of Sheffield" data-en="Source: University of Sheffield">Fuente: University of Sheffield</span></span>
+          <span class="tag tag-water" data-es="Agua" data-en="Water">Agua</span>
+        </div>
+      </div>
+      <div class="card-img media-frame is-thumb" data-video-url=""><span class="media-emoji" aria-hidden="true">🏔️</span></div>
+    </article>
+
+    <p class="no-results" id="no-results" role="status"></p>
+
+    <!-- SPONSOR SLOT "blog-list" (728×90). Empty until the first sponsor signs. To fill it, replace the
+         <a class="ad-empty"> with: <a href="SPONSOR_URL" rel="sponsored noopener" target="_blank"><img src="ads/SPONSOR.png" width="728" height="90" alt="SPONSOR NAME"/></a> -->
+    <aside class="ad-slot" data-slot="blog-list" aria-label="Patrocinado" data-es-aria-label="Patrocinado" data-en-aria-label="Sponsored">
+      <span class="ad-label" data-es="Patrocinado por…" data-en="Sponsored by…">Patrocinado por…</span>
+      <a class="ad-empty" href="/es/patrocinadores">
+        <span class="ad-empty-title" data-es="Tu marca aquí" data-en="Your brand here">Tu marca aquí</span>
+        <span class="ad-empty-sub" data-es="Espacio disponible · 728×90 · Tu empresa entre las historias →" data-en="Available · 728×90 · Your company among the stories →">Espacio disponible · 728×90 · Tu empresa entre las historias →</span>
+      </a>
+    </aside>
+
+    <nav class="blog-pager" id="blog-pager" aria-label="Paginación" data-es-aria-label="Paginación" hidden data-en-aria-label="Pagination">
+      <button type="button" class="pager-btn" id="pager-prev" data-es="← Anterior" data-en="← Previous">← Anterior</button>
+      <span class="pager-info" id="pager-info" aria-live="polite"></span>
+      <button type="button" class="pager-btn" id="pager-next" data-es="Siguiente →" data-en="Next →">Siguiente →</button>
+    </nav>
+
+    <!-- GHOST LOADING STATE (hidden by default, shown by JS when fetching) -->
+    <div class="ghost-loading" id="ghost-loading">
+      <p class="ghost-loading-text" data-es="Cargando historias desde Ghost CMS..." data-en="Loading stories from Ghost CMS...">Cargando historias desde Ghost CMS...</p>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <span class="page-info" id="page-info" data-es="Mostrando 1–8 de 28 historias" data-en="Showing 1–8 of 28 stories">Mostrando 1–8 de 28 historias</span>
+      <div class="page-btns">
+        <button class="page-btn" id="prev-btn" disabled onclick="changePage(-1)" data-es="← Anterior" data-en="← Previous">← Anterior</button>
+        <button class="page-btn active" id="page-1" onclick="goToPage(1)">1</button>
+        <button class="page-btn" id="page-2" onclick="goToPage(2)">2</button>
+        <button class="page-btn" id="page-3" onclick="goToPage(3)">3</button>
+        <button class="page-btn" id="next-btn" onclick="changePage(1)" data-es="Siguiente →" data-en="Next →">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Newsletter -->
+    <div class="sidebar-block" id="newsletter">
+      <div class="nl-mini">
+        <h3 class="nl-mini-title" data-es="Mantente al tanto del <em>futuro de la alimentación</em>" data-en="Stay ahead of <em>food's future</em>">Mantente al tanto del <em>futuro de la alimentación</em></h3>
+        <p class="nl-mini-desc" data-es="Resumen semanal sobre innovación alimentaria en LATAM. Gratis, siempre. Bilingüe." data-en="Weekly brief on food innovation across LATAM. Free, always. Bilingüe.">Resumen semanal sobre innovación alimentaria en LATAM. Gratis, siempre. Bilingüe.</p>
+        <input class="nl-mini-input" type="email" placeholder="tu@correo.com" data-es-placeholder="tu@correo.com" aria-label="Correo electrónico" data-es-aria-label="Correo electrónico" data-en-placeholder="your@email.com" data-en-aria-label="Email"/>
+        <button class="nl-mini-btn" type="button" data-es="Suscríbete Gratis →" data-en="Subscribe Free →">Suscríbete Gratis →</button>
+        <p class="nl-mini-note" data-es="Sé de los primeros suscriptores · Sin spam · Cancela cuando quieras" data-en="Be an early subscriber · No spam · Unsubscribe anytime">Sé de los primeros suscriptores · Sin spam · Cancela cuando quieras</p>
+      </div>
+    </div>
+
+    <!-- Topics -->
+    <div class="sidebar-block">
+      <div class="sidebar-title" data-es="Explorar por Tema" data-en="Browse by Topic">Explorar por Tema</div>
+      <div class="topic-list">
+        <div class="topic-item" data-tag="lab" onclick="filterCards(null,'lab')">
+          <span class="topic-name"><span class="topic-icon">🧬</span> <span data-es="Cultivado en Lab" data-en="Lab-Grown">Cultivado en Lab</span></span>
+          <span class="topic-count"></span>
+        </div>
+        <div class="topic-item" data-tag="regen" onclick="filterCards(null,'regen')">
+          <span class="topic-name"><span class="topic-icon">🌱</span> <span data-es="Regenerativo" data-en="Regenerative">Regenerativo</span></span>
+          <span class="topic-count"></span>
+        </div>
+        <div class="topic-item" data-tag="insects" onclick="filterCards(null,'insects')">
+          <span class="topic-name"><span class="topic-icon">🦗</span> <span data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span></span>
+          <span class="topic-count"></span>
+        </div>
+        <div class="topic-item" data-tag="tech" onclick="filterCards(null,'tech')">
+          <span class="topic-name"><span class="topic-icon">🤖</span> <span data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span></span>
+          <span class="topic-count"></span>
+        </div>
+        <div class="topic-item" data-tag="water" onclick="filterCards(null,'water')">
+          <span class="topic-name"><span class="topic-icon">💧</span> <span data-es="Agua" data-en="Water">Agua</span></span>
+          <span class="topic-count"></span>
+        </div>
+        <div class="topic-item" data-tag="ancestral" onclick="filterCards(null,'ancestral')">
+          <span class="topic-name"><span class="topic-icon">🌽</span> <span data-es="Ancestral" data-en="Ancestral">Ancestral</span></span>
+          <span class="topic-count"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Most Read -->
+    <div class="sidebar-block">
+      <div class="sidebar-title" data-es="Lo Más Leído Esta Semana" data-en="Most Read This Week">Lo Más Leído Esta Semana</div>
+      <div class="most-read-list">
+        <div class="mr-item">
+          <span class="mr-num">1</span>
+          <div>
+            <div class="mr-title" data-es="Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia" data-en="Enthos raises VC funding for Colombia insect-protein plant">Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia</div>
+            <span class="mr-tag" data-es="🦗 Proteína de Insectos" data-en="🦗 Insect Protein">🦗 Proteína de Insectos</span>
+          </div>
+        </div>
+        <div class="mr-item">
+          <span class="mr-num">2</span>
+          <div>
+            <div class="mr-title" data-es="Embrapa cultiva pollo a partir de células en Brasil" data-en="Embrapa grows cultivated chicken from cells in Brazil">Embrapa cultiva pollo a partir de células en Brasil</div>
+            <span class="mr-tag" data-es="🧬 Cultivado en Lab" data-en="🧬 Lab-Grown">🧬 Cultivado en Lab</span>
+          </div>
+        </div>
+        <div class="mr-item">
+          <span class="mr-num">3</span>
+          <div>
+            <div class="mr-title" data-es="El Banco Mundial destina $120M a la agricultura de Costa Rica" data-en="World Bank commits $120M to Costa Rica agriculture">El Banco Mundial destina $120M a la agricultura de Costa Rica</div>
+            <span class="mr-tag" data-es="🌱 Regenerativo" data-en="🌱 Regenerative">🌱 Regenerativo</span>
+          </div>
+        </div>
+        <div class="mr-item">
+          <span class="mr-num">4</span>
+          <div>
+            <div class="mr-title" data-es="La planta de alimento para insectos de ProNuvo respaldada por la IFC en Guápiles" data-en="ProNuvo's IFC-backed insect-feed plant in Guápiles">La planta de alimento para insectos de ProNuvo respaldada por la IFC en Guápiles</div>
+            <span class="mr-tag" data-es="♻️ Proteína de Insectos" data-en="♻️ Insect Protein">♻️ Proteína de Insectos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sponsor slot -->
+    <div class="sidebar-block" id="advertise">
+      <div class="sidebar-title" data-es="Socio" data-en="Partner">Socio</div>
+      <div class="sponsor-mini">
+        <span class="sponsor-mini-label" data-es="Patrocinado por" data-en="Sponsored by">Patrocinado por</span>
+        <div class="sponsor-logo-box"><span data-es="TU LOGO AQUÍ" data-en="YOUR LOGO HERE">TU LOGO AQUÍ</span></div>
+        <a href="/es/patrocinadores" class="sponsor-mini-cta" data-es="Anúnciate con FuturoFood →" data-en="Advertise with FuturoFood →">Anúnciate con FuturoFood →</a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-wa"><a class="wa-channel-btn" href="https://whatsapp.com/channel/0029VbEDSkkIHphKuLdWG847" target="_blank" rel="noopener" data-wa-channel="footer"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span data-es="Sigue nuestro Canal de WhatsApp" data-en="Follow our WhatsApp Channel">Sigue nuestro Canal de WhatsApp</span></a></div>
+  <div class="footer-bottom">
+    <div class="footer-brand">Futuro<em>Food</em></div>
+    <div class="footer-links">
+      <a href="/es/" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="#" data-es="Nosotros" data-en="About">Nosotros</a>
+      <a href="#newsletter" data-es="Boletín" data-en="Newsletter">Boletín</a>
+      <a href="/es/patrocinadores" data-es="Anunciarse" data-en="Advertise">Anunciarse</a>
+      <a href="#" data-es="Contacto" data-en="Contact">Contacto</a>
+      <a href="#" data-es="Privacidad" data-en="Privacy">Privacidad</a>
+    </div>
+    <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica" data-en="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+  </div>
+</footer>
+<script src="/consent.js?v=1" defer></script>
+<script src="/i18n.js?v=3" defer></script>
+<script src="/newsletter.js?v=3" defer></script>
+<script src="/media.js?v=1" defer></script>
+
+<script>
+/*
+ ╔══════════════════════════════════════════════════════════════════════╗
+ ║  FUTUROFOOD — GHOST CMS INTEGRATION                                  ║
+ ║  ─────────────────────────────────────────────────────────────────   ║
+ ║  STEP 1: Set your Ghost credentials below                            ║
+ ║  STEP 2: Call initGhost() — it auto-replaces static cards           ║
+ ║  STEP 3: Remove the .static-banner div from the HTML above          ║
+ ╚══════════════════════════════════════════════════════════════════════╝
+*/
+
+// ── GHOST CONFIG ──────────────────────────────────────────────────────
+// Replace these with your real values when Ghost is live
+const GHOST_URL = 'https://YOUR-GHOST-SITE.ghost.io';   // ← your Ghost URL
+const GHOST_KEY = 'YOUR_CONTENT_API_KEY';                // ← from Ghost Admin
+const GHOST_VERSION = 'v5.0';
+const POSTS_PER_PAGE = 8;
+
+// ── TAG → CSS CLASS MAPPING ───────────────────────────────────────────
+// Map Ghost tag slugs to card tag classes
+const TAG_MAP = {
+  'insect-protein': { cls: 'tag-insects', label: '🦗 Insect Protein', filter: 'insects' },
+  'lab-grown':      { cls: 'tag-lab',     label: '🧬 Lab-Grown',      filter: 'lab'     },
+  'regenerative':   { cls: 'tag-regen',   label: '🌱 Regenerative',   filter: 'regen'   },
+  'ancestral':      { cls: 'tag-ancestral',label:'🌽 Ancestral',      filter: 'ancestral'},
+  'food-tech':      { cls: 'tag-tech',    label: '🤖 Food Tech',      filter: 'tech'    },
+  'water':          { cls: 'tag-water',   label: '💧 Water',          filter: 'water'   },
+};
+
+// ── EMOJI FALLBACKS per tag ───────────────────────────────────────────
+const TAG_EMOJI = {
+  'insects':'🦗','lab':'🧬','regen':'🌱',
+  'ancestral':'🌽','tech':'🤖','water':'💧'
+};
+
+// ── GHOST FETCH ───────────────────────────────────────────────────────
+/*
+  fetchGhostPosts(page, tag)
+  ─────────────────────────
+  Fetches posts from Ghost Content API.
+  Call this once Ghost is configured above.
+
+  API endpoint:
+  GET {GHOST_URL}/ghost/api/content/posts/
+      ?key={GHOST_KEY}
+      &include=tags,authors
+      &limit={POSTS_PER_PAGE}
+      &page={page}
+      &filter=tag:{tag}  (optional)
+
+  Returns: { posts: [...], meta: { pagination: { total, pages } } }
+*/
+async function fetchGhostPosts(page = 1, tag = null) {
+  if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
+    console.info('[FuturoFood] Ghost not configured yet — showing static content.');
+    return null;
+  }
+
+  const tagFilter = tag && tag !== 'all' ? `&filter=tag:${tag}` : '';
+  const url = `${GHOST_URL}/ghost/api/${GHOST_VERSION}/content/posts/`
+    + `?key=${GHOST_KEY}`
+    + `&include=tags,authors`
+    + `&limit=${POSTS_PER_PAGE}`
+    + `&page=${page}`
+    + tagFilter;
+
+  try {
+    document.getElementById('ghost-loading').style.display = 'block';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Ghost API error: ${res.status}`);
+    const data = await res.json();
+    document.getElementById('ghost-loading').style.display = 'none';
+    return data;
+  } catch (err) {
+    console.error('[FuturoFood] Ghost fetch failed:', err);
+    document.getElementById('ghost-loading').style.display = 'none';
+    return null;
+  }
+}
+
+// ── RENDER GHOST POSTS ────────────────────────────────────────────────
+function renderGhostPosts(posts, pagination) {
+  const container = document.getElementById('articles-container');
+  const loading = document.getElementById('ghost-loading');
+  const paginationDiv = container.querySelector('.pagination');
+
+  // Remove static cards (keep loading + pagination)
+  const staticCards = container.querySelectorAll('.article-card');
+  staticCards.forEach(c => c.remove());
+
+  posts.forEach(post => {
+    // Map Ghost tag to our system
+    const ghostTag = post.tags?.[0]?.slug || 'food-tech';
+    const tagInfo = TAG_MAP[ghostTag] || TAG_MAP['food-tech'];
+    const emoji = TAG_EMOJI[tagInfo.filter] || '🍽️';
+
+    // Format date
+    const date = new Date(post.published_at).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    const card = document.createElement('article');
+    card.className = 'article-card';
+    card.dataset.tag = tagInfo.filter;
+    card.onclick = () => window.location.href = post.url;
+    card.innerHTML = `
+      <div>
+        <div class="card-top">
+          <span class="tag ${tagInfo.cls}">${tagInfo.label}</span>
+          <span class="card-readtime">${post.reading_time} min</span>
+        </div>
+        <h3 class="card-title">${post.title}</h3>
+        <p class="card-excerpt">${post.excerpt || post.custom_excerpt || ''}</p>
+        <div class="card-bottom">
+          <span class="card-date">${date}</span>
+        </div>
+      </div>
+      <div class="card-img">${
+        post.feature_image
+          ? `<img src="${post.feature_image}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;"/>`
+          : emoji
+      }</div>
+    `;
+    container.insertBefore(card, loading);
+  });
+
+  // Update pagination
+  updatePagination(pagination);
+  document.getElementById('post-count').textContent =
+    `${pagination.total} stories · Page ${pagination.page} of ${pagination.pages}`;
+}
+
+// ── FILTER + SEARCH + SAVED + PAGES (static mode) ─────────────────────
+// A card is shown when it matches the category (or "saved") and every
+// search word; matches are then split into pages of 6.
+let activeTag = 'all';
+let staticPage = 1;
+const PER_PAGE = 6;
+const SAVED_KEY = 'ff-saved';
+
+function filterCards(btn, tag) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', btn ? b === btn : b.dataset.tag === tag);
+  });
+
+  // If Ghost is configured, fetch from API
+  if (!GHOST_URL.includes('YOUR-GHOST-SITE')) {
+    fetchGhostPosts(1, tag).then(data => {
+      if (data) renderGhostPosts(data.posts, data.meta.pagination);
+    });
+    return;
+  }
+
+  activeTag = tag;
+  applyFilters(true);
+  // Called from the sidebar: bring the list into view (the sidebar sits below it on mobile)
+  if (!btn) document.getElementById('topics').scrollIntoView({ behavior: 'smooth' });
+}
+
+const normalizeText = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const htmlToText = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+const isSpanish = () => document.documentElement.lang === 'es';
+
+// Title + excerpt in both languages, so a search matches whichever language is shown.
+function searchText(card) {
+  if (card.dataset.search === undefined) {
+    const parts = [];
+    card.querySelectorAll('.card-title, .card-title [data-es], .card-excerpt').forEach(el => {
+      if (el.matches('.card-title') && el.querySelector('[data-es]')) return; // text lives on the inner link
+      parts.push(el.dataset.en !== undefined ? htmlToText(el.dataset.en) : el.textContent);
+      if (el.dataset.es) parts.push(htmlToText(el.dataset.es));
+    });
+    card.dataset.search = normalizeText(parts.join(' '));
+  }
+  return card.dataset.search;
+}
+
+function storyCards() {
+  return [...document.querySelectorAll('#articles-container .article-card')];
+}
+
+// ── Saved stories (this browser only) ──
+function savedIds() {
+  try { return new Set(JSON.parse(localStorage.getItem(SAVED_KEY) || '[]')); } catch (e) { return new Set(); }
+}
+function storeSaved(ids) {
+  try { localStorage.setItem(SAVED_KEY, JSON.stringify([...ids])); } catch (e) {}
+}
+function paintSaveButton(btn, saved) {
+  const en = saved ? 'Remove from saved' : 'Save article';
+  const es = saved ? 'Quitar de guardados' : 'Guardar artículo';
+  btn.setAttribute('aria-pressed', String(saved));
+  btn.setAttribute('data-en-aria-label', en);
+  btn.setAttribute('data-es-aria-label', es);
+  btn.setAttribute('aria-label', isSpanish() ? es : en);
+  btn.title = isSpanish() ? es : en;
+}
+function initSaveButtons() {
+  const ids = savedIds();
+  storyCards().forEach(card => {
+    const btn = card.querySelector('.save-btn');
+    if (!btn) return;
+    paintSaveButton(btn, ids.has(card.dataset.id));
+    btn.addEventListener('click', () => {
+      const current = savedIds();
+      const nowSaved = !current.has(card.dataset.id);
+      if (nowSaved) current.add(card.dataset.id); else current.delete(card.dataset.id);
+      storeSaved(current);
+      paintSaveButton(btn, nowSaved);
+      updateTagCounts();
+      if (activeTag === 'saved') applyFilters(false);
+    });
+  });
+}
+
+function applyFilters(resetPage) {
+  if (resetPage) staticPage = 1;
+  const terms = normalizeText(document.getElementById('story-search').value).split(/\s+/).filter(Boolean);
+  const saved = savedIds();
+  const cards = storyCards();
+  const matches = cards.filter(card =>
+    (activeTag === 'all' || (activeTag === 'saved' ? saved.has(card.dataset.id) : card.dataset.tag === activeTag))
+    && terms.every(t => searchText(card).includes(t)));
+
+  const pages = Math.max(1, Math.ceil(matches.length / PER_PAGE));
+  staticPage = Math.min(staticPage, pages);
+  const onPage = new Set(matches.slice((staticPage - 1) * PER_PAGE, staticPage * PER_PAGE));
+  cards.forEach(card => { card.style.display = onPage.has(card) ? '' : 'none'; });
+
+  // Empty state
+  const empty = document.getElementById('no-results');
+  empty.classList.toggle('visible', matches.length === 0);
+  if (matches.length === 0) {
+    const es = isSpanish();
+    empty.textContent = terms.length
+      ? (es ? 'No se encontraron artículos para tu búsqueda' : 'No articles found for your search')
+      : activeTag === 'saved'
+        ? (es ? 'Todavía no guardaste artículos. Toca ♡ en cualquier historia para guardarla.' : 'No saved articles yet. Tap ♡ on any story to save it.')
+        : (es ? 'Todavía no hay historias en esta categoría.' : 'No stories in this category yet.');
+  }
+
+  // Pager
+  const pager = document.getElementById('blog-pager');
+  pager.hidden = pages <= 1;
+  document.getElementById('pager-info').textContent = isSpanish()
+    ? `Página ${staticPage} de ${pages}` : `Page ${staticPage} of ${pages}`;
+  document.getElementById('pager-prev').disabled = staticPage <= 1;
+  document.getElementById('pager-next').disabled = staticPage >= pages;
+
+  updatePostCount(matches.length, cards.length);
+}
+
+function goToStaticPage(delta) {
+  staticPage += delta;
+  applyFilters(false);
+  document.getElementById('topics').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updatePostCount(visible, total) {
+  const es = isSpanish();
+  const noun = n => es ? (n === 1 ? 'historia' : 'historias') : (n === 1 ? 'story' : 'stories');
+  document.getElementById('post-count').textContent = visible === total
+    ? `${total} ${noun(total)}`
+    : (es ? `${visible} de ${total} ${noun(total)}` : `${visible} of ${total} ${noun(total)}`);
+}
+
+function updateTagCounts() {
+  const cards = storyCards();
+  const saved = savedIds();
+  const counts = { all: cards.length, saved: cards.filter(c => saved.has(c.dataset.id)).length };
+  cards.forEach(c => { counts[c.dataset.tag] = (counts[c.dataset.tag] || 0) + 1; });
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.querySelector('.filter-count').textContent = counts[b.dataset.tag] || 0;
+  });
+  document.querySelectorAll('.topic-item[data-tag]').forEach(item => {
+    item.querySelector('.topic-count').textContent = counts[item.dataset.tag] || 0;
+  });
+}
+
+// ── PAGINATION ────────────────────────────────────────────────────────
+let currentPage = 1;
+let currentTag = 'all';
+
+function updatePagination(p) {
+  document.getElementById('prev-btn').disabled = p.page <= 1;
+  document.getElementById('next-btn').disabled = p.page >= p.pages;
+  document.getElementById('page-info').textContent =
+    `Showing ${(p.page-1)*POSTS_PER_PAGE+1}–${Math.min(p.page*POSTS_PER_PAGE,p.total)} of ${p.total} stories`;
+}
+
+function changePage(dir) {
+  currentPage += dir;
+  fetchGhostPosts(currentPage, currentTag).then(data => {
+    if (data) renderGhostPosts(data.posts, data.meta.pagination);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToPage(n) {
+  currentPage = n;
+  fetchGhostPosts(n, currentTag).then(data => {
+    if (data) renderGhostPosts(data.posts, data.meta.pagination);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+/*
+  initGhost() — call this to activate Ghost integration
+  ──────────────────────────────────────────────────────
+  Once GHOST_URL and GHOST_KEY are set above,
+  uncomment the initGhost() call at the bottom.
+  It will auto-fetch and replace static cards on page load.
+*/
+async function initGhost() {
+  const data = await fetchGhostPosts(1, 'all');
+  if (data && data.posts?.length) {
+    renderGhostPosts(data.posts, data.meta.pagination);
+    // Hide static banner once Ghost is live
+    const banner = document.querySelector('.static-banner');
+    if (banner) banner.style.display = 'none';
+  }
+}
+
+// ── ACTIVATE GHOST (uncomment when ready) ─────────────────────────────
+// initGhost();
+//
+// Static mode: real counts, live search, saved stories and pages of 6
+if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
+  const postCount = document.getElementById('post-count');
+  postCount.removeAttribute('data-es'); // filled in by updatePostCount in both languages
+  document.querySelector('.pagination').style.display = 'none'; // Ghost-only pager
+  const searchBox = document.getElementById('story-search');
+  // ?q= opens the blog already filtered (used by the WebSite search markup on the home page)
+  const initialQuery = new URLSearchParams(location.search).get('q');
+  if (initialQuery) searchBox.value = initialQuery.slice(0, 100);
+  searchBox.addEventListener('input', () => applyFilters(true));
+  document.getElementById('pager-prev').addEventListener('click', () => goToStaticPage(-1));
+  document.getElementById('pager-next').addEventListener('click', () => goToStaticPage(1));
+  // i18n.js switches languages by setting <html lang>; refresh the texts written here
+  new MutationObserver(() => {
+    applyFilters(false);
+    const ids = savedIds();
+    storyCards().forEach(c => { const b = c.querySelector('.save-btn'); if (b) paintSaveButton(b, ids.has(c.dataset.id)); });
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  initSaveButtons();
+  updateTagCounts();
+  applyFilters(true);
+}
+</script>
+<script src="/share.js?v=4" defer></script>
+<script src="/capture.js?v=1" defer></script>
+<script src="/analytics.js?v=5" defer></script>
+</body>
+</html>

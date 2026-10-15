@@ -4,7 +4,8 @@
 // 2. Verifies each candidate's source URL actually resolves (200 OK).
 // 3. Asks Claude to draft a bilingual (EN/ES) article grounded in the fetched excerpt.
 // 4. Renders a new article page from scripts/article-template.html.
-// 5. Inserts a card into futurofood-blog.html and a <url> into sitemap.xml.
+// 5. Inserts a card into futurofood-blog.html, then builds the Spanish pages
+//    (es/) and sitemap.xml with scripts/build-i18n.mjs.
 // No dependencies — relies on global fetch (Node 18+ / Bun).
 //
 // Requires env: ANTHROPIC_API_KEY (optional: ANTHROPIC_MODEL)
@@ -24,6 +25,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 import { createRequire } from "node:module";
 import { updateOgCards } from "./og-image.mjs";
+import { buildSite } from "./build-i18n.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,7 +35,6 @@ const ROOT = join(__dirname, "..");
 const REGISTRY_PATH = join(__dirname, "articles-registry.json");
 const TEMPLATE_PATH = join(__dirname, "article-template.html");
 const BLOG_PATH = join(ROOT, "futurofood-blog.html");
-const SITEMAP_PATH = join(ROOT, "sitemap.xml");
 
 const TARGET_ARTICLES = 3;
 // Try a few extra candidates so a failed draft can be replaced by the next story.
@@ -304,6 +305,8 @@ Otherwise respond with ONLY valid JSON, no markdown fences, no commentary, match
   "deck_en": "one-sentence dek, ~25-35 words", "deck_es": "...",
   "seo_title_en": "search-result title, max 47 characters, main keyword first (company/topic + change), faithful to the excerpt",
   "meta_description_en": "search-result description, max 155 characters, specific and inviting, no claims beyond the excerpt",
+  "seo_title_es": "same as seo_title_en, in natural Spanish (the /es/ page), max 47 characters",
+  "meta_description_es": "same as meta_description_en, in natural Spanish, max 155 characters",
   "keywords_en": ["5 to 7 search keywords: company or people, topic, technology, country, 'Latin America'"],
   "takeaways": [{"en":"...","es":"..."}, {"en":"...","es":"..."}, {"en":"...","es":"..."}],
   "body": [{"type":"p","en":"...","es":"..."}, {"type":"h2","en":"...","es":"..."}, "5 to 8 items total, at least 2 of type h2, each p is 2-4 sentences"]
@@ -448,6 +451,7 @@ async function setVideo(target, rawUrl) {
   writeFileSync(pagePath, page.replace(re, (_, a, b) => `${a}${escapeAttr(video.url || "")}${b}`));
   writeRegistry(registry);
   rebuildCards();
+  buildSite({ root: ROOT, log });
   log(video.url ? `video set on ${entry.filename}: ${video.url}` : `video removed from ${entry.filename}`);
 }
 
@@ -524,7 +528,7 @@ export function formatCardDate(iso) {
 const SAVE_BUTTON = `<button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>`;
 
 // Share icon (Feather "share-2", MIT) next to the heart; share.js handles it
-const CARD_SHARE_BUTTON = `<button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>`;
+const CARD_SHARE_BUTTON = `<button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>`;
 
 // Blog card: the title link stretches over the whole card (CSS), so the save
 // button can sit on top as a real button instead of being nested in a link.
@@ -547,16 +551,6 @@ export function renderCard(entry) {
       </div>
       <div class="card-img media-frame is-thumb" data-video-url="${escapeAttr(entry.video_url || "")}"><span class="media-emoji" aria-hidden="true">${entry.emoji}</span></div>
     </article>`;
-}
-
-export function renderSitemapUrl(entry) {
-  const cleanPath = entry.filename.replace(/\.html$/, "");
-  return `  <url>
-    <loc>https://futurofood.com/${cleanPath}</loc>
-    <lastmod>${entry.date_iso}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>`;
 }
 
 export function renderRelated(related) {
@@ -636,6 +630,8 @@ export function renderArticlePage(draft, meta, related) {
     // SEO: title ≤ 60 characters with the suffix, description ≤ 155
     "{{SEO_TITLE}}": escapeHtml(`${fitLength(draft.seo_title_en || draft.title_en, 47)} | FuturoFood`),
     "{{META_DESC_ATTR}}": escapeAttr(fitLength(draft.meta_description_en || draft.deck_en, 155)),
+    "{{SEO_TITLE_ES_ATTR}}": escapeAttr(`${fitLength(draft.seo_title_es || draft.title_es, 47)} | FuturoFood`),
+    "{{META_DESC_ES_ATTR}}": escapeAttr(fitLength(draft.meta_description_es || draft.deck_es, 155)),
     "{{META_DESC_JSON}}": escapeJson(fitLength(draft.meta_description_en || draft.deck_en, 155)),
     "{{KEYWORDS_ATTR}}": escapeAttr(keywords.join(", ")),
     "{{KEYWORDS_JSON}}": JSON.stringify(keywords),
@@ -686,7 +682,7 @@ function rebuildCards() {
 }
 
 async function main() {
-  if (process.argv.includes("--rebuild-cards")) return rebuildCards();
+  if (process.argv.includes("--rebuild-cards")) { rebuildCards(); buildSite({ root: ROOT, log }); return; }
   if (process.argv.includes("--find-videos")) return findMissingVideos();
   const setVideoAt = process.argv.indexOf("--set-video");
   if (setVideoAt !== -1) return setVideo(process.argv[setVideoAt + 1], process.argv[setVideoAt + 2]);
@@ -733,11 +729,8 @@ async function main() {
   }
 
   let blogHtml = readFileSync(BLOG_PATH, "utf8");
-  let sitemapHtml = readFileSync(SITEMAP_PATH, "utf8");
   readMarkerBlock(blogHtml, "futurofood-blog.html"); // throws if markers missing
-  readMarkerBlock(sitemapHtml, "sitemap.xml");
 
-  const newUrls = [];
   const newRegistryEntries = [];
   const todayIso = new Date().toISOString().slice(0, 10);
 
@@ -801,7 +794,6 @@ async function main() {
     };
     registry.unshift(entry);
     newRegistryEntries.push(entry);
-    newUrls.push(renderSitemapUrl(entry));
   }
 
   if (newRegistryEntries.length === 0) {
@@ -814,12 +806,9 @@ async function main() {
   blogHtml = replaceMarkerBlock(blogHtml, registry.map(renderCard).join("\n\n"));
   writeFileSync(BLOG_PATH, blogHtml);
 
-  const existingUrlsBlock = readMarkerBlock(sitemapHtml, "sitemap.xml").trim();
-  const mergedUrls = [newUrls.join("\n\n"), existingUrlsBlock].filter(Boolean).join("\n\n");
-  sitemapHtml = replaceMarkerBlock(sitemapHtml, mergedUrls);
-  writeFileSync(SITEMAP_PATH, sitemapHtml);
-
   writeRegistry(registry);
+  // Spanish pages (es/), hreflang and sitemap.xml with both languages
+  buildSite({ root: ROOT, log });
 
   log(`Done. Published ${newRegistryEntries.length} article(s):`);
   for (const e of newRegistryEntries) log(` - ${e.filename} (${e.source_name})`);
@@ -843,7 +832,9 @@ export function renderReviewSummary(entries, previewBaseUrl) {
       e.video_url
         ? `- **Video:** [${e.video_title || e.video_url}](${e.video_url})${e.video_channel ? ` — ${e.video_channel}` : ""}`
         : "- **Video:** ninguno — se muestra el placeholder",
-      preview ? `- **Vista previa:** ${preview}` : `- **Archivo:** \`${e.filename}\``,
+      preview
+        ? `- **Vista previa:** [en español](${preview.replace(/\/(futurofood-article[^/]*)$/, "/es/$1")}) · [en inglés](${preview})`
+        : `- **Archivo:** \`${e.filename}\` (y \`es/${e.filename}\`)`,
     ].join("\n");
   });
   return [

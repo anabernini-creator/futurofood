@@ -19,27 +19,17 @@
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
-<script>
-  // Language: Spanish browsers get Spanish automatically (i18n.js). Hide the
-  // page until i18n.js has swapped the text, so there's no flash of English —
-  // never longer than 1.5 s.
-  try {
-    var ffl = localStorage.getItem('ff-lang-choice') || (/^es\b/i.test(navigator.language || '') ? 'es' : 'en');
-    if (ffl === 'es') {
-      document.documentElement.lang = 'es';
-      document.documentElement.classList.add('i18n-pending');
-      setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 1500);
-    }
-  } catch (e) {}
-</script>
-<style>.i18n-pending body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
 <link rel="canonical" href="https://futurofood.com/futurofood-about"/>
-<title>About FuturoFood | Food Innovation Media for LATAM</title>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-about"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-about"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/futurofood-about"/>
+<title data-es="Sobre FuturoFood | Innovación alimentaria en LATAM">About FuturoFood | Food Innovation Media for LATAM</title>
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta name="keywords" content="FuturoFood, food innovation media, Latin America, bilingual newsletter, food tech, agtech, Costa Rica"/>
-<meta name="description" content="FuturoFood is a bilingual media outlet covering the farmers, researchers and founders changing how Latin America grows and eats its food."/>
+<meta name="description" content="FuturoFood is a bilingual media outlet covering the farmers, researchers and founders changing how Latin America grows and eats its food." data-es-content="FuturoFood es un medio bilingüe sobre quienes cultivan, investigan y emprenden para cambiar cómo América Latina produce y come sus alimentos."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
@@ -73,7 +63,7 @@ a{color:inherit;text-decoration:none}
 .btn-sub{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.5rem 1.25rem;transition:background .2s;display:inline-block}
 .btn-sub:hover{background:#6ee89a}
 .lang-switch{display:flex;border:1px solid var(--border)}
-.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
 .lang-btn+.lang-btn{border-left:1px solid var(--border)}
 .lang-btn.active{background:var(--green);color:var(--ink)}
 .lang-btn:hover:not(.active){color:var(--green)}
@@ -228,9 +218,9 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
       <small data-es="El futuro de la alimentación · LATAM">The Future of Food · LATAM</small>
     </a>
     <div class="mast-right">
-      <div class="lang-switch" role="group" aria-label="Language selector">
-        <button type="button" class="lang-btn active" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      <div class="lang-switch" role="group" aria-label="Language selector" data-es-aria-label="Selector de idioma">
+        <a class="lang-btn active" data-lang="en" href="/futurofood-about" hreflang="en" aria-current="true">EN</a>
+        <a class="lang-btn" data-lang="es" href="/es/futurofood-about" hreflang="es">ES</a>
       </div>
       <a href="futurofood.html#newsletter" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
@@ -403,7 +393,7 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   </div>
 </footer>
 <script src="consent.js?v=1" defer></script>
-<script src="i18n.js?v=2" defer></script>
+<script src="i18n.js?v=3" defer></script>
 <script src="analytics.js?v=5" defer></script>
 </body>
 </html>

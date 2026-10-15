@@ -19,21 +19,7 @@
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
-<script>
-  // Language: Spanish browsers get Spanish automatically (i18n.js). Hide the
-  // page until i18n.js has swapped the text, so there's no flash of English —
-  // never longer than 1.5 s.
-  try {
-    var ffl = localStorage.getItem('ff-lang-choice') || (/^es\b/i.test(navigator.language || '') ? 'es' : 'en');
-    if (ffl === 'es') {
-      document.documentElement.lang = 'es';
-      document.documentElement.classList.add('i18n-pending');
-      setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 1500);
-    }
-  } catch (e) {}
-</script>
-<style>.i18n-pending body{visibility:hidden}
-/* ── SPONSORS PAGE ── */
+<style>/* ── SPONSORS PAGE ── */
 .sp-section{max-width:1280px;margin:0 auto;padding:4rem 2rem;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border)}
 .sp-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
 .sp-title em{color:var(--green);font-style:normal}
@@ -70,15 +56,21 @@
 @media(max-width:860px){.sp-grid{grid-template-columns:1fr}.sp-form{grid-template-columns:1fr}.sp-section{padding:3rem 1rem}}
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
 <link rel="canonical" href="https://futurofood.com/patrocinadores"/>
-<title>Sponsor FuturoFood | Reach LATAM Food Innovators</title>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/patrocinadores"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/patrocinadores"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/patrocinadores"/>
+<title data-es="Patrocina FuturoFood | Llega a innovadores de LATAM">Sponsor FuturoFood | Reach LATAM Food Innovators</title>
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta name="keywords" content="FuturoFood sponsorship, media kit, food tech advertising, agtech newsletter, Latin America, sponsored content"/>
-<meta name="description" content="Sponsor FuturoFood: newsletter mentions, blog banners and sponsored articles that reach food innovators, investors and farmers across Latin America."/>
-<meta property="og:title" content="Patrocina FuturoFood — Llega a quienes construyen el futuro de la alimentación en LATAM"/>
-<meta property="og:description" content="Menciones en el newsletter, banners en el blog y artículos patrocinados. Desde US$200."/>
+<meta name="description" content="Sponsor FuturoFood: newsletter mentions, blog banners and sponsored articles that reach food innovators, investors and farmers across Latin America." data-es-content="Patrocina FuturoFood: menciones en el boletín, banners y artículos patrocinados que llegan a innovadores, inversionistas y productores de LATAM."/>
+<meta property="og:title" content="Sponsor FuturoFood — Reach the people building the future of food in LATAM" data-es-content="Patrocina FuturoFood — Llega a quienes construyen el futuro de la alimentación en LATAM"/>
+<meta property="og:description" content="Newsletter mentions, blog banners and sponsored articles. From US$200." data-es-content="Menciones en el newsletter, banners en el blog y artículos patrocinados. Desde US$200."/>
 <meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:locale:alternate" content="es_LA"/>
 <meta property="og:site_name" content="FuturoFood"/>
 <meta property="og:url" content="https://futurofood.com/patrocinadores"/>
 <meta property="og:image" content="https://futurofood.com/og-default.jpg"/>
@@ -116,7 +108,7 @@ a{color:inherit;text-decoration:none}
 .btn-sub{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.5rem 1.25rem;transition:background .2s;display:inline-block}
 .btn-sub:hover{background:#6ee89a}
 .lang-switch{display:flex;border:1px solid var(--border)}
-.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
 .lang-btn+.lang-btn{border-left:1px solid var(--border)}
 .lang-btn.active{background:var(--green);color:var(--ink)}
 .lang-btn:hover:not(.active){color:var(--green)}
@@ -240,9 +232,9 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
       <small data-es="El futuro de la alimentación · LATAM">The Future of Food · LATAM</small>
     </a>
     <div class="mast-right">
-      <div class="lang-switch" role="group" aria-label="Language selector">
-        <button type="button" class="lang-btn active" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      <div class="lang-switch" role="group" aria-label="Language selector" data-es-aria-label="Selector de idioma">
+        <a class="lang-btn active" data-lang="en" href="/patrocinadores" hreflang="en" aria-current="true">EN</a>
+        <a class="lang-btn" data-lang="es" href="/es/patrocinadores" hreflang="es">ES</a>
       </div>
       <a href="futurofood.html#newsletter" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
@@ -335,7 +327,7 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   </div>
 </footer>
 <script src="consent.js?v=1" defer></script>
-<script src="i18n.js?v=2" defer></script>
+<script src="i18n.js?v=3" defer></script>
 <script>
 // Sponsor inquiry form → /api/sponsor-inquiry (emails Ana)
 (function () {

@@ -1,0 +1,48 @@
+name: Sync Spanish pages
+
+# The English pages are the source of the site. scripts/build-i18n.mjs writes
+# the Spanish pages (es/), hreflang links and sitemap.xml from them. The
+# weekly agent already runs it; this keeps es/ in step when an English page
+# is edited by hand.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["es/**", "sitemap.xml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-spanish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # page dates for the sitemap come from git
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build Spanish pages
+        run: node scripts/build-i18n.mjs
+
+      - name: Commit if anything changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Spanish pages already up to date." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "FuturoFood Build"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A es sitemap.xml ./*.html
+          git commit -m "build: sync Spanish pages (es/) and sitemap"
+          git push
+          echo "Spanish pages updated: $(git show --stat --format= HEAD | tail -1)" >> "$GITHUB_STEP_SUMMARY"

@@ -30,7 +30,7 @@ export function buildIssue(articles, dateIso) {
   const subject = `FuturoFood Weekly — ${spanishDate(dateIso)}`;
   const campaign = `weekly-${dateIso}`;
   const items = articles.map((a) => {
-    const url = `${SITE}/${a.path}?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}`;
+    const url = `${SITE}/es/${a.path}?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}`;
     return `
 <h2 style="margin:28px 0 6px;font-size:22px;line-height:1.25;"><a href="${esc(url)}" style="color:#0A0F0A;text-decoration:none;">${esc(a.title_es)}</a></h2>
 <p style="margin:0 0 4px;font-size:13px;color:#5B6B5B;">${esc(a.tag_es)}${a.source ? ` · Fuente: ${esc(a.source)}` : ""}</p>
@@ -43,7 +43,7 @@ export function buildIssue(articles, dateIso) {
 <p style="font-size:16px;line-height:1.6;">${count === 1 ? "Esta es la historia" : `Estas son las ${count} historias`} de la semana en FuturoFood: quienes cultivan, investigan y emprenden para cambiar el sistema alimentario en América Latina.</p>
 ${items}
 <hr style="border:none;border-top:1px solid #E2E8E2;margin:28px 0;"/>
-<p style="font-size:15px;line-height:1.6;">¿Conoces a alguien a quien le interese? Reenvíale este correo o comparte cualquier historia por WhatsApp desde <a href="${SITE}/futurofood-blog?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}" style="color:#1F8A4C;">futurofood.com</a>.</p>
+<p style="font-size:15px;line-height:1.6;">¿Conoces a alguien a quien le interese? Reenvíale este correo o comparte cualquier historia por WhatsApp desde <a href="${SITE}/es/futurofood-blog?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}" style="color:#1F8A4C;">futurofood.com</a>.</p>
 <p style="font-size:13px;line-height:1.6;color:#5B6B5B;">All stories are also available in English at futurofood.com.</p>`;
   const subtitle = count === 1
     ? "La historia de la semana sobre quienes cambian la alimentación en LATAM"

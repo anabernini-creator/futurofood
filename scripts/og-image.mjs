@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Link-preview cards (Open Graph / X) for article pages.
 //
-// For each article page it renders og/<page>.jpg (1200x630): FuturoFood logo,
-// the category with its emoji on the dark-green placeholder, the Spanish title
-// and a two-line excerpt — then points the page's og:/twitter: tags at it.
-// Title and description tags are Spanish too (LATAM audience, same language as
-// the WhatsApp share message).
+// For each article page it renders two 1200x630 cards (FuturoFood logo, the
+// category with its emoji on the dark-green placeholder, the title and a
+// two-line excerpt): og/<page>.jpg in Spanish and og/en/<page>.jpg in English.
+// The English page's og:/twitter: tags point at the English card and carry the
+// Spanish values in data-es-content, which build-i18n.mjs uses for /es/.
 //
 //   node scripts/og-image.mjs                      # every futurofood-article*.html
 //   node scripts/og-image.mjs futurofood-article-x.html …
@@ -23,12 +23,12 @@ const DEFAULT_IMAGE = `${SITE}/og-default.jpg`;
 
 // Same categories as the blog filters; the card shows the category's emoji.
 const CATEGORIES = {
-  "Lab-Grown": { emoji: "🧬", es: "Cultivado en Lab" },
-  "Regenerative": { emoji: "🌱", es: "Regenerativo" },
-  "Insect Protein": { emoji: "🦗", es: "Proteína de Insectos" },
-  "Food Tech": { emoji: "🤖", es: "Tecnología Alimentaria" },
-  "Water": { emoji: "💧", es: "Agua" },
-  "Ancestral": { emoji: "🌽", es: "Ancestral" },
+  "Lab-Grown": { emoji: "🧬", en: "Lab-Grown", es: "Cultivado en Lab" },
+  "Regenerative": { emoji: "🌱", en: "Regenerative", es: "Regenerativo" },
+  "Insect Protein": { emoji: "🦗", en: "Insect Protein", es: "Proteína de Insectos" },
+  "Food Tech": { emoji: "🤖", en: "Food Tech", es: "Tecnología Alimentaria" },
+  "Water": { emoji: "💧", en: "Water", es: "Agua" },
+  "Ancestral": { emoji: "🌽", en: "Ancestral", es: "Ancestral" },
 };
 
 function decode(s) {
@@ -47,17 +47,25 @@ function clip(text, max = 150) {
   return text.slice(0, max).replace(/\s+\S*$/, "").replace(/[,;:—-]\s*$/, "") + "…";
 }
 
+// Title and deck in both languages: the element text is English, data-es Spanish
 export function ogDataFromPage(html) {
-  const title = html.match(/<h1 class="article-title" data-es="([^"]*)"/);
-  const deck = html.match(/<p class="article-deck" data-es="([^"]*)"/);
+  const el = (tag, cls) => html.match(new RegExp(`<${tag} class="${cls}"((?:[^>"']|"[^"]*")*)>([\\s\\S]*?)<\\/${tag}>`));
+  const title = el("h1", "article-title");
+  const deck = el("p", "article-deck");
   const tag = html.match(/<span class="article-tag"[^>]*>([^<]*)<\/span>/);
   if (!title || !deck || !tag) throw new Error("missing title, deck or tag");
+  const es = (m) => (m[1].match(/data-es="([^"]*)"/) || [])[1];
+  if (!es(title) || !es(deck)) throw new Error("missing Spanish title or deck");
   const label = Object.keys(CATEGORIES).find((k) => decode(tag[1]).endsWith(k)) || "Food Tech";
-  return { title: decode(title[1]), excerpt: decode(deck[1]), category: CATEGORIES[label] };
+  return {
+    category: CATEGORIES[label],
+    en: { title: decode(title[2]), excerpt: decode(deck[2]) },
+    es: { title: decode(es(title)), excerpt: decode(es(deck)) },
+  };
 }
 
-function cardHtml({ title, excerpt, category }) {
-  return `<!doctype html><html lang="es"><head><meta charset="utf-8">
+function cardHtml({ title, excerpt, category }, lang) {
+  return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=DM+Sans:wght@400&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -81,7 +89,7 @@ p{margin-top:20px;font-family:'DM Sans',system-ui,sans-serif;font-size:25px;line
 </style></head><body>
 <div class="text">
   <div class="logo">Futuro<em>Food</em></div>
-  <div class="chip">${escapeHtml(category.emoji)} ${escapeHtml(category.es)}</div>
+  <div class="chip">${escapeHtml(category.emoji)} ${escapeHtml(category[lang])}</div>
   <h1 id="t" data-short="${escapeHtml(title.split(" — ")[0])}">${escapeHtml(title)}</h1>
   <p>${escapeHtml(excerpt)}</p>
   <div class="site">futurofood.com</div>
@@ -100,30 +108,28 @@ function chromePath() {
   return candidates.find((p) => existsSync(p)) || null;
 }
 
-// Points the page's preview tags at the card (or the default image).
-export function applyOgMeta(html, { title, excerpt, imageUrl, pageUrl }) {
-  const desc = clip(excerpt);
-  const set = (attr, key, value) => {
-    const re = new RegExp(`<meta ${attr}="${key}" content="[^"]*"\\/>`);
-    const tag = `<meta ${attr}="${key}" content="${escapeHtml(value)}"/>`;
+// Points the page's preview tags at the cards (or the default image): English
+// values in content, Spanish in data-es-content (used for the /es/ page).
+export function applyOgMeta(html, { en, es }) {
+  const set = (attr, key, value, valueEs) => {
+    const re = new RegExp(`<meta ${attr}="${key}" content="[^"]*"(?: data-es-content="[^"]*")?\\/>`);
+    const tag = `<meta ${attr}="${key}" content="${escapeHtml(value)}" data-es-content="${escapeHtml(valueEs)}"/>`;
     if (re.test(html)) html = html.replace(re, () => tag);
     else html = html.replace(/<meta property="og:site_name"[^>]*\/>\n/, (m) => `${m}${tag}\n`);
   };
-  set("property", "og:title", title);
-  set("property", "og:description", desc);
-  set("property", "og:image", imageUrl);
-  set("property", "og:image:alt", `${title} — FuturoFood`);
-  set("property", "og:locale", "es_LA");
-  set("name", "twitter:title", title);
-  set("name", "twitter:description", desc);
-  set("name", "twitter:image", imageUrl);
-  // Structured data points at the same image as the preview tags
-  html = html.replace(/"image": \[[^\]]*\]/, () => `"image": [${JSON.stringify(imageUrl)}]`);
-  // Canonical URL (clean, no .html) so search engines index a single address
-  const canonical = `<link rel="canonical" href="${pageUrl}"/>`;
-  html = /<link rel="canonical"[^>]*\/>/.test(html)
-    ? html.replace(/<link rel="canonical"[^>]*\/>/, () => canonical)
-    : html.replace(/<meta property="og:site_name"[^>]*\/>\n/, (m) => `${canonical}\n${m}`);
+  set("property", "og:title", en.title, es.title);
+  set("property", "og:description", clip(en.excerpt), clip(es.excerpt));
+  set("property", "og:image", en.imageUrl, es.imageUrl);
+  set("property", "og:image:alt", `${en.title} — FuturoFood`, `${es.title} — FuturoFood`);
+  set("name", "twitter:title", en.title, es.title);
+  set("name", "twitter:description", clip(en.excerpt), clip(es.excerpt));
+  set("name", "twitter:image", en.imageUrl, es.imageUrl);
+  const locale = `<meta property="og:locale" content="en_US"/>`;
+  html = /<meta property="og:locale" content="[^"]*"\/>/.test(html)
+    ? html.replace(/<meta property="og:locale" content="[^"]*"\/>/, locale)
+    : html.replace(/<meta property="og:site_name"[^>]*\/>\n/, (m) => `${m}${locale}\n`);
+  // Structured data points at the English card (build-i18n.mjs swaps it on /es/)
+  html = html.replace(/"image": \[[^\]]*\]/, () => `"image": [${JSON.stringify(en.imageUrl)}]`);
   return html;
 }
 
@@ -142,44 +148,48 @@ export async function updateOgCards(files, log = console.log) {
       const path = join(ROOT, file);
       let html = readFileSync(path, "utf8");
       const data = ogDataFromPage(html);
-      let imageUrl = DEFAULT_IMAGE;
-      let fit = null;
+      const images = { en: DEFAULT_IMAGE, es: DEFAULT_IMAGE };
+      const fits = [];
       if (browser) {
-        try {
-          const name = `${basename(file, ".html")}.jpg`;
-          mkdirSync(join(ROOT, "og"), { recursive: true });
-          const page = await browser.newPage();
-          await page.setViewport({ width: 1200, height: 630 });
-          await page.setContent(cardHtml(data), { waitUntil: "networkidle0" });
-          fit = await page.evaluate(async () => {
-            await document.fonts.ready;
-            // Largest size (54→40px) that fits the title in 3 lines, else in 4.
-            // Runs after the fonts load — Playfair is wider than the fallback.
-            const t = document.getElementById("t");
-            const lines = () => Math.round(t.scrollHeight / parseFloat(getComputedStyle(t).lineHeight));
-            const fitsAt = (size, max) => { t.style.fontSize = size + "px"; return lines() <= max; };
-            const tryFit = () => {
-              for (const max of [3, 4]) {
-                for (let size = 54; size >= 40; size -= 2) if (fitsAt(size, max)) return { size, lines: lines() };
-              }
-              return null;
-            };
-            // Very long titles ("X — and Y"): keep the first clause rather than cut mid-word
-            const fit = tryFit() || ((t.textContent = t.dataset.short), tryFit());
-            if (fit) return fit;
-            fitsAt(40, 4);
-            return { size: 40, lines: lines() };
-          });
-          await page.screenshot({ path: join(ROOT, "og", name), type: "jpeg", quality: 84 });
-          await page.close();
-          imageUrl = `${SITE}/og/${name}`;
-          rendered.push(file);
-        } catch (e) {
-          log(`[og] card failed for ${file}: ${e.message}`);
+        for (const lang of ["es", "en"]) {
+          try {
+            const name = `${basename(file, ".html")}.jpg`;
+            const dir = lang === "es" ? "og" : "og/en";
+            mkdirSync(join(ROOT, dir), { recursive: true });
+            const page = await browser.newPage();
+            await page.setViewport({ width: 1200, height: 630 });
+            await page.setContent(cardHtml({ ...data[lang], category: data.category }, lang), { waitUntil: "networkidle0" });
+            const fit = await page.evaluate(async () => {
+              await document.fonts.ready;
+              // Largest size (54→40px) that fits the title in 3 lines, else in 4.
+              // Runs after the fonts load — Playfair is wider than the fallback.
+              const t = document.getElementById("t");
+              const lines = () => Math.round(t.scrollHeight / parseFloat(getComputedStyle(t).lineHeight));
+              const fitsAt = (size, max) => { t.style.fontSize = size + "px"; return lines() <= max; };
+              const tryFit = () => {
+                for (const max of [3, 4]) {
+                  for (let size = 54; size >= 40; size -= 2) if (fitsAt(size, max)) return { size, lines: lines() };
+                }
+                return null;
+              };
+              // Very long titles ("X — and Y"): keep the first clause rather than cut mid-word
+              const fit = tryFit() || ((t.textContent = t.dataset.short), tryFit());
+              if (fit) return fit;
+              fitsAt(40, 4);
+              return { size: 40, lines: lines() };
+            });
+            await page.screenshot({ path: join(ROOT, dir, name), type: "jpeg", quality: 84 });
+            await page.close();
+            images[lang] = `${SITE}/${dir}/${name}`;
+            fits.push(`${lang} ${fit.size}px/${fit.lines} lines`);
+          } catch (e) {
+            log(`[og] ${lang} card failed for ${file}: ${e.message}`);
+          }
         }
+        if (images.es !== DEFAULT_IMAGE) rendered.push(file);
       }
-      writeFileSync(path, applyOgMeta(html, { ...data, imageUrl, pageUrl: `${SITE}/${basename(file, ".html")}` }));
-      log(`[og] ${file} → ${imageUrl}${fit ? ` (title ${fit.size}px, ${fit.lines} lines)` : ""}`);
+      writeFileSync(path, applyOgMeta(html, { en: { ...data.en, imageUrl: images.en }, es: { ...data.es, imageUrl: images.es } }));
+      log(`[og] ${file} → ${images.en} · ${images.es}${fits.length ? ` (${fits.join(", ")})` : ""}`);
     }
   } finally {
     if (browser) await browser.close();

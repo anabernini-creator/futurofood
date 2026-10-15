@@ -1,61 +1,63 @@
-(function(){
-  var STORAGE_KEY = 'ff-lang-choice'; // only manual EN/ES choices (older 'ff-lang' was saved automatically)
-  var ATTRS = ['placeholder','aria-label','title'];
+/*
+ * FuturoFood languages: English at the root, Spanish under /es/ — each page
+ * is already written in its language (scripts/build-i18n.mjs), so nothing is
+ * translated or redirected here (automatic redirects confuse search engines).
+ *
+ *  - The EN/ES switch links to the same page in the other language, keeping
+ *    the ?query and #section, and remembers the choice ("ff-lang-choice").
+ *  - On an English page, readers whose browser is in Spanish (or who chose
+ *    Spanish before) see a small "¿Prefieres leer en español?" bar with a link
+ *    to /es/. Closing it (×) or choosing English hides it for good.
+ */
+(function () {
+  var CHOICE = 'ff-lang-choice';
+  var HINT_CLOSED = 'ff-lang-hint-closed';
 
-  function getSaved(){
-    try{ return localStorage.getItem(STORAGE_KEY); }catch(e){ return null; }
-  }
-  function setSaved(lang){
-    try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
-  }
+  function get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function set(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
 
-  // First visit: Spanish if the browser's main language is Spanish (es, es-CR,
-  // es-419…), English otherwise. A manual EN/ES click is saved and wins.
-  function detected(){
-    return /^es\b/i.test(navigator.language || '') ? 'es' : 'en';
-  }
-
-  function applyLang(lang, remember){
-    document.documentElement.setAttribute('lang', lang);
-
-    document.querySelectorAll('[data-es]').forEach(function(el){
-      if(el.dataset.en === undefined) el.dataset.en = el.innerHTML;
-      el.innerHTML = lang === 'es' ? el.dataset.es : el.dataset.en;
-    });
-
-    ATTRS.forEach(function(attr){
-      var cacheAttr = 'data-en-' + attr;
-      var esAttr = 'data-es-' + attr;
-      document.querySelectorAll('[' + esAttr + ']').forEach(function(el){
-        if(!el.hasAttribute(cacheAttr)){
-          el.setAttribute(cacheAttr, el.getAttribute(attr) || '');
-        }
-        var val = lang === 'es' ? el.getAttribute(esAttr) : el.getAttribute(cacheAttr);
-        if(val !== null) el.setAttribute(attr, val);
-      });
-    });
-
-    document.querySelectorAll('.lang-btn').forEach(function(b){
-      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-    });
-
-    if(remember) setSaved(lang);
-    // Revealed again after the head snippet hid the page to avoid a flash of English
-    document.documentElement.classList.remove('i18n-pending');
+  function esUrl() {
+    var es = document.querySelector('.lang-btn[data-lang="es"]');
+    var path = es ? es.getAttribute('href') : '/es/';
+    return path + location.search + location.hash;
   }
 
-  function init(){
-    applyLang(getSaved() || detected(), false);
-    document.addEventListener('click', function(e){
-      var btn = e.target.closest('.lang-btn');
-      if(!btn) return;
-      applyLang(btn.getAttribute('data-lang'), true);
+  function initSwitch() {
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest && e.target.closest('a.lang-btn');
+      if (!link) return;
+      set(CHOICE, link.getAttribute('data-lang'));
+      if (link.classList.contains('active')) { e.preventDefault(); return; }
+      link.href = link.getAttribute('href').split(/[?#]/)[0] + location.search + location.hash;
     });
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  }else{
-    init();
+  function initHint() {
+    if (document.documentElement.lang !== 'en' || get(HINT_CLOSED)) return;
+    var choice = get(CHOICE);
+    var spanish = choice ? choice === 'es' : /^es\b/i.test(navigator.language || '');
+    if (!spanish) return;
+    var style = document.createElement('style');
+    style.textContent =
+      '.lang-hint{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.25rem .75rem;padding:.5rem 2.75rem .5rem 1rem;position:relative;' +
+      'background:#111A11;border-bottom:1px solid rgba(232,245,224,.1);font-family:"DM Sans",system-ui,sans-serif;font-size:.85rem;color:rgba(232,245,224,.8)}' +
+      '.lang-hint a{color:#4ADE80;font-weight:600;text-decoration:none;white-space:nowrap}' +
+      '.lang-hint a:hover{text-decoration:underline}' +
+      '.lang-hint button{position:absolute;right:.4rem;top:50%;transform:translateY(-50%);width:2.25rem;height:2.25rem;background:none;border:none;cursor:pointer;color:rgba(232,245,224,.5);font-size:1.2rem;line-height:1}' +
+      '.lang-hint button:hover{color:#E8F5E0}';
+    document.head.appendChild(style);
+    var bar = document.createElement('div');
+    bar.className = 'lang-hint';
+    bar.lang = 'es';
+    bar.setAttribute('role', 'note');
+    bar.innerHTML = '<span>¿Prefieres leer en español?</span><a href="' + esUrl() + '" hreflang="es" data-lang-hint>Leer en español →</a>' +
+      '<button type="button" aria-label="Cerrar">×</button>';
+    bar.querySelector('a').addEventListener('click', function () { set(CHOICE, 'es'); });
+    bar.querySelector('button').addEventListener('click', function () { set(HINT_CLOSED, '1'); bar.remove(); });
+    document.body.insertBefore(bar, document.body.firstChild);
   }
+
+  function init() { initSwitch(); initHint(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

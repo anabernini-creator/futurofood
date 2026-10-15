@@ -19,36 +19,28 @@
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
-<script>
-  // Language: Spanish browsers get Spanish automatically (i18n.js). Hide the
-  // page until i18n.js has swapped the text, so there's no flash of English —
-  // never longer than 1.5 s.
-  try {
-    var ffl = localStorage.getItem('ff-lang-choice') || (/^es\b/i.test(navigator.language || '') ? 'es' : 'en');
-    if (ffl === 'es') {
-      document.documentElement.lang = 'es';
-      document.documentElement.classList.add('i18n-pending');
-      setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 1500);
-    }
-  } catch (e) {}
-</script>
-<style>.i18n-pending body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
 <link rel="canonical" href="https://futurofood.com/"/>
-<title>FuturoFood | Food-Tech News from Latin America</title>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/"/>
+<title data-es="FuturoFood | Noticias de food-tech de América Latina">FuturoFood | Food-Tech News from Latin America</title>
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta name="keywords" content="food tech Latin America, foodtech LATAM, agtech, lab-grown meat, insect protein, regenerative agriculture, alternative protein, food innovation"/>
-<meta name="description" content="Lab-grown meat, insect protein, regenerative farming and agtech: stories of who is changing how Latin America eats. Free weekly newsletter."/>
-<meta property="og:title" content="FuturoFood — The Future of Food in Latin America"/>
-<meta property="og:description" content="Lab-grown meat, insect protein, regenerative farming. The bilingual media platform for food innovation in LATAM."/>
+<meta name="description" content="Lab-grown meat, insect protein, regenerative farming and agtech: stories of who is changing how Latin America eats. Free weekly newsletter." data-es-content="Carne cultivada, proteína de insectos, agricultura regenerativa y agtech: historias de quienes cambian cómo come América Latina. Boletín semanal gratis."/>
+<meta property="og:title" content="FuturoFood — The Future of Food in Latin America" data-es-content="FuturoFood — El futuro de la alimentación en América Latina"/>
+<meta property="og:description" content="Lab-grown meat, insect protein, regenerative farming. The bilingual media platform for food innovation in LATAM." data-es-content="Carne cultivada, proteína de insectos, agricultura regenerativa. El medio bilingüe sobre innovación alimentaria en LATAM."/>
 <meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:locale:alternate" content="es_LA"/>
 <meta property="og:url" content="https://futurofood.com/"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta property="og:image" content="https://futurofood.com/og-default.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema"/>
+<meta property="og:image:alt" content="FuturoFood — Stories of the people who grow, research and build to change the food system" data-es-content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema"/>
 <meta name="twitter:image" content="https://futurofood.com/og-default.jpg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -177,7 +169,7 @@ a{color:inherit;text-decoration:none}
   letter-spacing:0.08em;
 }
 .lang-switch{display:flex;border:1px solid var(--border)}
-.lang-btn{
+.lang-btn{display:inline-block;text-decoration:none;
   background:transparent;border:none;cursor:pointer;
   color:var(--mist);
   font-family:var(--mono);
@@ -976,9 +968,9 @@ footer{
     </a>
     <div class="mast-right">
       <span class="issue-tag" data-es="Vol. 1 · Edición 1 · 2026">Vol. 1 · Issue 1 · 2026</span>
-      <div class="lang-switch" role="group" aria-label="Language selector">
-        <button type="button" class="lang-btn active" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      <div class="lang-switch" role="group" aria-label="Language selector" data-es-aria-label="Selector de idioma">
+        <a class="lang-btn active" data-lang="en" href="/" hreflang="en" aria-current="true">EN</a>
+        <a class="lang-btn" data-lang="es" href="/es/" hreflang="es">ES</a>
       </div>
       <a href="#newsletter" class="btn-subscribe" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
@@ -1079,8 +1071,8 @@ footer{
         <div class="stat-label" data-es="Año en que la ANVISA de Brasil publicó su marco regulatorio para carne cultivada (RDC 839)">Year Brazil's ANVISA published its cultivated-meat regulatory framework (RDC 839)</div>
       </div>
       <div class="pull-quote">
-        <p>"Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa." — By around the middle of next year, it will be on display as an Embrapa technological asset.</p>
-        <cite>— Luciano Paulino da Silva, researcher, Embrapa LNANO</cite>
+        <p data-es="&quot;Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa.&quot; — Para mediados del próximo año, estará en vitrina como un activo tecnológico de Embrapa.">"Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa." — By around the middle of next year, it will be on display as an Embrapa technological asset.</p>
+        <cite data-es="— Luciano Paulino da Silva, investigador, Embrapa LNANO">— Luciano Paulino da Silva, researcher, Embrapa LNANO</cite>
       </div>
       <div class="mini-story">
         <span class="kicker" data-es="🪲 Proteína de Insectos">🪲 Insect Protein</span>
@@ -1093,7 +1085,7 @@ footer{
 </section>
 
 <!-- TOPIC BAND -->
-<nav class="topic-band" id="topics" aria-label="Topics">
+<nav class="topic-band" id="topics" aria-label="Topics" data-es-aria-label="Temas">
   <div class="topic">
     <span class="topic-icon">🦗</span>
     <span class="topic-name" data-es="Proteína de Insectos">Insect Protein</span>
@@ -1134,25 +1126,25 @@ footer{
   </div>
   <div class="articles-grid">
     <article class="article-card">
-      <div class="card-top-row"><span class="article-tag tag-lab" data-es="Cultivado en Lab">Lab-Grown</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
+      <div class="card-top-row"><span class="article-tag tag-lab" data-es="Cultivado en Lab">Lab-Grown</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
       <h3 class="article-title"><a class="card-link" href="futurofood-article.html" data-es="La agencia estatal de investigación Embrapa de Brasil cultiva carne de pollo real a partir de células — sin sacrificar un solo animal">Brazil's state research agency Embrapa is growing real chicken meat from cells — without a single animal slaughtered</a></h3>
       <p class="article-excerpt" data-es="Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília, con un paquete tecnológico terminado previsto para mediados de 2027. Brasil ya estableció normas regulatorias para la carne cultivada desde 2023.">Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília, with a finished technology package targeted for mid-2027. Brazil already set regulatory rules for cultivated meat back in 2023.</p>
       <div class="article-meta" data-es="5 min · Fuente: Embrapa / Rio Times">5 min · Source: Embrapa / Rio Times</div>
     </article>
     <article class="article-card">
-      <div class="card-top-row"><span class="article-tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
+      <div class="card-top-row"><span class="article-tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
       <h3 class="article-title"><a class="card-link" href="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html" data-es="Enthos recauda capital de riesgo para construir una de las plantas de proteína de insectos más grandes de América Latina en Colombia">Enthos raises VC funding to build one of Latin America's largest insect-protein plants in Colombia</a></h3>
       <p class="article-excerpt" data-es="S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa colombiana que usa larvas de mosca soldado negra para convertir residuos de comida en harina y aceite de insectos para alimento animal y acuícola, como alternativa a la harina de pescado.">S2G Investments and Ocean 14 Capital backed Enthos, a Colombian company using black soldier fly larvae to turn food waste into insect meal and oil for animal and aquaculture feed, as an alternative to fishmeal.</p>
       <div class="article-meta" data-es="2 min · Fuente: The Fish Site">2 min · Source: The Fish Site</div>
     </article>
     <article class="article-card">
-      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo">Regenerative</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
+      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo">Regenerative</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
       <h3 class="article-title"><a class="card-link" href="futurofood-blog.html" data-es="Osa Conservation ayudará a 350 agricultores costarricenses a pasarse a la agricultura regenerativa">Osa Conservation will help 350 Costa Rican farmers go regenerative</a></h3>
       <p class="article-excerpt" data-es="Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono.">With a three-year Walmart Foundation grant, Osa Conservation's Farms for Nature project will give 350 farmers in southern Costa Rica's AmistOsa landscape tailored regenerative farming plans, aiming to raise productivity and store carbon.</p>
       <div class="article-meta" data-es="5 min · Fuente: Osa Conservation">5 min · Source: Osa Conservation</div>
     </article>
     <article class="article-card">
-      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo">Regenerative</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
+      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo">Regenerative</span><button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
       <h3 class="article-title"><a class="card-link" href="futurofood-blog.html" data-es="Costa Rica y el Banco Mundial destinan $120M al financiamiento de la agricultura sostenible">Costa Rica and the World Bank commit $120M to sustainable agriculture financing</a></h3>
       <p class="article-excerpt" data-es="El nuevo préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo una línea que paga a los agricultores por la captura de carbono en las cadenas de café, ganadería y caña de azúcar.">The new loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including a track that pays farmers for carbon capture in coffee, livestock, and sugarcane production chains.</p>
       <div class="article-meta" data-es="4 min · Fuente: Banco Mundial">4 min · Source: World Bank</div>
@@ -1195,7 +1187,7 @@ footer{
       </div>
     </div>
     <div class="nl-form">
-      <input class="nl-input" type="email" placeholder="your@email.com" aria-label="Email address" data-es-aria-label="Correo electrónico"/>
+      <input class="nl-input" type="email" placeholder="your@email.com" data-es-placeholder="tu@correo.com" aria-label="Email address" data-es-aria-label="Correo electrónico"/>
       <button class="btn-nl" type="button" data-es="Suscríbete — Es Gratis →">Subscribe — It's Free →</button>
     </div>
     <p class="nl-note" data-es="Sin spam. Cancela cuando quieras. Tu privacidad es sagrada.">No spam. Unsubscribe anytime. Your privacy is sacred.</p>
@@ -1211,35 +1203,35 @@ footer{
   <div class="sponsors-grid">
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+        <span class="sponsor-logo-placeholder" data-es="TU MARCA">YOUR BRAND</span>
       </div>
       <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
       <div class="sponsor-category eyebrow" data-es="AgriTech · México">AgriTech · Mexico</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+        <span class="sponsor-logo-placeholder" data-es="TU MARCA">YOUR BRAND</span>
       </div>
       <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
       <div class="sponsor-category eyebrow" data-es="Biotecnología · Brasil">Biotech · Brazil</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+        <span class="sponsor-logo-placeholder" data-es="TU MARCA">YOUR BRAND</span>
       </div>
       <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
       <div class="sponsor-category eyebrow" data-es="Agricultura Regenerativa · Costa Rica">Regen Ag · Costa Rica</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+        <span class="sponsor-logo-placeholder" data-es="TU MARCA">YOUR BRAND</span>
       </div>
       <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
       <div class="sponsor-category eyebrow" data-es="Espacio de patrocinador fundador">Founding sponsor slot</div>
     </div>
     <div class="sponsor-slot available">
       <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder">YOUR BRAND</span>
+        <span class="sponsor-logo-placeholder" data-es="TU MARCA">YOUR BRAND</span>
       </div>
       <div class="sponsor-name" style="color:var(--green)" data-es="Disponible">Available</div>
       <div class="sponsor-category eyebrow" data-es="Espacio de patrocinador fundador">Founding sponsor slot</div>
@@ -1344,10 +1336,10 @@ footer{
 </footer>
 
 <script src="consent.js?v=1" defer></script>
-<script src="i18n.js?v=2" defer></script>
+<script src="i18n.js?v=3" defer></script>
 <script src="newsletter.js?v=3" defer></script>
 <script src="media.js?v=1" defer></script>
-<script src="share.js?v=3" defer></script>
+<script src="share.js?v=4" defer></script>
 <script src="capture.js?v=1" defer></script>
 <script src="analytics.js?v=5" defer></script>
 </body>

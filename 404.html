@@ -19,23 +19,9 @@
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
-<script>
-  // Language: Spanish browsers get Spanish automatically (i18n.js). Hide the
-  // page until i18n.js has swapped the text, so there's no flash of English —
-  // never longer than 1.5 s.
-  try {
-    var ffl = localStorage.getItem('ff-lang-choice') || (/^es\b/i.test(navigator.language || '') ? 'es' : 'en');
-    if (ffl === 'es') {
-      document.documentElement.lang = 'es';
-      document.documentElement.classList.add('i18n-pending');
-      setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 1500);
-    }
-  } catch (e) {}
-</script>
-<style>.i18n-pending body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>404 — Story Not Found · FuturoFood</title>
-<meta name="robots" content="noindex"/>
+<title data-es="404 — Historia no encontrada · FuturoFood">404 — Story Not Found · FuturoFood</title>
+<meta name="robots" content="noindex, max-image-preview:large"/>
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -57,7 +43,7 @@ a{color:inherit;text-decoration:none}
 .btn-sub:hover{background:#6ee89a}
 .mast-right{display:flex;align-items:center;gap:1rem}
 .lang-switch{display:flex;border:1px solid var(--border)}
-.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
 .lang-btn+.lang-btn{border-left:1px solid var(--border)}
 .lang-btn.active{background:var(--green);color:var(--ink)}
 .lang-btn:hover:not(.active){color:var(--green)}
@@ -100,9 +86,9 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.25re
   <div class="masthead-inner">
     <a href="futurofood.html" class="mast-logo">Futuro<em>Food</em></a>
     <div class="mast-right">
-      <div class="lang-switch" role="group" aria-label="Language selector">
-        <button type="button" class="lang-btn active" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      <div class="lang-switch" role="group" aria-label="Language selector" data-es-aria-label="Selector de idioma">
+        <a class="lang-btn active" data-lang="en" href="/" hreflang="en" aria-current="true">EN</a>
+        <a class="lang-btn" data-lang="es" href="/es/" hreflang="es">ES</a>
       </div>
       <a href="futurofood.html#newsletter" class="btn-sub" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
@@ -137,7 +123,7 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.25re
   <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
 </footer>
 <script src="consent.js?v=1" defer></script>
-<script src="i18n.js?v=2" defer></script>
+<script src="i18n.js?v=3" defer></script>
 <script src="analytics.js?v=5" defer></script>
 </body>
 </html>

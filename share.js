@@ -14,7 +14,9 @@
  *
  * Every shared URL carries utm_source=<channel>&utm_medium=share and
  * utm_campaign=article (article page) or card (blog/home cards), so signups
- * are attributed in Beehiiv. Link clicks are tracked by analytics.js through
+ * are attributed in Beehiiv. Links point to the page in the language being
+ * read (English at the root, Spanish under /es/), except WhatsApp: its
+ * message is in Spanish, so it always links to the /es/ page. Link clicks are tracked by analytics.js through
  * [data-share]; native-sheet shares are announced with the "ff:share" event.
  */
 (function () {
@@ -36,6 +38,16 @@
     return en !== null ? htmlToText(en) : el.textContent.replace(/\s+/g, ' ').trim();
   }
 
+  // Clean path of a URL on this site: /x.html → /x, /index → /
+  function cleanPath(path) {
+    return path.replace(/\.html$/, '').replace(/(^|\/)index$/, '$1') || '/';
+  }
+  function spanishUrl(url) {
+    var u = new URL(url);
+    if (!/^\/es(\/|$)/.test(u.pathname)) u.pathname = u.pathname === '/' ? '/es/' : '/es' + u.pathname;
+    return u.toString();
+  }
+
   function withUtm(url, source, campaign) {
     return url + (url.indexOf('?') === -1 ? '?' : '&') +
       'utm_source=' + source + '&utm_medium=share&utm_campaign=' + campaign;
@@ -45,7 +57,7 @@
   function links(t) {
     var enc = encodeURIComponent;
     return {
-      whatsapp: 'https://wa.me/?text=' + enc('Mira este artículo de FuturoFood: ' + t.titleEs + ' ' + withUtm(t.url, 'whatsapp', t.campaign)),
+      whatsapp: 'https://wa.me/?text=' + enc('Mira este artículo de FuturoFood: ' + t.titleEs + ' ' + withUtm(spanishUrl(t.url), 'whatsapp', t.campaign)),
       x: 'https://twitter.com/intent/tweet?text=' + enc(t.titleShown) + '&url=' + enc(withUtm(t.url, 'x', t.campaign)),
       linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + enc(withUtm(t.url, 'linkedin', t.campaign)),
       copy: withUtm(t.url, 'copy_link', t.campaign),
@@ -55,7 +67,7 @@
   function articleTarget() {
     var h1 = document.querySelector('h1.article-title');
     return {
-      url: SITE + location.pathname,
+      url: SITE + cleanPath(location.pathname),
       titleEs: h1 ? textIn(h1, 'es') : document.title,
       titleShown: h1 ? textIn(h1, document.documentElement.lang) : document.title,
       campaign: 'article',
@@ -69,10 +81,10 @@
     var titleEn = textIn(titleEl, 'en');
     var url;
     if (/futurofood-article/.test(href)) {
-      url = SITE + '/' + href.replace(/^\//, '').replace(/\.html$/, '');
+      url = SITE + cleanPath(new URL(link.href).pathname);
     } else {
       // Brief stories have no page of their own: share the blog filtered to them
-      url = SITE + '/futurofood-blog?q=' + encodeURIComponent(titleEn.split(/\s+/).slice(0, 4).join(' '));
+      url = SITE + (isEs() ? '/es' : '') + '/futurofood-blog?q=' + encodeURIComponent(titleEn.split(/\s+/).slice(0, 4).join(' '));
     }
     return { url: url, titleEs: textIn(titleEl, 'es'), titleShown: textIn(titleEl, document.documentElement.lang), campaign: 'card' };
   }
@@ -165,7 +177,7 @@
     if (navigator.share && window.matchMedia('(pointer: coarse)').matches) {
       navigator.share({
         title: t.titleShown,
-        text: 'Mira este artículo de FuturoFood: ' + t.titleEs,
+        text: isEs() ? 'Mira este artículo de FuturoFood: ' + t.titleEs : 'Read this FuturoFood story: ' + t.titleShown,
         url: withUtm(t.url, 'share_sheet', t.campaign),
       }).then(function () { announce('share_sheet', t.campaign); }).catch(function () {});
     } else {

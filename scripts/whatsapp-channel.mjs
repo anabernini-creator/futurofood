@@ -5,7 +5,7 @@
 // workflow posts it as a PR comment; Ana pastes it into the Channel.
 //
 // WhatsApp format: each story is the category emoji + the title in *bold*,
-// then its published deck (Spanish) and the article link tagged
+// then its published deck (Spanish) and the link to the Spanish page, tagged
 // utm_source=whatsapp_channel&utm_medium=social&utm_campaign=weekly.
 // At most 3 stories per message: more stories are split into several.
 //
@@ -26,7 +26,7 @@ const PER_MESSAGE = 3;
 const CATEGORY_EMOJI = { lab: "🧬", regen: "🌱", insects: "🦗", tech: "🤖", water: "💧", ancestral: "🌽" };
 
 export function articleLink(entry) {
-  return `${SITE}/${entry.filename.replace(/\.html$/, "")}?${UTM}`;
+  return `${SITE}/es/${entry.filename.replace(/\.html$/, "")}?${UTM}`; // Spanish message → /es/ page
 }
 
 // WhatsApp reads *…* as bold and _…_ as italics: keep the article's own

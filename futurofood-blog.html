@@ -19,40 +19,32 @@
   gtag('js', new Date());
   gtag('config', 'G-DB7ETK6YM5');
 </script>
-<script>
-  // Language: Spanish browsers get Spanish automatically (i18n.js). Hide the
-  // page until i18n.js has swapped the text, so there's no flash of English —
-  // never longer than 1.5 s.
-  try {
-    var ffl = localStorage.getItem('ff-lang-choice') || (/^es\b/i.test(navigator.language || '') ? 'es' : 'en');
-    if (ffl === 'es') {
-      document.documentElement.lang = 'es';
-      document.documentElement.classList.add('i18n-pending');
-      setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 1500);
-    }
-  } catch (e) {}
-</script>
-<style>.i18n-pending body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
 <link rel="canonical" href="https://futurofood.com/futurofood-blog"/>
-<title>Food-Tech Stories from Latin America | FuturoFood</title>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-blog"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-blog"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/futurofood-blog"/>
+<title data-es="Historias de food-tech de América Latina | FuturoFood">Food-Tech Stories from Latin America | FuturoFood</title>
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta name="keywords" content="food tech news, Latin America, agtech startups, lab-grown meat, insect protein, regenerative farming, water, ancestral foods"/>
-<meta name="description" content="Every FuturoFood story in one place: lab-grown meat, insect protein, regenerative farming, water and ancestral foods across Latin America."/>
+<meta name="description" content="Every FuturoFood story in one place: lab-grown meat, insect protein, regenerative farming, water and ancestral foods across Latin America." data-es-content="Todas las historias de FuturoFood: carne cultivada, proteína de insectos, agricultura regenerativa, agua y alimentos ancestrales en América Latina."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-<meta property="og:title" content="All Stories — FuturoFood"/>
-<meta property="og:description" content="Food innovation across Latin America: lab-grown, regenerative, insect protein, food tech, water and ancestral foods. Bilingual EN/ES."/>
+<meta property="og:title" content="All Stories — FuturoFood" data-es-content="Todas las historias — FuturoFood"/>
+<meta property="og:description" content="Food innovation across Latin America: lab-grown, regenerative, insect protein, food tech, water and ancestral foods. Bilingual EN/ES." data-es-content="Innovación alimentaria en América Latina: cultivado en laboratorio, regenerativo, proteína de insectos, tecnología alimentaria, agua y alimentos ancestrales."/>
 <meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:locale:alternate" content="es_LA"/>
 <meta property="og:site_name" content="FuturoFood"/>
 <meta property="og:url" content="https://futurofood.com/futurofood-blog"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta property="og:image" content="https://futurofood.com/og-default.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema"/>
+<meta property="og:image:alt" content="FuturoFood — Stories of the people who grow, research and build to change the food system" data-es-content="FuturoFood — Historias de quienes cultivan, investigan y emprenden para cambiar el sistema"/>
 <meta name="twitter:image" content="https://futurofood.com/og-default.jpg"/>
 <link rel="stylesheet" href="media.css?v=1"/>
 <link rel="stylesheet" href="share.css?v=5"/>
@@ -135,7 +127,7 @@ a{color:inherit;text-decoration:none}
 }
 .btn-subscribe:hover{background:#6ee89a;transform:translateY(-1px)}
 .lang-switch{display:flex;border:1px solid var(--border)}
-.lang-btn{background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
 .lang-btn+.lang-btn{border-left:1px solid var(--border)}
 .lang-btn.active{background:var(--green);color:var(--ink)}
 .lang-btn:hover:not(.active){color:var(--green)}
@@ -709,9 +701,9 @@ footer{
       <small data-es="El futuro de la alimentación · LATAM">The Future of Food · LATAM</small>
     </a>
     <div class="mast-right">
-      <div class="lang-switch" role="group" aria-label="Language selector">
-        <button type="button" class="lang-btn active" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      <div class="lang-switch" role="group" aria-label="Language selector" data-es-aria-label="Selector de idioma">
+        <a class="lang-btn active" data-lang="en" href="/futurofood-blog" hreflang="en" aria-current="true">EN</a>
+        <a class="lang-btn" data-lang="es" href="/es/futurofood-blog" hreflang="es">ES</a>
       </div>
       <a href="#newsletter" class="btn-subscribe" data-es="Suscríbete Gratis">Subscribe Free</a>
     </div>
@@ -837,7 +829,7 @@ footer{
           <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
           <span class="card-readtime" data-es="2 min de lectura">2 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title"><a class="card-link" href="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html" data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces">Enthos is turning food waste into insect protein for animal and fish feed</a></h3>
         <p class="card-excerpt" data-es="Con el respaldo de S2G Investments y Ocean 14 Capital, la empresa colombiana construye Enthos 1, una planta de mosca soldado negra pensada para ser uno de los mayores centros de proteína de insectos de América Latina.">Backed by S2G Investments and Ocean 14 Capital, the Colombian company is building Enthos 1, a black soldier fly plant designed to become one of Latin America's largest insect protein sites.</p>
@@ -855,7 +847,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="3 min de lectura">3 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title"><a class="card-link" href="futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields.html" data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales">The Brazilian company bringing AI and autonomous robots to sugarcane fields</a></h3>
         <p class="card-excerpt" data-es="Britaldo Hernandez impulsa a Solinftec más allá de los robots y el software para convertirla en una empresa de 'IA física' basada en una década de datos de campo en Brasil y Estados Unidos.">Britaldo Hernandez is pushing Solinftec beyond robots and software toward becoming a 'physical AI' knowledge company built on a decade of field data from Brazil and the US.</p>
@@ -873,7 +865,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="3 min de lectura">3 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title"><a class="card-link" href="futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in.html" data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global">Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South</a></h3>
         <p class="card-excerpt" data-es="La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático.">The India-based startup, which turns WhatsApp messages and phone calls from field teams into structured data, plans to use fresh pre-seed funding to expand into Latin America, Africa and Southeast Asia.</p>
@@ -891,7 +883,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="3 min de lectura">3 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title"><a class="card-link" href="futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia.html" data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños">Charolais cattle breed reinvents itself to win over Brazilian ranchers</a></h3>
         <p class="card-excerpt" data-es="Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil.">Three decades of genetic selection have turned a slow-maturing giant breed into an early-finishing favorite for industrial crossbreeding in Brazil's feedlot-driven cattle industry.</p>
@@ -909,7 +901,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="3 min de lectura">3 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title"><a class="card-link" href="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026">TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026</a></h3>
         <p class="card-excerpt" data-es="La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC.">Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC.</p>
@@ -928,7 +920,7 @@ footer{
           <span class="tag tag-lab" data-es="Cultivado en Lab">Lab-Grown</span>
           <span class="card-readtime" data-es="4 min de lectura">4 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title"><a class="card-link" href="futurofood-article.html" data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal">Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered</a></h3>
         <p class="card-excerpt" data-es="La agencia estatal de investigación Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027, apoyándose en las normas regulatorias que Brasil estableció en 2023.">State research agency Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027, building on regulatory rules Brazil set in 2023.</p>
@@ -946,7 +938,7 @@ footer{
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
           <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title" data-es="Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa">Osa Conservation will help 350 Costa Rican farmers adopt regenerative farming in AmistOsa</h3>
         <p class="card-excerpt" data-es="Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono.">With a three-year Walmart Foundation grant, Osa Conservation's Farms for Nature project will give 350 farmers in southern Costa Rica's AmistOsa landscape tailored regenerative farming plans, aiming to raise productivity and store carbon.</p>
@@ -964,7 +956,7 @@ footer{
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
           <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title" data-es="El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica">World Bank commits $120M loan to sustainable agriculture in Costa Rica</h3>
         <p class="card-excerpt" data-es="El financiamiento respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar.">The financing supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane production chains.</p>
@@ -983,7 +975,7 @@ footer{
           <span class="tag tag-insects" data-es="Proteína de Insectos">Insect Protein</span>
           <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title" data-es="La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica">IFC invests $2M in ProNuvo, a Costa Rican insect-feed producer in Guápiles</h3>
         <p class="card-excerpt" data-es="El financiamiento ayuda a ProNuvo a completar una planta industrial de alimento para insectos de 4,000 TM/año. La empresa cosecha larvas de mosca soldado negra nativas de Costa Rica, usando una fracción de la tierra, el tiempo y el agua de las fuentes de proteína convencionales.">The financing helps ProNuvo complete a 4,000 MT/year industrial insect-feed plant. The company harvests Black Soldier Fly larvae native to Costa Rica, using a fraction of the land, time, and water of conventional protein sources.</p>
@@ -1001,7 +993,7 @@ footer{
           <span class="tag tag-regen" data-es="Regenerativo">Regenerative</span>
           <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title" data-es="Finca Aquiares: cómo una finca cafetalera costarricense de 600 hectáreas se volvió carbono neutral">Aquiares Estate: how a 600-hectare Costa Rican coffee farm became carbon neutral</h3>
         <p class="card-excerpt" data-es="La finca certificada por Rainforest Alliance, en las laderas del volcán Turrialba, alcanzó la neutralidad de carbono en 2016 y ahora captura más carbono del que emite — un modelo de café regenerativo que abarca tres generaciones de trabajadores.">The Rainforest Alliance Certified farm on the slopes of Turrialba Volcano achieved carbon neutrality in 2016 and now sequesters more carbon than it emits — a regenerative coffee model spanning three generations of workers.</p>
@@ -1020,7 +1012,7 @@ footer{
           <span class="tag tag-tech" data-es="Tecnología Alimentaria">Food Tech</span>
           <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title" data-es="La argentina Kilimo ha ahorrado 72 mil millones de litros de agua con riego impulsado por IA — ya está presente en 7 países">Argentina's Kilimo has saved 72 billion liters of water with AI-powered irrigation — now in 7 countries</h3>
         <p class="card-excerpt" data-es="Kilimo combina datos satelitales, meteorológicos y de suelo para indicar a los agricultores cuándo y cuánto regar. Según su cofundadora, quienes la usan ahorran hasta un 30% de agua; la empresa ya llega a más de 2.000 agricultores en siete países, entre ellos Argentina, México y Chile.">Kilimo combines satellite, weather and soil data to tell farmers when and how much to irrigate. Its co-founder says users save up to 30% of water; the company has reached more than 2,000 farmers in seven countries, including Argentina, Mexico and Chile.</p>
@@ -1038,7 +1030,7 @@ footer{
           <span class="tag tag-water" data-es="Agua">Water</span>
           <span class="card-readtime" data-es="1 min de lectura">1 min read</span>
           <button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          <button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share" data-es-title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
         </div>
         <h3 class="card-title" data-es="Los glaciares andinos se adelgazan un 35% más rápido que el promedio mundial — y 90 millones de personas dependen de ellos">Andean glaciers are thinning 35% faster than the global average — and 90 million people depend on them</h3>
         <p class="card-excerpt" data-es="Un informe de política de las universidades de Sheffield y Newcastle advierte que los glaciares andinos, que se adelgazan 0.7 metros al año, amenazan la seguridad hídrica y alimentaria de millones de personas río abajo — y algunas zonas de los Andes podrían quedar casi sin hielo hacia 2100.">A policy brief from the Universities of Sheffield and Newcastle warns that Andean glaciers, thinning by 0.7 meters a year, threaten the water and food security of millions of people downstream — and parts of the Andes could be almost ice-free by 2100.</p>
@@ -1094,7 +1086,7 @@ footer{
       <div class="nl-mini">
         <h3 class="nl-mini-title" data-es="Mantente al tanto del <em>futuro de la alimentación</em>">Stay ahead of <em>food's future</em></h3>
         <p class="nl-mini-desc" data-es="Resumen semanal sobre innovación alimentaria en LATAM. Gratis, siempre. Bilingüe.">Weekly brief on food innovation across LATAM. Free, always. Bilingüe.</p>
-        <input class="nl-mini-input" type="email" placeholder="your@email.com" aria-label="Email" data-es-aria-label="Correo electrónico"/>
+        <input class="nl-mini-input" type="email" placeholder="your@email.com" data-es-placeholder="tu@correo.com" aria-label="Email" data-es-aria-label="Correo electrónico"/>
         <button class="nl-mini-btn" type="button" data-es="Suscríbete Gratis →">Subscribe Free →</button>
         <p class="nl-mini-note" data-es="Sé de los primeros suscriptores · Sin spam · Cancela cuando quieras">Be an early subscriber · No spam · Unsubscribe anytime</p>
       </div>
@@ -1171,7 +1163,7 @@ footer{
       <div class="sidebar-title" data-es="Socio">Partner</div>
       <div class="sponsor-mini">
         <span class="sponsor-mini-label" data-es="Patrocinado por">Sponsored by</span>
-        <div class="sponsor-logo-box"><span>YOUR LOGO HERE</span></div>
+        <div class="sponsor-logo-box"><span data-es="TU LOGO AQUÍ">YOUR LOGO HERE</span></div>
         <a href="patrocinadores.html" class="sponsor-mini-cta" data-es="Anúnciate con FuturoFood →">Advertise with FuturoFood →</a>
       </div>
     </div>
@@ -1196,7 +1188,7 @@ footer{
   </div>
 </footer>
 <script src="consent.js?v=1" defer></script>
-<script src="i18n.js?v=2" defer></script>
+<script src="i18n.js?v=3" defer></script>
 <script src="newsletter.js?v=3" defer></script>
 <script src="media.js?v=1" defer></script>
 
@@ -1551,7 +1543,7 @@ if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
   applyFilters(true);
 }
 </script>
-<script src="share.js?v=3" defer></script>
+<script src="share.js?v=4" defer></script>
 <script src="capture.js?v=1" defer></script>
 <script src="analytics.js?v=5" defer></script>
 </body>

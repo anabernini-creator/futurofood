@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<!-- Google Analytics 4 — gtag.js loads async, so it never blocks rendering -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DB7ETK6YM5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2: analytics cookies stay off until consent.js confirms the
+  // visitor is outside the EU/EEA, UK, Switzerland and Brazil, or they accept.
+  gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 1000});
+  try {
+    var ffc = JSON.parse(localStorage.getItem('ff-consent') || 'null');
+    var ffr = sessionStorage.getItem('ff-consent-required');
+    if (ffc) gtag('consent', 'update', {analytics_storage: ffc.analytics ? 'granted' : 'denied'});
+    else if (ffr === '0') gtag('consent', 'update', {analytics_storage: 'granted'});
+  } catch (e) {}
+  gtag('js', new Date());
+  gtag('config', 'G-DB7ETK6YM5');
+</script>
+<style>/* ── SPONSORS PAGE ── */
+.sp-section{max-width:1280px;margin:0 auto;padding:4rem 2rem;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border)}
+.sp-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
+.sp-title em{color:var(--green);font-style:normal}
+.sp-intro{color:var(--mist);font-size:.95rem;line-height:1.65;max-width:720px;margin-bottom:2.25rem}
+.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.sp-card{background:var(--panel);padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.6rem}
+.sp-icon{font-size:1.6rem}
+.sp-card h3{font-family:var(--serif);font-size:1.15rem;font-weight:700;line-height:1.25}
+.sp-card p{font-size:.86rem;color:var(--mist);line-height:1.6}
+.sp-price{margin-top:auto;padding-top:1rem;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.sp-price small{display:block;margin-top:.3rem;font-size:.58rem;letter-spacing:.06em;color:var(--mist2);text-transform:none;font-weight:400}
+.sp-note{margin-top:1.5rem;font-size:.84rem;color:var(--mist);line-height:1.6;max-width:760px;border-left:3px solid var(--gold);padding-left:1rem}
+.sp-list{list-style:none;display:grid;gap:.75rem;max-width:820px}
+.sp-list li{font-size:.92rem;line-height:1.6;color:var(--mist);padding-left:1.4rem;position:relative}
+.sp-list li::before{content:"→";position:absolute;left:0;color:var(--green)}
+.sp-list strong{color:var(--leaf)}
+.sp-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.25rem;max-width:820px}
+.sp-field{display:flex;flex-direction:column;gap:.4rem}
+.sp-field.full{grid-column:1 / -1}
+.sp-field label{font-family:var(--mono);font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.sp-field input,.sp-field select,.sp-field textarea{width:100%;background:var(--panel);border:1px solid var(--border);color:var(--leaf);font-family:var(--sans);font-size:.92rem;padding:.75rem .9rem;outline:none;border-radius:0}
+.sp-field textarea{min-height:140px;resize:vertical;line-height:1.55}
+.sp-field input:focus,.sp-field select:focus,.sp-field textarea:focus{border-color:var(--green)}
+.sp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.sp-actions{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:1rem}
+.sp-submit{background:var(--green);color:var(--ink);border:none;cursor:pointer;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.95rem 1.6rem}
+.sp-submit:hover{background:#6ee89a}
+.sp-submit:disabled{opacity:.6;cursor:default}
+.sp-status{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--mist)}
+.sp-status.error{color:var(--fire)}
+.sp-status.ok{color:var(--green)}
+.sp-small{grid-column:1 / -1;font-size:.78rem;color:var(--mist2);line-height:1.55}
+.sp-small a,.sp-intro a{color:var(--green)}
+@media(max-width:860px){.sp-grid{grid-template-columns:1fr}.sp-form{grid-template-columns:1fr}.sp-section{padding:3rem 1rem}}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
+<link rel="canonical" href="https://futurofood.com/es/patrocinadores"/>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/patrocinadores"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/patrocinadores"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/patrocinadores"/>
+<title data-es="Patrocina FuturoFood | Llega a innovadores de LATAM">Patrocina FuturoFood | Llega a innovadores de LATAM</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<meta name="keywords" content="FuturoFood sponsorship, media kit, food tech advertising, agtech newsletter, Latin America, sponsored content"/>
+<meta name="description" content="Patrocina FuturoFood: menciones en el boletín, banners y artículos patrocinados que llegan a innovadores, inversionistas y productores de LATAM." data-es-content="Patrocina FuturoFood: menciones en el boletín, banners y artículos patrocinados que llegan a innovadores, inversionistas y productores de LATAM." data-en-content="Sponsor FuturoFood: newsletter mentions, blog banners and sponsored articles that reach food innovators, investors and farmers across Latin America."/>
+<meta property="og:title" content="Patrocina FuturoFood — Llega a quienes construyen el futuro de la alimentación en LATAM" data-es-content="Patrocina FuturoFood — Llega a quienes construyen el futuro de la alimentación en LATAM" data-en-content="Sponsor FuturoFood — Reach the people building the future of food in LATAM"/>
+<meta property="og:description" content="Menciones en el newsletter, banners en el blog y artículos patrocinados. Desde US$200." data-es-content="Menciones en el newsletter, banners en el blog y artículos patrocinados. Desde US$200." data-en-content="Newsletter mentions, blog banners and sponsored articles. From US$200."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="es_LA"/>
+<meta property="og:locale:alternate" content="en_US"/>
+<meta property="og:site_name" content="FuturoFood"/>
+<meta property="og:url" content="https://futurofood.com/es/patrocinadores"/>
+<meta property="og:image" content="https://futurofood.com/og-default.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/consent.css?v=1"/>
+<link rel="stylesheet" href="/wa-channel.css?v=1"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+:root{
+  --ink:#0A0F0A;--leaf:#E8F5E0;--panel:#111A11;--panel2:#162016;
+  --green:#4ADE80;--fire:#FF6B35;--gold:#F5C842;
+  --mist:rgba(232,245,224,0.70);--mist2:rgba(232,245,224,0.35);
+  --border:rgba(232,245,224,0.10);--border2:rgba(232,245,224,0.06);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+body{background:var(--ink);color:var(--leaf);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* MASTHEAD */
+.masthead{border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100;background:rgba(10,15,10,0.93);backdrop-filter:blur(16px)}
+.masthead-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:64px;gap:1rem}
+.mast-nav{display:flex;gap:1.75rem}
+.mast-nav a{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.mast-nav a:hover,.mast-nav a.active{color:var(--green)}
+.mast-logo{text-align:center;font-family:var(--serif);font-size:1.6rem;font-weight:900;letter-spacing:-.02em;display:block;cursor:pointer}
+.mast-logo em{color:var(--green);font-style:normal}
+.mast-logo small{display:block;font-family:var(--mono);font-size:.55rem;letter-spacing:.22em;color:var(--mist);margin-top:3px}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:1rem}
+.btn-sub{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.5rem 1.25rem;transition:background .2s;display:inline-block}
+.btn-sub:hover{background:#6ee89a}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
+
+/* HERO */
+.about-hero{max-width:1280px;margin:0 auto;padding:5rem 2rem 4rem;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:3px solid var(--leaf)}
+.hero-eyebrow{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:1.5rem;display:block}
+.hero-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,5rem);font-weight:900;letter-spacing:-.04em;line-height:.95;margin-bottom:2rem}
+.hero-title em{color:var(--green);font-style:normal}
+.hero-deck{font-family:var(--serif);font-size:clamp(1.1rem,2vw,1.4rem);font-style:italic;color:var(--mist);line-height:1.55;max-width:680px;border-left:3px solid var(--green);padding-left:1.25rem}
+
+/* MISSION */
+.mission{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border)}
+.mission-left{padding:4rem 3rem 4rem 2rem;border-right:1px solid var(--border)}
+.mission-right{padding:4rem 2rem 4rem 3rem;background:var(--panel)}
+.section-label{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:1.5rem;display:block}
+.mission-title{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.25rem}
+.mission-title em{color:var(--green);font-style:normal}
+.mission-body{font-size:.95rem;color:var(--mist);line-height:1.8;margin-bottom:1.25rem}
+.value-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.value-item{background:var(--panel2);padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start}
+.value-icon{font-size:1.5rem;flex-shrink:0;margin-top:.1rem}
+.value-title{font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.value-desc{font-size:.82rem;color:var(--mist);line-height:1.55}
+
+/* STATS BAND */
+.stats-band{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border)}
+.stat-cell{background:var(--panel);padding:2.5rem 1.5rem;text-align:center}
+.stat-n{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1;margin-bottom:.4rem}
+.stat-n.g{color:var(--green)}
+.stat-n.f{color:var(--fire)}
+.stat-n.gold{color:var(--gold)}
+.stat-l{font-family:var(--mono);font-size:.6rem;color:var(--mist);letter-spacing:.07em;line-height:1.4}
+
+/* TOPICS */
+.topics-section{max-width:1280px;margin:0 auto;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border)}
+.topics-header{padding:3rem 2rem 1.5rem;border-bottom:1px solid var(--border)}
+.topics-title{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-.03em}
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.topic-cell{padding:1.75rem 1.5rem;border-right:1px solid var(--border);border-top:1px solid var(--border);transition:background .2s}
+.topic-cell:nth-child(3n){border-right:none}
+.topic-cell:hover{background:var(--panel2)}
+.topic-icon{font-size:1.75rem;display:block;margin-bottom:.875rem}
+.topic-name{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.topic-desc{font-size:.82rem;color:var(--mist);line-height:1.55}
+
+/* MANIFESTO FULL */
+.manifesto-full{max-width:1280px;margin:0 auto;border-left:1px solid var(--border2);border-right:1px solid var(--border2);background:var(--panel);border-bottom:1px solid var(--border);padding:5rem 2rem}
+.manifesto-inner{max-width:760px;margin:0 auto;text-align:center}
+.manifesto-quote{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem}
+.manifesto-quote em{color:var(--green);font-style:normal}
+.manifesto-body{font-size:1rem;color:var(--mist);line-height:1.85;margin-bottom:1.25rem}
+.origin-list{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0 2rem}
+.origin-tag{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(74,222,128,.08);color:var(--green);border:1px solid rgba(74,222,128,.2);padding:.3rem .75rem}
+
+/* AI SECTION */
+.ai-section{max-width:1280px;margin:0 auto;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr}
+.ai-left{padding:3rem 2.5rem 3rem 2rem;border-right:1px solid var(--border)}
+.ai-right{padding:3rem 2rem 3rem 2.5rem;background:var(--panel2)}
+.ai-title{font-family:var(--serif);font-size:clamp(1.25rem,2.5vw,2rem);font-weight:900;letter-spacing:-.02em;margin-bottom:1rem}
+.ai-body{font-size:.92rem;color:var(--mist);line-height:1.8;margin-bottom:1rem}
+.tech-stack{display:flex;flex-direction:column;gap:.5rem}
+.tech-item{display:flex;align-items:center;gap:.875rem;padding:.75rem 1rem;background:var(--panel);border:1px solid var(--border);font-size:.85rem}
+.tech-name{font-weight:600}
+.tech-role{font-family:var(--mono);font-size:.6rem;color:var(--mist2);letter-spacing:.05em;margin-left:auto}
+.tech-dot{width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0}
+
+/* CONTACT CTA */
+.contact-cta{max-width:1280px;margin:0 auto;border-left:1px solid var(--border2);border-right:1px solid var(--border2);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr}
+.contact-item{padding:2.5rem 2rem;border-right:1px solid var(--border)}
+.contact-item:last-child{border-right:none}
+.contact-label{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:.875rem;display:block}
+.contact-title{font-family:var(--serif);font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
+.contact-desc{font-size:.85rem;color:var(--mist);line-height:1.6;margin-bottom:1.25rem}
+.btn-contact{display:inline-block;font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--leaf);color:var(--leaf);padding:.65rem 1.5rem;transition:background .2s,color .2s}
+.btn-contact:hover{background:var(--leaf);color:var(--ink)}
+.btn-green{background:var(--green);color:var(--ink);border-color:var(--green)}
+.btn-green:hover{background:#6ee89a;color:var(--ink)}
+
+/* FOOTER */
+footer{border-top:3px solid var(--leaf);background:var(--panel)}
+.footer-bottom{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;flex-wrap:wrap;gap:.75rem}
+.footer-brand{font-family:var(--serif);font-weight:900;font-size:1.1rem}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{font-family:var(--mono);font-size:.6rem;color:var(--mist2);letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{font-family:var(--mono);font-size:.58rem;color:rgba(232,245,224,.25)}
+
+@media(max-width:900px){
+  .mission,.ai-section,.contact-cta{grid-template-columns:1fr}
+  .mission-left,.ai-left,.contact-item{border-right:none;border-bottom:1px solid var(--border)}
+  .stats-band{grid-template-columns:1fr 1fr}
+  .topics-grid{grid-template-columns:1fr 1fr}
+  .masthead-inner{display:flex;flex-wrap:wrap;align-items:center;row-gap:.5rem}
+  .mast-nav{display:none}
+  .masthead{padding:0 1rem}
+  .mast-logo{text-align:left;font-size:1.15rem;width:100%}
+  .mast-logo small{display:none}
+  .mast-right{gap:.35rem;width:100%;justify-content:flex-end;flex-wrap:wrap}
+  .lang-btn{padding:.3rem .5rem;font-size:.6rem}
+  .btn-sub{padding:.35rem .7rem;font-size:.6rem}
+}
+@media(max-width:600px){
+  .stats-band{grid-template-columns:1fr}
+  .topics-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{transition-duration:0ms!important}}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <nav class="mast-nav">
+      <a href="/es/" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="/es/futurofood-blog" data-es="Historias" data-en="Stories">Historias</a>
+      <a href="/es/futurofood-about" data-es="Nosotros" data-en="About">Nosotros</a>
+    </nav>
+    <a href="/es/" class="mast-logo">
+      <span>Futuro<em>Food</em></span>
+      <small data-es="El futuro de la alimentación · LATAM" data-en="The Future of Food · LATAM">El futuro de la alimentación · LATAM</small>
+    </a>
+    <div class="mast-right">
+      <div class="lang-switch" role="group" aria-label="Selector de idioma" data-es-aria-label="Selector de idioma" data-en-aria-label="Language selector">
+        <a class="lang-btn" data-lang="en" href="/patrocinadores" hreflang="en">EN</a>
+        <a class="lang-btn active" data-lang="es" href="/es/patrocinadores" hreflang="es" aria-current="true">ES</a>
+      </div>
+      <a href="/es/#newsletter" class="btn-sub" data-es="Suscríbete Gratis" data-en="Subscribe Free">Suscríbete Gratis</a>
+    </div>
+  </div>
+</header>
+
+<div class="about-hero">
+  <span class="hero-eyebrow" data-es="Patrocina FuturoFood" data-en="Sponsor FuturoFood">Patrocina FuturoFood</span>
+  <h1 class="hero-title" data-es="Llega a quienes <em>construyen</em><br>el futuro de la alimentación<br>en América Latina" data-en="Reach the people <em>building</em><br>the future of food<br>in Latin America">Llega a quienes <em>construyen</em><br>el futuro de la alimentación<br>en América Latina</h1>
+  <p class="hero-deck" data-es="FuturoFood es un newsletter semanal y un sitio bilingüe (EN/ES) sobre quienes cultivan, investigan y emprenden para cambiar el sistema alimentario en LATAM. Patrocinar FuturoFood pone a tu empresa frente a esa comunidad — siempre con etiqueta clara y dentro de nuestros criterios editoriales." data-en="FuturoFood is a bilingual (EN/ES) weekly newsletter and website about the people who grow, research and build to change Latin America's food system. Sponsoring FuturoFood puts your company in front of that community — always clearly labeled and within our editorial standards.">FuturoFood es un newsletter semanal y un sitio bilingüe (EN/ES) sobre quienes cultivan, investigan y emprenden para cambiar el sistema alimentario en LATAM. Patrocinar FuturoFood pone a tu empresa frente a esa comunidad — siempre con etiqueta clara y dentro de nuestros criterios editoriales.</p>
+  <div class="hero-wa"><a class="wa-channel-btn" href="https://whatsapp.com/channel/0029VbEDSkkIHphKuLdWG847" target="_blank" rel="noopener" data-wa-channel="sponsors"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span data-es="Sigue nuestro Canal de WhatsApp" data-en="Follow our WhatsApp Channel">Sigue nuestro Canal de WhatsApp</span></a></div>
+</div>
+
+<section class="sp-section" aria-labelledby="sp-audience">
+  <span class="section-label" data-es="Audiencia" data-en="Audience">Audiencia</span>
+  <h2 class="sp-title" id="sp-audience" data-es="Para quién <em>escribimos</em>" data-en="Who we <em>write for</em>">Para quién <em>escribimos</em></h2>
+  <div class="sp-grid">
+    <div class="sp-card"><span class="sp-icon" aria-hidden="true">🧪</span><h3 data-es="Innovadores de la alimentación" data-en="Food innovators">Innovadores de la alimentación</h3><p data-es="Fundadores y equipos de I+D y producto en proteínas alternativas, agtech, procesamiento y empaque de alimentos." data-en="Founders and R&amp;amp;D and product teams in alternative proteins, agtech, food processing and packaging.">Fundadores y equipos de I+D y producto en proteínas alternativas, agtech, procesamiento y empaque de alimentos.</p></div>
+    <div class="sp-card"><span class="sp-icon" aria-hidden="true">📈</span><h3 data-es="Inversionistas" data-en="Investors">Inversionistas</h3><p data-es="Fondos de capital de riesgo, fondos de impacto y equipos de venture corporativo que siguen el food-tech y el agtech en América Latina." data-en="Venture capital, impact funds and corporate venture teams following food tech and agtech in Latin America.">Fondos de capital de riesgo, fondos de impacto y equipos de venture corporativo que siguen el food-tech y el agtech en América Latina.</p></div>
+    <div class="sp-card"><span class="sp-icon" aria-hidden="true">🌾</span><h3 data-es="Agricultores y productores" data-en="Farmers and producers">Agricultores y productores</h3><p data-es="Productores, cooperativas y agroempresas que adoptan prácticas regenerativas y herramientas basadas en datos." data-en="Growers, cooperatives and agribusinesses adopting regenerative practices and data-driven tools.">Productores, cooperativas y agroempresas que adoptan prácticas regenerativas y herramientas basadas en datos.</p></div>
+  </div>
+  <p class="sp-note" data-es="Somos una publicación joven. Antes de cualquier contratación te compartimos los números actuales de suscriptores, aperturas y visitas — sin cifras infladas." data-en="We're a young publication. Before any booking we share our current subscriber, open-rate and traffic numbers with you — no inflated figures.">Somos una publicación joven. Antes de cualquier contratación te compartimos los números actuales de suscriptores, aperturas y visitas — sin cifras infladas.</p>
+</section>
+
+<section class="sp-section" aria-labelledby="sp-formats">
+  <span class="section-label" data-es="Formatos y precios" data-en="Formats and pricing">Formatos y precios</span>
+  <h2 class="sp-title" id="sp-formats" data-es="Tres formas de <em>llegar</em>" data-en="Three ways to <em>show up</em>">Tres formas de <em>llegar</em></h2>
+  <div class="sp-grid">
+    <div class="sp-card"><span class="sp-icon" aria-hidden="true">✉️</span><h3 data-es="Mención en el newsletter" data-en="Newsletter mention">Mención en el newsletter</h3><p data-es="Un párrafo corto con tu logo y enlace en el correo semanal de los lunes, marcado como «Patrocinado»." data-en="A short paragraph with your logo and link in our Monday email, marked &quot;Sponsored&quot;.">Un párrafo corto con tu logo y enlace en el correo semanal de los lunes, marcado como «Patrocinado».</p><div class="sp-price" data-es="Desde US$200 <small>por mención</small>" data-en="From US$200 <small>per mention</small>">Desde US$200 <small>por mención</small></div></div>
+    <div class="sp-card"><span class="sp-icon" aria-hidden="true">🖼️</span><h3 data-es="Banner en el blog" data-en="Blog banner">Banner en el blog</h3><p data-es="Banner de 728×90 en futurofood.com/blog, en uno de los dos espacios «Patrocinado por…», con enlace a tu sitio." data-en="A 728×90 banner on futurofood.com/blog, in one of the two &quot;Sponsored by…&quot; placements, linking to your site.">Banner de 728×90 en futurofood.com/blog, en uno de los dos espacios «Patrocinado por…», con enlace a tu sitio.</p><div class="sp-price" data-es="Desde US$200 <small>según espacio y duración</small>" data-en="From US$200 <small>depending on placement and length</small>">Desde US$200 <small>según espacio y duración</small></div></div>
+    <div class="sp-card"><span class="sp-icon" aria-hidden="true">📰</span><h3 data-es="Artículo patrocinado" data-en="Sponsored article">Artículo patrocinado</h3><p data-es="Una historia sobre el trabajo de tu empresa, escrita con nuestros estándares, bilingüe y marcada como «Patrocinado»." data-en="A story about your company's work, written to our standards, bilingual and marked &quot;Sponsored&quot;.">Una historia sobre el trabajo de tu empresa, escrita con nuestros estándares, bilingüe y marcada como «Patrocinado».</p><div class="sp-price" data-es="Desde US$200 <small>cotización según alcance</small>" data-en="From US$200 <small>quoted by scope</small>">Desde US$200 <small>cotización según alcance</small></div></div>
+  </div>
+  <p class="sp-note" data-es="Patrocinadores fundadores: las primeras empresas en sumarse acceden a tarifas preferenciales. Escríbenos y armamos un paquete." data-en="Founding sponsors: the first companies to join get preferential rates. Write to us and we'll put a package together.">Patrocinadores fundadores: las primeras empresas en sumarse acceden a tarifas preferenciales. Escríbenos y armamos un paquete.</p>
+</section>
+
+<section class="sp-section" aria-labelledby="sp-standards">
+  <span class="section-label" data-es="Nuestros criterios" data-en="Our standards">Nuestros criterios</span>
+  <h2 class="sp-title" id="sp-standards" data-es="Lo que <em>sí</em> y lo que <em>no</em>" data-en="What we <em>do</em> and <em>don't</em> do">Lo que <em>sí</em> y lo que <em>no</em></h2>
+  <ul class="sp-list">
+    <li data-es="<strong>Todo contenido patrocinado lleva etiqueta.</strong> Nunca presentamos publicidad como si fuera una noticia." data-en="<strong>All sponsored content is labeled.</strong> We never present advertising as news."><strong>Todo contenido patrocinado lleva etiqueta.</strong> Nunca presentamos publicidad como si fuera una noticia.</li>
+    <li data-es="<strong>Los patrocinadores no aprueban nuestro periodismo.</strong> Patrocinar no compra cobertura editorial." data-en="<strong>Sponsors don't approve our journalism.</strong> A sponsorship doesn't buy editorial coverage."><strong>Los patrocinadores no aprueban nuestro periodismo.</strong> Patrocinar no compra cobertura editorial.</li>
+    <li data-es="<strong>Trabajamos con empresas que encajan con nuestra promesa:</strong> historias de quienes cultivan, investigan y emprenden para cambiar el sistema." data-en="<strong>We work with companies that fit our promise:</strong> stories of those who grow, research and build to change the system."><strong>Trabajamos con empresas que encajan con nuestra promesa:</strong> historias de quienes cultivan, investigan y emprenden para cambiar el sistema.</li>
+  </ul>
+</section>
+
+<section class="sp-section" id="contacto" aria-labelledby="sp-contact">
+  <span class="section-label" data-es="Contacto" data-en="Contact">Contacto</span>
+  <h2 class="sp-title" id="sp-contact" data-es="Cuéntanos sobre <em>tu empresa</em>" data-en="Tell us about <em>your company</em>">Cuéntanos sobre <em>tu empresa</em></h2>
+  <p class="sp-intro" data-es='Te respondemos en pocos días hábiles. También puedes escribirnos a <a href="mailto:hello@futurofood.com">hello@futurofood.com</a>.' data-en="We'll get back to you within a few business days. You can also write to <a href=&quot;mailto:hello@futurofood.com&quot;>hello@futurofood.com</a>.">Te respondemos en pocos días hábiles. También puedes escribirnos a <a href="mailto:hello@futurofood.com">hello@futurofood.com</a>.</p>
+  <form class="sp-form" id="sponsor-form" novalidate>
+    <div class="sp-field"><label for="sp-name" data-es="Nombre *" data-en="Name *">Nombre *</label><input id="sp-name" name="name" autocomplete="name" required maxlength="100"/></div>
+    <div class="sp-field"><label for="sp-company" data-es="Empresa *" data-en="Company *">Empresa *</label><input id="sp-company" name="company" autocomplete="organization" required maxlength="120"/></div>
+    <div class="sp-field"><label for="sp-email" data-es="Correo *" data-en="Email *">Correo *</label><input id="sp-email" name="email" type="email" autocomplete="email" required maxlength="200"/></div>
+    <div class="sp-field"><label for="sp-website" data-es="Sitio web" data-en="Website">Sitio web</label><input id="sp-website" name="website" type="url" inputmode="url" maxlength="200" placeholder="https://"/></div>
+    <div class="sp-field"><label for="sp-format" data-es="Formato" data-en="Format">Formato</label>
+      <select id="sp-format" name="format">
+        <option value="newsletter" data-es="Mención en el newsletter" data-en="Newsletter mention">Mención en el newsletter</option>
+        <option value="banner" data-es="Banner en el blog" data-en="Blog banner">Banner en el blog</option>
+        <option value="article" data-es="Artículo patrocinado" data-en="Sponsored article">Artículo patrocinado</option>
+        <option value="unsure" selected data-es="Aún no lo sé" data-en="Not sure yet">Aún no lo sé</option>
+      </select></div>
+    <div class="sp-field"><label for="sp-budget" data-es="Presupuesto" data-en="Budget">Presupuesto</label>
+      <select id="sp-budget" name="budget">
+        <option value="200-500">US$200–500</option>
+        <option value="500-1000">US$500–1,000</option>
+        <option value="1000+" data-es="Más de US$1.000" data-en="US$1,000+">Más de US$1.000</option>
+        <option value="unsure" selected data-es="Aún no lo sé" data-en="Not sure yet">Aún no lo sé</option>
+      </select></div>
+    <div class="sp-field full"><label for="sp-message" data-es="Mensaje *" data-en="Message *">Mensaje *</label><textarea id="sp-message" name="message" required maxlength="3000" placeholder="¿Qué hace tu empresa y qué te gustaría lograr?" data-es-placeholder="¿Qué hace tu empresa y qué te gustaría lograr?" data-en-placeholder="What does your company do, and what would you like to achieve?"></textarea></div>
+    <div class="sp-hp" aria-hidden="true"><label for="sp-fax">Fax</label><input id="sp-fax" name="fax" tabindex="-1" autocomplete="off"/></div>
+    <div class="sp-actions">
+      <button type="submit" class="sp-submit" data-es="Enviar consulta →" data-en="Send inquiry →">Enviar consulta →</button>
+      <span class="sp-status" id="sp-status" role="status" aria-live="polite"></span>
+    </div>
+    <p class="sp-small" data-es='Usaremos tus datos solo para responder tu consulta. <a href="futurofood-privacy.html">Política de privacidad</a>.' data-en="We'll only use your details to answer your inquiry. <a href=&quot;futurofood-privacy.html&quot;>Privacy policy</a>.">Usaremos tus datos solo para responder tu consulta. <a href="/es/futurofood-privacy">Política de privacidad</a>.</p>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-wa"><a class="wa-channel-btn" href="https://whatsapp.com/channel/0029VbEDSkkIHphKuLdWG847" target="_blank" rel="noopener" data-wa-channel="footer"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span data-es="Sigue nuestro Canal de WhatsApp" data-en="Follow our WhatsApp Channel">Sigue nuestro Canal de WhatsApp</span></a></div>
+  <div class="footer-bottom">
+    <div class="footer-brand">Futuro<em>Food</em></div>
+    <div class="footer-links">
+      <a href="/es/" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="/es/futurofood-blog" data-es="Historias" data-en="Stories">Historias</a>
+      <a href="/es/futurofood-about" data-es="Nosotros" data-en="About">Nosotros</a>
+      <a href="/es/futurofood-privacy" data-es="Privacidad" data-en="Privacy">Privacidad</a>
+    </div>
+    <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica" data-en="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
+  </div>
+</footer>
+<script src="/consent.js?v=1" defer></script>
+<script src="/i18n.js?v=3" defer></script>
+<script>
+// Sponsor inquiry form → /api/sponsor-inquiry (emails Ana)
+(function () {
+  var form = document.getElementById('sponsor-form');
+  var status = document.getElementById('sp-status');
+  var button = form.querySelector('.sp-submit');
+  var startedAt = Date.now();
+  var MSG = {
+    sending: { en: 'Sending…', es: 'Enviando…' },
+    ok: { en: '✓ Thanks! We received your inquiry and will reply soon.', es: '✓ ¡Gracias! Recibimos tu consulta y te responderemos pronto.' },
+    missing: { en: 'Please fill in your name, company, email and a short message.', es: 'Completa tu nombre, empresa, correo y un mensaje breve.' },
+    email: { en: 'Please enter a valid email.', es: 'Ingresa un correo válido.' },
+    unavailable: { en: 'The form is not available right now. Please write to hello@futurofood.com.', es: 'El formulario no está disponible ahora. Escríbenos a hello@futurofood.com.' },
+    error: { en: 'Something went wrong. Please try again or write to hello@futurofood.com.', es: 'Algo salió mal. Intenta de nuevo o escríbenos a hello@futurofood.com.' }
+  };
+  function lang() { return document.documentElement.lang === 'es' ? 'es' : 'en'; }
+  function show(key, kind) {
+    status.textContent = MSG[key][lang()];
+    status.className = 'sp-status' + (kind ? ' ' + kind : '');
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = Object.fromEntries(new FormData(form).entries());
+    if (!data.name.trim() || !data.company.trim() || data.message.trim().length < 10) return show('missing', 'error');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) return show('email', 'error');
+    data.started_at = startedAt;
+    data.lang = lang();
+    button.disabled = true;
+    show('sending');
+    fetch('/api/sponsor-inquiry', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (res) { return res.json().then(function (body) { return { status: res.status, body: body }; }); })
+      .then(function (r) {
+        if (r.body.ok) {
+          form.reset();
+          show('ok', 'ok');
+          if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', { form: 'sponsor_inquiry' });
+        } else if (r.body.error === 'invalid_email') show('email', 'error');
+        else if (r.body.error === 'missing_fields' || r.body.error === 'missing_message') show('missing', 'error');
+        else if (r.body.error === 'not_configured') show('unavailable', 'error');
+        else show('error', 'error');
+      })
+      .catch(function () { show('error', 'error'); })
+      .then(function () { button.disabled = false; });
+  });
+})();
+</script>
+<script src="/analytics.js?v=5" defer></script>
+</body>
+</html>
