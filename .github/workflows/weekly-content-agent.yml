@@ -70,6 +70,8 @@ jobs:
         id: agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # CATIE's server omits the Sectigo intermediate certificate (checking stays on)
+          NODE_EXTRA_CA_CERTS: certs/sectigo-dv-r36.pem
           REVIEW_SUMMARY_PATH: ${{ runner.temp }}/review-summary.md
           SKIP_URLS_PATH: ${{ runner.temp }}/skip-urls.txt
         run: |

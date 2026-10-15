@@ -9,6 +9,9 @@
 // No dependencies — relies on global fetch (Node 18+ / Bun).
 //
 // Requires env: ANTHROPIC_API_KEY (optional: ANTHROPIC_MODEL)
+// CATIE's server sends its certificate without the Sectigo intermediate, so
+// runs set NODE_EXTRA_CA_CERTS=certs/sectigo-dv-r36.pem (the official Sectigo
+// intermediate; certificate checking stays on for every site).
 // Optional env for the review PR: REVIEW_SUMMARY_PATH (writes a Markdown summary
 // of the new articles there) and PREVIEW_BASE_URL (Cloudflare branch preview).
 // 6. Searches YouTube (Claude web search, youtube.com only) for a video about
@@ -41,7 +44,7 @@ const TARGET_ARTICLES = 3;
 // Try a few extra candidates so a failed draft can be replaced by the next story.
 const MAX_ATTEMPTS = 8;
 // Verified sources to choose from, so the country/category rotation has options.
-const MAX_POOL = 20;
+const MAX_POOL = 30;
 // Only cover recent news — some feeds keep returning year-old items.
 const MAX_AGE_DAYS = 21;
 // Keep the weekly mix varied — at most this many stories per outlet per run.
@@ -74,19 +77,42 @@ const FEEDS = [
   // Environment journalism in Spanish (also covers other regions) — filter to both.
   { url: "https://es.mongabay.com/feed/", requireLatam: true, requireFoodtech: true },
   // Brazilian agribusiness outlet (Portuguese) — filter to food/agtech stories.
-  { url: "https://www.agfeed.com.br/feed/", requireLatam: false, requireFoodtech: true },
+  { url: "https://www.agfeed.com.br/feed/", requireLatam: false, requireFoodtech: true, country: "brasil" },
   // LATAM startup outlets, broad — filter down to food/agtech stories.
   { url: "https://www.contxto.com/en/feed/", requireLatam: false, requireFoodtech: true },
   { url: "https://latamlist.com/feed/", requireLatam: false, requireFoodtech: true },
-  { url: "https://startupi.com.br/feed/", requireLatam: false, requireFoodtech: true },
+  { url: "https://startupi.com.br/feed/", requireLatam: false, requireFoodtech: true, country: "brasil" },
   // Climate/food journalism (Spanish edition, also covers China) — filter to both.
   { url: "https://dialogue.earth/es/feed/", requireLatam: true, requireFoodtech: true },
   // Global tech journalism, broad — filter to stories that are both.
   { url: "https://restofworld.org/feed/", requireLatam: true, requireFoodtech: true },
+
+  // ── Added Oct 2026 for the country/category rotation (approved by Ana) ──
+  // Research centers (CGIAR) with work worldwide — filter to LATAM.
+  { url: "https://www.cimmyt.org/es/feed/", requireLatam: true, requireFoodtech: false }, // México · maíz nativo, semillas
+  { url: "https://cipotato.org/feed/", requireLatam: true, requireFoodtech: false }, // Perú · papas nativas
+  // Specialized agro outlets and agencies — every story is about farming.
+  { url: "https://imagenagropecuaria.com/feed/", requireLatam: false, requireFoodtech: false, country: "mexico" }, // México
+  { url: "https://www.redagricola.com/feed/", requireLatam: false, requireFoodtech: false }, // Chile y región
+  { url: "https://www.inia.cl/feed/", requireLatam: false, requireFoodtech: false, country: "chile" }, // Chile · INIA
+  { url: "https://www.fia.cl/feed/", requireLatam: false, requireFoodtech: false, country: "chile" }, // Chile · FIA
+  { url: "https://bichosdecampo.com/feed/", requireLatam: false, requireFoodtech: false, country: "argentina" }, // Argentina
+  { url: "https://www.clarin.com/rss/rural/", requireLatam: false, requireFoodtech: false, country: "argentina" }, // Argentina
+  { url: "https://www.catie.ac.cr/feed/", requireLatam: false, requireFoodtech: false, country: "centroamerica" }, // Costa Rica · CATIE (needs NODE_EXTRA_CA_CERTS, see header)
+  // Broader outlets (environment, health, journalism, universities) — filter to food/agro stories.
+  { url: "https://www.inforegion.pe/feed/", requireLatam: false, requireFoodtech: true, country: "peru" }, // Perú
+  { url: "https://www.actualidadambiental.pe/feed/", requireLatam: false, requireFoodtech: true, country: "peru" }, // Perú · SPDA
+  { url: "https://saludconlupa.com/feed/", requireLatam: false, requireFoodtech: true }, // Perú / regional
+  { url: "https://contracorriente.red/feed/", requireLatam: false, requireFoodtech: true, country: "centroamerica" }, // Honduras
+  { url: "https://www.zamorano.edu/feed/", requireLatam: false, requireFoodtech: true, country: "centroamerica" }, // Honduras · Zamorano
+  { url: "https://www.unacomunica.una.ac.cr/index.php?format=feed", requireLatam: false, requireFoodtech: true, country: "centroamerica" }, // Costa Rica · UNA
+  // Outlets with an advocacy perspective: the draft reports only verifiable facts and attributes positions.
+  { url: "https://agenciatierraviva.com.ar/feed/", requireLatam: false, requireFoodtech: true, perspective: "advocacy", country: "argentina" }, // Argentina
+  { url: "https://prensacomunitaria.org/feed/", requireLatam: false, requireFoodtech: true, perspective: "advocacy", country: "centroamerica" }, // Guatemala
 ];
 
 const LATAM_RE = /latin america|latam|am[eé]rica latina|latinoam[eé]rica|amazon[iíi]a|amaz[oô]nia|brazil|brasil|mexico|méxico|colombia|argentina|chile|per[uú]|costa rica|ecuador|uruguay|paraguay|bolivia|venezuela|guatemala|honduras|panam[aá]|dominican|el salvador|nicaragua/i;
-const FOODTECH_RE = /\bfood\b|foodtech|food-tech|agri|agtech|ag-tech|agriculture|farm|crop|livestock|protein|meat|dairy|seafood|aquaculture|nutrition|beverage|coffee|caf[eé]|cacao|cocoa|regenerative|cultivated meat|alternative protein|vertical farm|fertilizer|fertilizante|aliment|agro|agr[ií]cola|cultivo|ganad|pecu[aá]ri|pesca|acuicultura|aquicultura|semilla|semente|prote[ií]na|carne|leche|leite|l[aá]cteo|insect|fermenta/i;
+const FOODTECH_RE = /\bfood\b|comida|foodtech|food-tech|agri|agtech|ag-tech|agriculture|farm|crop|livestock|protein|meat|dairy|seafood|aquaculture|nutrition|beverage|coffee|caf[eé]|cacao|cocoa|regenerative|cultivated meat|alternative protein|vertical farm|fertilizer|fertilizante|aliment|agro|agr[ií]cola|cultivo|ganad|pecu[aá]ri|pesca|acuicultura|aquicultura|semilla|semente|prote[ií]na|carne|leche|leite|l[aá]cteo|insect|fermenta/i;
 
 function log(...args) {
   console.log("[content-agent]", ...args);
@@ -103,6 +129,23 @@ const KNOWN_OUTLETS = {
   "latamlist.com": "LatamList",
   "startupi.com.br": "Startupi",
   "dialogue.earth": "Dialogue Earth",
+  "cimmyt.org": "CIMMYT",
+  "cipotato.org": "CIP",
+  "imagenagropecuaria.com": "Imagen Agropecuaria",
+  "redagricola.com": "Redagrícola",
+  "inia.cl": "INIA Chile",
+  "fia.cl": "FIA",
+  "bichosdecampo.com": "Bichos de Campo",
+  "clarin.com": "Clarín Rural",
+  "catie.ac.cr": "CATIE",
+  "inforegion.pe": "Inforegión",
+  "actualidadambiental.pe": "Actualidad Ambiental",
+  "saludconlupa.com": "Salud con Lupa",
+  "contracorriente.red": "Contracorriente",
+  "zamorano.edu": "Zamorano",
+  "unacomunica.una.ac.cr": "UNA Comunica",
+  "agenciatierraviva.com.ar": "Agencia Tierra Viva",
+  "prensacomunitaria.org": "Prensa Comunitaria",
 };
 function outletName(hostname) {
   return KNOWN_OUTLETS[hostname] || hostname;
@@ -216,7 +259,7 @@ async function fetchCandidates() {
       const res = await fetchWithTimeout(feed.url, { headers: { "user-agent": "Mozilla/5.0 (compatible; FuturoFoodBot/1.0)" } });
       if (!res.ok) { log("feed fetch failed", feed.url, res.status); continue; }
       const xml = await res.text();
-      const items = parseRssItems(xml).filter((item) => isRelevant(item, feed));
+      const items = parseRssItems(xml).filter((item) => isRelevant(item, feed)).map((item) => ({ ...item, perspective: feed.perspective || null, countryHint: feed.country || null }));
       log(`${feed.url} -> ${items.length} relevant items`);
       all.push(...items);
     } catch (e) {
@@ -262,15 +305,16 @@ const OTHER_COUNTRY_RE = {
 };
 
 // Fallback when the triage is not available: the country named most often in
-// the headline (counted three times) and excerpt, or "regional".
-export function detectCountry(title, excerpt = "") {
+// the headline (counted three times) and excerpt, else the outlet's usual
+// country (feed "country"), else "regional".
+export function detectCountry(title, excerpt = "", hint = null) {
   let best = null, bestHits = 0;
   for (const [c, re] of Object.entries({ ...COUNTRY_RE, ...OTHER_COUNTRY_RE })) {
     const count = (t) => (String(t).match(new RegExp(re.source, "gi")) || []).length;
     const hits = count(title) * 3 + count(excerpt);
     if (hits > bestHits) { best = c; bestHits = hits; }
   }
-  return best || "regional";
+  return best || hint || "regional";
 }
 
 function isoWeekKey(iso) {
@@ -284,7 +328,7 @@ function isoWeekKey(iso) {
 // country, closest category, and whether it fits the editorial promise.
 async function triageCandidates(candidates) {
   const model = process.env.ANTHROPIC_MODEL || "claude-sonnet-5";
-  const list = candidates.map((c, i) => `[${i}] ${c.sourceName} — ${c.title}\n${String(c.excerpt).replace(/\s+/g, " ").slice(0, 700)}`).join("\n\n");
+  const list = candidates.map((c, i) => `[${i}] ${c.sourceName}${c.countryHint ? ` (outlet usually covers: ${c.countryHint})` : ""} — ${c.title}\n${String(c.excerpt).replace(/\s+/g, " ").slice(0, 700)}`).join("\n\n");
   const prompt = `You classify news candidates for FuturoFood, a bilingual outlet about food, farming and food technology in Latin America. Editorial promise: "Stories of those who grow, research and build to change the food system".
 
 For each candidate below, answer from its headline and excerpt only:
@@ -309,7 +353,7 @@ ${list}`;
     const t = arr.find((x) => x.i === i) || {};
     return {
       ...c,
-      country: typeof t.country === "string" && t.country.trim() ? t.country.trim().toLowerCase() : detectCountry(c.title, c.excerpt),
+      country: typeof t.country === "string" && t.country.trim() ? t.country.trim().toLowerCase() : detectCountry(c.title, c.excerpt, c.countryHint),
       category: VALID_TAGS.includes(t.category) ? t.category : null,
       fits: t.fits !== false,
     };
@@ -406,7 +450,9 @@ FuturoFood's editorial promise — it decides both which stories we run and how 
 
 Write a short, original news article based ONLY on the excerpt below. Do not invent quotes, numbers, or facts that aren't in the excerpt or headline. If the excerpt looks thin, paywalled, or unrelated to the headline, keep the article brief and high-level and lean on the headline + outlet context instead of fabricating detail. Attribute claims to the outlet (e.g. "according to ${candidate.sourceName}" / "según ${candidate.sourceName}").
 
-SOURCE OUTLET: ${candidate.sourceName}
+${candidate.perspective === "advocacy" ? `THIS OUTLET WRITES FROM AN ADVOCACY PERSPECTIVE. Report only verifiable facts: who did what, where and when, and figures the excerpt attributes to a named source. Present the outlet's or the sources' positions and claims as theirs ("according to…", "X argues…"), never as FuturoFood's view. Don't adopt the outlet's framing, slogans or loaded words in titles or text. If the excerpt is mostly opinion or a manifesto with few verifiable facts, skip it.
+
+` : ""}SOURCE OUTLET: ${candidate.sourceName}
 SOURCE URL: ${candidate.verifiedUrl}
 HEADLINE: ${candidate.title}
 PUBLISHED: ${candidate.pubDate}
@@ -847,13 +893,13 @@ async function main() {
   // Country + category of every source, then this week's order
   let triaged;
   if (dryRun) {
-    triaged = verified.map((v) => ({ ...v, country: detectCountry(v.title, v.excerpt), category: null, fits: true }));
+    triaged = verified.map((v) => ({ ...v, country: detectCountry(v.title, v.excerpt, v.countryHint), category: null, fits: true }));
   } else {
     try {
       triaged = await triageCandidates(verified);
     } catch (e) {
       log("triage failed — countries from keywords, no category rotation", e.message);
-      triaged = verified.map((v) => ({ ...v, country: detectCountry(v.title, v.excerpt), category: null, fits: true }));
+      triaged = verified.map((v) => ({ ...v, country: detectCountry(v.title, v.excerpt, v.countryHint), category: null, fits: true }));
     }
   }
   const categoryCounts = {};
@@ -922,6 +968,7 @@ async function main() {
       deck_es: draft.deck_es,
       tag_slug: draft.tag_slug,
       country: candidate.country,
+      ...(candidate.perspective === "advocacy" ? { advocacy_source: true } : {}),
       tag_en: draft.tag_en,
       tag_es: draft.tag_es,
       emoji: draft.emoji,
@@ -988,6 +1035,7 @@ export function renderReviewSummary(entries, previewBaseUrl, rotation = []) {
         ? `- **Video:** [${e.video_title || e.video_url}](${e.video_url})${e.video_channel ? ` — ${e.video_channel}` : ""}`
         : "- **Video:** ninguno — se muestra el placeholder",
       e.country ? `- **País:** ${countryLabel(e.country)}` : null,
+      e.advocacy_source ? "- ⚠️ **Fuente con mirada activista:** revisa que el texto cuente solo hechos verificables y atribuya las posturas a quien las dice" : null,
       preview
         ? `- **Vista previa:** [en español](${preview.replace(/\/(futurofood-article[^/]*)$/, "/es/$1")}) · [en inglés](${preview})`
         : `- **Archivo:** \`${e.filename}\` (y \`es/${e.filename}\`)`,
