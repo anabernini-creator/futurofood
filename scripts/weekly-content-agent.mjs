@@ -4,7 +4,7 @@
 // 2. Verifies each candidate's source URL actually resolves (200 OK).
 // 3. Asks Claude to draft a bilingual (EN/ES) article grounded in the fetched excerpt.
 // 4. Renders a new article page from scripts/article-template.html.
-// 5. Inserts a card into futurofood-blog.html, then builds the Spanish pages
+// 5. Inserts a card into futurofood-blog.html, then refreshes the home page and builds the Spanish pages
 //    (es/) and sitemap.xml with scripts/build-i18n.mjs.
 // No dependencies — relies on global fetch (Node 18+ / Bun).
 //

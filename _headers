@@ -1,6 +1,11 @@
 /
   Cache-Control: public, max-age=300
 
+# Spanish home (/es/), same as the English one. The *.html rules below also
+# match pages under /es/.
+/es/
+  Cache-Control: public, max-age=300
+
 /*.html
   Cache-Control: public, max-age=300
 

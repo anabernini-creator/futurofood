@@ -157,37 +157,6 @@ a{color:inherit;text-decoration:none}
   text-align:right;line-height:1.6;
 }
 
-/* ── STATUS BANNER ── */
-/* 
-  ╔══════════════════════════════════════════════════════╗
-  ║  GHOST CMS INTEGRATION POINT                         ║
-  ║  When Ghost is live, hide .static-banner             ║
-  ║  and show .ghost-connected-banner instead            ║
-  ╚══════════════════════════════════════════════════════╝
-*/
-.static-banner{
-  max-width:1280px;margin:0 auto;
-  border-left:1px solid var(--border2);
-  border-right:1px solid var(--border2);
-}
-.static-banner-inner{
-  margin:0 2rem;
-  background:var(--panel2);
-  border:1px solid rgba(245,200,66,.2);
-  border-left:3px solid var(--gold);
-  padding:.75rem 1.25rem;
-  display:flex;align-items:center;gap:.75rem;
-  font-family:var(--mono);font-size:.65rem;
-  color:var(--gold);letter-spacing:.06em;
-  margin-bottom:2rem;
-}
-.banner-dot{
-  width:6px;height:6px;background:var(--gold);
-  border-radius:50%;flex-shrink:0;
-  animation:blink 2s infinite;
-}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
 /* ── FILTER BAR ── */
 .filter-bar{
   max-width:1280px;margin:0 auto;
@@ -342,27 +311,6 @@ a{color:inherit;text-decoration:none}
 /* Articles list */
 .articles-list{border-right:1px solid var(--border)}
 
-/*
-  ╔══════════════════════════════════════════════════════════════════╗
-  ║  GHOST CMS INTEGRATION — ARTICLE CARDS                          ║
-  ║                                                                  ║
-  ║  Step 1: Get your Ghost API key:                                 ║
-  ║    Ghost Admin → Settings → Integrations → Add custom           ║
-  ║    Copy the "Content API Key"                                    ║
-  ║                                                                  ║
-  ║  Step 2: Replace GHOST_URL and GHOST_KEY below in the JS        ║
-  ║    const GHOST_URL = 'https://your-ghost-site.com'              ║
-  ║    const GHOST_KEY = 'your-content-api-key'                     ║
-  ║                                                                  ║
-  ║  Step 3: The fetchGhostPosts() function will replace             ║
-  ║    the static cards with live Ghost content automatically        ║
-  ║                                                                  ║
-  ║  Ghost Content API endpoint used:                                ║
-  ║    GET /ghost/api/content/posts/                                 ║
-  ║    ?key={key}&include=tags,authors&limit=12&page={n}            ║
-  ╚══════════════════════════════════════════════════════════════════╝
-*/
-
 .article-card{
   padding:2rem;
   border-bottom:1px solid var(--border);
@@ -441,29 +389,6 @@ a{color:inherit;text-decoration:none}
   border:1px solid var(--border);
   flex-shrink:0;
 }
-
-/* Pagination */
-.pagination{
-  padding:2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid var(--border);
-}
-.page-info{
-  font-family:var(--mono);font-size:.62rem;
-  color:var(--mist2);letter-spacing:.06em;
-}
-.page-btns{display:flex;gap:.5rem}
-.page-btn{
-  font-family:var(--mono);font-size:.62rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;
-  background:transparent;color:var(--mist);
-  border:1px solid var(--border);
-  padding:.5rem 1rem;cursor:pointer;
-  transition:border-color .2s,color .2s;
-}
-.page-btn:hover{border-color:var(--green);color:var(--green)}
-.page-btn:disabled{opacity:.3;cursor:not-allowed}
-.page-btn.active{background:var(--green);color:var(--ink);border-color:var(--green)}
 
 /* ── SIDEBAR ── */
 .sidebar{padding:2rem 1.5rem}
@@ -594,30 +519,6 @@ a{color:inherit;text-decoration:none}
 }
 .sponsor-mini-cta:hover{background:var(--green);color:var(--ink)}
 
-/* ── GHOST LOADING STATE ── */
-/*
-  ╔═══════════════════════════════════════════════╗
-  ║  When Ghost loads, show .ghost-loading        ║
-  ║  and hide it when posts render                ║
-  ╚═══════════════════════════════════════════════╝
-*/
-.ghost-loading{
-  padding:3rem 2rem;
-  text-align:center;
-  display:none; /* shown by JS when fetching */
-}
-.ghost-loading-text{
-  font-family:var(--mono);font-size:.68rem;
-  color:var(--mist2);letter-spacing:.1em;text-transform:uppercase;
-}
-.skeleton{
-  background:var(--panel2);
-  animation:shimmer 1.5s infinite;
-}
-@keyframes shimmer{
-  0%,100%{opacity:.5}
-  50%{opacity:.8}
-}
 
 /* ── FOOTER ── */
 footer{
@@ -666,7 +567,6 @@ footer{
   .page-meta{text-align:left}
 }
 @media(prefers-reduced-motion:reduce){
-  .banner-dot,.ghost-loading{animation:none}
   *{transition-duration:0ms!important}
 }
 
@@ -801,26 +701,6 @@ footer{
 
   <!-- ARTICLES LIST -->
   <div class="articles-list" id="articles-container">
-
-    <!--
-    ╔══════════════════════════════════════════════════════════════════════════╗
-    ║  GHOST CMS — DYNAMIC CONTENT INTEGRATION                                 ║
-    ║                                                                          ║
-    ║  When Ghost is connected, the JavaScript below replaces these            ║
-    ║  static cards with posts from the Ghost Content API.                     ║
-    ║                                                                          ║
-    ║  Each Ghost post maps to .article-card like this:                        ║
-    ║    post.title      → .card-title                                         ║
-    ║    post.excerpt    → .card-excerpt                                       ║
-    ║    post.tags[0]    → .tag (mapped to tag-insects, tag-lab, etc.)         ║
-    ║    post.published_at → .card-date (formatted)                            ║
-    ║    post.reading_time → .card-readtime                                    ║
-    ║    post.feature_image → .card-img (or emoji fallback)                    ║
-    ║    post.url        → href of entire card / read-cta                      ║
-    ║                                                                          ║
-    ║  See fetchGhostPosts() function at bottom of this file                   ║
-    ╚══════════════════════════════════════════════════════════════════════════╝
-    -->
 
     <!-- AGENT:ARTICLES:START (weekly-content-agent.mjs writes generated cards here — do not hand-edit between markers) -->
     <article class="article-card" data-tag="insects" data-id="futurofood-article-enthos-insect-protein-from-food-waste-colombia.html">
@@ -1060,22 +940,6 @@ footer{
       <button type="button" class="pager-btn" id="pager-next" data-es="Siguiente →">Next →</button>
     </nav>
 
-    <!-- GHOST LOADING STATE (hidden by default, shown by JS when fetching) -->
-    <div class="ghost-loading" id="ghost-loading">
-      <p class="ghost-loading-text" data-es="Cargando historias desde Ghost CMS...">Loading stories from Ghost CMS...</p>
-    </div>
-
-    <!-- PAGINATION -->
-    <div class="pagination">
-      <span class="page-info" id="page-info" data-es="Mostrando 1–8 de 28 historias">Showing 1–8 of 28 stories</span>
-      <div class="page-btns">
-        <button class="page-btn" id="prev-btn" disabled onclick="changePage(-1)" data-es="← Anterior">← Previous</button>
-        <button class="page-btn active" id="page-1" onclick="goToPage(1)">1</button>
-        <button class="page-btn" id="page-2" onclick="goToPage(2)">2</button>
-        <button class="page-btn" id="page-3" onclick="goToPage(3)">3</button>
-        <button class="page-btn" id="next-btn" onclick="changePage(1)" data-es="Siguiente →">Next →</button>
-      </div>
-    </div>
   </div>
 
   <!-- SIDEBAR -->
@@ -1193,137 +1057,6 @@ footer{
 <script src="media.js?v=1" defer></script>
 
 <script>
-/*
- ╔══════════════════════════════════════════════════════════════════════╗
- ║  FUTUROFOOD — GHOST CMS INTEGRATION                                  ║
- ║  ─────────────────────────────────────────────────────────────────   ║
- ║  STEP 1: Set your Ghost credentials below                            ║
- ║  STEP 2: Call initGhost() — it auto-replaces static cards           ║
- ║  STEP 3: Remove the .static-banner div from the HTML above          ║
- ╚══════════════════════════════════════════════════════════════════════╝
-*/
-
-// ── GHOST CONFIG ──────────────────────────────────────────────────────
-// Replace these with your real values when Ghost is live
-const GHOST_URL = 'https://YOUR-GHOST-SITE.ghost.io';   // ← your Ghost URL
-const GHOST_KEY = 'YOUR_CONTENT_API_KEY';                // ← from Ghost Admin
-const GHOST_VERSION = 'v5.0';
-const POSTS_PER_PAGE = 8;
-
-// ── TAG → CSS CLASS MAPPING ───────────────────────────────────────────
-// Map Ghost tag slugs to card tag classes
-const TAG_MAP = {
-  'insect-protein': { cls: 'tag-insects', label: '🦗 Insect Protein', filter: 'insects' },
-  'lab-grown':      { cls: 'tag-lab',     label: '🧬 Lab-Grown',      filter: 'lab'     },
-  'regenerative':   { cls: 'tag-regen',   label: '🌱 Regenerative',   filter: 'regen'   },
-  'ancestral':      { cls: 'tag-ancestral',label:'🌽 Ancestral',      filter: 'ancestral'},
-  'food-tech':      { cls: 'tag-tech',    label: '🤖 Food Tech',      filter: 'tech'    },
-  'water':          { cls: 'tag-water',   label: '💧 Water',          filter: 'water'   },
-};
-
-// ── EMOJI FALLBACKS per tag ───────────────────────────────────────────
-const TAG_EMOJI = {
-  'insects':'🦗','lab':'🧬','regen':'🌱',
-  'ancestral':'🌽','tech':'🤖','water':'💧'
-};
-
-// ── GHOST FETCH ───────────────────────────────────────────────────────
-/*
-  fetchGhostPosts(page, tag)
-  ─────────────────────────
-  Fetches posts from Ghost Content API.
-  Call this once Ghost is configured above.
-
-  API endpoint:
-  GET {GHOST_URL}/ghost/api/content/posts/
-      ?key={GHOST_KEY}
-      &include=tags,authors
-      &limit={POSTS_PER_PAGE}
-      &page={page}
-      &filter=tag:{tag}  (optional)
-
-  Returns: { posts: [...], meta: { pagination: { total, pages } } }
-*/
-async function fetchGhostPosts(page = 1, tag = null) {
-  if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
-    console.info('[FuturoFood] Ghost not configured yet — showing static content.');
-    return null;
-  }
-
-  const tagFilter = tag && tag !== 'all' ? `&filter=tag:${tag}` : '';
-  const url = `${GHOST_URL}/ghost/api/${GHOST_VERSION}/content/posts/`
-    + `?key=${GHOST_KEY}`
-    + `&include=tags,authors`
-    + `&limit=${POSTS_PER_PAGE}`
-    + `&page=${page}`
-    + tagFilter;
-
-  try {
-    document.getElementById('ghost-loading').style.display = 'block';
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Ghost API error: ${res.status}`);
-    const data = await res.json();
-    document.getElementById('ghost-loading').style.display = 'none';
-    return data;
-  } catch (err) {
-    console.error('[FuturoFood] Ghost fetch failed:', err);
-    document.getElementById('ghost-loading').style.display = 'none';
-    return null;
-  }
-}
-
-// ── RENDER GHOST POSTS ────────────────────────────────────────────────
-function renderGhostPosts(posts, pagination) {
-  const container = document.getElementById('articles-container');
-  const loading = document.getElementById('ghost-loading');
-  const paginationDiv = container.querySelector('.pagination');
-
-  // Remove static cards (keep loading + pagination)
-  const staticCards = container.querySelectorAll('.article-card');
-  staticCards.forEach(c => c.remove());
-
-  posts.forEach(post => {
-    // Map Ghost tag to our system
-    const ghostTag = post.tags?.[0]?.slug || 'food-tech';
-    const tagInfo = TAG_MAP[ghostTag] || TAG_MAP['food-tech'];
-    const emoji = TAG_EMOJI[tagInfo.filter] || '🍽️';
-
-    // Format date
-    const date = new Date(post.published_at).toLocaleDateString('en-US', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
-
-    const card = document.createElement('article');
-    card.className = 'article-card';
-    card.dataset.tag = tagInfo.filter;
-    card.onclick = () => window.location.href = post.url;
-    card.innerHTML = `
-      <div>
-        <div class="card-top">
-          <span class="tag ${tagInfo.cls}">${tagInfo.label}</span>
-          <span class="card-readtime">${post.reading_time} min</span>
-        </div>
-        <h3 class="card-title">${post.title}</h3>
-        <p class="card-excerpt">${post.excerpt || post.custom_excerpt || ''}</p>
-        <div class="card-bottom">
-          <span class="card-date">${date}</span>
-        </div>
-      </div>
-      <div class="card-img">${
-        post.feature_image
-          ? `<img src="${post.feature_image}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;"/>`
-          : emoji
-      }</div>
-    `;
-    container.insertBefore(card, loading);
-  });
-
-  // Update pagination
-  updatePagination(pagination);
-  document.getElementById('post-count').textContent =
-    `${pagination.total} stories · Page ${pagination.page} of ${pagination.pages}`;
-}
-
 // ── FILTER + SEARCH + SAVED + PAGES (static mode) ─────────────────────
 // A card is shown when it matches the category (or "saved") and every
 // search word; matches are then split into pages of 6.
@@ -1337,14 +1070,6 @@ function filterCards(btn, tag) {
   document.querySelectorAll('.filter-btn').forEach(b => {
     b.classList.toggle('active', btn ? b === btn : b.dataset.tag === tag);
   });
-
-  // If Ghost is configured, fetch from API
-  if (!GHOST_URL.includes('YOUR-GHOST-SITE')) {
-    fetchGhostPosts(1, tag).then(data => {
-      if (data) renderGhostPosts(data.posts, data.meta.pagination);
-    });
-    return;
-  }
 
   activeTag = tag;
   applyFilters(true);
@@ -1472,59 +1197,10 @@ function updateTagCounts() {
   });
 }
 
-// ── PAGINATION ────────────────────────────────────────────────────────
-let currentPage = 1;
-let currentTag = 'all';
-
-function updatePagination(p) {
-  document.getElementById('prev-btn').disabled = p.page <= 1;
-  document.getElementById('next-btn').disabled = p.page >= p.pages;
-  document.getElementById('page-info').textContent =
-    `Showing ${(p.page-1)*POSTS_PER_PAGE+1}–${Math.min(p.page*POSTS_PER_PAGE,p.total)} of ${p.total} stories`;
-}
-
-function changePage(dir) {
-  currentPage += dir;
-  fetchGhostPosts(currentPage, currentTag).then(data => {
-    if (data) renderGhostPosts(data.posts, data.meta.pagination);
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function goToPage(n) {
-  currentPage = n;
-  fetchGhostPosts(n, currentTag).then(data => {
-    if (data) renderGhostPosts(data.posts, data.meta.pagination);
-  });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────
-/*
-  initGhost() — call this to activate Ghost integration
-  ──────────────────────────────────────────────────────
-  Once GHOST_URL and GHOST_KEY are set above,
-  uncomment the initGhost() call at the bottom.
-  It will auto-fetch and replace static cards on page load.
-*/
-async function initGhost() {
-  const data = await fetchGhostPosts(1, 'all');
-  if (data && data.posts?.length) {
-    renderGhostPosts(data.posts, data.meta.pagination);
-    // Hide static banner once Ghost is live
-    const banner = document.querySelector('.static-banner');
-    if (banner) banner.style.display = 'none';
-  }
-}
-
-// ── ACTIVATE GHOST (uncomment when ready) ─────────────────────────────
-// initGhost();
-//
-// Static mode: real counts, live search, saved stories and pages of 6
-if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
+// Real counts, live search, saved stories and pages of 6
+{
   const postCount = document.getElementById('post-count');
   postCount.removeAttribute('data-es'); // filled in by updatePostCount in both languages
-  document.querySelector('.pagination').style.display = 'none'; // Ghost-only pager
   const searchBox = document.getElementById('story-search');
   // ?q= opens the blog already filtered (used by the WebSite search markup on the home page)
   const initialQuery = new URLSearchParams(location.search).get('q');
@@ -1532,12 +1208,6 @@ if (GHOST_URL.includes('YOUR-GHOST-SITE')) {
   searchBox.addEventListener('input', () => applyFilters(true));
   document.getElementById('pager-prev').addEventListener('click', () => goToStaticPage(-1));
   document.getElementById('pager-next').addEventListener('click', () => goToStaticPage(1));
-  // i18n.js switches languages by setting <html lang>; refresh the texts written here
-  new MutationObserver(() => {
-    applyFilters(false);
-    const ids = savedIds();
-    storyCards().forEach(c => { const b = c.querySelector('.save-btn'); if (b) paintSaveButton(b, ids.has(c.dataset.id)); });
-  }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   initSaveButtons();
   updateTagCounts();
   applyFilters(true);

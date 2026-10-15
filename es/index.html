@@ -192,6 +192,7 @@ a{color:inherit;text-decoration:none}
   border-bottom:1px solid var(--border);
 }
 .ticker-label{
+  position:relative;z-index:2; /* stays above the scrolling headlines */
   font-family:var(--mono);
   font-size:0.6rem;
   font-weight:600;
@@ -364,6 +365,34 @@ a{color:inherit;text-decoration:none}
 
 /* Right column */
 .bs-right{}
+.cover-takeaways{
+  background:var(--panel2);
+  border:1px solid var(--border);
+  border-top:2px solid var(--green);
+  padding:1.25rem;
+  margin-bottom:1.5rem;
+}
+.cover-takeaways-title{
+  font-family:var(--mono);
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--green);
+  display:block;
+  margin-bottom:.75rem;
+}
+.cover-takeaways ul{list-style:none;margin:0;padding:0}
+.cover-takeaways li{
+  font-size:.8rem;
+  color:var(--mist);
+  line-height:1.5;
+  padding:.55rem 0 .55rem 1.1rem;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.cover-takeaways li:last-child{border-bottom:none;padding-bottom:0}
+.cover-takeaways li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--mono)}
 .stat-block{
   background:var(--panel2);
   border:1px solid var(--border);
@@ -506,6 +535,8 @@ a{color:inherit;text-decoration:none}
 .tag-lab    {background:rgba(245,200,66,.12);color:var(--gold)}
 .tag-regen  {background:rgba(255,107,53,.12);color:var(--fire)}
 .tag-tech   {background:rgba(232,245,224,.08);color:var(--mist)}
+.tag-water  {background:rgba(96,165,250,.12);color:#7DB8F5}
+.tag-ancestral{background:rgba(245,200,66,.12);color:var(--gold)}
 .article-title{
   font-family:var(--serif);
   font-size:1rem;
@@ -895,6 +926,7 @@ footer{
   .lang-btn{padding:.3rem .5rem;font-size:.6rem}
   .btn-subscribe{padding:.35rem .7rem;font-size:.6rem}
   .broadsheet{grid-template-columns:1fr}
+  .bs-center{order:-1;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border)} /* cover story first on phones */
   .bs-divider{display:none}
   .topic-band{grid-template-columns:repeat(3,1fr)}
   .articles-grid{grid-template-columns:1fr}
@@ -967,7 +999,7 @@ footer{
       <small data-es="El futuro de la alimentación · LATAM" data-en="The Future of Food · LATAM">El futuro de la alimentación · LATAM</small>
     </a>
     <div class="mast-right">
-      <span class="issue-tag" data-es="Vol. 1 · Edición 1 · 2026" data-en="Vol. 1 · Issue 1 · 2026">Vol. 1 · Edición 1 · 2026</span>
+      <span class="issue-tag" data-es="Vol. 1 · Edición 2 · 2026" data-en="Vol. 1 · Issue 2 · 2026">Vol. 1 · Edición 2 · 2026</span>
       <div class="lang-switch" role="group" aria-label="Selector de idioma" data-es-aria-label="Selector de idioma" data-en-aria-label="Language selector">
         <a class="lang-btn" data-lang="en" href="/" hreflang="en">EN</a>
         <a class="lang-btn active" data-lang="es" href="/es/" hreflang="es" aria-current="true">ES</a>
@@ -981,19 +1013,21 @@ footer{
 <div class="ticker" aria-hidden="true">
   <span class="ticker-label" data-es="↗ Ahora" data-en="↗ Now">↗ Ahora</span>
   <div class="ticker-track">
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Embrapa de Brasil cultiva pollo a partir de células · Cultivado en Lab' data-en="<span class=&quot;ticker-dot&quot;></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown"><span class="ticker-dot"></span> Embrapa de Brasil cultiva pollo a partir de células · Cultivado en Lab</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia' data-en="<span class=&quot;ticker-dot&quot;></span> Enthos raises VC funding for Colombia insect-protein plant"><span class="ticker-dot"></span> Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> El Banco Mundial destina $120M a la agricultura sostenible de Costa Rica' data-en="<span class=&quot;ticker-dot&quot;></span> World Bank commits $120M to Costa Rica sustainable agriculture"><span class="ticker-dot"></span> El Banco Mundial destina $120M a la agricultura sostenible de Costa Rica</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Osa Conservation se asocia con 350 agricultores en agricultura regenerativa · Costa Rica' data-en="<span class=&quot;ticker-dot&quot;></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica"><span class="ticker-dot"></span> Osa Conservation se asocia con 350 agricultores en agricultura regenerativa · Costa Rica</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> ProNuvo (Costa Rica) construye planta de alimento para insectos de 4,000 TM/año con respaldo de la IFC' data-en="<span class=&quot;ticker-dot&quot;></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing"><span class="ticker-dot"></span> ProNuvo (Costa Rica) construye planta de alimento para insectos de 4,000 TM/año con respaldo de la IFC</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Finca Aquiares, Turrialba: café regenerativo carbono neutral desde 2016' data-en="<span class=&quot;ticker-dot&quot;></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016"><span class="ticker-dot"></span> Finca Aquiares, Turrialba: café regenerativo carbono neutral desde 2016</span>
-    <!-- duplicate -->
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Embrapa de Brasil cultiva pollo a partir de células · Cultivado en Lab' data-en="<span class=&quot;ticker-dot&quot;></span> Brazil's Embrapa grows cultivated chicken from cells · Lab-Grown"><span class="ticker-dot"></span> Embrapa de Brasil cultiva pollo a partir de células · Cultivado en Lab</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia' data-en="<span class=&quot;ticker-dot&quot;></span> Enthos raises VC funding for Colombia insect-protein plant"><span class="ticker-dot"></span> Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> El Banco Mundial destina $120M a la agricultura sostenible de Costa Rica' data-en="<span class=&quot;ticker-dot&quot;></span> World Bank commits $120M to Costa Rica sustainable agriculture"><span class="ticker-dot"></span> El Banco Mundial destina $120M a la agricultura sostenible de Costa Rica</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Osa Conservation se asocia con 350 agricultores en agricultura regenerativa · Costa Rica' data-en="<span class=&quot;ticker-dot&quot;></span> Osa Conservation partners with 350 farmers on regenerative ag · Costa Rica"><span class="ticker-dot"></span> Osa Conservation se asocia con 350 agricultores en agricultura regenerativa · Costa Rica</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> ProNuvo (Costa Rica) construye planta de alimento para insectos de 4,000 TM/año con respaldo de la IFC' data-en="<span class=&quot;ticker-dot&quot;></span> ProNuvo (Costa Rica) builds 4,000 MT/year insect-feed plant with IFC backing"><span class="ticker-dot"></span> ProNuvo (Costa Rica) construye planta de alimento para insectos de 4,000 TM/año con respaldo de la IFC</span>
-    <span class="ticker-item" data-es='<span class="ticker-dot"></span> Finca Aquiares, Turrialba: café regenerativo carbono neutral desde 2016' data-en="<span class=&quot;ticker-dot&quot;></span> Aquiares Estate, Turrialba: carbon-neutral regenerative coffee since 2016"><span class="ticker-dot"></span> Finca Aquiares, Turrialba: café regenerativo carbono neutral desde 2016</span>
+    <!-- HOME:TICKER:START (scripts/build-home.mjs — do not edit by hand) -->
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces" data-en="Enthos is turning food waste into insect protein for animal and fish feed">Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales" data-en="The Brazilian company bringing AI and autonomous robots to sugarcane fields">La empresa brasileña que lleva IA y robots autónomos a los cañaverales</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global" data-en="Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South">Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños" data-en="Charolais cattle breed reinvents itself to win over Brazilian ranchers">La raza Charolesa se reinventa para conquistar a los ganaderos brasileños</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026" data-en="TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026">TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal" data-en="Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered">Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal</span></span>
+    <!-- duplicate for the loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces" data-en="Enthos is turning food waste into insect protein for animal and fish feed">Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales" data-en="The Brazilian company bringing AI and autonomous robots to sugarcane fields">La empresa brasileña que lleva IA y robots autónomos a los cañaverales</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global" data-en="Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South">Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños" data-en="Charolais cattle breed reinvents itself to win over Brazilian ranchers">La raza Charolesa se reinventa para conquistar a los ganaderos brasileños</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026" data-en="TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026">TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026</span></span>
+    <span class="ticker-item"><span class="ticker-dot"></span> <span data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal" data-en="Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered">Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal</span></span>
+    <!-- HOME:TICKER:END -->
   </div>
 </div>
 
@@ -1001,120 +1035,105 @@ footer{
 <main>
 <section class="hero">
   <div class="hero-date-bar">
-    <span class="hero-date" data-es="viernes, 27 de junio de 2026" data-en="Friday, June 27, 2026">viernes, 27 de junio de 2026</span>
+    <span class="hero-date" data-es="martes, 13 de octubre de 2026" data-en="Tuesday, October 13, 2026">martes, 13 de octubre de 2026</span>
     <span class="hero-edition" data-es="FuturoFood Semanal · Edición Gratuita" data-en="FuturoFood Weekly · Free Edition">FuturoFood Semanal · Edición Gratuita</span>
   </div>
 
+  <!-- HOME:BROADSHEET:START (scripts/build-home.mjs — do not edit by hand) -->
   <div class="broadsheet">
     <!-- LEFT COL -->
     <div class="bs-col bs-left">
       <div class="mini-story">
-        <span class="kicker" data-es="🌱 Regenerativo" data-en="🌱 Regenerative">🌱 Regenerativo</span>
-        <h3 class="mini-title" data-es="350 agricultores costarricenses se unen a una red de agricultura regenerativa" data-en="350 Costa Rican farmers join regenerative agriculture network">350 agricultores costarricenses se unen a una red de agricultura regenerativa</h3>
-        <p class="mini-body" data-es="El proyecto Farms for Nature de Osa Conservation, con respaldo de la Fundación Walmart, busca ayudar a agricultores del sur de Costa Rica a aumentar su productividad mientras capturan carbono." data-en="Osa Conservation's Farms for Nature project, backed by the Walmart Foundation, aims to help farmers in southern Costa Rica raise productivity while storing carbon.">El proyecto Farms for Nature de Osa Conservation, con respaldo de la Fundación Walmart, busca ayudar a agricultores del sur de Costa Rica a aumentar su productividad mientras capturan carbono.</p>
-        <a href="/es/futurofood-blog" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
+        <span class="kicker" data-es="🤖 Tecnología Alimentaria" data-en="🤖 Food Tech">🤖 Tecnología Alimentaria</span>
+        <h3 class="mini-title" data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales" data-en="The Brazilian company bringing AI and autonomous robots to sugarcane fields">La empresa brasileña que lleva IA y robots autónomos a los cañaverales</h3>
+        <p class="mini-body" data-es="Britaldo Hernandez impulsa a Solinftec más allá de los robots y el software para convertirla en una empresa de 'IA física' basada en una década de datos de campo en Brasil y Estados Unidos." data-en="Britaldo Hernandez is pushing Solinftec beyond robots and software toward becoming a 'physical AI' knowledge company built on a decade of field data from Brazil and the US.">Britaldo Hernandez impulsa a Solinftec más allá de los robots y el software para convertirla en una empresa de 'IA física' basada en una década de datos de campo en Brasil y Estados Unidos.</p>
+        <a href="/es/futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
       </div>
       <div class="mini-story">
-        <span class="kicker" data-es="🏦 Finanzas" data-en="🏦 Finance">🏦 Finanzas</span>
-        <h3 class="mini-title" data-es="El Banco Mundial destina $120M a la agricultura sostenible en Costa Rica" data-en="World Bank commits $120M to sustainable agriculture in Costa Rica">El Banco Mundial destina $120M a la agricultura sostenible en Costa Rica</h3>
-        <p class="mini-body" data-es="El préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar." data-en="The loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane chains.">El préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar.</p>
-        <a href="/es/futurofood-blog" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
+        <span class="kicker" data-es="🤖 Tecnología Alimentaria" data-en="🤖 Food Tech">🤖 Tecnología Alimentaria</span>
+        <h3 class="mini-title" data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global" data-en="Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South">Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global</h3>
+        <p class="mini-body" data-es="La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático." data-en="The India-based startup, which turns WhatsApp messages and phone calls from field teams into structured data, plans to use fresh pre-seed funding to expand into Latin America, Africa and Southeast Asia.">La startup con sede en India, que convierte mensajes de WhatsApp y llamadas de equipos de campo en datos estructurados, usará el nuevo capital semilla para expandirse a América Latina, África y el sudeste asiático.</p>
+        <a href="/es/futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
       </div>
       <div class="mini-story">
-        <span class="kicker" data-es="☕ Regenerativo" data-en="☕ Regenerative">☕ Regenerativo</span>
-        <h3 class="mini-title" data-es="Finca Aquiares: una finca cafetalera carbono neutral en Turrialba" data-en="Aquiares Estate: a carbon-neutral coffee farm in Turrialba">Finca Aquiares: una finca cafetalera carbono neutral en Turrialba</h3>
-        <p class="mini-body" data-es="La finca de 600 hectáreas de café, certificada por Rainforest Alliance, logró la neutralidad de carbono en 2016 y hoy captura más carbono del que emite — un modelo regenerativo que abarca tres generaciones de trabajadores." data-en="The 600-hectare Rainforest Alliance Certified coffee farm became carbon neutral in 2016 and now captures more carbon than it emits — a regenerative model spanning three generations of workers.">La finca de 600 hectáreas de café, certificada por Rainforest Alliance, logró la neutralidad de carbono en 2016 y hoy captura más carbono del que emite — un modelo regenerativo que abarca tres generaciones de trabajadores.</p>
-        <a href="/es/futurofood-blog" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
+        <span class="kicker" data-es="🤖 Tecnología Alimentaria" data-en="🤖 Food Tech">🤖 Tecnología Alimentaria</span>
+        <h3 class="mini-title" data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños" data-en="Charolais cattle breed reinvents itself to win over Brazilian ranchers">La raza Charolesa se reinventa para conquistar a los ganaderos brasileños</h3>
+        <p class="mini-body" data-es="Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil." data-en="Three decades of genetic selection have turned a slow-maturing giant breed into an early-finishing favorite for industrial crossbreeding in Brazil's feedlot-driven cattle industry.">Tres décadas de selección genética transformaron a una raza de maduración tardía en una favorita para cruces industriales en la ganadería intensiva de Brasil.</p>
+        <a href="/es/futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
       </div>
     </div>
 
     <div class="bs-divider"></div>
 
-    <!-- CENTER COL — FLAGSHIP -->
+    <!-- CENTER COL — COVER STORY (the newest article) -->
     <div class="bs-col bs-center">
       <span class="flagship-label" data-es="↗ Historia Principal" data-en="↗ Cover Story">↗ Historia Principal</span>
-      <!-- Video: paste a YouTube, Vimeo or .mp4/.webm URL in data-video-url (empty = editorial placeholder) -->
-      <div class="flagship-img media-frame" data-video-url="" data-video-title="Embrapa cultivated meat research, Brasília" role="img" aria-label="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — investigación de carne cultivada" data-es-aria-label="Laboratorio de Nanobiotecnología de Embrapa (Cenargen), Brasília — investigación de carne cultivada" data-en-aria-label="Embrapa Nanobiotechnology Laboratory (Cenargen), Brasília — cultivated meat research">
-        <span class="media-emoji" aria-hidden="true">🧬</span>
-        <span class="media-caption" aria-hidden="true">Embrapa · Brasília · 2026</span>
+      <div class="flagship-img media-frame" data-video-url="" data-video-title="Enthos is turning food waste into insect protein for animal and fish feed">
+        <span class="media-emoji" aria-hidden="true">🦗</span>
+    <span class="media-caption" data-es="The Fish Site · 13 de octubre de 2026" data-en="The Fish Site · October 13, 2026">The Fish Site · 13 de octubre de 2026</span>
       </div>
-      <h1 class="flagship-title" data-es="La agencia estatal de investigación de Brasil cultiva carne de pollo a partir de<em> células</em> — y el mayor exportador de carne vacuna del mundo dice que esto es solo el comienzo" data-en="
-        Brazil's state research agency is growing chicken meat from<em> cells</em> — and the world's top beef exporter says it's just the beginning
-      ">La agencia estatal de investigación de Brasil cultiva carne de pollo a partir de<em> células</em> — y el mayor exportador de carne vacuna del mundo dice que esto es solo el comienzo</h1>
-      <p class="byline" data-es='Por <span>Equipo Editorial FuturoFood</span> · Fuentes: Agência Brasil, Rio Times, Embrapa · 6 min de lectura · EN/ES' data-en="By <span>FuturoFood Editorial</span> · Sources: Agência Brasil, Rio Times, Embrapa · 6 min read · EN/ES">Por <span>Equipo Editorial FuturoFood</span> · Fuentes: Agência Brasil, Rio Times, Embrapa · 6 min de lectura · EN/ES</p>
-      <p class="flagship-deck" data-es="Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027 — desarrollado íntegramente de forma interna, en un país que ya estableció normas regulatorias para la carne cultivada desde 2023." data-en="
-        Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027 — built entirely in-house, in a country that already set regulatory rules for cultivated meat back in 2023.
-      ">Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027 — desarrollado íntegramente de forma interna, en un país que ya estableció normas regulatorias para la carne cultivada desde 2023.</p>
-      <p class="flagship-body" data-es="Brasil es el mayor exportador de carne vacuna del mundo — un país construido, en gran parte, sobre la ganadería. Por eso, cuando su propia agencia federal de investigación comienza a cultivar carne en un plato, sin sacrificar un solo animal, es una señal de que la idea ha superado ampliamente el terreno experimental." data-en="
-        Brazil is the world's largest beef exporter — a country built, in large part, on cattle. So when its own federal research agency starts growing meat in a dish, without a single animal slaughtered, it's a signal that the idea has moved well past the experimental fringe.
-      ">Brasil es el mayor exportador de carne vacuna del mundo — un país construido, en gran parte, sobre la ganadería. Por eso, cuando su propia agencia federal de investigación comienza a cultivar carne en un plato, sin sacrificar un solo animal, es una señal de que la idea ha superado ampliamente el terreno experimental.</p>
-      <p class="flagship-body" data-es="El investigador Luciano Paulino da Silva, quien coordina los experimentos en el Laboratorio de Nanobiotecnología de Embrapa, espera que el trabajo esté listo como paquete tecnológico licenciable para mediados de 2027 — apoyándose en el marco regulatorio que la ANVISA de Brasil publicó en 2023." data-en="
-        Researcher Luciano Paulino da Silva, who coordinates the experiments at Embrapa's Nanobiotechnology Laboratory, expects the work to be ready as a licensable technology package by mid-2027 — building on a regulatory framework Brazil's ANVISA published back in 2023.
-      ">El investigador Luciano Paulino da Silva, quien coordina los experimentos en el Laboratorio de Nanobiotecnología de Embrapa, espera que el trabajo esté listo como paquete tecnológico licenciable para mediados de 2027 — apoyándose en el marco regulatorio que la ANVISA de Brasil publicó en 2023.</p>
-      <a href="/es/futurofood-article" class="read-more" data-es="Seguir leyendo →" data-en="Continue reading →">Seguir leyendo →</a>
+      <h1 class="flagship-title" data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces" data-en="Enthos is turning food waste into insect protein for animal and fish feed">Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces</h1>
+      <p class="byline" data-es="Por <span>Equipo Editorial FuturoFood</span> · Fuente: The Fish Site · 2 min de lectura · EN/ES" data-en="By <span>FuturoFood Editorial</span> · Source: The Fish Site · 2 min read · EN/ES">Por <span>Equipo Editorial FuturoFood</span> · Fuente: The Fish Site · 2 min de lectura · EN/ES</p>
+      <p class="flagship-deck" data-es="Con el respaldo de S2G Investments y Ocean 14 Capital, la empresa colombiana construye Enthos 1, una planta de mosca soldado negra pensada para ser uno de los mayores centros de proteína de insectos de América Latina." data-en="Backed by S2G Investments and Ocean 14 Capital, the Colombian company is building Enthos 1, a black soldier fly plant designed to become one of Latin America's largest insect protein sites.">Con el respaldo de S2G Investments y Ocean 14 Capital, la empresa colombiana construye Enthos 1, una planta de mosca soldado negra pensada para ser uno de los mayores centros de proteína de insectos de América Latina.</p>
+      <p class="flagship-body" data-es="La empresa colombiana Enthos Circular Feed Technologies construye lo que busca convertir en una de las plantas de proteína de insectos más grandes de América Latina, según The Fish Site. En mayo de 2025, S2G Investments y Ocean 14 Capital Fund I anunciaron una inversión conjunta para respaldar el proyecto; los términos financieros no se revelaron." data-en="Colombian company Enthos Circular Feed Technologies is building what it aims to make one of Latin America's largest insect protein plants, according to The Fish Site. In May 2025, S2G Investments and Ocean 14 Capital Fund I announced a joint investment to support the project; the financial terms were not disclosed.">La empresa colombiana Enthos Circular Feed Technologies construye lo que busca convertir en una de las plantas de proteína de insectos más grandes de América Latina, según The Fish Site. En mayo de 2025, S2G Investments y Ocean 14 Capital Fund I anunciaron una inversión conjunta para respaldar el proyecto; los términos financieros no se revelaron.</p>
+      <p class="flagship-body" data-es="La planta insignia, Enthos 1, usa larvas de mosca soldado negra para aprovechar residuos de comida. Las larvas se convierten en harina de insectos rica en proteína y en aceite para la industria de alimento animal y acuícola, y el material restante se transforma en fertilizante orgánico, según los inversionistas." data-en="The flagship facility, Enthos 1, uses black soldier fly larvae to upcycle food waste. The larvae become high-protein insect meal and oil for the animal and aquaculture feed industries, and the remaining material becomes organic fertilizer, according to the investors.">La planta insignia, Enthos 1, usa larvas de mosca soldado negra para aprovechar residuos de comida. Las larvas se convierten en harina de insectos rica en proteína y en aceite para la industria de alimento animal y acuícola, y el material restante se transforma en fertilizante orgánico, según los inversionistas.</p>
+      <a href="/es/futurofood-article-enthos-insect-protein-from-food-waste-colombia" class="read-more" data-es="Seguir leyendo →" data-en="Continue reading →">Seguir leyendo →</a>
     </div>
 
     <div class="bs-divider"></div>
 
     <!-- RIGHT COL -->
     <div class="bs-col bs-right">
-      <div class="stat-block">
-        <div class="stat-num green">2027</div>
-        <div class="stat-label" data-es="Año meta para el paquete tecnológico terminado de carne cultivada de Embrapa, listo para licenciar a empresas privadas" data-en="Target year for Embrapa's finished cultivated-meat technology package, ready to license to private companies">Año meta para el paquete tecnológico terminado de carne cultivada de Embrapa, listo para licenciar a empresas privadas</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num fire">4</div>
-        <div class="stat-label" data-es="Países con aprobación regulatoria o comercial para carne cultivada: Singapur, EE. UU., Israel, Australia/Nueva Zelanda" data-en="Countries with regulatory or commercial approval for cultivated meat: Singapore, US, Israel, Australia/New Zealand">Países con aprobación regulatoria o comercial para carne cultivada: Singapur, EE. UU., Israel, Australia/Nueva Zelanda</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num gold">2023</div>
-        <div class="stat-label" data-es="Año en que la ANVISA de Brasil publicó su marco regulatorio para carne cultivada (RDC 839)" data-en="Year Brazil's ANVISA published its cultivated-meat regulatory framework (RDC 839)">Año en que la ANVISA de Brasil publicó su marco regulatorio para carne cultivada (RDC 839)</div>
-      </div>
-      <div class="pull-quote">
-        <p data-es="&quot;Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa.&quot; — Para mediados del próximo año, estará en vitrina como un activo tecnológico de Embrapa." data-en="&quot;Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa.&quot; — By around the middle of next year, it will be on display as an Embrapa technological asset.">"Até meados do ano que vem, vai estar na vitrine como um ativo tecnológico Embrapa." — Para mediados del próximo año, estará en vitrina como un activo tecnológico de Embrapa.</p>
-        <cite data-es="— Luciano Paulino da Silva, investigador, Embrapa LNANO" data-en="— Luciano Paulino da Silva, researcher, Embrapa LNANO">— Luciano Paulino da Silva, investigador, Embrapa LNANO</cite>
+      <div class="cover-takeaways">
+        <span class="cover-takeaways-title" data-es="Puntos clave de la historia principal" data-en="Cover story takeaways">Puntos clave de la historia principal</span>
+        <ul>
+          <li data-es="S2G Investments y Ocean 14 Capital Fund I invirtieron en conjunto en Enthos en mayo de 2025; el monto no se reveló." data-en="S2G Investments and Ocean 14 Capital Fund I made a joint investment in Enthos in May 2025; the amount was not disclosed.">S2G Investments y Ocean 14 Capital Fund I invirtieron en conjunto en Enthos en mayo de 2025; el monto no se reveló.</li>
+          <li data-es="Enthos 1, una planta a escala comercial en Colombia, usa larvas de mosca soldado negra para convertir residuos de comida en harina de insectos, aceite y fertilizante orgánico." data-en="Enthos 1, a commercial-scale plant in Colombia, uses black soldier fly larvae to turn food waste into insect meal, oil and organic fertilizer.">Enthos 1, una planta a escala comercial en Colombia, usa larvas de mosca soldado negra para convertir residuos de comida en harina de insectos, aceite y fertilizante orgánico.</li>
+          <li data-es="Los inversionistas ven la harina de insectos como una alternativa a la harina de pescado, que en su mayoría termina en alimento para acuicultura." data-en="The investors see insect meal as an alternative to fishmeal, most of which ends up in aquaculture feed.">Los inversionistas ven la harina de insectos como una alternativa a la harina de pescado, que en su mayoría termina en alimento para acuicultura.</li>
+        </ul>
       </div>
       <div class="mini-story">
-        <span class="kicker" data-es="🪲 Proteína de Insectos" data-en="🪲 Insect Protein">🪲 Proteína de Insectos</span>
-        <h3 class="mini-title" data-es="También esta semana: Enthos amplía su planta de proteína de insectos en Colombia" data-en="Also this week: Enthos scales Colombia's insect-protein plant">También esta semana: Enthos amplía su planta de proteína de insectos en Colombia</h3>
-        <p class="mini-body" data-es="S2G Investments y Ocean 14 Capital respaldaron una planta de mosca soldado negra que convierte residuos de comida en harina de insectos, como alternativa a la harina de pescado en el alimento para acuicultura." data-en="S2G Investments and Ocean 14 Capital backed a black soldier fly plant that turns food waste into insect meal, an alternative to fishmeal in aquaculture feed.">S2G Investments y Ocean 14 Capital respaldaron una planta de mosca soldado negra que convierte residuos de comida en harina de insectos, como alternativa a la harina de pescado en el alimento para acuicultura.</p>
-        <a href="/es/futurofood-article-enthos-insect-protein-from-food-waste-colombia" class="read-more" data-es="Leer →" data-en="Read →">Leer →</a>
+        <span class="kicker" data-es="🤖 Tecnología Alimentaria" data-en="🤖 Food Tech">🤖 Tecnología Alimentaria</span>
+        <h3 class="mini-title" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026" data-en="TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026">TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026</h3>
+        <p class="mini-body" data-es="La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC." data-en="Brazil's largest tech company dedicates four sessions to agribusiness at its flagship event, spotlighting AI-driven management tools, a Syngenta case study, and recent acquisitions like TBDC.">La mayor empresa de tecnología de Brasil dedica cuatro sesiones al agronegocio en su evento insignia, con foco en herramientas de gestión impulsadas por IA, un caso de Syngenta y adquisiciones recientes como TBDC.</p>
+        <a href="/es/futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ" class="read-more" data-es="Leer historia →" data-en="Read story →">Leer historia →</a>
       </div>
     </div>
   </div>
+  <!-- HOME:BROADSHEET:END -->
 </section>
 
 <!-- TOPIC BAND -->
 <nav class="topic-band" id="topics" aria-label="Temas" data-es-aria-label="Temas" data-en-aria-label="Topics">
-  <div class="topic">
+  <div class="topic" data-tag="insects">
     <span class="topic-icon">🦗</span>
     <span class="topic-name" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span>
-    <span class="topic-count eyebrow" data-es="12 historias" data-en="12 stories">12 historias</span>
+    <span class="topic-count eyebrow" data-es="2 historias" data-en="2 stories">2 historias</span>
   </div>
-  <div class="topic">
+  <div class="topic" data-tag="lab">
     <span class="topic-icon">🧬</span>
     <span class="topic-name" data-es="Cultivado en Lab" data-en="Lab-Grown">Cultivado en Lab</span>
-    <span class="topic-count eyebrow" data-es="9 historias" data-en="9 stories">9 historias</span>
+    <span class="topic-count eyebrow" data-es="1 historia" data-en="1 story">1 historia</span>
   </div>
-  <div class="topic">
+  <div class="topic" data-tag="regen">
     <span class="topic-icon">🌱</span>
     <span class="topic-name" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span>
-    <span class="topic-count eyebrow" data-es="18 historias" data-en="18 stories">18 historias</span>
+    <span class="topic-count eyebrow" data-es="3 historias" data-en="3 stories">3 historias</span>
   </div>
-  <div class="topic">
+  <div class="topic" data-tag="ancestral">
     <span class="topic-icon">🌽</span>
     <span class="topic-name" data-es="Ancestral" data-en="Ancestral">Ancestral</span>
-    <span class="topic-count eyebrow" data-es="14 historias" data-en="14 stories">14 historias</span>
+    <span class="topic-count eyebrow" data-es="0 historias" data-en="0 stories">0 historias</span>
   </div>
-  <div class="topic">
+  <div class="topic" data-tag="tech">
     <span class="topic-icon">🤖</span>
     <span class="topic-name" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span>
-    <span class="topic-count eyebrow" data-es="21 historias" data-en="21 stories">21 historias</span>
+    <span class="topic-count eyebrow" data-es="5 historias" data-en="5 stories">5 historias</span>
   </div>
-  <div class="topic">
+  <div class="topic" data-tag="water">
     <span class="topic-icon">💧</span>
     <span class="topic-name" data-es="Agua" data-en="Water">Agua</span>
-    <span class="topic-count eyebrow" data-es="7 historias" data-en="7 stories">7 historias</span>
+    <span class="topic-count eyebrow" data-es="1 historia" data-en="1 story">1 historia</span>
   </div>
 </nav>
 
@@ -1125,30 +1144,32 @@ footer{
     <a href="/es/futurofood-blog" class="see-all" data-es="Ver todas las historias →" data-en="View all stories →">Ver todas las historias →</a>
   </div>
   <div class="articles-grid">
+    <!-- HOME:LATEST:START (scripts/build-home.mjs — do not edit by hand) -->
     <article class="article-card">
       <div class="card-top-row"><span class="article-tag tag-lab" data-es="Cultivado en Lab" data-en="Lab-Grown">Cultivado en Lab</span><button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
-      <h3 class="article-title"><a class="card-link" href="/es/futurofood-article" data-es="La agencia estatal de investigación Embrapa de Brasil cultiva carne de pollo real a partir de células — sin sacrificar un solo animal" data-en="Brazil's state research agency Embrapa is growing real chicken meat from cells — without a single animal slaughtered">La agencia estatal de investigación Embrapa de Brasil cultiva carne de pollo real a partir de células — sin sacrificar un solo animal</a></h3>
-      <p class="article-excerpt" data-es="Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília, con un paquete tecnológico terminado previsto para mediados de 2027. Brasil ya estableció normas regulatorias para la carne cultivada desde 2023." data-en="Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília, with a finished technology package targeted for mid-2027. Brazil already set regulatory rules for cultivated meat back in 2023.">Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília, con un paquete tecnológico terminado previsto para mediados de 2027. Brasil ya estableció normas regulatorias para la carne cultivada desde 2023.</p>
-      <div class="article-meta" data-es="5 min · Fuente: Embrapa / Rio Times" data-en="5 min · Source: Embrapa / Rio Times">5 min · Fuente: Embrapa / Rio Times</div>
+      <h3 class="article-title"><a class="card-link" href="/es/futurofood-article" data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal" data-en="Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered">Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal</a></h3>
+      <p class="article-excerpt" data-es="La agencia estatal de investigación Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027, apoyándose en las normas regulatorias que Brasil estableció en 2023." data-en="State research agency Embrapa has produced prototype cultivated chicken fillets at labs in Concórdia and Brasília. A finished technology package is targeted for mid-2027, building on regulatory rules Brazil set in 2023.">La agencia estatal de investigación Embrapa ha producido filetes de pollo cultivado prototipo en sus laboratorios de Concórdia y Brasília. Se espera un paquete tecnológico terminado para mediados de 2027, apoyándose en las normas regulatorias que Brasil estableció en 2023.</p>
+      <div class="article-meta" data-es="4 min · Fuente: Embrapa / Rio Times" data-en="4 min · Source: Embrapa / Rio Times">4 min · Fuente: Embrapa / Rio Times</div>
+    </article>
+    <article class="article-card">
+      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
+      <h3 class="article-title"><a class="card-link" href="/es/futurofood-blog?q=Osa%20Conservation%20will%20help" data-es="Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa" data-en="Osa Conservation will help 350 Costa Rican farmers adopt regenerative farming in AmistOsa">Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa</a></h3>
+      <p class="article-excerpt" data-es="Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono." data-en="With a three-year Walmart Foundation grant, Osa Conservation's Farms for Nature project will give 350 farmers in southern Costa Rica's AmistOsa landscape tailored regenerative farming plans, aiming to raise productivity and store carbon.">Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono.</p>
+      <div class="article-meta" data-es="1 min · Fuente: Osa Conservation" data-en="1 min · Source: Osa Conservation">1 min · Fuente: Osa Conservation</div>
+    </article>
+    <article class="article-card">
+      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
+      <h3 class="article-title"><a class="card-link" href="/es/futurofood-blog?q=World%20Bank%20commits%20%24120M" data-es="El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica" data-en="World Bank commits $120M loan to sustainable agriculture in Costa Rica">El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica</a></h3>
+      <p class="article-excerpt" data-es="El financiamiento respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar." data-en="The financing supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including payments for carbon capture in coffee, livestock, and sugarcane production chains.">El financiamiento respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo pagos por captura de carbono en las cadenas de café, ganadería y caña de azúcar.</p>
+      <div class="article-meta" data-es="1 min · Fuente: Banco Mundial" data-en="1 min · Source: World Bank">1 min · Fuente: Banco Mundial</div>
     </article>
     <article class="article-card">
       <div class="card-top-row"><span class="article-tag tag-insects" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span><button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
-      <h3 class="article-title"><a class="card-link" href="/es/futurofood-article-enthos-insect-protein-from-food-waste-colombia" data-es="Enthos recauda capital de riesgo para construir una de las plantas de proteína de insectos más grandes de América Latina en Colombia" data-en="Enthos raises VC funding to build one of Latin America's largest insect-protein plants in Colombia">Enthos recauda capital de riesgo para construir una de las plantas de proteína de insectos más grandes de América Latina en Colombia</a></h3>
-      <p class="article-excerpt" data-es="S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa colombiana que usa larvas de mosca soldado negra para convertir residuos de comida en harina y aceite de insectos para alimento animal y acuícola, como alternativa a la harina de pescado." data-en="S2G Investments and Ocean 14 Capital backed Enthos, a Colombian company using black soldier fly larvae to turn food waste into insect meal and oil for animal and aquaculture feed, as an alternative to fishmeal.">S2G Investments y Ocean 14 Capital respaldaron a Enthos, una empresa colombiana que usa larvas de mosca soldado negra para convertir residuos de comida en harina y aceite de insectos para alimento animal y acuícola, como alternativa a la harina de pescado.</p>
-      <div class="article-meta" data-es="2 min · Fuente: The Fish Site" data-en="2 min · Source: The Fish Site">2 min · Fuente: The Fish Site</div>
+      <h3 class="article-title"><a class="card-link" href="/es/futurofood-blog?q=IFC%20invests%20%242M%20in" data-es="La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica" data-en="IFC invests $2M in ProNuvo, a Costa Rican insect-feed producer in Guápiles">La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica</a></h3>
+      <p class="article-excerpt" data-es="El financiamiento ayuda a ProNuvo a completar una planta industrial de alimento para insectos de 4,000 TM/año. La empresa cosecha larvas de mosca soldado negra nativas de Costa Rica, usando una fracción de la tierra, el tiempo y el agua de las fuentes de proteína convencionales." data-en="The financing helps ProNuvo complete a 4,000 MT/year industrial insect-feed plant. The company harvests Black Soldier Fly larvae native to Costa Rica, using a fraction of the land, time, and water of conventional protein sources.">El financiamiento ayuda a ProNuvo a completar una planta industrial de alimento para insectos de 4,000 TM/año. La empresa cosecha larvas de mosca soldado negra nativas de Costa Rica, usando una fracción de la tierra, el tiempo y el agua de las fuentes de proteína convencionales.</p>
+      <div class="article-meta" data-es="1 min · Fuente: IFC / Grupo Banco Mundial" data-en="1 min · Source: IFC / World Bank Group">1 min · Fuente: IFC / Grupo Banco Mundial</div>
     </article>
-    <article class="article-card">
-      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
-      <h3 class="article-title"><a class="card-link" href="/es/futurofood-blog" data-es="Osa Conservation ayudará a 350 agricultores costarricenses a pasarse a la agricultura regenerativa" data-en="Osa Conservation will help 350 Costa Rican farmers go regenerative">Osa Conservation ayudará a 350 agricultores costarricenses a pasarse a la agricultura regenerativa</a></h3>
-      <p class="article-excerpt" data-es="Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono." data-en="With a three-year Walmart Foundation grant, Osa Conservation's Farms for Nature project will give 350 farmers in southern Costa Rica's AmistOsa landscape tailored regenerative farming plans, aiming to raise productivity and store carbon.">Con una donación de tres años de la Fundación Walmart, el proyecto Farms for Nature de Osa Conservation dará a 350 agricultores del paisaje AmistOsa, en el sur de Costa Rica, planes de agricultura regenerativa a la medida, con el objetivo de aumentar la productividad y capturar carbono.</p>
-      <div class="article-meta" data-es="5 min · Fuente: Osa Conservation" data-en="5 min · Source: Osa Conservation">5 min · Fuente: Osa Conservation</div>
-    </article>
-    <article class="article-card">
-      <div class="card-top-row"><span class="article-tag tag-regen" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><button type="button" class="card-share-btn" aria-label="Compartir esta historia" data-es-aria-label="Compartir esta historia" title="Compartir" data-es-title="Compartir" data-en-aria-label="Share this story" data-en-title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></div>
-      <h3 class="article-title"><a class="card-link" href="/es/futurofood-blog" data-es="Costa Rica y el Banco Mundial destinan $120M al financiamiento de la agricultura sostenible" data-en="Costa Rica and the World Bank commit $120M to sustainable agriculture financing">Costa Rica y el Banco Mundial destinan $120M al financiamiento de la agricultura sostenible</a></h3>
-      <p class="article-excerpt" data-es="El nuevo préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo una línea que paga a los agricultores por la captura de carbono en las cadenas de café, ganadería y caña de azúcar." data-en="The new loan supports Costa Rica's Public Policy for the Agricultural Sector 2023–2032, including a track that pays farmers for carbon capture in coffee, livestock, and sugarcane production chains.">El nuevo préstamo respalda la Política Pública para el Sector Agropecuario 2023–2032 de Costa Rica, incluyendo una línea que paga a los agricultores por la captura de carbono en las cadenas de café, ganadería y caña de azúcar.</p>
-      <div class="article-meta" data-es="4 min · Fuente: Banco Mundial" data-en="4 min · Source: World Bank">4 min · Fuente: Banco Mundial</div>
-    </article>
+    <!-- HOME:LATEST:END -->
   </div>
 </section>
 
@@ -1159,10 +1180,10 @@ footer{
       <span class="nl-live-dot"></span>
       <span data-es="Gratis · Semanal · Bilingüe" data-en="Free · Weekly · Bilingual">Gratis · Semanal · Bilingüe</span>
     </div>
-    <h2 class="nl-title" data-es="El futuro de la alimentación<br>llega a tu bandeja de entrada.<br><em>Todos los martes.</em>" data-en="
+    <h2 class="nl-title" data-es="El futuro de la alimentación<br>llega a tu bandeja de entrada.<br><em>Cada semana.</em>" data-en="
       The future of food<br>lands in your inbox.<br>
-      <em>Every Tuesday.</em>
-    ">El futuro de la alimentación<br>llega a tu bandeja de entrada.<br><em>Todos los martes.</em></h2>
+      <em>Every week.</em>
+    ">El futuro de la alimentación<br>llega a tu bandeja de entrada.<br><em>Cada semana.</em></h2>
     <p class="nl-desc" data-es="Sé de los primeros innovadores alimentarios, inversionistas, agricultores y científicos de América Latina en recibir el resumen semanal sobre lo que está cambiando la forma en que comen 650 millones de personas. Gratis, siempre." data-en="
       Be one of the first food innovators, investors, farmers, and scientists across Latin America to get the weekly brief on what's changing how 650 million people eat. Free, always.
     ">Sé de los primeros innovadores alimentarios, inversionistas, agricultores y científicos de América Latina en recibir el resumen semanal sobre lo que está cambiando la forma en que comen 650 millones de personas. Gratis, siempre.</p>

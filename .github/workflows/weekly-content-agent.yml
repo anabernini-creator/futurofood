@@ -88,7 +88,7 @@ jobs:
           shopt -s nullglob
           git config user.name "FuturoFood Content Agent"
           git config user.email "actions@users.noreply.github.com"
-          git add futurofood-blog.html sitemap.xml es
+          git add futurofood-blog.html index.html futurofood.html sitemap.xml es
           [ -f scripts/articles-registry.json ] && git add scripts/articles-registry.json
           article_files=(futurofood-article-*.html og/*.jpg og/en/*.jpg)
           [ ${#article_files[@]} -gt 0 ] && git add "${article_files[@]}"

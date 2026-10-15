@@ -4,12 +4,6 @@
 User-agent: *
 Allow: /
 
-# Disallow admin and API paths
-Disallow: /ghost/
-Disallow: /ghost/api/
-Disallow: /members/
-Disallow: /assets/
-
 # Allow Google AdsBot (for ads review, if needed)
 User-agent: AdsBot-Google
 Allow: /
