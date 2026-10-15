@@ -1,0 +1,30 @@
+/*
+ * FuturoFood WhatsApp Channel button ([data-wa-channel="<placement>"]):
+ * footer of every page, /patrocinadores and the end-of-article newsletter
+ * block. Clicks are sent to GA4 as "join_whatsapp_channel" by analytics.js.
+ */
+.wa-channel-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  background:#25D366;color:#0A0F0A;border:1px solid #25D366;text-decoration:none;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.8rem 1.3rem;line-height:1.2;text-align:center;transition:background .2s,border-color .2s}
+.wa-channel-btn:hover,.wa-channel-btn:focus-visible{background:#1EBE5B;border-color:#1EBE5B;color:#0A0F0A}
+.wa-channel-btn:focus-visible{outline:2px solid #E8F5E0;outline-offset:2px}
+.wa-ico{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Footer: its own row above the footer content */
+.footer-wa{width:100%;max-width:1280px;margin:0 auto;padding:1.5rem 2rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+/* Simple footers that are a single flex row (404, privacy) */
+.footer-wa.is-inline{flex-basis:100%;max-width:none;padding:0}
+/* Home footer: inside the brand column */
+.footer-wa.is-col{padding:0;margin-top:1.5rem}
+
+/* End of article, next to the newsletter form */
+.cta-wa{display:flex;flex-direction:column;align-items:center;gap:.6rem;margin-top:1.5rem}
+.cta-wa-or{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,245,224,.45)}
+
+/* /patrocinadores hero */
+.hero-wa{margin-top:1.75rem}
+
+@media(max-width:640px){
+  .wa-channel-btn{width:100%}
+}

@@ -9,6 +9,8 @@
  *             phone's share sheet, and blog/home card share menus
  *   sign_up { method: newsletter, placement: inline | exit_intent | mobile_bar }
  *   popup_view / popup_close { popup: exit_intent }       — capture.js popup
+ *   join_whatsapp_channel { placement: footer | article_end | sponsors }
+ *                                                         — WhatsApp Channel button
  */
 (function () {
   function track(name, params) {
@@ -19,6 +21,13 @@
     if (!el) return;
     var menu = el.closest('.share-menu');
     track('share', { method: el.getAttribute('data-share'), content_type: (menu && menu.dataset.shareContext) || 'article' });
+  });
+  // WhatsApp Channel button (wa-channel.css). It opens in a new tab, so the
+  // beacon transport is only a safeguard.
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-wa-channel]');
+    if (!el) return;
+    track('join_whatsapp_channel', { placement: el.getAttribute('data-wa-channel'), link_url: el.href, transport_type: 'beacon' });
   });
   // Shares through the phone's native share sheet (share.js)
   document.addEventListener('ff:share', function (e) {
