@@ -490,34 +490,14 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;margin-top:.25rem;display:block;
 }
 
-/* Sponsor mini */
+/* Sponsor space */
 .sponsor-mini{
-  border:1px solid var(--border);padding:1.25rem;
-  text-align:center;background:var(--panel2);
+  display:block;padding:1.1rem 1.25rem;text-align:center;
+  border:1px dashed rgba(74,222,128,.35);background:var(--panel2);
+  font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);line-height:1.6;transition:border-color .2s;
 }
-.sponsor-mini-label{
-  font-family:var(--mono);font-size:.55rem;
-  color:var(--mist2);letter-spacing:.1em;text-transform:uppercase;
-  margin-bottom:.875rem;display:block;
-}
-.sponsor-logo-box{
-  width:100%;height:50px;
-  border:1px dashed rgba(74,222,128,.2);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:.875rem;
-}
-.sponsor-logo-box span{
-  font-family:var(--mono);font-size:.55rem;
-  color:rgba(232,245,224,.2);letter-spacing:.06em;
-}
-.sponsor-mini-cta{
-  font-family:var(--mono);font-size:.58rem;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:var(--green);border:1px solid rgba(74,222,128,.3);
-  display:block;padding:.5rem;
-  transition:background .2s,color .2s;
-}
-.sponsor-mini-cta:hover{background:var(--green);color:var(--ink)}
+.sponsor-mini:hover{border-color:var(--green);border-style:solid}
 
 
 /* ── FOOTER ── */
@@ -570,18 +550,6 @@ footer{
   *{transition-duration:0ms!important}
 }
 
-/* ── SPONSOR SLOTS (728×90) ── */
-.ad-slot{max-width:calc(728px + 4rem);margin:0 auto;padding:1.5rem 2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem}
-.ad-label{align-self:flex-start;font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist2)}
-.ad-slot img{display:block;width:100%;max-width:728px;height:auto;aspect-ratio:728/90}
-.ad-empty{width:100%;max-width:728px;aspect-ratio:728/90;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;padding:.5rem 1rem;text-align:center;text-decoration:none;
-  border:1px dashed rgba(74,222,128,.35);
-  background:radial-gradient(ellipse at 50% 50%, rgba(74,222,128,.07), transparent 70%),var(--panel);
-  transition:border-color .2s,background .2s}
-.ad-empty:hover{border-color:var(--green);border-style:solid}
-.ad-empty-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--leaf)}
-.ad-empty-sub{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
-@media(max-width:640px){.ad-slot{padding:1.25rem 1rem}.ad-empty{aspect-ratio:auto;min-height:90px}}
 </style>
 </head>
 <body>
@@ -686,15 +654,6 @@ footer{
   </div>
 </div>
 
-<!-- SPONSOR SLOT "blog-top" (728×90). Empty until the first sponsor signs. To fill it, replace the
-     <a class="ad-empty"> with: <a href="SPONSOR_URL" rel="sponsored noopener" target="_blank"><img src="ads/SPONSOR.png" width="728" height="90" alt="SPONSOR NAME"/></a> -->
-<aside class="ad-slot" data-slot="blog-top" aria-label="Patrocinado" data-es-aria-label="Patrocinado" data-en-aria-label="Sponsored">
-  <span class="ad-label" data-es="Patrocinado por…" data-en="Sponsored by…">Patrocinado por…</span>
-  <a class="ad-empty" href="/es/patrocinadores">
-    <span class="ad-empty-title" data-es="Tu marca aquí" data-en="Your brand here">Tu marca aquí</span>
-    <span class="ad-empty-sub" data-es="Espacio disponible · 728×90 · Llega a innovadores, inversionistas y productores de LATAM →" data-en="Available · 728×90 · Reach LATAM food innovators, investors and producers →">Espacio disponible · 728×90 · Llega a innovadores, inversionistas y productores de LATAM →</span>
-  </a>
-</aside>
 
 <!-- MAIN LAYOUT -->
 <div class="blog-layout">
@@ -924,15 +883,6 @@ footer{
 
     <p class="no-results" id="no-results" role="status"></p>
 
-    <!-- SPONSOR SLOT "blog-list" (728×90). Empty until the first sponsor signs. To fill it, replace the
-         <a class="ad-empty"> with: <a href="SPONSOR_URL" rel="sponsored noopener" target="_blank"><img src="ads/SPONSOR.png" width="728" height="90" alt="SPONSOR NAME"/></a> -->
-    <aside class="ad-slot" data-slot="blog-list" aria-label="Patrocinado" data-es-aria-label="Patrocinado" data-en-aria-label="Sponsored">
-      <span class="ad-label" data-es="Patrocinado por…" data-en="Sponsored by…">Patrocinado por…</span>
-      <a class="ad-empty" href="/es/patrocinadores">
-        <span class="ad-empty-title" data-es="Tu marca aquí" data-en="Your brand here">Tu marca aquí</span>
-        <span class="ad-empty-sub" data-es="Espacio disponible · 728×90 · Tu empresa entre las historias →" data-en="Available · 728×90 · Your company among the stories →">Espacio disponible · 728×90 · Tu empresa entre las historias →</span>
-      </a>
-    </aside>
 
     <nav class="blog-pager" id="blog-pager" aria-label="Paginación" data-es-aria-label="Paginación" hidden data-en-aria-label="Pagination">
       <button type="button" class="pager-btn" id="pager-prev" data-es="← Anterior" data-en="← Previous">← Anterior</button>
@@ -1024,12 +974,7 @@ footer{
 
     <!-- Sponsor slot -->
     <div class="sidebar-block" id="advertise">
-      <div class="sidebar-title" data-es="Socio" data-en="Partner">Socio</div>
-      <div class="sponsor-mini">
-        <span class="sponsor-mini-label" data-es="Patrocinado por" data-en="Sponsored by">Patrocinado por</span>
-        <div class="sponsor-logo-box"><span data-es="TU LOGO AQUÍ" data-en="YOUR LOGO HERE">TU LOGO AQUÍ</span></div>
-        <a href="/es/patrocinadores" class="sponsor-mini-cta" data-es="Anúnciate con FuturoFood →" data-en="Advertise with FuturoFood →">Anúnciate con FuturoFood →</a>
-      </div>
+      <a href="/es/patrocinadores" class="sponsor-mini" data-es="¿Tu marca aquí? Conoce cómo patrocinar →" data-en="Your brand here? See how to sponsor →">¿Tu marca aquí? Conoce cómo patrocinar →</a>
     </div>
 
   </aside>
@@ -1042,11 +987,12 @@ footer{
     <div class="footer-brand">Futuro<em>Food</em></div>
     <div class="footer-links">
       <a href="/es/" data-es="Inicio" data-en="Home">Inicio</a>
-      <a href="#" data-es="Nosotros" data-en="About">Nosotros</a>
+      <a href="/es/futurofood-about" data-es="Nosotros" data-en="About">Nosotros</a>
       <a href="#newsletter" data-es="Boletín" data-en="Newsletter">Boletín</a>
       <a href="/es/patrocinadores" data-es="Anunciarse" data-en="Advertise">Anunciarse</a>
-      <a href="#" data-es="Contacto" data-en="Contact">Contacto</a>
-      <a href="#" data-es="Privacidad" data-en="Privacy">Privacidad</a>
+      <a href="mailto:hello@futurofood.com" data-es="Contacto" data-en="Contact">Contacto</a>
+      <a href="/es/futurofood-privacy" data-es="Privacidad" data-en="Privacy">Privacidad</a>
+      <a href="/es/futurofood-terms" data-es="Términos" data-en="Terms">Términos</a>
     </div>
     <span class="footer-copy" data-es="© 2026 FuturoFood.com · Alajuela, Costa Rica" data-en="© 2026 FuturoFood.com · Alajuela, Costa Rica">© 2026 FuturoFood.com · Alajuela, Costa Rica</span>
   </div>

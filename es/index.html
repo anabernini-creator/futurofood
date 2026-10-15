@@ -672,79 +672,22 @@ a{color:inherit;text-decoration:none}
   border-left:1px solid var(--border2);
   border-right:1px solid var(--border2);
   border-bottom:1px solid var(--border);
-}
-.sponsors-header{
-  display:flex;justify-content:space-between;align-items:center;
   padding:1.5rem 2rem;
-  border-bottom:1px solid var(--border);
 }
-.sponsors-label{
+.sponsor-single{
+  display:block;
+  padding:1.1rem 1.25rem;
+  border:1px dashed rgba(74,222,128,.35);
+  text-align:center;
   font-family:var(--mono);
-  font-size:.62rem;
-  font-weight:600;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--mist);
-}
-.sponsor-cta{
-  font-family:var(--mono);
-  font-size:.6rem;
+  font-size:.68rem;
   font-weight:600;
   letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--green);
-  border:1px solid var(--green);
-  padding:.35rem .9rem;
-  transition:background .2s,color .2s;
+  transition:border-color .2s,background .2s;
 }
-.sponsor-cta:hover{background:var(--green);color:var(--ink)}
-.sponsors-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-}
-.sponsor-slot{
-  padding:2rem 1.5rem;
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;
-  text-align:center;
-  transition:background .2s;
-}
-.sponsor-slot:last-child{border-right:none}
-.sponsor-slot:hover{background:var(--panel2)}
-.sponsor-logo-area{
-  width:80px;height:40px;
-  border:1px dashed var(--border);
-  display:flex;align-items:center;justify-content:center;
-}
-.sponsor-logo-placeholder{
-  font-family:var(--mono);
-  font-size:.55rem;
-  color:rgba(232,245,224,.2);
-  letter-spacing:.06em;
-}
-.sponsor-name{
-  font-family:var(--mono);
-  font-size:.58rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--mist);
-}
-.sponsor-category{
-  font-family:var(--mono);
-  font-size:.52rem;
-  color:rgba(232,245,224,.3);
-  letter-spacing:.06em;
-}
-.sponsor-slot.available{
-  cursor:pointer;
-}
-.sponsor-slot.available .sponsor-logo-area{
-  border-color:rgba(74,222,128,.2);
-}
-.sponsor-slot.available:hover .sponsor-logo-placeholder{
-  color:var(--green);
-}
+.sponsor-single:hover{border-color:var(--green);border-style:solid;background:var(--panel2)}
 
 /* ─── MANIFESTO ─── */
 .manifesto-section{
@@ -851,19 +794,6 @@ footer{
   line-height:1.5;
   margin-bottom:1.25rem;
 }
-.footer-social{display:flex;gap:.75rem}
-.social-link{
-  font-family:var(--mono);
-  font-size:.58rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--mist);
-  border:1px solid var(--border);
-  padding:.3rem .65rem;
-  transition:border-color .2s,color .2s;
-}
-.social-link:hover{border-color:var(--green);color:var(--green)}
 .footer-col-title{
   font-family:var(--mono);
   font-size:.62rem;
@@ -909,7 +839,6 @@ footer{
   .broadsheet{grid-template-columns:1fr 2px 2fr;grid-template-rows:auto auto}
   .bs-right-col-wrapper{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1.5rem 0 0}
   .articles-grid{grid-template-columns:1fr 1fr}
-  .sponsors-grid{grid-template-columns:repeat(3,1fr)}
   .footer-inner{grid-template-columns:1fr 1fr}
   .manifesto-section{grid-template-columns:1fr}
   .newsletter-section{grid-template-columns:1fr}
@@ -930,7 +859,6 @@ footer{
   .bs-divider{display:none}
   .topic-band{grid-template-columns:repeat(3,1fr)}
   .articles-grid{grid-template-columns:1fr}
-  .sponsors-grid{grid-template-columns:1fr 1fr}
   .footer-inner{grid-template-columns:1fr}
   .footer-col{border-right:none;border-bottom:1px solid var(--border)}
   .nl-proof{grid-template-columns:1fr 1fr}
@@ -1217,47 +1145,7 @@ footer{
 
 <!-- SPONSORS -->
 <section class="sponsors-section" id="sponsors">
-  <div class="sponsors-header">
-    <span class="sponsors-label" data-es="Patrocina FuturoFood" data-en="Sponsor FuturoFood">Patrocina FuturoFood</span>
-    <a href="/es/patrocinadores" class="sponsor-cta" data-es="Conviértete en Patrocinador Fundador →" data-en="Become a Founding Sponsor →">Conviértete en Patrocinador Fundador →</a>
-  </div>
-  <div class="sponsors-grid">
-    <div class="sponsor-slot available">
-      <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder" data-es="TU MARCA" data-en="YOUR BRAND">TU MARCA</span>
-      </div>
-      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible" data-en="Available">Disponible</div>
-      <div class="sponsor-category eyebrow" data-es="AgriTech · México" data-en="AgriTech · Mexico">AgriTech · México</div>
-    </div>
-    <div class="sponsor-slot available">
-      <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder" data-es="TU MARCA" data-en="YOUR BRAND">TU MARCA</span>
-      </div>
-      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible" data-en="Available">Disponible</div>
-      <div class="sponsor-category eyebrow" data-es="Biotecnología · Brasil" data-en="Biotech · Brazil">Biotecnología · Brasil</div>
-    </div>
-    <div class="sponsor-slot available">
-      <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder" data-es="TU MARCA" data-en="YOUR BRAND">TU MARCA</span>
-      </div>
-      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible" data-en="Available">Disponible</div>
-      <div class="sponsor-category eyebrow" data-es="Agricultura Regenerativa · Costa Rica" data-en="Regen Ag · Costa Rica">Agricultura Regenerativa · Costa Rica</div>
-    </div>
-    <div class="sponsor-slot available">
-      <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder" data-es="TU MARCA" data-en="YOUR BRAND">TU MARCA</span>
-      </div>
-      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible" data-en="Available">Disponible</div>
-      <div class="sponsor-category eyebrow" data-es="Espacio de patrocinador fundador" data-en="Founding sponsor slot">Espacio de patrocinador fundador</div>
-    </div>
-    <div class="sponsor-slot available">
-      <div class="sponsor-logo-area">
-        <span class="sponsor-logo-placeholder" data-es="TU MARCA" data-en="YOUR BRAND">TU MARCA</span>
-      </div>
-      <div class="sponsor-name" style="color:var(--green)" data-es="Disponible" data-en="Available">Disponible</div>
-      <div class="sponsor-category eyebrow" data-es="Espacio de patrocinador fundador" data-en="Founding sponsor slot">Espacio de patrocinador fundador</div>
-    </div>
-  </div>
+  <a href="/es/patrocinadores" class="sponsor-single" data-es="¿Tu marca aquí? Conoce cómo patrocinar →" data-en="Your brand here? See how to sponsor →">¿Tu marca aquí? Conoce cómo patrocinar →</a>
 </section>
 
 <!-- MANIFESTO -->
@@ -1310,11 +1198,6 @@ footer{
     <div class="footer-col">
       <div class="footer-brand">Futuro<em>Food</em></div>
       <p class="footer-tagline" data-es="El futuro de la alimentación<br>en América Latina · Desde 2026" data-en="The future of food<br>in Latin America · Since 2026">El futuro de la alimentación<br>en América Latina · Desde 2026</p>
-      <div class="footer-social">
-        <a href="#" class="social-link">X/Twitter</a>
-        <a href="#" class="social-link">LinkedIn</a>
-        <a href="#" class="social-link">Instagram</a>
-      </div>
       <div class="footer-wa is-col"><a class="wa-channel-btn" href="https://whatsapp.com/channel/0029VbEDSkkIHphKuLdWG847" target="_blank" rel="noopener" data-wa-channel="footer"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span data-es="Sigue nuestro Canal de WhatsApp" data-en="Follow our WhatsApp Channel">Sigue nuestro Canal de WhatsApp</span></a></div>
     </div>
     <div class="footer-col">
@@ -1334,8 +1217,8 @@ footer{
         <a href="/es/futurofood-about" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a>
         <a href="#newsletter" data-es="Boletín" data-en="Newsletter">Boletín</a>
         <a href="/es/patrocinadores" data-es="Anunciarse" data-en="Advertise">Anunciarse</a>
-        <a href="#" data-es="Contacto" data-en="Contact">Contacto</a>
-        <a href="#" data-es="Escribe para Nosotros" data-en="Write for Us">Escribe para Nosotros</a>
+        <a href="mailto:hello@futurofood.com" data-es="Contacto" data-en="Contact">Contacto</a>
+        <a href="mailto:hello@futurofood.com?subject=Quiero%20escribir%20para%20FuturoFood" data-es-href="mailto:hello@futurofood.com?subject=Quiero%20escribir%20para%20FuturoFood" data-es="Escribe para Nosotros" data-en-href="mailto:hello@futurofood.com?subject=I%20want%20to%20write%20for%20FuturoFood" data-en="Write for Us">Escribe para Nosotros</a>
       </div>
     </div>
     <div class="footer-col">
@@ -1350,8 +1233,8 @@ footer{
     <span class="footer-copy" data-es="© 2026 FuturoFood.com · Todos los derechos reservados · Alajuela, Costa Rica" data-en="© 2026 FuturoFood.com · All rights reserved · Alajuela, Costa Rica">© 2026 FuturoFood.com · Todos los derechos reservados · Alajuela, Costa Rica</span>
     <div class="footer-legal">
       <a href="/es/futurofood-privacy" data-es="Política de Privacidad" data-en="Privacy Policy">Política de Privacidad</a>
-      <a href="/es/futurofood-privacy" data-es="Términos" data-en="Terms">Términos</a>
-      <a href="/es/futurofood-privacy" data-es="Política de Cookies" data-en="Cookie Policy">Política de Cookies</a>
+      <a href="/es/futurofood-terms" data-es="Términos" data-en="Terms">Términos</a>
+      <a href="/es/futurofood-privacy#cookies" data-es="Política de Cookies" data-en="Cookie Policy">Política de Cookies</a>
     </div>
   </div>
 </footer>

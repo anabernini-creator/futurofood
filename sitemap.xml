@@ -93,6 +93,24 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://futurofood.com/futurofood-terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://futurofood.com/futurofood-terms"/>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://futurofood.com/es/futurofood-terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://futurofood.com/futurofood-terms"/>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://futurofood.com/futurofood-article</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-article"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-article"/>

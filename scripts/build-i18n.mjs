@@ -39,6 +39,7 @@ const STATIC_PAGES = {
   "futurofood-about.html": { path: "/futurofood-about", sitemap: ["monthly", "0.7"] },
   "patrocinadores.html": { path: "/patrocinadores", sitemap: ["monthly", "0.6"] },
   "futurofood-privacy.html": { path: "/futurofood-privacy", sitemap: ["yearly", "0.3"] },
+  "futurofood-terms.html": { path: "/futurofood-terms", sitemap: ["yearly", "0.3"] },
   "pro.html": { path: "/pro" }, // noindex for now
   "404.html": { path: null },
   "futurofood-article.html": { path: "/futurofood-article", sitemap: ["monthly", "0.8"] },
