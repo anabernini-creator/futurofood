@@ -146,7 +146,7 @@ ${left.map(miniStory).join("\n")}
         ${cover.frameInner}
       </div>
       <h1 class="flagship-title" data-es="${cover.titleEs}">${cover.titleEn}</h1>
-      <p class="byline" data-es="Por <span>Equipo Editorial FuturoFood</span> · ${escapeAttr(cover.sourceEs)} · ${readEs} · EN/ES">By <span>FuturoFood Editorial</span> · ${escapeText(cover.sourceEn)} · ${readEn} · EN/ES</p>
+      <p class="byline" data-es="Por <span>Redacción FuturoFood</span> · Revisado por Ana María Bernini · ${escapeAttr(cover.sourceEs)} · ${readEs}">By <span>FuturoFood Newsroom</span> · Reviewed by Ana María Bernini · ${escapeText(cover.sourceEn)} · ${readEn}</p>
       <p class="flagship-deck" data-es="${cover.deckEs}">${cover.deckEn}</p>
 ${cover.paragraphs.map((p) => `      <p class="flagship-body" data-es="${p.es}">${p.en}</p>`).join("\n")}
       <a href="${coverStory.href}" class="read-more" data-es="Seguir leyendo →">Continue reading →</a>

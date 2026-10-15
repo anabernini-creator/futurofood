@@ -100,3 +100,7 @@ a.share-wa.share-top-btn:hover{background:#1EBE5B;border-color:#1EBE5B;color:#0A
 .card-share-btn:active{transform:scale(.88)}
 .card-share-btn:focus-visible{outline:2px solid #4ADE80;outline-offset:2px}
 .card-share-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Article byline links to the About page (who reviews each story) */
+a.meta-author{text-decoration:none;color:inherit}
+a.meta-author:hover .author-name,a.meta-author:focus-visible .author-name{color:#4ADE80}

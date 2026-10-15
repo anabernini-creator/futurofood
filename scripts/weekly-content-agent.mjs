@@ -634,7 +634,11 @@ async function setVideo(target, rawUrl) {
   const page = readFileSync(pagePath, "utf8");
   const re = /(<div class="feature-image media-frame" data-video-url=")[^"]*(")/;
   if (!re.test(page)) throw new Error(`no media frame in ${entry.filename}`);
-  writeFileSync(pagePath, page.replace(re, (_, a, b) => `${a}${escapeAttr(video.url || "")}${b}`));
+  // A video is a change to the published story: dateModified moves to today
+  const today = new Date().toISOString().slice(0, 10);
+  writeFileSync(pagePath, page
+    .replace(re, (_, a, b) => `${a}${escapeAttr(video.url || "")}${b}`)
+    .replace(/"dateModified": "[^"]*"/, `"dateModified": "${today}"`));
   writeRegistry(registry);
   rebuildCards();
   buildSite({ root: ROOT, log });

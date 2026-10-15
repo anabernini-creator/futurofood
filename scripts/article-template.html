@@ -47,7 +47,8 @@
   "image": ["https://futurofood.com/og/{{PAGE_PATH}}.jpg"],
   "datePublished": "{{DATE_ISO}}",
   "dateModified": "{{DATE_ISO}}",
-  "author": { "@type": "Organization", "name": "FuturoFood Editorial", "url": "https://futurofood.com/futurofood-about" },
+  "author": { "@type": "Organization", "name": "FuturoFood", "url": "https://futurofood.com/futurofood-about" },
+  "editor": { "@type": "Person", "name": "Ana María Bernini", "jobTitle": "Editor", "url": "https://futurofood.com/futurofood-about#who" },
   "publisher": { "@type": "Organization", "@id": "https://futurofood.com/#organization", "name": "FuturoFood", "url": "https://futurofood.com/", "logo": { "@type": "ImageObject", "url": "https://futurofood.com/logo.png", "width": 512, "height": 512 } },
   "mainEntityOfPage": "https://futurofood.com/{{PAGE_PATH}}",
   "articleSection": "{{TAG_EN_JSON}}",
@@ -61,7 +62,7 @@
 <link rel="preload" href="/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="stylesheet" href="fonts.css?v=1"/>
 <link rel="stylesheet" href="media.css?v=1"/>
-<link rel="stylesheet" href="share.css?v=5"/>
+<link rel="stylesheet" href="share.css?v=6"/>
 <link rel="stylesheet" href="capture.css?v=1"/>
 <link rel="stylesheet" href="consent.css?v=1"/>
 <link rel="stylesheet" href="wa-channel.css?v=1"/>
@@ -267,14 +268,15 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
   </div>
 
   <div class="article-meta-bar">
-    <div class="meta-author">
+    <a class="meta-author" href="futurofood-about.html#who">
       <div class="author-avatar">✍️</div>
       <div>
-        <div class="author-name" data-es="Equipo Editorial FuturoFood">FuturoFood Editorial</div>
-        <div class="author-role" data-es="FuturoFood · Redacción de Alimentación LATAM">FuturoFood · LATAM Food Desk</div>
+        <div class="author-name" data-es="Redacción FuturoFood">FuturoFood Newsroom</div>
+        <div class="author-role" data-es="Revisado por Ana María Bernini">Reviewed by Ana María Bernini</div>
       </div>
-    </div>
+    </a>
     <div class="meta-divider"></div>
+    <div class="meta-item"><time datetime="{{DATE_ISO}}" data-es="{{DATE_HUMAN_ES}}">{{DATE_HUMAN}}</time></div>
     <div class="meta-item" data-es='Fuente: <strong>{{SOURCE_NAME}}</strong>'>Source: <strong>{{SOURCE_NAME}}</strong></div>
     <div class="meta-item" data-es='<strong>{{READ_MINUTES}} min</strong> de lectura'><strong>{{READ_MINUTES}} min</strong> read</div>
     <div class="meta-item">EN / <strong>ES</strong></div>

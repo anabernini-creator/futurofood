@@ -220,6 +220,9 @@ function translateJsonLd(json, ctx) {
       if (ctx.image) node.image = [ctx.image];
       node.inLanguage = "es";
       if (ctx.url) node.mainEntityOfPage = ctx.url;
+      for (const who of [node.author, node.editor]) {
+        if (who?.url?.startsWith(`${SITE}/futurofood-about`)) who.url = who.url.replace(`${SITE}/futurofood-about`, `${SITE}/es/futurofood-about`);
+      }
     }
     const target = node["@type"] === "WebSite" && node.potentialAction?.target;
     if (target?.urlTemplate) target.urlTemplate = target.urlTemplate.replace(`${SITE}/futurofood-blog`, `${SITE}/es/futurofood-blog`);
