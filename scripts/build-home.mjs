@@ -67,7 +67,7 @@ export function readStories(blogHtml) {
 }
 
 // Link for a story: its page, or the blog filtered to it (brief stories)
-function storyHref(s) {
+export function storyHref(s) {
   return s.href || `futurofood-blog.html?q=${encodeURIComponent(decode(s.titleEn).split(/\s+/).slice(0, 4).join(" "))}`;
 }
 
@@ -99,13 +99,30 @@ function isoWeek(iso) {
   const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
   return `${d.getUTCFullYear()}-${1 + Math.round(((d - firstThursday) / 864e5 - 3 + ((firstThursday.getUTCDay() + 6) % 7)) / 7)}`;
 }
+// Every edition, newest first: the stories of one week (ISO weeks), numbered
+// within its year (2026 = Vol. 1). The edition's date is its newest story.
+export function editions(stories) {
+  const fmt = (iso, lang) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(lang, { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+  const byWeek = new Map();
+  for (const s of stories) {
+    const w = isoWeek(s.date);
+    if (!byWeek.has(w)) byWeek.set(w, []);
+    byWeek.get(w).push(s);
+  }
+  const list = [...byWeek.values()]
+    .map((group) => group.slice().sort((x, y) => (x.date < y.date ? 1 : x.date > y.date ? -1 : x.order - y.order)))
+    .sort((x, y) => (x[0].date < y[0].date ? -1 : 1));
+  const perYear = {};
+  return list.map((group) => {
+    const date = group[0].date;
+    const year = +date.slice(0, 4);
+    perYear[year] = (perYear[year] || 0) + 1;
+    return { volume: year - FIRST_YEAR + 1, issue: perYear[year], year, date, dateEn: fmt(date, "en-US"), dateEs: fmt(date, "es"), stories: group };
+  }).reverse();
+}
+
 export function edition(stories) {
-  const latest = stories[0].date;
-  const year = +latest.slice(0, 4);
-  const weeks = new Set(stories.filter((s) => s.date.startsWith(String(year)) && s.date <= latest).map((s) => isoWeek(s.date)));
-  const d = new Date(`${latest}T12:00:00Z`);
-  const fmt = (lang) => d.toLocaleDateString(lang, { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
-  return { volume: year - FIRST_YEAR + 1, issue: weeks.size, year, dateEn: fmt("en-US"), dateEs: fmt("es") };
+  return editions(stories)[0];
 }
 
 // ── Markup ──

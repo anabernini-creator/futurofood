@@ -111,6 +111,24 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://futurofood.com/boletin</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://futurofood.com/boletin"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://futurofood.com/es/boletin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://futurofood.com/boletin"/>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://futurofood.com/es/boletin</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://futurofood.com/boletin"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://futurofood.com/es/boletin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://futurofood.com/boletin"/>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://futurofood.com/futurofood-article</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://futurofood.com/futurofood-article"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://futurofood.com/es/futurofood-article"/>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<!-- Google Analytics 4 — gtag.js loads async, so it never blocks rendering -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DB7ETK6YM5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2: analytics cookies stay off until consent.js confirms the
+  // visitor is outside the EU/EEA, UK, Switzerland and Brazil, or they accept.
+  gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 1000});
+  try {
+    var ffc = JSON.parse(localStorage.getItem('ff-consent') || 'null');
+    var ffr = sessionStorage.getItem('ff-consent-required');
+    if (ffc) gtag('consent', 'update', {analytics_storage: ffc.analytics ? 'granted' : 'denied'});
+    else if (ffr === '0') gtag('consent', 'update', {analytics_storage: 'granted'});
+  } catch (e) {}
+  gtag('js', new Date());
+  gtag('config', 'G-DB7ETK6YM5');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="max-image-preview:large"/>
+<link rel="canonical" href="https://futurofood.com/es/boletin"/>
+<link rel="alternate" hreflang="en" href="https://futurofood.com/boletin"/>
+<link rel="alternate" hreflang="es" href="https://futurofood.com/es/boletin"/>
+<link rel="alternate" hreflang="x-default" href="https://futurofood.com/boletin"/>
+<title data-es="Ediciones anteriores del boletín | FuturoFood">Ediciones anteriores del boletín | FuturoFood</title>
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<meta name="description" content="Todas las ediciones de FuturoFood Semanal, de la más reciente a la más antigua: las historias de food-tech de LATAM de cada semana, con enlace a cada artículo." data-es-content="Todas las ediciones de FuturoFood Semanal, de la más reciente a la más antigua: las historias de food-tech de LATAM de cada semana, con enlace a cada artículo." data-en-content="Every edition of FuturoFood Weekly, newest first: the LATAM food-tech stories of each week, with links to each article."/>
+<link rel="preload" href="/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/fonts.css?v=1"/>
+<link rel="stylesheet" href="/consent.css?v=1"/>
+<link rel="stylesheet" href="/wa-channel.css?v=1"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+:root{--ink:#0A0F0A;--leaf:#E8F5E0;--panel:#111A11;--panel2:#162016;--green:#4ADE80;--mist:rgba(232,245,224,0.70);--mist2:rgba(232,245,224,0.35);--border:rgba(232,245,224,0.10);--border2:rgba(232,245,224,0.06);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
+body{background:var(--ink);color:var(--leaf);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+a{color:var(--green)}
+.masthead{border-bottom:1px solid var(--border);padding:0 2rem;background:rgba(10,15,10,0.93)}
+.masthead-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;min-height:64px}
+.mast-logo{font-family:var(--serif);font-size:1.4rem;font-weight:900;text-decoration:none;color:var(--leaf)}
+.mast-logo em{color:var(--green);font-style:normal}
+.btn-sub{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--green);color:var(--ink);padding:.45rem 1.1rem;text-decoration:none;transition:background .2s}
+.btn-sub:hover{background:#6ee89a}
+.mast-right{display:flex;align-items:center;gap:1rem}
+.lang-switch{display:flex;border:1px solid var(--border)}
+.lang-btn{display:inline-block;text-decoration:none;background:transparent;border:none;cursor:pointer;color:var(--mist2);font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:.4rem .65rem;transition:background .2s,color .2s}
+.lang-btn+.lang-btn{border-left:1px solid var(--border)}
+.lang-btn.active{background:var(--green);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--green)}
+.page-wrap{max-width:760px;margin:0 auto;padding:4rem 2rem 6rem}
+.page-eyebrow{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem;display:block}
+.page-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:1rem}
+.page-meta{font-family:var(--mono);font-size:.62rem;color:var(--mist2);letter-spacing:.06em;margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.doc h2{font-family:var(--serif);font-size:1.4rem;font-weight:700;margin:2.5rem 0 .875rem;padding-top:2rem;border-top:1px solid var(--border)}
+.doc h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin:1.75rem 0 .6rem;color:var(--leaf)}
+.doc p{font-size:.95rem;color:var(--mist);line-height:1.8;margin-bottom:1rem}
+.doc ul{margin:.75rem 0 1rem 1.5rem}
+.doc li{font-size:.92rem;color:var(--mist);line-height:1.7;margin-bottom:.3rem}
+.doc strong{color:var(--leaf);font-weight:600}
+.doc a{color:var(--green)}
+.highlight-box{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--green);padding:1.25rem 1.5rem;margin:1.5rem 0}
+.highlight-box p{margin:0;font-size:.88rem;line-height:1.7}
+footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.footer-brand{font-family:var(--serif);font-weight:900;font-size:1rem;color:var(--leaf)}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-copy{font-family:var(--mono);font-size:.58rem;color:rgba(232,245,224,.25)}
+@media(max-width:600px){.masthead-inner{gap:1rem}.page-wrap{padding:2rem 1rem 4rem}}
+@media(max-width:480px){
+  .masthead{padding:0 1rem}
+  .masthead-inner{flex-wrap:wrap;row-gap:.5rem}
+  .mast-logo{font-size:1.1rem;width:100%}
+  .mast-right{gap:.35rem;width:100%;justify-content:flex-end;flex-wrap:wrap}
+  .lang-btn{padding:.3rem .5rem;font-size:.6rem}
+  .btn-sub{padding:.35rem .7rem;font-size:.6rem}
+}
+/* Newsletter archive */
+.archive-intro{font-family:var(--serif);font-size:1.25rem;line-height:1.5;color:var(--leaf);margin-bottom:1.25rem}
+.archive-form{margin-bottom:3rem}
+.cta-form{display:flex;gap:.75rem;max-width:520px}
+.cta-input{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--border);color:var(--leaf);font-family:var(--sans);font-size:.9rem;padding:.875rem 1.1rem;outline:none}
+.cta-input:focus{border-color:var(--green)}
+.cta-btn{background:var(--green);color:var(--ink);font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.25rem;border:none;cursor:pointer;white-space:nowrap}
+.cta-btn:hover{background:#6ee89a}
+.cta-note{font-family:var(--mono);font-size:.58rem;color:var(--mist2);letter-spacing:.05em;margin-top:.6rem}
+.issue{padding:2rem 0;border-top:1px solid var(--border)}
+.issue-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.issue-num{font-family:var(--serif);font-size:1.5rem;font-weight:900;margin:0}
+.issue-date{font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist2)}
+.issue-sub{font-family:var(--mono);font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin:0 0 .5rem}
+.issue-list{list-style:none;margin:0;padding:0}
+.issue-list li{padding:.6rem 0;border-bottom:1px solid var(--border2);display:flex;gap:.75rem;align-items:baseline}
+.issue-list li:last-child{border-bottom:none}
+.issue-tag{flex-shrink:0;font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist2);min-width:9.5rem}
+.issue-list a{color:var(--leaf);text-decoration:none;border-bottom:1px solid rgba(74,222,128,.3)}
+.issue-list a:hover{color:var(--green);border-color:var(--green)}
+@media(max-width:640px){.cta-form{flex-direction:column}.issue-list li{flex-direction:column;gap:.2rem}.issue-tag{min-width:0}}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="/es/" class="mast-logo">Futuro<em>Food</em></a>
+    <div class="mast-right">
+      <div class="lang-switch" role="group" aria-label="Selector de idioma" data-es-aria-label="Selector de idioma" data-en-aria-label="Language selector">
+        <a class="lang-btn" data-lang="en" href="/boletin" hreflang="en">EN</a>
+        <a class="lang-btn active" data-lang="es" href="/es/boletin" hreflang="es" aria-current="true">ES</a>
+      </div>
+      <a href="/es/#newsletter" class="btn-sub" data-es="Suscríbete Gratis" data-en="Subscribe Free">Suscríbete Gratis</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <span class="page-eyebrow" data-es="FuturoFood Semanal" data-en="FuturoFood Weekly">FuturoFood Semanal</span>
+  <h1 class="page-title" data-es="Ediciones anteriores" data-en="Past issues">Ediciones anteriores</h1>
+
+  <div class="doc">
+    <p class="archive-intro" data-es="Las historias de food-tech de LATAM que importan, en tu correo cada semana. Gratis." data-en="The LATAM food-tech stories that matter, in your inbox every week. Free.">Las historias de food-tech de LATAM que importan, en tu correo cada semana. Gratis.</p>
+    <div class="archive-form">
+      <div class="cta-form">
+        <input class="cta-input" type="email" placeholder="tu@correo.com" data-es-placeholder="tu@correo.com" aria-label="Correo electrónico" data-es-aria-label="Correo electrónico" data-en-placeholder="your@email.com" data-en-aria-label="Email address"/>
+        <button class="cta-btn" data-es="Suscríbete gratis →" data-en="Subscribe free →">Suscríbete gratis →</button>
+      </div>
+      <p class="cta-note" data-es="Sin spam · Cancela cuando quieras" data-en="No spam · Unsubscribe anytime">Sin spam · Cancela cuando quieras</p>
+    </div>
+
+    <!-- ARCHIVE:START (scripts/build-archive.mjs writes the editions here — do not edit by hand) -->
+    <section class="issue" id="v1-2">
+      <div class="issue-head">
+        <h2 class="issue-num" data-es="Edición 2" data-en="Issue 2">Edición 2</h2>
+        <time class="issue-date" datetime="2026-10-13" data-es="martes, 13 de octubre de 2026 · Vol. 1" data-en="Tuesday, October 13, 2026 · Vol. 1">martes, 13 de octubre de 2026 · Vol. 1</time>
+      </div>
+      <h3 class="issue-sub" data-es="En esta edición" data-en="In this issue">En esta edición</h3>
+      <ul class="issue-list">
+        <li><span class="issue-tag" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span><a href="/es/futurofood-article-enthos-insect-protein-from-food-waste-colombia" data-es="Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces" data-en="Enthos is turning food waste into insect protein for animal and fish feed">Enthos convierte residuos de comida en proteína de insectos para alimentar animales y peces</a></li>
+        <li><span class="issue-tag" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span><a href="/es/futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields" data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales" data-en="The Brazilian company bringing AI and autonomous robots to sugarcane fields">La empresa brasileña que lleva IA y robots autónomos a los cañaverales</a></li>
+        <li><span class="issue-tag" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span><a href="/es/futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in" data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global" data-en="Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South">Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global</a></li>
+        <li><span class="issue-tag" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span><a href="/es/futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia" data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños" data-en="Charolais cattle breed reinvents itself to win over Brazilian ranchers">La raza Charolesa se reinventa para conquistar a los ganaderos brasileños</a></li>
+        <li><span class="issue-tag" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span><a href="/es/futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026" data-en="TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026">TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026</a></li>
+      </ul>
+    </section>
+    <section class="issue" id="v1-1">
+      <div class="issue-head">
+        <h2 class="issue-num" data-es="Edición 1" data-en="Issue 1">Edición 1</h2>
+        <time class="issue-date" datetime="2026-06-27" data-es="sábado, 27 de junio de 2026 · Vol. 1" data-en="Saturday, June 27, 2026 · Vol. 1">sábado, 27 de junio de 2026 · Vol. 1</time>
+      </div>
+      <h3 class="issue-sub" data-es="En esta edición" data-en="In this issue">En esta edición</h3>
+      <ul class="issue-list">
+        <li><span class="issue-tag" data-es="Cultivado en Lab" data-en="Lab-Grown">Cultivado en Lab</span><a href="/es/futurofood-article" data-es="Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal" data-en="Brazil's Embrapa is growing chicken meat from cells — no animal slaughtered">Embrapa de Brasil cultiva carne de pollo a partir de células — sin sacrificar ningún animal</a></li>
+        <li><span class="issue-tag" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><a href="/es/futurofood-blog?q=Osa%20Conservation%20will%20help" data-es="Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa" data-en="Osa Conservation will help 350 Costa Rican farmers adopt regenerative farming in AmistOsa">Osa Conservation ayudará a 350 agricultores costarricenses a adoptar la agricultura regenerativa en AmistOsa</a></li>
+        <li><span class="issue-tag" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><a href="/es/futurofood-blog?q=World%20Bank%20commits%20%24120M" data-es="El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica" data-en="World Bank commits $120M loan to sustainable agriculture in Costa Rica">El Banco Mundial destina un préstamo de $120M a la agricultura sostenible en Costa Rica</a></li>
+        <li><span class="issue-tag" data-es="Proteína de Insectos" data-en="Insect Protein">Proteína de Insectos</span><a href="/es/futurofood-blog?q=IFC%20invests%20%242M%20in" data-es="La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica" data-en="IFC invests $2M in ProNuvo, a Costa Rican insect-feed producer in Guápiles">La IFC invierte $2M en ProNuvo, productora de alimento para insectos en Guápiles, Costa Rica</a></li>
+        <li><span class="issue-tag" data-es="Regenerativo" data-en="Regenerative">Regenerativo</span><a href="/es/futurofood-blog?q=Aquiares%20Estate%3A%20how%20a" data-es="Finca Aquiares: cómo una finca cafetalera costarricense de 600 hectáreas se volvió carbono neutral" data-en="Aquiares Estate: how a 600-hectare Costa Rican coffee farm became carbon neutral">Finca Aquiares: cómo una finca cafetalera costarricense de 600 hectáreas se volvió carbono neutral</a></li>
+        <li><span class="issue-tag" data-es="Tecnología Alimentaria" data-en="Food Tech">Tecnología Alimentaria</span><a href="/es/futurofood-blog?q=Argentina's%20Kilimo%20has%20saved" data-es="La argentina Kilimo ha ahorrado 72 mil millones de litros de agua con riego impulsado por IA — ya está presente en 7 países" data-en="Argentina's Kilimo has saved 72 billion liters of water with AI-powered irrigation — now in 7 countries">La argentina Kilimo ha ahorrado 72 mil millones de litros de agua con riego impulsado por IA — ya está presente en 7 países</a></li>
+        <li><span class="issue-tag" data-es="Agua" data-en="Water">Agua</span><a href="/es/futurofood-blog?q=Andean%20glaciers%20are%20thinning" data-es="Los glaciares andinos se adelgazan un 35% más rápido que el promedio mundial — y 90 millones de personas dependen de ellos" data-en="Andean glaciers are thinning 35% faster than the global average — and 90 million people depend on them">Los glaciares andinos se adelgazan un 35% más rápido que el promedio mundial — y 90 millones de personas dependen de ellos</a></li>
+      </ul>
+    </section>
+    <!-- ARCHIVE:END -->
+  </div>
+</div>
+
+<footer>
+  <div class="footer-wa is-inline"><a class="wa-channel-btn" href="https://whatsapp.com/channel/0029VbEDSkkIHphKuLdWG847" target="_blank" rel="noopener" data-wa-channel="footer"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span data-es="Sigue nuestro Canal de WhatsApp" data-en="Follow our WhatsApp Channel">Sigue nuestro Canal de WhatsApp</span></a></div>
+  <div class="footer-brand">Futuro<em>Food</em></div>
+  <span class="footer-copy" data-es="© 2026 FuturoFood.com · Todos los derechos reservados" data-en="© 2026 FuturoFood.com · All rights reserved">© 2026 FuturoFood.com · Todos los derechos reservados</span>
+</footer>
+<script src="/consent.js?v=1" defer></script>
+<script src="/i18n.js?v=3" defer></script>
+<script src="/newsletter.js?v=3" defer></script>
+<script src="/analytics.js?v=5" defer></script>
+</body>
+</html>

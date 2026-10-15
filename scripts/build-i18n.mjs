@@ -25,6 +25,7 @@ import { execFileSync } from "node:child_process";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildHome } from "./build-home.mjs";
+import { buildArchive } from "./build-archive.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://futurofood.com";
@@ -40,6 +41,7 @@ const STATIC_PAGES = {
   "patrocinadores.html": { path: "/patrocinadores", sitemap: ["monthly", "0.6"] },
   "futurofood-privacy.html": { path: "/futurofood-privacy", sitemap: ["yearly", "0.3"] },
   "futurofood-terms.html": { path: "/futurofood-terms", sitemap: ["yearly", "0.3"] },
+  "boletin.html": { path: "/boletin", sitemap: ["weekly", "0.6"] },
   "pro.html": { path: "/pro" }, // noindex for now
   "404.html": { path: null },
   "futurofood-article.html": { path: "/futurofood-article", sitemap: ["monthly", "0.8"] },
@@ -365,6 +367,8 @@ ${urls.join("\n")}
 export function buildSite({ root = ROOT, log = console.log } = {}) {
   // Home page first (cover, columns, ticker, edition), so /es/ gets it too
   buildHome({ root, log });
+  // Newsletter archive (/boletin): one entry per edition
+  buildArchive({ root, log });
   const pages = sitePages(root);
   const esDir = join(root, ES_DIR);
   mkdirSync(esDir, { recursive: true });
