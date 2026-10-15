@@ -26,6 +26,17 @@ function spanishDate(iso) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("es", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 }
 
+// One-off notices at the end of the issues sent up to a given date
+const NOTICES = [
+  {
+    until: "2026-10-25", // the first issue after the privacy policy update of Oct 15, 2026
+    html: `<p style="font-size:14px;line-height:1.6;">📄 Actualizamos nuestra Política de Privacidad para que refleje con precisión las herramientas que usamos hoy. Puedes leerla aquí: <a href="${SITE}/es/futurofood-privacy" style="color:#1F8A4C;">futurofood.com/es/futurofood-privacy</a></p>
+<p style="font-size:13px;line-height:1.6;color:#5B6B5B;">We updated our Privacy Policy to accurately reflect the tools we use today. Read it here: <a href="${SITE}/futurofood-privacy" style="color:#1F8A4C;">futurofood.com/futurofood-privacy</a></p>
+`,
+  },
+];
+const notices = (dateIso) => NOTICES.filter((n) => dateIso <= n.until).map((n) => n.html).join("");
+
 export function buildIssue(articles, dateIso) {
   const subject = `FuturoFood Weekly — ${spanishDate(dateIso)}`;
   const campaign = `weekly-${dateIso}`;
@@ -44,7 +55,7 @@ export function buildIssue(articles, dateIso) {
 ${items}
 <hr style="border:none;border-top:1px solid #E2E8E2;margin:28px 0;"/>
 <p style="font-size:15px;line-height:1.6;">¿Conoces a alguien a quien le interese? Reenvíale este correo o comparte cualquier historia por WhatsApp desde <a href="${SITE}/es/futurofood-blog?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}" style="color:#1F8A4C;">futurofood.com</a>.</p>
-<p style="font-size:13px;line-height:1.6;color:#5B6B5B;">All stories are also available in English at futurofood.com.</p>`;
+${notices(dateIso)}<p style="font-size:13px;line-height:1.6;color:#5B6B5B;">All stories are also available in English at futurofood.com.</p>`;
   const subtitle = count === 1
     ? "La historia de la semana sobre quienes cambian la alimentación en LATAM"
     : `${count} historias sobre quienes cambian la alimentación en LATAM`;
