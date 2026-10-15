@@ -523,6 +523,9 @@ export function formatCardDate(iso) {
 // Heart icon (Feather "heart", MIT) for the blog's save button
 const SAVE_BUTTON = `<button type="button" class="save-btn" aria-pressed="false" aria-label="Save article" data-es-aria-label="Guardar artículo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>`;
 
+// Share icon (Feather "share-2", MIT) next to the heart; share.js handles it
+const CARD_SHARE_BUTTON = `<button type="button" class="card-share-btn" aria-label="Share this story" data-es-aria-label="Compartir esta historia" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>`;
+
 // Blog card: the title link stretches over the whole card (CSS), so the save
 // button can sit on top as a real button instead of being nested in a link.
 export function renderCard(entry) {
@@ -533,6 +536,7 @@ export function renderCard(entry) {
           <span class="tag tag-${entry.tag_slug}" data-es="${escapeAttr(entry.tag_es)}">${escapeHtml(entry.tag_en)}</span>
           <span class="card-readtime" data-es="${entry.read_minutes} min de lectura">${entry.read_minutes} min read</span>
           ${SAVE_BUTTON}
+          ${CARD_SHARE_BUTTON}
         </div>
         <h3 class="card-title"><a class="card-link" href="${entry.filename}" data-es="${escapeAttr(entry.title_es)}">${escapeHtml(entry.title_en)}</a></h3>
         <p class="card-excerpt" data-es="${escapeAttr(entry.deck_es)}">${escapeHtml(entry.deck_en)}</p>
