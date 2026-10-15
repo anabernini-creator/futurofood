@@ -1,8 +1,8 @@
 name: Weekly newsletter
 
 # Runs when Ana merges a weekly review PR (content/weekly-*): the articles are
-# then live, so "FuturoFood Weekly — <fecha>" is created in Beehiiv and sent to
-# all subscribers (or posted on the PR, ready to paste). A second PR comment
+# then live, so "FuturoFood Weekly — <fecha>" is created in Beehiiv as a draft
+# (Ana writes "La nota de Ana" before sending) or posted on the PR, ready to paste. A second PR comment
 # carries the message for the WhatsApp Channel. Manual runs default to a
 # draft, for testing.
 on:
@@ -55,7 +55,8 @@ jobs:
         env:
           NEWSLETTER_TRIGGER_TOKEN: ${{ secrets.NEWSLETTER_TRIGGER_TOKEN }}
           BASE_REGISTRY_REF: ${{ github.event.pull_request.base.sha || inputs.base_ref }}
-          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'send' }}
+          # Always a draft from the merge: "La nota de Ana" is written by hand before sending
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'draft' }}
           OUTPUT_DIR: ${{ runner.temp }}/newsletter
           WAIT_FOR_LIVE: "1"
         run: node scripts/weekly-newsletter.mjs
@@ -71,7 +72,7 @@ jobs:
           subject=$(jq -r '.subject // ""' "$OUT/result.json")
           if [ "$ok" = "true" ]; then
             echo "✅ **$subject** — $(jq -r '.mode // "ya existía"' "$OUT/result.json") en Beehiiv ($(jq -r '.status // ""' "$OUT/result.json"))." >> "$GITHUB_STEP_SUMMARY"
-            if [ -n "$PR" ]; then gh pr comment "$PR" --body "✅ Newsletter **$subject** creado en Beehiiv ($(jq -r '.status // ""' "$OUT/result.json"))."; fi
+            if [ -n "$PR" ]; then gh pr comment "$PR" --body "✅ Newsletter **$subject** creado en Beehiiv ($(jq -r '.status // ""' "$OUT/result.json")). Escribe **La nota de Ana** y envíalo desde Beehiiv."; fi
           elif [ "$err" = "plan_not_supported" ]; then
             {
               echo "📬 **Newsletter de la semana listo para enviar.** Tu plan de Beehiiv no permite crear correos por API, así que hay que pegarlo a mano (2 minutos):"
@@ -79,7 +80,8 @@ jobs:
               echo "1. Beehiiv → **Start writing** (nuevo post)."
               echo "2. Título y asunto: **$subject**"
               echo "3. Agrega un bloque **HTML** y pega el contenido de abajo."
-              echo "4. Audiencia: todos los suscriptores → **Publish / Send**."
+              echo "4. Escribe **La nota de Ana** donde dice «[Escribe aquí tu nota]» y borra el recuadro con la guía."
+              echo "5. Audiencia: todos los suscriptores → **Publish / Send**."
               echo
               echo "**Asunto:** $subject"
               echo

@@ -26,6 +26,7 @@ import { dirname, join, resolve } from "node:path";
 import { createRequire } from "node:module";
 import { updateOgCards } from "./og-image.mjs";
 import { buildSite } from "./build-i18n.mjs";
+import { readStories } from "./build-home.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -39,6 +40,8 @@ const BLOG_PATH = join(ROOT, "futurofood-blog.html");
 const TARGET_ARTICLES = 3;
 // Try a few extra candidates so a failed draft can be replaced by the next story.
 const MAX_ATTEMPTS = 8;
+// Verified sources to choose from, so the country/category rotation has options.
+const MAX_POOL = 20;
 // Only cover recent news — some feeds keep returning year-old items.
 const MAX_AGE_DAYS = 21;
 // Keep the weekly mix varied — at most this many stories per outlet per run.
@@ -229,6 +232,125 @@ async function fetchCandidates() {
       return true;
     })
     .sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate));
+}
+
+// ---------- weekly rotation ----------
+// Countries rotate in this order; no country appears two weeks in a row.
+// "regional" (Latin America as a whole) is always allowed. Other countries
+// (Ecuador, Uruguay…) are kept by name and follow the same no-repeat rule.
+export const ROTATION = ["mexico", "colombia", "peru", "chile", "argentina", "centroamerica", "brasil"];
+const COUNTRY_LABEL = { mexico: "México", colombia: "Colombia", peru: "Perú", chile: "Chile", argentina: "Argentina", centroamerica: "Centroamérica", brasil: "Brasil", regional: "América Latina (regional)" };
+const COUNTRY_RE = {
+  mexico: /m[eé]xic|mexican/i,
+  colombia: /colombi/i,
+  peru: /\bper[uú]\b|peruvian|peruan/i,
+  chile: /\bchile(?!s\b)|chilean|chilen/i,
+  argentina: /argentin/i,
+  centroamerica: /costa ric|guatemal|hondur|el salvador|salvadore|nicaragu|panam[aá]|belice|belize|central americ|centroam[eé]ric/i,
+  brasil: /bra[sz]il/i,
+};
+// Each week at least one story comes from the categories with the fewest
+// stories; on a tie this order decides (Ancestral first).
+const CATEGORY_PRIORITY = ["ancestral", "water", "lab", "insects", "regen", "tech"];
+const LOW_CATEGORIES = 3;
+
+export const countryLabel = (c) => COUNTRY_LABEL[c] || (c ? c[0].toUpperCase() + c.slice(1) : "sin país");
+
+const OTHER_COUNTRY_RE = {
+  ecuador: /ecuador/i, uruguay: /urugua/i, paraguay: /paragua/i, bolivia: /bolivi/i,
+  venezuela: /venezol|venezuel/i, cuba: /\bcuba/i, "república dominicana": /dominican|dominicana/i,
+};
+
+// Fallback when the triage is not available: the country named most often in
+// the headline (counted three times) and excerpt, or "regional".
+export function detectCountry(title, excerpt = "") {
+  let best = null, bestHits = 0;
+  for (const [c, re] of Object.entries({ ...COUNTRY_RE, ...OTHER_COUNTRY_RE })) {
+    const count = (t) => (String(t).match(new RegExp(re.source, "gi")) || []).length;
+    const hits = count(title) * 3 + count(excerpt);
+    if (hits > bestHits) { best = c; bestHits = hits; }
+  }
+  return best || "regional";
+}
+
+function isoWeekKey(iso) {
+  const d = new Date(`${iso}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7) + 3);
+  const jan4 = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  return `${d.getUTCFullYear()}-W${String(1 + Math.round((d - jan4) / 864e5 / 7 - ((jan4.getUTCDay() + 6) % 7 - 3) / 7)).padStart(2, "0")}`;
+}
+
+// One short Claude call that classifies every verified source before drafting:
+// country, closest category, and whether it fits the editorial promise.
+async function triageCandidates(candidates) {
+  const model = process.env.ANTHROPIC_MODEL || "claude-sonnet-5";
+  const list = candidates.map((c, i) => `[${i}] ${c.sourceName} — ${c.title}\n${String(c.excerpt).replace(/\s+/g, " ").slice(0, 700)}`).join("\n\n");
+  const prompt = `You classify news candidates for FuturoFood, a bilingual outlet about food, farming and food technology in Latin America. Editorial promise: "Stories of those who grow, research and build to change the food system".
+
+For each candidate below, answer from its headline and excerpt only:
+- country: where the story happens — one of ${ROTATION.join(", ")} (centroamerica = Costa Rica, Guatemala, Honduras, El Salvador, Nicaragua, Panama or Belize), "regional" if it covers Latin America broadly with no single country, or the lowercase Spanish name of another country (e.g. "ecuador", "uruguay")
+- category: the closest of lab (lab-grown/cultivated), regen (regenerative farming), insects (insect protein), tech (food tech, agtech), water (water, irrigation, climate and water), ancestral (ancestral and indigenous foods, native crops, traditional knowledge)
+- fits: true only if the story is substantially about food, agriculture or food technology in Latin America AND has farmers, researchers or entrepreneurs actually changing how food is grown, made or distributed at its center
+
+Respond with ONLY a JSON array, one object per candidate: [{"i":0,"country":"...","category":"...","fits":true}, ...]
+
+${list}`;
+  const res = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({ model, max_tokens: 16000, messages: [{ role: "user", content: prompt }] }),
+  }, 180000);
+  if (!res.ok) throw new Error(`anthropic_error ${res.status}`);
+  const data = await res.json();
+  const text = data.content?.find((b) => b.type === "text")?.text || "";
+  const raw = (text.match(/```(?:json)?\s*([\s\S]*?)```/) || [null, text])[1];
+  const arr = JSON.parse(raw.slice(raw.indexOf("["), raw.lastIndexOf("]") + 1));
+  return candidates.map((c, i) => {
+    const t = arr.find((x) => x.i === i) || {};
+    return {
+      ...c,
+      country: typeof t.country === "string" && t.country.trim() ? t.country.trim().toLowerCase() : detectCountry(c.title, c.excerpt),
+      category: VALID_TAGS.includes(t.category) ? t.category : null,
+      fits: t.fits !== false,
+    };
+  });
+}
+
+// Orders the candidates for this week:
+//   1. drop stories that don't fit, and countries published last week
+//   2. first, the best story from a low-count category (Ancestral first)
+//   3. then countries not used yet this week, the longest-unseen first
+// Returns the drafting order plus what the review PR should say.
+export function planWeek(candidates, registry, categoryCounts, todayIso) {
+  const thisWeek = isoWeekKey(todayIso);
+  const weeks = [...new Set(registry.map((r) => isoWeekKey(r.date_iso)))].filter((w) => w < thisWeek).sort();
+  const lastWeek = weeks[weeks.length - 1];
+  const blocked = new Set(registry.filter((r) => r.country && isoWeekKey(r.date_iso) === lastWeek && r.country !== "regional").map((r) => r.country));
+  // Longest-unseen country first (never published = first), ties by rotation order
+  const lastSeen = (c) => registry.filter((r) => r.country === c).map((r) => r.date_iso).sort().pop() || "";
+  const countryRank = (c) => (c === "regional" ? [2, "", 0] : ROTATION.includes(c) ? [0, lastSeen(c), ROTATION.indexOf(c)] : [1, lastSeen(c), 0]);
+  const cmpCountry = (a, b) => {
+    const x = countryRank(a.country), y = countryRank(b.country);
+    return x[0] - y[0] || (x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0) || x[2] - y[2];
+  };
+  const low = [...CATEGORY_PRIORITY].sort((a, b) => (categoryCounts[a] || 0) - (categoryCounts[b] || 0) || CATEGORY_PRIORITY.indexOf(a) - CATEGORY_PRIORITY.indexOf(b)).slice(0, LOW_CATEGORIES);
+
+  const skipped = candidates.filter((c) => !c.fits || blocked.has(c.country));
+  let pool = candidates.filter((c) => c.fits && !blocked.has(c.country));
+  const order = [];
+  let lowPick = null;
+  for (const cat of low) {
+    const match = pool.filter((c) => c.category === cat).sort(cmpCountry)[0];
+    if (match) { lowPick = { candidate: match, category: cat }; order.push(match); pool = pool.filter((c) => c !== match); break; }
+  }
+  while (pool.length) {
+    const used = new Set(order.map((c) => c.country));
+    const fresh = pool.filter((c) => c.country === "regional" || !used.has(c.country));
+    const next = (fresh.length ? fresh : pool).slice().sort(cmpCountry)[0];
+    order.push(next);
+    pool = pool.filter((c) => c !== next);
+  }
+  return { order, blocked: [...blocked], low, lowPick, skipped };
 }
 
 // ---------- verification ----------
@@ -704,7 +826,7 @@ async function main() {
 
   const verified = [];
   for (const c of candidates) {
-    if (verified.length >= MAX_ATTEMPTS) break;
+    if (verified.length >= MAX_POOL) break;
     const v = await verifyAndFetchExcerpt(c);
     if (!v) continue;
     if (usedUrls.has(v.verifiedUrl)) continue;
@@ -722,9 +844,27 @@ async function main() {
     return;
   }
 
+  // Country + category of every source, then this week's order
+  let triaged;
   if (dryRun) {
-    log("--dry-run: skipping Claude drafting and file writes. Candidates that would be used:");
-    for (const v of verified) log(` - [${v.sourceName}] ${v.title}\n     ${v.verifiedUrl}`);
+    triaged = verified.map((v) => ({ ...v, country: detectCountry(v.title, v.excerpt), category: null, fits: true }));
+  } else {
+    try {
+      triaged = await triageCandidates(verified);
+    } catch (e) {
+      log("triage failed — countries from keywords, no category rotation", e.message);
+      triaged = verified.map((v) => ({ ...v, country: detectCountry(v.title, v.excerpt), category: null, fits: true }));
+    }
+  }
+  const categoryCounts = {};
+  for (const s of readStories(readFileSync(BLOG_PATH, "utf8"))) categoryCounts[s.tag] = (categoryCounts[s.tag] || 0) + 1;
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const plan = planWeek(triaged, registry, categoryCounts, todayIso);
+  log(`rotation: blocked (last week) ${plan.blocked.map(countryLabel).join(", ") || "none"} · low categories ${plan.low.join(", ")} · low pick ${plan.lowPick ? `${plan.lowPick.category}: ${plan.lowPick.candidate.title}` : "none available"}`);
+  for (const c of plan.order) log(` - [${countryLabel(c.country)} · ${c.category || "?"}] ${c.title}`);
+
+  if (dryRun) {
+    log("--dry-run: skipping Claude drafting and file writes.");
     return;
   }
 
@@ -732,10 +872,10 @@ async function main() {
   readMarkerBlock(blogHtml, "futurofood-blog.html"); // throws if markers missing
 
   const newRegistryEntries = [];
-  const todayIso = new Date().toISOString().slice(0, 10);
 
-  for (const candidate of verified) {
-    if (newRegistryEntries.length >= TARGET_ARTICLES) break;
+  let attempts = 0;
+  for (const candidate of plan.order) {
+    if (newRegistryEntries.length >= TARGET_ARTICLES || attempts++ >= MAX_ATTEMPTS) break;
     let draft;
     try {
       draft = await draftArticle(candidate);
@@ -781,6 +921,7 @@ async function main() {
       deck_en: draft.deck_en,
       deck_es: draft.deck_es,
       tag_slug: draft.tag_slug,
+      country: candidate.country,
       tag_en: draft.tag_en,
       tag_es: draft.tag_es,
       emoji: draft.emoji,
@@ -814,11 +955,25 @@ async function main() {
   for (const e of newRegistryEntries) log(` - ${e.filename} (${e.source_name})`);
 
   if (process.env.REVIEW_SUMMARY_PATH) {
-    writeFileSync(process.env.REVIEW_SUMMARY_PATH, renderReviewSummary(newRegistryEntries, process.env.PREVIEW_BASE_URL));
+    writeFileSync(process.env.REVIEW_SUMMARY_PATH, renderReviewSummary(newRegistryEntries, process.env.PREVIEW_BASE_URL, rotationNotes(plan, newRegistryEntries)));
   }
 }
 
-export function renderReviewSummary(entries, previewBaseUrl) {
+// What the review PR says about this week's rotation
+export function rotationNotes(plan, entries) {
+  const notes = [];
+  notes.push(`- **Países:** ${entries.map((e) => countryLabel(e.country)).join(", ")}${plan.blocked.length ? ` · se evitó ${plan.blocked.map(countryLabel).join(", ")} porque salió la semana pasada` : ""}`);
+  const lowNames = plan.low.map((c) => CATEGORIES[c].es).join(", ");
+  const lowDone = entries.find((e) => plan.low.includes(e.tag_slug));
+  notes.push(lowDone
+    ? `- **Categoría con pocas publicaciones:** ${CATEGORIES[lowDone.tag_slug].es} («${lowDone.title_es}»)`
+    : `- **Categoría con pocas publicaciones:** ⚠️ esta semana no hubo fuentes verificables de ${lowNames}. No se inventó ninguna historia para cumplir la regla.`);
+  const missing = ROTATION.filter((c) => !plan.order.some((o) => o.country === c) && !plan.blocked.includes(c));
+  if (missing.length) notes.push(`- **Sin fuentes verificables esta semana de:** ${missing.map(countryLabel).join(", ")}`);
+  return notes;
+}
+
+export function renderReviewSummary(entries, previewBaseUrl, rotation = []) {
   const articles = entries.map((e, i) => {
     const preview = previewBaseUrl ? `${previewBaseUrl.replace(/\/$/, "")}/${e.filename.replace(/\.html$/, "")}` : null;
     return [
@@ -832,15 +987,17 @@ export function renderReviewSummary(entries, previewBaseUrl) {
       e.video_url
         ? `- **Video:** [${e.video_title || e.video_url}](${e.video_url})${e.video_channel ? ` — ${e.video_channel}` : ""}`
         : "- **Video:** ninguno — se muestra el placeholder",
+      e.country ? `- **País:** ${countryLabel(e.country)}` : null,
       preview
         ? `- **Vista previa:** [en español](${preview.replace(/\/(futurofood-article[^/]*)$/, "/es/$1")}) · [en inglés](${preview})`
         : `- **Archivo:** \`${e.filename}\` (y \`es/${e.filename}\`)`,
-    ].join("\n");
+    ].filter((line) => line !== null).join("\n");
   });
   return [
     `El agente semanal preparó ${entries.length} artículo(s). **Nada se publica hasta que hagas Merge.**`,
     "",
     ...articles.flatMap((a) => [a, ""]),
+    ...(rotation.length ? ["### Rotación de esta semana", ...rotation, ""] : []),
     "### Antes de aprobar",
     "- [ ] Encaja con la promesa: *historias de quienes cultivan, investigan y emprenden para cambiar el sistema*, y el título nombra a quién y qué cambia",
     "- [ ] Las cifras y nombres coinciden con la fuente",
