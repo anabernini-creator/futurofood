@@ -112,7 +112,11 @@ const FEEDS = [
   { url: "https://www.unacomunica.una.ac.cr/index.php?format=feed", requireLatam: false, requireFoodtech: true, country: "centroamerica" }, // Costa Rica · UNA
   // Outlets with an advocacy perspective: the draft reports only verifiable facts and attributes positions.
   { url: "https://agenciatierraviva.com.ar/feed/", requireLatam: false, requireFoodtech: true, perspective: "advocacy", country: "argentina" }, // Argentina
-  { url: "https://prensacomunitaria.org/feed/", requireLatam: false, requireFoodtech: true, perspective: "advocacy", country: "centroamerica" }, // Guatemala
+  // Strict topics (Ana, Oct 2026): seeds, maize, crops, food, and Indigenous or campesino knowledge only.
+  // Watched: if it brings no published story in 30 days, the review PR says so.
+  { url: "https://prensacomunitaria.org/feed/", requireLatam: false, requireFoodtech: false, perspective: "advocacy", country: "centroamerica",
+    topics: /semilla|ma[ií]z|milpa|cultiv|cosech|siembra|sembr|agricult|agr[ií]cola|aliment|comida|frijol|hambre|agroecol|soberan[ií]a alimentaria|saberes|conocimientos? (ancestral|tradicional|ind[ií]gena|campesin)/i,
+    watch: { since: "2026-10-15", days: 30 } }, // Guatemala
 ];
 
 const LATAM_RE = /latin america|latam|am[eé]rica latina|latinoam[eé]rica|amazon[iíi]a|amaz[oô]nia|brazil|brasil|mexico|méxico|colombia|argentina|chile|per[uú]|costa rica|ecuador|uruguay|paraguay|bolivia|venezuela|guatemala|honduras|panam[aá]|dominican|el salvador|nicaragua/i;
@@ -255,21 +259,27 @@ function isRelevant(item, feedConfig) {
   const haystack = `${item.title} ${item.description}`.toLowerCase();
   if (feedConfig.requireLatam && !LATAM_RE.test(haystack)) return false;
   if (feedConfig.requireFoodtech && !FOODTECH_RE.test(haystack)) return false;
+  if (feedConfig.topics && !feedConfig.topics.test(haystack)) return false;
   return true;
 }
+
+// Items each feed brought this run (null = the feed failed), for the review PR
+const FEED_STATS = new Map();
 
 async function fetchCandidates() {
   const all = [];
   for (const feed of FEEDS) {
     try {
       const res = await fetchWithTimeout(feed.url, { headers: { "user-agent": "Mozilla/5.0 (compatible; FuturoFoodBot/1.0)" } });
-      if (!res.ok) { log("feed fetch failed", feed.url, res.status); continue; }
+      if (!res.ok) { log("feed fetch failed", feed.url, res.status); FEED_STATS.set(feed.url, null); continue; }
       const xml = await res.text();
       const items = parseRssItems(xml).filter((item) => isRelevant(item, feed)).map((item) => ({ ...item, perspective: feed.perspective || null, countryHint: feed.country || null }));
       log(`${feed.url} -> ${items.length} relevant items`);
+      FEED_STATS.set(feed.url, items.length);
       all.push(...items);
     } catch (e) {
       log("feed error", feed.url, e.message);
+      FEED_STATS.set(feed.url, null);
     }
   }
   const seen = new Set();
@@ -1011,12 +1021,31 @@ async function main() {
   for (const e of newRegistryEntries) log(` - ${e.filename} (${e.source_name})`);
 
   if (process.env.REVIEW_SUMMARY_PATH) {
-    writeFileSync(process.env.REVIEW_SUMMARY_PATH, renderReviewSummary(newRegistryEntries, process.env.PREVIEW_BASE_URL, rotationNotes(plan, newRegistryEntries)));
+    writeFileSync(process.env.REVIEW_SUMMARY_PATH, renderReviewSummary(newRegistryEntries, process.env.PREVIEW_BASE_URL, rotationNotes(plan, newRegistryEntries, watchNotes(registry, newRegistryEntries, todayIso))));
   }
 }
 
 // What the review PR says about this week's rotation
-export function rotationNotes(plan, entries) {
+// Watched feeds (FEEDS[].watch): a warning when one has brought no published
+// story for `days` days — counted from the later of `since` and its last story.
+export function watchNotes(registry, entries, todayIso, stats = FEED_STATS) {
+  const host = (url) => { try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return ""; } };
+  const day = (iso) => Date.parse(`${iso}T12:00:00Z`);
+  return FEEDS.filter((f) => f.watch).flatMap((f) => {
+    const h = host(f.url);
+    const name = KNOWN_OUTLETS[h] || h;
+    const dates = [...registry, ...entries].filter((e) => host(e.source_url) === h).map((e) => e.date_iso).sort();
+    const last = dates[dates.length - 1];
+    const from = last && last > f.watch.since ? last : f.watch.since;
+    const days = Math.floor((day(todayIso) - day(from)) / 864e5);
+    if (days < f.watch.days) return [];
+    const n = stats.get(f.url);
+    const week = n == null ? "esta semana su feed no respondió" : `esta semana pasaron su filtro ${n} nota${n === 1 ? "" : "s"}`;
+    return [`- ⚠️ **${name}:** ninguna historia publicada en ${days} días (${last ? `la última fue del ${last}` : `está en el agente desde el ${f.watch.since}`}); ${week}. Evalúa si conviene quitarla.`];
+  });
+}
+
+export function rotationNotes(plan, entries, watch = []) {
   const notes = [];
   notes.push(`- **Países:** ${entries.map((e) => countryLabel(e.country)).join(", ")}${plan.blocked.length ? ` · se evitó ${plan.blocked.map(countryLabel).join(", ")} porque salió la semana pasada` : ""}`);
   const lowNames = plan.low.map((c) => CATEGORIES[c].es).join(", ");
@@ -1026,7 +1055,7 @@ export function rotationNotes(plan, entries) {
     : `- **Categoría con pocas publicaciones:** ⚠️ esta semana no hubo fuentes verificables de ${lowNames}. No se inventó ninguna historia para cumplir la regla.`);
   const missing = ROTATION.filter((c) => !plan.order.some((o) => o.country === c) && !plan.blocked.includes(c));
   if (missing.length) notes.push(`- **Sin fuentes verificables esta semana de:** ${missing.map(countryLabel).join(", ")}`);
-  return notes;
+  return [...notes, ...watch];
 }
 
 export function renderReviewSummary(entries, previewBaseUrl, rotation = []) {
