@@ -2,7 +2,9 @@ name: Weekly newsletter
 
 # Runs when Ana merges a weekly review PR (content/weekly-*): the articles are
 # then live, so "FuturoFood Weekly — <fecha>" is created in Beehiiv and sent to
-# all subscribers. Manual runs default to a draft, for testing.
+# all subscribers (or posted on the PR, ready to paste). A second PR comment
+# carries the message for the WhatsApp Channel. Manual runs default to a
+# draft, for testing.
 on:
   pull_request:
     types: [closed]
@@ -92,4 +94,19 @@ jobs:
             if [ -n "$PR" ]; then gh pr comment "$PR" --body-file "$OUT/comment.md"; fi
           else
             echo "❌ Newsletter no enviado: $err" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # Ready-to-paste message for the WhatsApp Channel, as a second PR comment
+      - name: WhatsApp Channel message
+        if: always()
+        env:
+          BASE_REGISTRY_REF: ${{ github.event.pull_request.base.sha || inputs.base_ref }}
+          OUTPUT_DIR: ${{ runner.temp }}/whatsapp
+          PR: ${{ github.event.pull_request.number || inputs.pr }}
+        run: |
+          node scripts/whatsapp-channel.mjs
+          OUT="$RUNNER_TEMP/whatsapp/whatsapp.md"
+          if [ -f "$OUT" ]; then
+            cat "$OUT" >> "$GITHUB_STEP_SUMMARY"
+            if [ -n "$PR" ]; then gh pr comment "$PR" --body-file "$OUT"; fi
           fi
