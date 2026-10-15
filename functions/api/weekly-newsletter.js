@@ -50,18 +50,23 @@ export function buildIssue(articles, dateIso) {
   }).join('\n<hr style="border:none;border-top:1px solid #E2E8E2;margin:24px 0;"/>');
   const count = articles.length;
   // "La nota de Ana": left empty on purpose — Ana writes it in Beehiiv before
-  // sending. The guide (dashed box) is removed when she writes the note.
+  // sending and removes the guide (dashed box). Below it, "En esta edición"
+  // lists the top 3 stories for readers.
+  const top = articles.slice(0, 3).map((a) => {
+    const url = `${SITE}/es/${a.path}?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}`;
+    return `<li style="margin:0 0 6px;"><a href="${esc(url)}" style="color:#0A0F0A;">${esc(a.title_es)}</a></li>`;
+  }).join("\n");
   const note = `
 <h2 style="margin:0 0 10px;font-size:22px;line-height:1.25;">La nota de Ana</h2>
 <div style="border:2px dashed #1F8A4C;background:#F3FAF4;padding:14px 16px;margin:0 0 12px;font-size:14px;line-height:1.6;color:#2F4A36;">
 <p style="margin:0 0 8px;"><strong>✍️ Guía para escribir tu nota (borra este recuadro antes de enviar):</strong></p>
-<p style="margin:0 0 8px;">¿Qué te llamó la atención esta semana y por qué importa para América Latina?</p>
-<p style="margin:0 0 4px;">Las 3 historias principales:</p>
-<ol style="margin:0;padding-left:20px;">
-${articles.slice(0, 3).map((a) => `<li>${esc(a.title_es)}</li>`).join("\n")}
-</ol>
+<p style="margin:0;">¿Qué te llamó la atención esta semana y por qué importa para América Latina?</p>
 </div>
 <p style="font-size:16px;line-height:1.6;color:#8A9A8A;">[Escribe aquí tu nota]</p>
+<h3 style="margin:22px 0 8px;font-size:15px;letter-spacing:.02em;">En esta edición <span style="font-weight:normal;color:#5B6B5B;">/ In this issue</span></h3>
+<ol style="margin:0 0 4px;padding-left:20px;font-size:15px;line-height:1.5;">
+${top}
+</ol>
 <hr style="border:none;border-top:1px solid #E2E8E2;margin:24px 0;"/>`;
   const html = `${note}
 <p style="font-size:16px;line-height:1.6;">Hola,</p>
