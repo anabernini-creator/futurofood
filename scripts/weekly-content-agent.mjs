@@ -98,7 +98,11 @@ const FEEDS = [
   { url: "https://www.fia.cl/feed/", requireLatam: false, requireFoodtech: false, country: "chile" }, // Chile · FIA
   { url: "https://bichosdecampo.com/feed/", requireLatam: false, requireFoodtech: false, country: "argentina" }, // Argentina
   { url: "https://www.clarin.com/rss/rural/", requireLatam: false, requireFoodtech: false, country: "argentina" }, // Argentina
-  { url: "https://www.catie.ac.cr/feed/", requireLatam: false, requireFoodtech: false, country: "centroamerica" }, // Costa Rica · CATIE (needs NODE_EXTRA_CA_CERTS, see header)
+  { url: "https://www.catie.ac.cr/feed/", requireLatam: false, requireFoodtech: false, country: "centroamerica" },
+  // Official source: the draft attributes everything to the ministry.
+  { url: "https://mag.go.cr/feed/", requireLatam: false, requireFoodtech: true, country: "centroamerica", perspective: "official" }, // Costa Rica · MAG
+  // Research program on Costa Rica's development (household spending, food prices…).
+  { url: "https://estadonacion.or.cr/feed/", requireLatam: false, requireFoodtech: true, country: "centroamerica" }, // Costa Rica · Estado de la Nación // Costa Rica · CATIE (needs NODE_EXTRA_CA_CERTS, see header)
   // Broader outlets (environment, health, journalism, universities) — filter to food/agro stories.
   { url: "https://www.inforegion.pe/feed/", requireLatam: false, requireFoodtech: true, country: "peru" }, // Perú
   { url: "https://www.actualidadambiental.pe/feed/", requireLatam: false, requireFoodtech: true, country: "peru" }, // Perú · SPDA
@@ -112,7 +116,7 @@ const FEEDS = [
 ];
 
 const LATAM_RE = /latin america|latam|am[eé]rica latina|latinoam[eé]rica|amazon[iíi]a|amaz[oô]nia|brazil|brasil|mexico|méxico|colombia|argentina|chile|per[uú]|costa rica|ecuador|uruguay|paraguay|bolivia|venezuela|guatemala|honduras|panam[aá]|dominican|el salvador|nicaragua/i;
-const FOODTECH_RE = /\bfood\b|comida|foodtech|food-tech|agri|agtech|ag-tech|agriculture|farm|crop|livestock|protein|meat|dairy|seafood|aquaculture|nutrition|beverage|coffee|caf[eé]|cacao|cocoa|regenerative|cultivated meat|alternative protein|vertical farm|fertilizer|fertilizante|aliment|agro|agr[ií]cola|cultivo|ganad|pecu[aá]ri|pesca|acuicultura|aquicultura|semilla|semente|prote[ií]na|carne|leche|leite|l[aá]cteo|insect|fermenta/i;
+const FOODTECH_RE = /\bfood\b|comida|nutri|hogares|consumo|canasta|hambre|foodtech|food-tech|agri|agtech|ag-tech|agriculture|farm|crop|livestock|protein|meat|dairy|seafood|aquaculture|nutrition|beverage|coffee|caf[eé]|cacao|cocoa|regenerative|cultivated meat|alternative protein|vertical farm|fertilizer|fertilizante|aliment|agro|agr[ií]cola|cultivo|ganad|pecu[aá]ri|pesca|acuicultura|aquicultura|semilla|semente|prote[ií]na|carne|leche|leite|l[aá]cteo|insect|fermenta/i;
 
 function log(...args) {
   console.log("[content-agent]", ...args);
@@ -146,6 +150,8 @@ const KNOWN_OUTLETS = {
   "unacomunica.una.ac.cr": "UNA Comunica",
   "agenciatierraviva.com.ar": "Agencia Tierra Viva",
   "prensacomunitaria.org": "Prensa Comunitaria",
+  "mag.go.cr": "Ministerio de Agricultura y Ganadería (MAG)",
+  "estadonacion.or.cr": "Programa Estado de la Nación",
 };
 function outletName(hostname) {
   return KNOWN_OUTLETS[hostname] || hostname;
@@ -450,7 +456,9 @@ FuturoFood's editorial promise — it decides both which stories we run and how 
 
 Write a short, original news article based ONLY on the excerpt below. Do not invent quotes, numbers, or facts that aren't in the excerpt or headline. If the excerpt looks thin, paywalled, or unrelated to the headline, keep the article brief and high-level and lean on the headline + outlet context instead of fabricating detail. Attribute claims to the outlet (e.g. "according to ${candidate.sourceName}" / "según ${candidate.sourceName}").
 
-${candidate.perspective === "advocacy" ? `THIS OUTLET WRITES FROM AN ADVOCACY PERSPECTIVE. Report only verifiable facts: who did what, where and when, and figures the excerpt attributes to a named source. Present the outlet's or the sources' positions and claims as theirs ("according to…", "X argues…"), never as FuturoFood's view. Don't adopt the outlet's framing, slogans or loaded words in titles or text. If the excerpt is mostly opinion or a manifesto with few verifiable facts, skip it.
+${candidate.perspective === "official" ? `THIS IS AN OFFICIAL GOVERNMENT SOURCE: Costa Rica's Ministry of Agriculture and Livestock. Present it as such and attribute facts and figures to it — in English "according to Costa Rica's Ministry of Agriculture and Livestock (MAG)", in Spanish "según el Ministerio de Agricultura y Ganadería (MAG) de Costa Rica". These are the government's own announcements: report plans, targets and figures as what the ministry says, not as independently verified results.
+
+` : ""}${candidate.perspective === "advocacy" ? `THIS OUTLET WRITES FROM AN ADVOCACY PERSPECTIVE. Report only verifiable facts: who did what, where and when, and figures the excerpt attributes to a named source. Present the outlet's or the sources' positions and claims as theirs ("according to…", "X argues…"), never as FuturoFood's view. Don't adopt the outlet's framing, slogans or loaded words in titles or text. If the excerpt is mostly opinion or a manifesto with few verifiable facts, skip it.
 
 ` : ""}SOURCE OUTLET: ${candidate.sourceName}
 SOURCE URL: ${candidate.verifiedUrl}
@@ -969,6 +977,7 @@ async function main() {
       tag_slug: draft.tag_slug,
       country: candidate.country,
       ...(candidate.perspective === "advocacy" ? { advocacy_source: true } : {}),
+      ...(candidate.perspective === "official" ? { official_source: true } : {}),
       tag_en: draft.tag_en,
       tag_es: draft.tag_es,
       emoji: draft.emoji,
@@ -1036,6 +1045,7 @@ export function renderReviewSummary(entries, previewBaseUrl, rotation = []) {
         : "- **Video:** ninguno — se muestra el placeholder",
       e.country ? `- **País:** ${countryLabel(e.country)}` : null,
       e.advocacy_source ? "- ⚠️ **Fuente con mirada activista:** revisa que el texto cuente solo hechos verificables y atribuya las posturas a quien las dice" : null,
+      e.official_source ? "- 🏛️ **Fuente oficial:** revisa que las cifras y anuncios aparezcan atribuidos al Ministerio («según el Ministerio de Agricultura y Ganadería…»)" : null,
       preview
         ? `- **Vista previa:** [en español](${preview.replace(/\/(futurofood-article[^/]*)$/, "/es/$1")}) · [en inglés](${preview})`
         : `- **Archivo:** \`${e.filename}\` (y \`es/${e.filename}\`)`,
