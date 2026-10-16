@@ -44,7 +44,9 @@ export function renderChannelMessages(entries, date = new Date()) {
   for (let i = 0; i < entries.length; i += PER_MESSAGE) chunks.push(entries.slice(i, i + PER_MESSAGE));
   return chunks.map((chunk, i) => {
     const part = chunks.length > 1 ? ` (${i + 1}/${chunks.length})` : "";
-    return [`*FuturoFood · Semana del ${day}*${part}`, ...chunk.map(renderStory)].join("\n\n");
+    // Reader tips: invitation at the end of the week's last message
+    const tip = i === chunks.length - 1 ? ["✍️ ¿Conoces a alguien que esté cambiando cómo se cultiva, se investiga o se come en tu país? Cuéntanos su historia: hello@futurofood.com"] : [];
+    return [`*FuturoFood · Semana del ${day}*${part}`, ...chunk.map(renderStory), ...tip].join("\n\n");
   });
 }
 

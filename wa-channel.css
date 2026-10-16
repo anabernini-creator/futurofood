@@ -28,3 +28,12 @@
 @media(max-width:640px){
   .wa-channel-btn{width:100%}
 }
+
+/* Reader story tips ([data-story-tip]): end of articles and /boletin.
+   Selectors are specific enough to win over each page's own p and a styles. */
+.story-tip{margin:2.5rem 0;padding:1.5rem 1.75rem;border:1px solid rgba(232,245,224,.12);border-left:3px solid #F5C842;background:#111A11}
+.story-tip p.story-tip-title,.article-content .story-tip p.story-tip-title{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;line-height:1.35;color:#E8F5E0;margin:0 0 .5rem}
+.story-tip p.story-tip-text,.article-content .story-tip p.story-tip-text{font-family:'DM Sans',system-ui,sans-serif;font-size:.9rem;line-height:1.6;color:rgba(232,245,224,.7);margin:0 0 1rem}
+.article-content .story-tip p.story-tip-title::first-letter{font:inherit;float:none;color:inherit;padding:0;line-height:inherit}
+.story-tip a.story-tip-btn,.article-content .story-tip a.story-tip-btn{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F5C842;border:1px solid rgba(245,200,66,.5);padding:.65rem 1rem;text-decoration:none;transition:background .2s,color .2s}
+.story-tip a.story-tip-btn:hover,.story-tip a.story-tip-btn:focus-visible,.article-content .story-tip a.story-tip-btn:hover{background:#F5C842;color:#0A0F0A;border-color:#F5C842}

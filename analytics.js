@@ -10,6 +10,7 @@
  *   sign_up { method: newsletter, placement: inline | exit_intent | mobile_bar }
  *   popup_view / popup_close { popup: exit_intent }       — capture.js popup
  *   join_whatsapp_channel { placement: footer | article_end | sponsors }
+ *   story_tip_click { placement: article_end | archive } — "Send us a story"
  *                                                         — WhatsApp Channel button
  */
 (function () {
@@ -28,6 +29,12 @@
     var el = e.target.closest && e.target.closest('[data-wa-channel]');
     if (!el) return;
     track('join_whatsapp_channel', { placement: el.getAttribute('data-wa-channel'), link_url: el.href, transport_type: 'beacon' });
+  });
+  // "Send us a story" (reader tips by email)
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-story-tip]');
+    if (!el) return;
+    track('story_tip_click', { placement: el.getAttribute('data-story-tip'), transport_type: 'beacon' });
   });
   // Shares through the phone's native share sheet (share.js)
   document.addEventListener('ff:share', function (e) {

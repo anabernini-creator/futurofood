@@ -73,7 +73,8 @@ ${top}
 <p style="font-size:16px;line-height:1.6;">${count === 1 ? "Esta es la historia" : `Estas son las ${count} historias`} de la semana en FuturoFood: quienes cultivan, investigan y emprenden para cambiar el sistema alimentario en América Latina.</p>
 ${items}
 <hr style="border:none;border-top:1px solid #E2E8E2;margin:28px 0;"/>
-<p style="font-size:15px;line-height:1.6;">¿Conoces a alguien a quien le interese? Reenvíale este correo o comparte cualquier historia por WhatsApp desde <a href="${SITE}/es/futurofood-blog?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}" style="color:#1F8A4C;">futurofood.com</a>.</p>
+<p style="font-size:15px;line-height:1.6;">✍️ <strong>¿Conoces a alguien que esté cambiando cómo se cultiva, se investiga o se come en tu país?</strong> Cuéntanos su historia: escríbenos a <a href="mailto:hello@futurofood.com?subject=Historia%20para%20FuturoFood" style="color:#1F8A4C;">hello@futurofood.com</a>. Revisamos cada sugerencia y publicamos solo lo que podemos verificar.</p>
+<p style="font-size:15px;line-height:1.6;">¿Te sirvió esta edición? Reenvíala a quien le interese o comparte cualquier historia por WhatsApp desde <a href="${SITE}/es/futurofood-blog?utm_source=newsletter&utm_medium=email&utm_campaign=${campaign}" style="color:#1F8A4C;">futurofood.com</a>.</p>
 ${notices(dateIso)}<p style="font-size:13px;line-height:1.6;color:#5B6B5B;">All stories are also available in English at futurofood.com.</p>`;
   const subtitle = count === 1
     ? "La historia de la semana sobre quienes cambian la alimentación en LATAM"

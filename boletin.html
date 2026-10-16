@@ -33,7 +33,7 @@
 <link rel="preload" href="/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="stylesheet" href="fonts.css?v=1"/>
 <link rel="stylesheet" href="consent.css?v=1"/>
-<link rel="stylesheet" href="wa-channel.css?v=1"/>
+<link rel="stylesheet" href="wa-channel.css?v=2"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
@@ -129,6 +129,12 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem
       <p class="cta-note" data-es="Sin spam · Cancela cuando quieras">No spam · Unsubscribe anytime</p>
     </div>
 
+    <aside class="story-tip" aria-label="Send us a story" data-es-aria-label="Envíanos una historia">
+      <p class="story-tip-title" data-es="¿Conoces a alguien que esté cambiando cómo se cultiva, se investiga o se come en tu país?">Know someone changing how food is grown, researched or eaten in your country?</p>
+      <p class="story-tip-text" data-es="Cuéntanos su historia. Revisamos cada sugerencia y publicamos solo lo que podemos verificar.">Tell us their story. We review every tip and publish only what we can verify.</p>
+      <a class="story-tip-btn" data-story-tip="archive" href="mailto:hello@futurofood.com?subject=Story%20for%20FuturoFood&amp;body=Who%20%28person%20or%20organization%29%3A%0ACountry%3A%0AWhat%20they%20are%20changing%3A%0ALink%20or%20contact%20%28if%20you%20have%20one%29%3A%0A" data-es-href="mailto:hello@futurofood.com?subject=Historia%20para%20FuturoFood&amp;body=Qui%C3%A9n%20%28persona%20u%20organizaci%C3%B3n%29%3A%0APa%C3%ADs%3A%0AQu%C3%A9%20est%C3%A1%20cambiando%3A%0AEnlace%20o%20contacto%20%28si%20lo%20tienes%29%3A%0A" data-es="Envíanos una historia →">Send us a story →</a>
+    </aside>
+
     <!-- ARCHIVE:START (scripts/build-archive.mjs writes the editions here — do not edit by hand) -->
     <section class="issue" id="v1-2">
       <div class="issue-head">
@@ -172,6 +178,6 @@ footer{border-top:1px solid var(--border);background:var(--panel);padding:1.5rem
 <script src="consent.js?v=1" defer></script>
 <script src="i18n.js?v=3" defer></script>
 <script src="newsletter.js?v=3" defer></script>
-<script src="analytics.js?v=5" defer></script>
+<script src="analytics.js?v=6" defer></script>
 </body>
 </html>
