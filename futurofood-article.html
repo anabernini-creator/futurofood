@@ -198,6 +198,10 @@ a{color:inherit;text-decoration:none}
 .related-tag{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem;display:block}
 .related-title-text{font-family:var(--serif);font-size:.88rem;font-weight:700;line-height:1.25;transition:color .2s}
 .related-date{font-family:var(--mono);font-size:.55rem;color:var(--mist2);letter-spacing:.05em;margin-top:.25rem;display:block}
+/* Related cards are links: no article-link colour or underline */
+.article-content a.related-card{color:inherit;border-bottom:1px solid var(--border2)}
+.article-content a.related-card:last-child{border-bottom:none}
+.article-content a.related-card:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 
 /* SIDEBAR */
 .article-sidebar{padding:2rem 1.5rem;position:sticky;top:80px;align-self:start}
@@ -455,30 +459,30 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
     <div class="related-section">
       <div class="related-title" data-es="Historias Relacionadas">Related Stories</div>
-      <div class="related-card">
-        <div class="related-img">🪲</div>
+      <a class="related-card" href="futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields.html">
+        <div class="related-img" aria-hidden="true">🤖</div>
         <div>
-          <span class="related-tag" data-es="🦗 Proteína de Insectos">🦗 Insect Protein</span>
-          <div class="related-title-text" data-es="Enthos recauda capital de riesgo para planta de proteína de insectos en Colombia">Enthos raises VC funding for Colombia insect-protein plant</div>
-          <span class="related-date" data-es="Fuente: Aquafeed.com · 6 min">Source: Aquafeed.com · 6 min</span>
+          <span class="related-tag" data-es="🤖 Tecnología Alimentaria">🤖 Food Tech</span>
+          <div class="related-title-text" data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales">The Brazilian company bringing AI and autonomous robots to sugarcane fields</div>
+          <span class="related-date" data-es="Fuente: AgFeed · 3 min">Source: AgFeed · 3 min</span>
         </div>
-      </div>
-      <div class="related-card">
-        <div class="related-img">🌱</div>
+      </a>
+      <a class="related-card" href="futurofood-article-charolais-cattle-breed-reinvents-itself-to-win-over-brazilia.html">
+        <div class="related-img" aria-hidden="true">🐂</div>
         <div>
-          <span class="related-tag" data-es="🌱 Regenerativo">🌱 Regenerative</span>
-          <div class="related-title-text" data-es="Osa Conservation ayudará a 350 agricultores de AmistOsa con agricultura regenerativa">Osa Conservation to help 350 AmistOsa farmers go regenerative</div>
-          <span class="related-date" data-es="Fuente: Osa Conservation · 5 min">Source: Osa Conservation · 5 min</span>
+          <span class="related-tag" data-es="🐂 Tecnología Alimentaria">🐂 Food Tech</span>
+          <div class="related-title-text" data-es="La raza Charolesa se reinventa para conquistar a los ganaderos brasileños">Charolais cattle breed reinvents itself to win over Brazilian ranchers</div>
+          <span class="related-date" data-es="Fuente: AgFeed · 3 min">Source: AgFeed · 3 min</span>
         </div>
-      </div>
-      <div class="related-card">
-        <div class="related-img">🏦</div>
+      </a>
+      <a class="related-card" href="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html">
+        <div class="related-img" aria-hidden="true">🌾</div>
         <div>
-          <span class="related-tag" data-es="🌱 Regenerativo">🌱 Regenerative</span>
-          <div class="related-title-text" data-es="El Banco Mundial destina $120M a la agricultura de Costa Rica">World Bank commits $120M to Costa Rica agriculture</div>
-          <span class="related-date" data-es="Fuente: Banco Mundial · 4 min">Source: World Bank · 4 min</span>
+          <span class="related-tag" data-es="🌾 Tecnología Alimentaria">🌾 Food Tech</span>
+          <div class="related-title-text" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026">TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026</div>
+          <span class="related-date" data-es="Fuente: AgFeed · 3 min">Source: AgFeed · 3 min</span>
         </div>
-      </div>
+      </a>
     </div>
   </article>
 

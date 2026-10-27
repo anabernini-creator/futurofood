@@ -176,6 +176,10 @@ a{color:inherit;text-decoration:none}
 .related-tag{font-family:var(--mono);font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem;display:block}
 .related-title-text{font-family:var(--serif);font-size:.88rem;font-weight:700;line-height:1.25;transition:color .2s}
 .related-date{font-family:var(--mono);font-size:.55rem;color:var(--mist2);letter-spacing:.05em;margin-top:.25rem;display:block}
+/* Related cards are links: no article-link colour or underline */
+.article-content a.related-card{color:inherit;border-bottom:1px solid var(--border2)}
+.article-content a.related-card:last-child{border-bottom:none}
+.article-content a.related-card:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 .article-sidebar{padding:2rem 1.5rem;position:sticky;top:80px;align-self:start}
 .sidebar-block{margin-bottom:2.5rem}
 .sidebar-block-title{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mist2);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
@@ -371,14 +375,30 @@ footer{border-top:3px solid var(--leaf);background:var(--panel)}
 
     <div class="related-section">
       <div class="related-title" data-es="Historias Relacionadas">Related Stories</div>
-      <div class="related-card">
-        <div class="related-img">🌾</div>
+      <a class="related-card" href="futurofood-article-solinftec-ai-autonomous-robots-sugarcane-fields.html">
+        <div class="related-img" aria-hidden="true">🤖</div>
+        <div>
+          <span class="related-tag" data-es="🤖 Tecnología Alimentaria">🤖 Food Tech</span>
+          <div class="related-title-text" data-es="La empresa brasileña que lleva IA y robots autónomos a los cañaverales">The Brazilian company bringing AI and autonomous robots to sugarcane fields</div>
+          <span class="related-date" data-es="Fuente: AgFeed · 3 min">Source: AgFeed · 3 min</span>
+        </div>
+      </a>
+      <a class="related-card" href="futurofood-article-totvs-doubles-down-on-agtech-with-dedicated-ai-track-at-univ.html">
+        <div class="related-img" aria-hidden="true">🌾</div>
         <div>
           <span class="related-tag" data-es="🌾 Tecnología Alimentaria">🌾 Food Tech</span>
           <div class="related-title-text" data-es="TOTVS redobla su apuesta agtech con un programa de IA en Universo TOTVS 2026">TOTVS Doubles Down on Agtech with Dedicated AI Track at Universo TOTVS 2026</div>
           <span class="related-date" data-es="Fuente: AgFeed · 3 min">Source: AgFeed · 3 min</span>
         </div>
-      </div>
+      </a>
+      <a class="related-card" href="futurofood-article-myca-raises-1-3m-to-bring-ai-field-agents-to-agribusiness-in.html">
+        <div class="related-img" aria-hidden="true">🤖</div>
+        <div>
+          <span class="related-tag" data-es="🤖 Tecnología Alimentaria">🤖 Food Tech</span>
+          <div class="related-title-text" data-es="Myca levanta US$1.3 millones para llevar agentes de IA a las operaciones agrícolas del Sur Global">Myca Raises $1.3M to Bring AI Field Agents to Agribusiness in the Global South</div>
+          <span class="related-date" data-es="Fuente: AgFunderNews · 3 min">Source: AgFunderNews · 3 min</span>
+        </div>
+      </a>
     </div>
   </article>
 

@@ -10,7 +10,8 @@
 // search engines read it), keeping the English in data-en / data-en-<attr>
 // for the scripts that need both (share.js, the blog search).
 //
-// First it refreshes the home page from the newest stories (build-home.mjs).
+// First it refreshes the home page from the newest stories (build-home.mjs),
+// the newsletter archive and the "Related Stories" of every article.
 // It also keeps, in the English sources: the canonical URL, hreflang
 // alternates (en, es, x-default → English), robots max-image-preview:large and
 // the EN/ES switch links. And it regenerates sitemap.xml with both languages.
@@ -26,6 +27,7 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildHome } from "./build-home.mjs";
 import { buildArchive } from "./build-archive.mjs";
+import { buildRelated } from "./build-related.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://futurofood.com";
@@ -369,6 +371,8 @@ export function buildSite({ root = ROOT, log = console.log } = {}) {
   buildHome({ root, log });
   // Newsletter archive (/boletin): one entry per edition
   buildArchive({ root, log });
+  // "Related Stories" on every article page (same country/topic first)
+  buildRelated({ root, log });
   const pages = sitePages(root);
   const esDir = join(root, ES_DIR);
   mkdirSync(esDir, { recursive: true });

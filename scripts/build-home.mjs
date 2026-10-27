@@ -10,6 +10,11 @@
 //   - cover story: the newest article (full page), with its takeaways
 //   - left column: the next 3 stories; right column: the one after
 //   - "Latest Stories": the 4 after those
+//   - "From the archive": earlier articles that are not on the front page
+//     (cover and columns). The HTML holds up to ARCHIVE_POOL of them (picked
+//     each week, so older ones also come back), 3 visible; a small inline
+//     script shows 3 at random on every visit, preferring ones that aren't in
+//     "Latest Stories"
 //   - story counts per topic
 // Only English is written here, with Spanish in data-es; build-i18n.mjs
 // (which calls this first) writes /es/.
@@ -21,6 +26,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HOME_FILES = ["index.html", "futurofood.html"];
 const FIRST_YEAR = 2026; // Vol. 1
+const ARCHIVE_SHOWN = 3;
+const ARCHIVE_POOL = 24; // cards in the HTML (page weight on phones)
 
 const EMOJI = { lab: "🧬", regen: "🌱", insects: "🦗", tech: "🤖", water: "💧", ancestral: "🌽" };
 
@@ -184,6 +191,38 @@ ${right.map(miniStory).join("\n")}
   </div>`;
 }
 
+// "From the archive" cards: older articles, those in "Latest Stories" marked
+// so the page script prefers the others
+function archiveCard(s, latest, last, shown) {
+  const fmt = (lang) => new Date(`${s.date}T12:00:00Z`).toLocaleDateString(lang, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
+  return `    <article class="article-card${last ? " is-last" : ""}" data-archive-card${latest ? " data-archive-latest" : ""}${shown ? "" : " hidden"}>
+      <div class="card-top-row"><span class="article-tag tag-${s.tag}" data-es="${s.tagEs}">${s.tagEn}</span><time class="archive-date" datetime="${s.date}" data-es="${fmt("es")}">${fmt("en-US")}</time></div>
+      <h3 class="article-title"><a class="card-link" href="${escapeAttr(s.href)}" data-es="${s.titleEs}">${s.titleEn}</a></h3>
+      <p class="article-excerpt" data-es="${s.excerptEs}">${s.excerptEn}</p>
+      <div class="article-meta" data-es="${s.read} min · Fuente: ${s.sourceEs}">${s.read} min · Source: ${s.sourceEn}</div>
+    </article>`;
+}
+
+// Same order for a given seed (the edition date), so rebuilds within a week
+// don't change the page
+function seededShuffle(list, seed) {
+  let h = 2166136261;
+  for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  const rand = () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; };
+  const out = list.slice();
+  for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+  return out;
+}
+
+export function archiveStories(stories, frontPage, latest, seed) {
+  const skip = new Set(frontPage);
+  const inLatest = new Set(latest);
+  const pool = seededShuffle(stories.filter((s) => s.href && !skip.has(s)), seed).slice(0, ARCHIVE_POOL);
+  // Visible without the script: ones not in "Latest Stories" first
+  const ordered = [...pool.filter((s) => !inLatest.has(s)), ...pool.filter((s) => inLatest.has(s))];
+  return ordered.map((s, i) => ({ story: s, latest: inLatest.has(s), shown: i < ARCHIVE_SHOWN, last: i === Math.min(ARCHIVE_SHOWN, ordered.length) - 1 }));
+}
+
 function between(html, name, content) {
   const re = new RegExp(`(<!-- HOME:${name}:START[^>]*-->\\n)[\\s\\S]*?(\\n\\s*<!-- HOME:${name}:END -->)`);
   if (!re.test(html)) throw new Error(`HOME:${name} markers missing`);
@@ -205,6 +244,10 @@ export function renderHome(html, stories, coverHtml) {
   html = between(html, "TICKER", `${ticker}\n    <!-- duplicate for the loop -->\n${ticker}`);
   html = between(html, "BROADSHEET", broadsheet(cover, coverStory, rest.slice(0, 3), rest.slice(3, 4)));
   html = between(html, "LATEST", rest.slice(4, 8).map(card).join("\n"));
+  const archive = archiveStories(stories, [coverStory, ...rest.slice(0, 4)], rest.slice(4, 8), ed.date);
+  html = between(html, "ARCHIVE", archive.map((a) => archiveCard(a.story, a.latest, a.last, a.shown)).join("\n"));
+  // No older articles yet: the section stays hidden
+  html = html.replace(/(<section class="articles-section archive-section"[^>]*?)(?: hidden)?>/, (_, open) => `${open}${archive.length ? "" : " hidden"}>`);
 
   // Real story counts per topic
   html = html.replace(/(<div class="topic"[^>]*data-tag="([a-z]+)"[^>]*>[\s\S]*?<span class="topic-count eyebrow")[^>]*>[^<]*(<\/span>)/g, (m, start, tag, end) => {
